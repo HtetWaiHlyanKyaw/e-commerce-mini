@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Admin\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,5 +19,8 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/brands/brands_list', function() {
+    return view('admin.brands.index');
+});
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
