@@ -2,7 +2,7 @@
   <!-- Sidebar scroll-->
   <div>
     <div class="brand-logo d-flex align-items-center justify-content-between">
-      
+
       <a href="{{ route('dashboard') }}" class="text-nowrap logo-img">
         <img src="{{asset('admin/images/logos/dark-logo.svg')}}" width="180" alt="" />
       </a>
@@ -44,21 +44,21 @@
             </span>
             <span class="hide-menu">List</span>
           </a>
-          
+
         </li>
         <li class="nav-small-cap">
           <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
           <span class="hide-menu">Models</span>
         </li>
         <li class="sidebar-item">
-          <a class="sidebar-link" href="{{route('brand.page')}}" aria-expanded="false">
+          <a class="sidebar-link" href="{{route('model.page')}}" aria-expanded="false">
             <span>
               <i class="ti ti-circle-plus"></i>
             </span>
             <span class="hide-menu">Create</span>
           </a>
         </li>
-        
+
         <li class="sidebar-item">
           <a class="sidebar-link" href="{{route('brand.list')}}" aria-expanded="false">
             <span>
@@ -66,7 +66,7 @@
             </span>
             <span class="hide-menu">List</span>
           </a>
-          
+
         </li>
         <li class="nav-small-cap">
           <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
@@ -87,7 +87,7 @@
             </span>
             <span class="hide-menu">List</span>
           </a>
-          
+
         </li>
         <li class="sidebar-item">
           <a class="sidebar-link" href="#" aria-expanded="false">
