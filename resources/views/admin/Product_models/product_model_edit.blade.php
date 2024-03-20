@@ -1,17 +1,17 @@
 @extends('admin.layouts.master')
-@section('title', 'Brands')
+@section('title', 'Models Edit Page')
 
 
 @section('content')
     <div class="container-fluid">
         {{-- Page Title --}}
-         <div class="pagetitle">
-            <h1>Brand Create</h1>
+        <div class="pagetitle">
+            <h1>Model Update</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">Home</li>
-                    <li class="breadcrumb-item">Brand</li>
-                    <li class="breadcrumb-item active">Create Brand</li>
+                    <li class="breadcrumb-item">Model</li>
+                    <li class="breadcrumb-item active">Edit Model</li>
                 </ol>
             </nav>
         </div>
@@ -30,20 +30,19 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title">
-                            <h4 class="text-center">Create New Brand</h4>
+                            <h4 class="text-center">Edit Model</h4>
                         </div>
                         <hr>
 
-                        <form action="{{ route('brand.create') }}" method="post">
+                        <form action="{{ route('product_model.update', $data->id) }}" method="post">
                             @csrf
-                            <label>Name</label>
+
                             <div class="form-group mb-3">
-                                
-                                <input type="text" name="brandName"
-                                    class="form-control @error('brandName') is-invalid @enderror" placeholder="brand name">
+                                <input type="text" name="modelName"
+                                    class="form-control @error('modelName') is-invalid @enderror" value="{{old('name', $data->name)}}">
 
 
-                                @error('brandName')
+                                @error('modelName')
                                     <div class="text-danger">
                                         {{ $message }}
                                     </div>
@@ -53,13 +52,13 @@
                             {{-- submit --}}
                             <div class="text-center">
                                 <input type="reset" value="cancel" class="btn btn-secondary px-3 me-3">
-                                <input type="submit" value="create" class="btn btn-primary px-3">
+                                <input type="submit" value="save" class="btn btn-primary px-3">
                             </div>
                         </form>
-                       
                     </div>
                 </div>
             </div>
         </div>
     </div>
- @endsection
+    
+@endsection

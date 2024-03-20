@@ -3,15 +3,15 @@
 
 
 @section('content')
-    <main id="main" class="main mx-5">
+    <div class="container-fluid">
         {{-- Page Title --}}
         <div class="pagetitle">
-            <h1>Category Create okkkk </h1>
+            <h1>Brand Update</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">Home</li>
                     <li class="breadcrumb-item">Brand</li>
-                    <li class="breadcrumb-item active">Edit Category</li>
+                    <li class="breadcrumb-item active">Edit Brand</li>
                 </ol>
             </nav>
         </div>
@@ -30,7 +30,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title">
-                            <h4 class="text-center">Edit New Brand</h4>
+                            <h4 class="text-center">Edit Brand</h4>
                         </div>
                         <hr>
 
@@ -51,6 +51,7 @@
 
                             {{-- submit --}}
                             <div class="text-center">
+                                <input type="reset" value="cancel" class="btn btn-secondary px-3 me-3">
                                 <input type="submit" value="save" class="btn btn-primary px-3">
                             </div>
                         </form>
@@ -58,6 +59,6 @@
                 </div>
             </div>
         </div>
-
-    </main>
+    </div>
+    
 @endsection

@@ -3,12 +3,6 @@
 
 @section('content')
 
-        {{-- <div class="container-fluid"> --}}
-        {{-- Page Title --}}
-
-
-
-
     <div class="container-fluid">
 {{-- Brand Create Success Message --}}
 
