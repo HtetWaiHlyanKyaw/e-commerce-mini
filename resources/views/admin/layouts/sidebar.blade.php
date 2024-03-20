@@ -2,7 +2,7 @@
   <!-- Sidebar scroll-->
   <div>
     <div class="brand-logo d-flex align-items-center justify-content-between">
-      
+
       <a href="{{ route('dashboard') }}" class="text-nowrap logo-img">
         <img src="{{asset('admin/images/logos/dark-logo.svg')}}" width="180" alt="" />
       </a>
@@ -30,7 +30,7 @@
           <span class="hide-menu">Store</span>
         </li>
         <li class="sidebar-item">
-          <a class="sidebar-link" href="{{route('admin.brands.list')}}" aria-expanded="false">
+          <a class="sidebar-link" href="" aria-expanded="false">
             <span>
               <i class="ti ti-packages"></i>
             </span>
@@ -38,7 +38,7 @@
           </a>
         </li>
         <li class="sidebar-item">
-          <a class="sidebar-link" href="{{route('admin.brands.list')}}" aria-expanded="false">
+          <a class="sidebar-link" href="" aria-expanded="false">
             <span>
               <i class="ti ti-cards"></i>
             </span>
@@ -46,7 +46,7 @@
           </a>
         </li>
         <li class="sidebar-item">
-          <a class="sidebar-link" href="{{route('admin.brands.list')}}" aria-expanded="false">
+          <a class="sidebar-link" href="" aria-expanded="false">
             <span>
               <i class="ti ti-device-mobile"></i>
             </span>
@@ -54,7 +54,7 @@
           </a>
         </li>
         <li class="sidebar-item">
-          <a class="sidebar-link" href="{{route('admin.brands.list')}}" aria-expanded="false">
+          <a class="sidebar-link" href="" aria-expanded="false">
             <span>
               <i class="ti ti-receipt-2"></i>
             </span>
@@ -62,7 +62,7 @@
           </a>
         </li>
         <li class="sidebar-item">
-          <a class="sidebar-link" href="{{route('admin.brands.list')}}" aria-expanded="false">
+          <a class="sidebar-link" href="" aria-expanded="false">
             <span>
               <i class="ti ti-message"></i>
             </span>
@@ -74,7 +74,7 @@
           <span class="hide-menu">Users</span>
         </li>
         <li class="sidebar-item">
-          <a class="sidebar-link" href="{{route('admin.brands.list')}}" aria-expanded="false">
+          <a class="sidebar-link" href="" aria-expanded="false">
             <span>
               <i class="ti ti-user-circle"></i>
             </span>
@@ -82,7 +82,7 @@
           </a>
         </li>
         <li class="sidebar-item">
-          <a class="sidebar-link" href="{{route('admin.brands.list')}}" aria-expanded="false">
+          <a class="sidebar-link" href="" aria-expanded="false">
             <span>
               <i class="ti ti-users"></i>
             </span>
@@ -94,7 +94,7 @@
           <span class="hide-menu">Supplies</span>
         </li>
         <li class="sidebar-item">
-          <a class="sidebar-link" href="{{route('admin.brands.list')}}" aria-expanded="false">
+          <a class="sidebar-link" href="" aria-expanded="false">
             <span>
               <i class="ti ti-user"></i>
             </span>
@@ -102,7 +102,7 @@
           </a>
         </li>
         <li class="sidebar-item">
-          <a class="sidebar-link" href="{{route('admin.brands.list')}}" aria-expanded="false">
+          <a class="sidebar-link" href="" aria-expanded="false">
             <span>
               <i class="ti ti-receipt-2"></i>
             </span>
