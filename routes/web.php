@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProductModelController;
+use App\Http\Controllers\Auth\LoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,4 +44,12 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 // Route::get('/brands/brands_list', function() {
 //     return view('admin.brands.index');
 // });
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+
+
+
+
