@@ -26,6 +26,7 @@
           </a>
         </li>
         <hr>
+
         <li class="nav-small-cap">
           <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
           <span class="hide-menu">Brands</span>
@@ -48,13 +49,15 @@
           </a>
         </li>
         <hr>
+
+
         <li class="nav-small-cap">
           <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
           <span class="hide-menu">Models</span>
         </li>
-       
+
         <li class="sidebar-item">
-          <a class="sidebar-link" href="{{route('product_model.list')}}" aria-expanded="false">
+          <a class="sidebar-link" href="{{route('model.list')}}" aria-expanded="false">
             <span>
               <i class="ti ti-list"></i>
             </span>
@@ -63,7 +66,7 @@
 
         </li>
         <li class="sidebar-item">
-          <a class="sidebar-link" href="{{route('product_model.create')}}" aria-expanded="false">
+          <a class="sidebar-link" href="{{route('model.page')}}" aria-expanded="false">
             <span>
               <i class="ti ti-circle-plus"></i>
             </span>
@@ -71,6 +74,8 @@
           </a>
         </li>
         <hr>
+
+
         <li class="nav-small-cap">
           <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
           <span class="hide-menu">Products</span>
@@ -82,7 +87,7 @@
             </span>
             <span class="hide-menu">List</span>
           </a>
-          
+
         </li>
         <li class="sidebar-item">
           <a class="sidebar-link" href="#" aria-expanded="false">
@@ -93,7 +98,7 @@
           </a>
         </li>
        <hr>
-        
+
         <li class="nav-small-cap">
           <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
           <span class="hide-menu">Admin</span>
@@ -121,7 +126,7 @@
             </span>
             <span class="hide-menu">Create</span>
           </a>
-        <hr>  
+        <hr>
         </li>
         <li class="nav-small-cap">
           <i class="ti ti-dots nav-small-cap-icon fs-4"></i>

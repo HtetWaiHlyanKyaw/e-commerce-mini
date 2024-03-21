@@ -36,7 +36,7 @@
 
                         <form action="{{ route('brand.update', $data->id) }}" method="post">
                             @csrf
-
+                            <label for="brandName" class="form-label">Brand Name</label>
                             <div class="form-group mb-3">
                                 <input type="text" name="brandName"
                                     class="form-control @error('brandName') is-invalid @enderror" value="{{old('name', $data->name)}}">

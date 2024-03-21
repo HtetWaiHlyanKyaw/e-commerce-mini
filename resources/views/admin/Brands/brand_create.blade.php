@@ -36,9 +36,9 @@
 
                         <form action="{{ route('brand.create') }}" method="post">
                             @csrf
-                            <label>Name</label>
+                            <label for="brandName" class="form-label">Brand Name</label>
                             <div class="form-group mb-3">
-                                
+
                                 <input type="text" name="brandName"
                                     class="form-control @error('brandName') is-invalid @enderror" placeholder="brand name">
 
@@ -56,7 +56,7 @@
                                 <input type="submit" value="create" class="btn btn-primary px-3">
                             </div>
                         </form>
-                       
+
                     </div>
                 </div>
             </div>

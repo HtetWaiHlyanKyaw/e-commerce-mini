@@ -16,7 +16,7 @@
 
         <h1>Brands</h1>
         <div class="pagetitle">
-            <h1>Category List Count -{{ $data->count() }}</h1>
+            <h3>Category List Count -{{ $data->count() }}</h3>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">Home</li>
@@ -28,16 +28,21 @@
         <table border="1" id="myTable">
             <thead>
                 <tr>
-                    <th class="float:left;">ID</th>
+                    <th class="float:left;">No</th>
                     <th>Name</th>
                     <th>created_at</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
+                @php
+                $counter = 1; // Initialize counter variable
+                @endphp
                 @foreach ($data as $blist)
+
                     <tr class="tr-shadow">
-                        <td class="col-lg-1">{{ $blist->id }}</td>
+                        {{-- <td class="col-lg-1">{{ $blist->id }}</td> --}}
+                        <td class="col-lg-1">{{ $counter}}</td>
                         <td class="col-lg-1">{{ $blist->name }}</td>
                         <td class="col-lg-1">{{ $blist->created_at->format('d / M /Y') }}</td>
                         <td class="col-lg-1">
@@ -47,13 +52,16 @@
                                     <i class="ti ti-edit"></i>
                                 </button>
                             </a>
-                            <a href="">
+                            <a href="{{route('brand.delete', $blist->id)}}">
                                 <button class="btn btn-danger" title="delete brand">
                                     <i class="ti ti-trash"></i>
                                 </button>
                             </a>
                         </td>
                     </tr>
+                    @php
+                    $counter++; // Increment counter for the next row
+                @endphp
                 @endforeach
             </tbody>
 
