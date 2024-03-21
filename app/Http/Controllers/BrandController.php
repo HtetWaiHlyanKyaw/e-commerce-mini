@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -23,7 +24,7 @@ class BrandController extends Controller
             'name' => $request->brandName,
 
         ]);
-        return back()->with(['success' => 'Brand  Creation  Success']);
+        return redirect()->route('brand.list')->with(['success' => 'Brand  Creation  Success']);
     }
 
     //brand List
@@ -49,13 +50,14 @@ class BrandController extends Controller
         $this->vali($request);
         $data = $this->dataArrange($request);
         Brand::where('id', $id)->update($data);
-        return redirect()->route('brand.list')->with(['success' => 'Brand  Edit Success']);
+        return back()->with(['success' => 'Brand  Edit Success']);
     }
 
     //brand delete
-    public function delete($id){
-    Brand::where ('id', $id)->delete();
-    return back()->with(['success'=> 'brand delete success']);
+    public function delete($id)
+    {
+        Brand::where('id', $id)->delete();
+        return redirect()->route('brand.list')->with(['success' => 'brand delete success']);
     }
 
     //Data Arrrange
