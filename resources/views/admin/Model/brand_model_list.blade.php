@@ -67,13 +67,13 @@
                             <td class="col-lg-1">{{ $productModel->brand->name }}</td>
                             {{-- <td class="col-lg-1">{{ $productModel->created_at->format('d / M /Y') }}</td> --}}
                             <td class="col-lg-1">
-                                <a href="{{route('brand.edit', $productModel->id)}}">
+                                <a href="{{route('model.edit', $productModel->id)}}">
                                     <button class="btn btn-warning me-2" title="edit brand">
                                         {{-- <i class="bi bi-pencil-square">edit</i> --}}
                                         <i class="ti ti-edit"></i>
                                     </button>
                                 </a>
-                                <a href="">
+                                <a href="{{route('model.delete', $productModel->id)}}">
                                     <button class="btn btn-danger" title="delete brand">
                                         <i class="ti ti-trash"></i>
                                     </button>
