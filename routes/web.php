@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\BrandModelController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,7 +42,14 @@ Route::prefix('admin/model')->group(function(){
     Route::get('/delete/{id}', [BrandModelController::class, 'delete'])->name('model.delete');
 });
 
-
+// Route::prefix('admin/product')->group(function(){
+//     Route::get('/page', [ProductController::class, 'page'])->name('product.page');
+//     Route::post('/create', [ProductController::class, 'create'])->name('product.create');
+//     Route::get('/list',[ProductController::class, 'list'])->name('product.list');
+//     Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
+//     Route::post('/update/{id}', [ProductController::class, 'update'])->name('product.update');
+//     Route::get('/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
+// });
 
 Auth::routes();
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

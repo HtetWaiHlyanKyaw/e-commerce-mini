@@ -48,8 +48,8 @@
             <table border="1" id="myTable">
                 <thead>
                     <tr>
-                        <th class="float:left;">ID</th>
-                        <th>No</th>
+                        <th class="float:left;">No</th>
+                        <th>Name</th>
                         <th>Brand</th>
                         {{-- <th>created_at</th> --}}
                         <th>Actions</th>
