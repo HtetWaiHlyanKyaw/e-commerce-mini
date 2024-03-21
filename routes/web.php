@@ -36,9 +36,9 @@ Route::prefix('admin/model')->group(function(){
     Route::get('/page', [BrandModelController::class, 'page'])->name('model.page');
     Route::post('/create', [BrandModelController::class, 'create'])->name('model.create');
     Route::get('/list',[BrandModelController::class, 'index'])->name('model.list');
-    Route::get('/edit/{id}', [BrandMOdelController::class, 'edit'])->name('model.edit');
-    Route::post('/update/{id}', [BrandMOdelController::class, 'update'])->name('model.update');
-    Route::get('/delete/{id}', [BrandMOdelController::class, 'delete'])->name('model.delete');
+    Route::get('/edit/{id}', [BrandModelController::class, 'edit'])->name('model.edit');
+    Route::post('/update/{id}', [BrandModelController::class, 'update'])->name('model.update');
+    Route::get('/delete/{id}', [BrandModelController::class, 'delete'])->name('model.delete');
 });
 
 

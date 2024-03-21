@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', 'Brand Page')
+@section('title', 'Model Create')
 
 
 @section('content')
