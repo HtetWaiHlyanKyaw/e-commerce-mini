@@ -28,7 +28,7 @@ class BrandModelController extends Controller
         $this->vali($request);
         $data =  $this->dataArrange($request);
         product_models::create($data);
-        return back()->with(['success' => 'Model  Creation  Success']);
+        return redirect()->route('model.list')->with(['success' => 'Model  Creation  Success']);
     }
 
     //Private function Data Arrange

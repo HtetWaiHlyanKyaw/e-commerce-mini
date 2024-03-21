@@ -21,7 +21,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
- //
+ //Brand URLs
 Route::prefix('admin/brand')->group(function(){
     Route::get('/page', [BrandController::class, 'page'])->name('brand.page');
     Route::post('/create', [BrandController::class, 'create'])->name('brand.create');
@@ -29,6 +29,7 @@ Route::prefix('admin/brand')->group(function(){
     Route::get('/edit/{id}', [BrandController::class, 'edit'])->name('brand.edit');
     Route::post('/update/{id}', [BrandController::class, 'update'])->name('brand.update');
     Route::get('/delete/{id}', [BrandController::class, 'delete'])->name('brand.delete');
+
 });
 
 //Model URLs
@@ -36,6 +37,9 @@ Route::prefix('admin/model')->group(function(){
     Route::get('/page', [BrandModelController::class, 'page'])->name('model.page');
     Route::post('/create', [BrandModelController::class, 'create'])->name('model.create');
     Route::get('/list',[BrandModelController::class, 'index'])->name('model.list');
+    Route::get('/edit/{id}', [BrandModelController::class, 'edit'])->name('model.edit');
+    Route::post('/update/{id}', [BrandModelController::class, 'update'])->name('model.update');
+    Route::get('/delete/{id}', [BrandModelController::class, 'delete'])->name('model.delete');
 });
 
 // Route::prefix('admin/product')->group(function(){

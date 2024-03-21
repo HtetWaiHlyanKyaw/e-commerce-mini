@@ -48,8 +48,13 @@
             <table border="1" id="myTable">
                 <thead>
                     <tr>
+<<<<<<< HEAD
                         <th class="float:left;">No</th>
                         <th>Name</th>
+=======
+                        <th class="float:left;">ID</th>
+                        <th>No</th>
+>>>>>>> f719dee7128818404460b0d053797c60467d243c
                         <th>Brand</th>
                         {{-- <th>created_at</th> --}}
                         <th>Actions</th>
@@ -57,8 +62,13 @@
                 </thead>
                 <tbody>
                     @php
+<<<<<<< HEAD
                 $counter = 1; // Initialize counter variable
                 @endphp
+=======
+                    $counter = 1; // Initialize counter variable
+                    @endphp
+>>>>>>> f719dee7128818404460b0d053797c60467d243c
                     @foreach ($productModels as $productModel)
                         <tr class="tr-shadow">
                             {{-- <td class="col-lg-1">{{ $productModel->id }}</td> --}}
@@ -82,7 +92,11 @@
                         </tr>
                         @php
                     $counter++; // Increment counter for the next row
+<<<<<<< HEAD
                         @endphp
+=======
+                @endphp
+>>>>>>> f719dee7128818404460b0d053797c60467d243c
                     @endforeach
                 </tbody>
 
