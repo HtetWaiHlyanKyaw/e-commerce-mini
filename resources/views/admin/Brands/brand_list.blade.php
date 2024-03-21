@@ -3,12 +3,6 @@
 
 @section('content')
 
-        {{-- <div class="container-fluid"> --}}
-        {{-- Page Title --}}
-
-
-
-
     <div class="container-fluid">
 {{-- Brand Create Success Message --}}
 
@@ -22,7 +16,7 @@
 
         <h1>Brands</h1>
         <div class="pagetitle">
-            <h1>Category List Count -{{ $data->count() }}</h1>
+            <h3>Category List Count -{{ $data->count() }}</h3>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">Home</li>

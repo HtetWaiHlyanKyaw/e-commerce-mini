@@ -34,7 +34,7 @@ Route::prefix('admin/brand')->group(function(){
 Route::prefix('admin/model')->group(function(){
     Route::get('/page', [BrandModelController::class, 'page'])->name('model.page');
     Route::post('/create', [BrandModelController::class, 'create'])->name('model.create');
-
+    Route::get('/list',[BrandModelController::class, 'index'])->name('model.list');
 
 });
 

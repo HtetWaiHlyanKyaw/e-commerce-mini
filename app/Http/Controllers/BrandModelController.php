@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Validator;
 
 class BrandModelController extends Controller
 {
+    public function index()
+    {
+        $productModels = product_models::with('brand')->get();
+        return view('admin.Model.brand_model_list', ['productModels' => $productModels]);
+    }
+
     public function page()
     {
         $data = Brand::get();
