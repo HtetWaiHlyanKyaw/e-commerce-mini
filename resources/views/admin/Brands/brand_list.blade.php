@@ -28,16 +28,20 @@
         <table border="1" id="myTable">
             <thead>
                 <tr>
-                    <th class="float:left;">ID</th>
+                    <th class="float:left;">No</th>
                     <th>Name</th>
                     <th>created_at</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
+                @php
+                $counter = 1; // Initialize counter variable
+                @endphp
                 @foreach ($data as $blist)
                     <tr class="tr-shadow">
-                        <td class="col-lg-1">{{ $blist->id }}</td>
+                        {{-- <td class="col-lg-1">{{ $blist->id }}</td> --}}
+                        <td class="col-lg-1">{{ $counter}}</td>
                         <td class="col-lg-1">{{ $blist->name }}</td>
                         <td class="col-lg-1">{{ $blist->created_at->format('d / M /Y') }}</td>
                         <td class="col-lg-1">
@@ -54,6 +58,9 @@
                             </a>
                         </td>
                     </tr>
+                    @php
+                    $counter++; // Increment counter for the next row
+                @endphp
                 @endforeach
             </tbody>
 
