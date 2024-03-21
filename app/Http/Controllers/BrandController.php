@@ -22,7 +22,6 @@ class BrandController extends Controller
 
         Brand::create([
             'name' => $request->brandName,
-
         ]);
         return redirect()->route('brand.list')->with(['success' => 'Brand  Creation  Success']);
     }
