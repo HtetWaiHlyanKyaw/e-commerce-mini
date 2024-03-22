@@ -1,11 +1,7 @@
 @extends('admin.layouts.master')
 @section('title', 'Suppliers')
 @section('style')
-<style>
-    .header-color{
-        color: #5D87FF;
-    }
-</style>
+
 @endsection
 
 @section('content')

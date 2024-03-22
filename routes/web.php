@@ -76,8 +76,8 @@ Route::prefix('admin/supplier')->group(function(){
 });
 
 Route::prefix('admin/supplier purchase')->group(function(){
-    // Route::get('/page', [SupplierPurchaseController::class, 'page'])->name('supplier.page');
-    // Route::post('/create', [SupplierPurchaseController::class, 'create'])->name('supplier.create');
+    Route::get('/page', [SupplierPurchaseController::class, 'page'])->name('supplier_purchase.page');
+    Route::post('/create', [SupplierPurchaseController::class, 'create'])->name('supplier.create');
     Route::get('/list',[SupplierPurchaseController::class, 'list'])->name('supplier_purchase.list');
     // Route::get('/edit/{id}', [SupplierPurchaseController::class, 'edit'])->name('supplier.edit');
     // Route::post('/update/{id}', [SupplierPurchaseController::class, 'update'])->name('supplier.update');
