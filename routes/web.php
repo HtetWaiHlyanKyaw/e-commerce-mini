@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\admin\ReviewController;
 
+use App\Http\Controllers\Admin\SupplierController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -63,6 +64,14 @@ Route::prefix('admin/customer')->group(function(){
 //review Url
 Route::prefix('admin/customer')->group(function(){
     Route::get('/reviews', [ReviewController::class, 'review'])->name('customer.reviews');
+});
+Route::prefix('admin/supplier')->group(function(){
+    Route::get('/page', [SupplierController::class, 'page'])->name('supplier.page');
+    Route::post('/create', [SupplierController::class, 'create'])->name('supplier.create');
+    Route::get('/list',[SupplierController::class, 'list'])->name('supplier.list');
+    Route::get('/edit/{id}', [SupplierController::class, 'edit'])->name('supplier.edit');
+    Route::post('/update/{id}', [SupplierController::class, 'update'])->name('supplier.update');
+    Route::get('/delete/{id}', [SupplierController::class, 'delete'])->name('supplier.delete');
 });
 
 Auth::routes();
