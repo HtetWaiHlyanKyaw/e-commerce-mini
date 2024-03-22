@@ -1,11 +1,13 @@
 <?php
 
+// use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\BrandModelController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,14 +44,26 @@ Route::prefix('admin/model')->group(function(){
     Route::get('/delete/{id}', [BrandModelController::class, 'delete'])->name('model.delete');
 });
 
-// Route::prefix('admin/product')->group(function(){
-//     Route::get('/page', [ProductController::class, 'page'])->name('product.page');
-//     Route::post('/create', [ProductController::class, 'create'])->name('product.create');
-//     Route::get('/list',[ProductController::class, 'list'])->name('product.list');
-//     Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
-//     Route::post('/update/{id}', [ProductController::class, 'update'])->name('product.update');
-//     Route::get('/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
-// });
+// Product URLs
+Route::prefix('admin/product')->group(function(){
+    Route::get('/page', [ProductController::class, 'page'])->name('product.page');
+    Route::post('/create', [ProductController::class, 'create'])->name('product.create');
+    Route::get('/list',[ProductController::class, 'list'])->name('product.list');
+    Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
+    Route::post('/update/{id}', [ProductController::class, 'update'])->name('product.update');
+    Route::get('/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
+});
+
+//Product URL
+
+
+// Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+// Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+// Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+// Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
+// Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+// Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
+// Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 
 Auth::routes();
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

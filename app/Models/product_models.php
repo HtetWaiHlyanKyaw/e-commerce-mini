@@ -17,4 +17,9 @@ class product_models extends Model
     {
         return $this->belongsTo(Brand::class);
     }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
