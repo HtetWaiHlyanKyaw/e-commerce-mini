@@ -1,11 +1,14 @@
 <?php
 
+use App\Http\Controllers\Admin\CustomerController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\BrandModelController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\admin\ReviewController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -50,6 +53,17 @@ Route::prefix('admin/model')->group(function(){
 //     Route::post('/update/{id}', [ProductController::class, 'update'])->name('product.update');
 //     Route::get('/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
 // });
+
+
+//Customer URL
+Route::prefix('admin/customer')->group(function(){
+    Route::get('/list', [CustomerController::class, 'list'])->name('customer.page');
+
+});
+//review Url
+Route::prefix('admin/customer')->group(function(){
+    Route::get('/reviews', [ReviewController::class, 'review'])->name('customer.reviews');
+});
 
 Auth::routes();
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

@@ -141,7 +141,7 @@
           </a>
         </li> --}}
         <li class="sidebar-item">
-          <a class="sidebar-link" href="#" aria-expanded="false">
+          <a class="sidebar-link" href="{{route('customer.page')}}" aria-expanded="false">
             <span>
               <i class="ti ti-list"></i>
             </span>
@@ -158,7 +158,7 @@
           </a>
         </li>
         <li class="sidebar-item">
-          <a class="sidebar-link" href="#" aria-expanded="false">
+          <a class="sidebar-link" href="{{route('customer.reviews')}}" aria-expanded="false">
             <span>
               <i class="ti ti-message"></i>
             </span>
