@@ -37,8 +37,8 @@
                     <th>Quantity</th>
                     <th>Unit Price</th>
                     <th>Total Price</th>
-                    <th>Created At</th>
-                    {{-- <th>Actions</th> --}}
+                    <th>Date</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -55,11 +55,11 @@
                         <td class="col-lg-1">{{ $supplierPurchase->unit_price }}</td>
                         <td class="col-lg-1">{{ $supplierPurchase->total_price }}</td>
                         <td class="col-lg-1">{{ $supplierPurchase->created_at->format('d / M /Y') }}</td>
-                        {{-- <td class="col-lg-1">
+                        <td class="col-lg-1">
                             <a href="{{route('supplier.edit', $supplierPurchase->id)}}">
                                 <button class="btn btn-outline-success btn-lg border-2" title="edit supplier">
                                     {{-- <i class="bi bi-pencil-square">edit</i> --}}
-                                    {{-- <i class="ti ti-edit"></i>
+                                    <i class="ti ti-edit"></i> 
                                 </button>
                             </a>
                             <a href="{{route('supplier.delete', $supplierPurchase->id)}}">
@@ -67,7 +67,7 @@
                                     <i class="ti ti-trash"></i>
                                 </button>
                             </a> 
-                        </td> --}}
+                        </td>
                     </tr>
                     @php
                     $counter++; // Increment counter for the next row
