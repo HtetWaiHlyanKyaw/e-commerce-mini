@@ -1,21 +1,21 @@
 @extends('admin.layouts.master')
 @section('title', 'Suppliers list')
 @section('style')
-<style>
-    .add-button{
-        font-size:18px;
-        font-weight: 400;
-        text-align: right;
-    }
-    .right-column{
-        min-width: 100px; 
-    }
-</style>
+    <style>
+        .header-color {
+            color: #1da9dc;
+        }
+
+        .bg-lighter {
+            background-color: #f6f7ff;
+            /* Slightly darker shade */
+        }
+    </style>
 @endsection
 @section('content')
 
     <div class="container-fluid">
-{{-- Brand Create Success Message --}}
+        {{-- Brand Create Success Message --}}
 
         <div>
             @if (session('success'))
@@ -26,69 +26,67 @@
         </div>
 
         <h1 class="header-color">Supplier List</h1>
-        <div class="pagetitle " >
+        <br>
+        <div class="pagetitle ">
             <h4> Total Suppliers -{{ $suppliers->count() }}</h4>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item">Home</li>
-                    <li class="breadcrumb-item">Suppliers</li>
-                    <li class="breadcrumb-item active">Suppliers List</li>
-                </ol>   
+                    <li class="breadcrumb-item ">Home</li>
+                    <li class="breadcrumb-item ">Suppliers</li>
+                    <li class="breadcrumb-item "><b>Suppliers List</b></li>
+                </ol>
             </nav>
         </div>
         {{-- <a class="text-success add-button" 
     href="{{ route('supplier.page') }}"><p class="font-weight-bold">+ Add Supplier</p></a> --}}
 
         <div class="bg-lighter p-4 border rounded">
-        <table style="background-color:white"  id="myTable">
-            <thead style="background-color: white; color: black; font-size: 15px;">
-                <tr>
-                    <th>No</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Address</th>
-                    <th>created_at</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody style="font-size: 15px;">
-                @php
-                $counter = 1; // Initialize counter variable
-                @endphp
-                @foreach ($suppliers as $supplier)
-                    <tr class="tr-shadow">
-                        {{-- <td class="col-lg-1">{{ $blist->id }}</td> --}}
-                        <td class="col-lg-1">{{ $counter}}</td>
-                        <td class="col-lg-1">{{ $supplier->name }}</td>
-                        <td class="col-lg-1">{{ $supplier->email }}</td>
-                        <td class="col-lg-1">{{ $supplier->phone_number }}</td>
-                        <td class="col-lg-1">{{ $supplier->address }}</td>
-                        <td class="col-lg-1">{{ $supplier->created_at->format('d / M /Y') }}</td>
-                        <td class="col-lg-1 right-column">
-                            <a href="{{route('supplier.edit', $supplier->id)}}">
-                                <button class="btn btn-outline-success btn-lg border-2" title="edit supplier">
-                                    {{-- <i class="bi bi-pencil-square">edit</i> --}}
-                                    <i class="ti ti-edit"></i>
-                                </button>
-                            </a>
-                            <a href="{{route('supplier.delete', $supplier->id)}}">
-                                <button class="btn btn-outline-danger btn-lg border-2" title="delete supplier" onclick="return confirm('Are you sure you want to delete this supplier?');"">
-                                    <i class="ti ti-trash"></i>
-                                </button>
-                            </a>
-                        </td>
+            <table style="background-color:white" id="myTable">
+                <thead style="background-color: white; color: black;">
+                    <tr>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>created_at</th>
+                        <th>Actions</th>
                     </tr>
+                </thead>
+                <tbody>
                     @php
-                    $counter++; // Increment counter for the next row
-                @endphp
-                @endforeach
-            </tbody>
-        </table>
+                        $counter = 1; // Initialize counter variable
+                    @endphp
+                    @foreach ($suppliers as $supplier)
+                        <tr class="tr-shadow">
+                            {{-- <td class="col-lg-1">{{ $blist->id }}</td> --}}
+                            <td class="col-lg-1">{{ $counter }}</td>
+                            <td class="col-lg-1">{{ $supplier->name }}</td>
+                            <td class="col-lg-1">{{ $supplier->email }}</td>
+                            <td class="col-lg-1">{{ $supplier->phone_number }}</td>
+                            <td class="col-lg-1">{{ $supplier->address }}</td>
+                            <td class="col-lg-1">{{ $supplier->created_at->format('d / M /Y') }}</td>
+                            <td class="col-lg-1">
+                                <a href="{{ route('supplier.edit', $supplier->id) }}">
+                                    <button class="btn btn-outline-success btn-lg border-2" title="edit supplier">
+                                        {{-- <i class="bi bi-pencil-square">edit</i> --}}
+                                        <i class="ti ti-edit"></i>
+                                    </button>
+                                </a>
+                                <a href="{{ route('supplier.delete', $supplier->id) }}">
+                                    <button class="btn btn-outline-danger btn-lg border-2" title="delete supplier"
+                                        onclick="return confirm('Are you sure you want to delete this supplier?');"">
+                                        <i class="ti ti-trash"></i>
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                        @php
+                            $counter++; // Increment counter for the next row
+                        @endphp
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
-    </div>
-    
-    @endsection
-    
-    </body>
-</html>
+@endsection

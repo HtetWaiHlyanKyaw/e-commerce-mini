@@ -1,20 +1,23 @@
 @extends('admin.layouts.master')
 @section('title', 'Model Create')
-
 @section('style')
-<link href="select2.css" rel="stylesheet"/>
+    <style>
+        .header-color {
+            color: #1da9dc;
+        }
+    </style>
 @endsection
-
 @section('content')
     <div class="container-fluid">
         {{-- Page Title --}}
         <div class="pagetitle">
-            <h1>Model Create</h1>
+            <h1 class="header-color">Model Create</h1>
+            <br>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item">Home</li>
-                    <li class="breadcrumb-item">Model</li>
-                    <li class="breadcrumb-item active">Create Model</li>
+                    <li class="breadcrumb-item ">Home</li>
+                    <li class="breadcrumb-item ">Model</li>
+                    <li class="breadcrumb-item "><b>Create Model</b></li>
                 </ol>
             </nav>
         </div>
@@ -42,11 +45,11 @@
                             @csrf
 
 
-                             {{-- Model  --}}
-                             <div class="form-group mb-3">
+                            {{-- Model  --}}
+                            <div class="form-group mb-3">
                                 <label for="modelName" class="form-label">Brand</label>
-                                <select class="form-select js-example-basic-single @error('BrandId') is-invalid @enderror"  name="BrandId"
-                                 aria-label="Default select example" >
+                                <select class="form-select @error('BrandId') is-invalid @enderror" name="BrandId"
+                                    aria-label="Default select example">
                                     <option value="">Choose Brand</option>
                                     @foreach ($data as $brand)
                                         <option value="{{ $brand->id }}">{{ $brand->name }}</option>
@@ -63,10 +66,11 @@
                             <div class="form-group mb-3">
                                 <label for="modelName" class="form-label">Model Name</label>
                                 <input type="text" name="modelName" id="modelName"
-                                    class="form-control @error('modelName') is-invalid @enderror" placeholder="Model's name" value="{{old('modelName')}}">
+                                    class="form-control @error('modelName') is-invalid @enderror" placeholder="Model's name"
+                                    value="{{ old('modelName') }}">
 
 
-                                    @error('modelName')
+                                @error('modelName')
                                     <div class="text-danger">
                                         {{ $message }}
                                     </div>
@@ -77,8 +81,9 @@
 
                             {{-- submit --}}
                             <div class="text-center">
-                                <input type="reset" value="cancel" class="btn btn-secondary px-3 me-3">
-                                <input type="submit" value="create" class="btn btn-primary px-3">
+                                <a href="{{ route('brand.list') }}"><input type="button" value="cancel"
+                                        class="btn btn-outline-danger btn-lg border-2 px-3 me-3"></a>
+                                <input type="submit" value="create" class="btn btn-primary btn-lg px-3">
                             </div>
                         </form>
                     </div>

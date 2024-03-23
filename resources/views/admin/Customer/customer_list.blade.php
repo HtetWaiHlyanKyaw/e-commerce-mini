@@ -1,6 +1,10 @@
 @extends('admin.layouts.master')
 @section('title', 'Customer list')
-
+<style>
+    .header-color {
+        color: #1da9dc;
+    }
+</style>
 @section('content')
 
     <div class="container-fluid">
@@ -14,14 +18,15 @@
             @endif
         </div>
 
-        <h1>Customer</h1>
+        <h1 class="header-color">Customer</h1>
+        <br>
         <div class="pagetitle">
             <h3>Customer List Count -{{ $data->count() }}</h3>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">Home</li>
                     <li class="breadcrumb-item">Customer</li>
-                    <li class="breadcrumb-item active">Customer List</li>
+                    <li class="breadcrumb-item "><b>Customer List</b></li>
                 </ol>
             </nav>
         </div>
@@ -31,7 +36,7 @@
                     <th>No</th>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>created_at</th>
+                    <th>Date</th>
                 </tr>
             </thead>
             <tbody>
@@ -56,6 +61,3 @@
     </div>
 
 @endsection
-</body>
-
-</html>
