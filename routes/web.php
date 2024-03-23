@@ -63,8 +63,8 @@ Route::prefix('admin/customer')->group(function(){
 
 });
 //review Url
-Route::prefix('admin/customer')->group(function(){
-    Route::get('/reviews', [ReviewController::class, 'review'])->name('customer.reviews');
+Route::prefix('admin/product')->group(function(){
+    Route::get('/reviews', [ReviewController::class, 'review'])->name('product.reviews');
 });
 Route::prefix('admin/supplier')->group(function(){
     Route::get('/page', [SupplierController::class, 'page'])->name('supplier.page');

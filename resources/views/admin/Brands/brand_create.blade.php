@@ -1,17 +1,25 @@
 @extends('admin.layouts.master')
 @section('title', 'Brands')
+@section('style')
+    <style>
+        .header-color {
+            color: #1da9dc;
+        }
+    </style>
+@endsection
 
 
 @section('content')
     <div class="container-fluid">
         {{-- Page Title --}}
-         <div class="pagetitle">
-            <h1>Brand Create</h1>
+        <div class="pagetitle">
+            <h1 class="header-color">Brand Create</h1>
+            <br>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item">Home</li>
-                    <li class="breadcrumb-item">Brand</li>
-                    <li class="breadcrumb-item active">Create Brand</li>
+                    <li class="breadcrumb-item ">Home</li>
+                    <li class="breadcrumb-item ">Brand</li>
+                    <li class="breadcrumb-item "><b>Create Brand</b></li>
                 </ol>
             </nav>
         </div>
@@ -52,8 +60,9 @@
 
                             {{-- submit --}}
                             <div class="text-center">
-                                <input type="reset" value="cancel" class="btn btn-secondary px-3 me-3">
-                                <input type="submit" value="create" class="btn btn-primary px-3">
+                                <a href="{{ route('brand.list') }}"><input type="button" value="cancel"
+                                        class="btn btn-outline-danger btn-lg border-2 px-3 me-3"></a>
+                                <input type="submit" value="create" class="btn btn-primary btn-lg px-3">
                             </div>
                         </form>
 
@@ -62,4 +71,4 @@
             </div>
         </div>
     </div>
- @endsection
+@endsection
