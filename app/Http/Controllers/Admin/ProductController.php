@@ -9,7 +9,7 @@ use App\Models\ProductModel;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Facades\Validator;
 class ProductController extends Controller
 {
     public function index()
