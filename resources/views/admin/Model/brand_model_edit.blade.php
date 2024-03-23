@@ -1,18 +1,25 @@
 @extends('admin.layouts.master')
 @section('title', 'Model Edit')
-
+@section('style')
+    <style>
+        .header-color {
+            color: #1da9dc;
+        }
+    </style>
+@endsection
 
 @section('content')
     <div class="container-fluid">
         {{-- Page Title --}}
         <div class="pagetitle">
-            <h1>Model Edit</h1>
+            <h1 class="header-color">Model Edit</h1>
+            <br>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item">Home</li>
-                    <li class="breadcrumb-item">Model</li>
-                    <li class="breadcrumb-item">Model list</li>
-                    <li class="breadcrumb-item active">Model Edit</li>
+                    <li class="breadcrumb-item ">Home</li>
+                    <li class="breadcrumb-item ">Model</li>
+                    <li class="breadcrumb-item ">Model list</li>
+                    <li class="breadcrumb-item "><b>Model Edit</b></li>
                 </ol>
             </nav>
         </div>
@@ -36,7 +43,7 @@
                         </div>
                         <hr>
 
-                        <form action="{{route('model.update' , $modelData->id)}}" method="post">
+                        <form action="{{ route('model.update', $modelData->id) }}" method="post">
                             @csrf
 
 
@@ -47,7 +54,8 @@
                                     aria-label="Default select example">
                                     <option value="">Choose Brand</option>
                                     @foreach ($brandData as $brand)
-                                        <option value="{{ $brand->id }}"   @if ($modelData->brand_id == $brand->id) selected @endif>
+                                        <option value="{{ $brand->id }}"
+                                            @if ($modelData->brand_id == $brand->id) selected @endif>
 
 
                                             {{ $brand->name }}
@@ -81,8 +89,9 @@
 
                             {{-- submit --}}
                             <div class="text-center">
-                                <input type="reset" value="cancel" class="btn btn-secondary px-3 me-3">
-                                <input type="submit" value="Update" class="btn btn-primary px-3">
+                                <a href="{{ route('brand.list') }}"><input type="button" value="cancel"
+                                        class="btn btn-outline-danger btn-lg border-2 px-3 me-3"></a>
+                                <input type="submit" value="create" class="btn btn-primary btn-lg px-3">
                             </div>
                         </form>
                     </div>
