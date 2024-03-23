@@ -34,8 +34,9 @@
                         </div>
                         <hr>
 
-                        <form action="{{ route('product.create') }}" method="post">
+                        <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
+
                             <label for="productName" class="form-label">Product Name</label>
                             <div class="form-group mb-3">
 
@@ -72,7 +73,7 @@
                                 <select class="form-select @error('BrandId') is-invalid @enderror"  name="BrandId"
                                  aria-label="Default select example">
                                     <option value="">Choose Brand</option>
-                                    @foreach ($data as $brand)
+                                    @foreach ($brands as $brand)
                                         <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                                     @endforeach
                                 </select>
@@ -89,7 +90,7 @@
                                 <select class="form-select @error('ModelId') is-invalid @enderror"  name="ModelName"
                                  aria-label="Default select example">
                                     <option value="">Choose Model</option>
-                                    @foreach ($data as $model)
+                                    @foreach ($models as $model)
                                         <option value="{{ $model->id }}">{{ $model->name }}</option>
                                     @endforeach
                                 </select>

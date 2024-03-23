@@ -11,6 +11,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">Home</li>
                     <li class="breadcrumb-item">Brand</li>
+                    <li class="breadcrumb-item">Brand List</li>
                     <li class="breadcrumb-item active">Edit Brand</li>
                 </ol>
             </nav>
@@ -60,5 +61,5 @@
             </div>
         </div>
     </div>
-    
+
 @endsection

@@ -4,7 +4,7 @@
     <div class="brand-logo d-flex align-items-center justify-content-between">
 
       <a href="{{ route('dashboard') }}" class="text-nowrap logo-img">
-        <img src="{{asset('admin/images/logos/dark-logo.svg')}}" width="180" alt="" />
+        <img src="{{asset('admin/images/logos/logo.png')}}" width="220" alt="" />
       </a>
       <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
         <i class="ti ti-x fs-8"></i>
@@ -81,7 +81,7 @@
           <span class="hide-menu">Products</span>
         </li>
         <li class="sidebar-item">
-          <a class="sidebar-link" href="#" aria-expanded="false">
+          <a class="sidebar-link" href="" aria-expanded="false">
             <span>
               <i class="ti ti-list"></i>
             </span>
@@ -90,7 +90,7 @@
 
         </li>
         <li class="sidebar-item">
-          <a class="sidebar-link" href="{{route('product.page')}}" aria-expanded="false">
+          <a class="sidebar-link" href="{{route('product.create')}}" aria-expanded="false">
             <span>
               <i class="ti ti-circle-plus"></i>
             </span>
@@ -141,7 +141,7 @@
           </a>
         </li> --}}
         <li class="sidebar-item">
-          <a class="sidebar-link" href="#" aria-expanded="false">
+          <a class="sidebar-link" href="{{route('customer.page')}}" aria-expanded="false">
             <span>
               <i class="ti ti-list"></i>
             </span>
@@ -158,7 +158,7 @@
           </a>
         </li>
         <li class="sidebar-item">
-          <a class="sidebar-link" href="#" aria-expanded="false">
+          <a class="sidebar-link" href="{{route('customer.reviews')}}" aria-expanded="false">
             <span>
               <i class="ti ti-message"></i>
             </span>
@@ -171,7 +171,36 @@
           <span class="hide-menu">Suppliers</span>
         </li>
         <li class="sidebar-item">
+          <a class="sidebar-link" href="{{route('supplier.list')}}" aria-expanded="false">
+            <span>
+              <i class="ti ti-list"></i>
+            </span>
+            <span class="hide-menu">List</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="{{route('supplier.page')}}" aria-expanded="false">
+            <span>
+              <i class="ti ti-circle-plus"></i>
+            </span>
+            <span class="hide-menu">Create</span>
+          </a>
+        </li>
+        {{-- <li class="sidebar-item">
           <a class="sidebar-link" href="#" aria-expanded="false">
+            <span>
+              <i class="ti ti-receipt-2"></i>
+            </span>
+            <span class="hide-menu">Purchases</span>
+          </a>
+        </li> --}}
+        <hr>
+        <li class="nav-small-cap">
+          <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+          <span class="hide-menu">Supplier Purchases</span>
+        </li>
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="{{route('supplier_purchase.list')}}" aria-expanded="false">
             <span>
               <i class="ti ti-list"></i>
             </span>
@@ -181,9 +210,9 @@
         <li class="sidebar-item">
           <a class="sidebar-link" href="#" aria-expanded="false">
             <span>
-              <i class="ti ti-receipt-2"></i>
+              <i class="ti ti-circle-plus"></i>
             </span>
-            <span class="hide-menu">Purchases</span>
+            <span class="hide-menu">Create</span>
           </a>
         </li>
         <hr>

@@ -1,13 +1,15 @@
 <?php
 
-// use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\Admin\CustomerController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\BrandModelController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController;
-
+use App\Http\Controllers\admin\ReviewController;
+use App\Http\Controllers\Admin\SupplierController;
+use App\Http\Controllers\Admin\SupplierPurchaseController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,24 +48,42 @@ Route::prefix('admin/model')->group(function(){
 
 // Product URLs
 Route::prefix('admin/product')->group(function(){
-    Route::get('/page', [ProductController::class, 'page'])->name('product.page');
-    Route::post('/create', [ProductController::class, 'create'])->name('product.create');
-    Route::get('/list',[ProductController::class, 'list'])->name('product.list');
+    Route::get('/index', [ProductController::class, 'index'])->name('product.index');
+    Route::get('/create', [ProductController::class, 'create'])->name('product.create');
+    Route::post('/store', [ProductController::class, 'store'])->name('product.store');
     Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
     Route::post('/update/{id}', [ProductController::class, 'update'])->name('product.update');
     Route::get('/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
 });
 
-//Product URL
 
 
-// Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-// Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
-// Route::post('/products', [ProductController::class, 'store'])->name('products.store');
-// Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
-// Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
-// Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
-// Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+//Customer URL
+Route::prefix('admin/customer')->group(function(){
+    Route::get('/list', [CustomerController::class, 'list'])->name('customer.page');
+
+});
+//review Url
+Route::prefix('admin/customer')->group(function(){
+    Route::get('/reviews', [ReviewController::class, 'review'])->name('customer.reviews');
+});
+Route::prefix('admin/supplier')->group(function(){
+    Route::get('/page', [SupplierController::class, 'page'])->name('supplier.page');
+    Route::post('/create', [SupplierController::class, 'create'])->name('supplier.create');
+    Route::get('/list',[SupplierController::class, 'list'])->name('supplier.list');
+    Route::get('/edit/{id}', [SupplierController::class, 'edit'])->name('supplier.edit');
+    Route::post('/update/{id}', [SupplierController::class, 'update'])->name('supplier.update');
+    Route::get('/delete/{id}', [SupplierController::class, 'delete'])->name('supplier.delete');
+});
+
+Route::prefix('admin/supplier purchase')->group(function(){
+    // Route::get('/page', [SupplierPurchaseController::class, 'page'])->name('supplier.page');
+    // Route::post('/create', [SupplierPurchaseController::class, 'create'])->name('supplier.create');
+    Route::get('/list',[SupplierPurchaseController::class, 'list'])->name('supplier_purchase.list');
+    // Route::get('/edit/{id}', [SupplierPurchaseController::class, 'edit'])->name('supplier.edit');
+    // Route::post('/update/{id}', [SupplierPurchaseController::class, 'update'])->name('supplier.update');
+    // Route::get('/delete/{id}', [SupplierPurchaseController::class, 'delete'])->name('supplier.delete');
+});
 
 Auth::routes();
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

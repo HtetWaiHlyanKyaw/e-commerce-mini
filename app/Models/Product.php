@@ -25,11 +25,10 @@ class Product extends Model
     public function brand()
     {
         return $this->belongsTo(Brand::class);
-
     }
 
-    public function product_models()
+    public function productModel()
     {
-        return $this->belongsTo(product_models::class);
+        return $this->belongsTo(ProductModel::class);
     }
 }
