@@ -70,14 +70,14 @@
                             {{-- Brand  --}}
                             <div class="form-group mb-3">
                                 <label for="modelName" class="form-label">Brand</label>
-                                <select class="form-select @error('BrandId') is-invalid @enderror"  name="BrandId"
+                                <select class="form-select @error('BrandName') is-invalid @enderror"  name="BrandName"
                                  aria-label="Default select example">
                                     <option value="">Choose Brand</option>
                                     @foreach ($brands as $brand)
                                         <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                                     @endforeach
                                 </select>
-                                @error('BrandId')
+                                @error('BrandName')
                                     <div class="text-danger">
                                         {{ $message }}
                                     </div>
@@ -87,14 +87,14 @@
                             {{-- Product_model_id  --}}
                             <div class="form-group mb-3">
                                 <label for="ModelName" class="form-label">Model</label>
-                                <select class="form-select @error('ModelId') is-invalid @enderror"  name="ModelName"
+                                <select class="form-select @error('ModelName') is-invalid @enderror"  name="ModelName"
                                  aria-label="Default select example">
                                     <option value="">Choose Model</option>
                                     @foreach ($models as $model)
                                         <option value="{{ $model->id }}">{{ $model->name }}</option>
                                     @endforeach
                                 </select>
-                                @error('ModelId')
+                                @error('ModelName')
                                     <div class="text-danger">
                                         {{ $message }}
                                     </div>

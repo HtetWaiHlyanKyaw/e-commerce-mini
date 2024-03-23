@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+use Illuminate\Support\Facades\Validator;
 use App\Models\Brand;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\ProductModel;
 use App\Http\Controllers\Controller;
+
 use Illuminate\Database\Eloquent\Model;
 
 class ProductController extends Controller
@@ -31,10 +32,10 @@ class ProductController extends Controller
     private function vali($request)
     {
         $rules = [
-            'name' => 'required',
+            'productName' => 'required',
             'image' => 'required | image | mimes:jpeg,jpg,png',
-            'brand_id' => 'required',
-            'product_model_id' => 'required',
+            'BrandName' => 'required',
+            'ModelName' => 'required',
             'storage_option' => 'required',
             'color' => 'required',
             'price' => 'required',
@@ -48,7 +49,7 @@ class ProductController extends Controller
 
     public function store(Request $request){
 
-
+        $this->vali($request);
         Product::create([
 
             'name' => $request ->productName,
