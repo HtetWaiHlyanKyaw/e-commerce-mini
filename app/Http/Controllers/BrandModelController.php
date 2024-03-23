@@ -4,15 +4,16 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Brand;
-use App\Models\product_models;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Models\ProductModel;
 use Illuminate\Support\Facades\Validator;
 
 class BrandModelController extends Controller
 {
     public function index()
     {
-        $productModels = product_models::with('brand')->get();
+        $productModels = ProductModel::with('brand')->get();
         return view('admin.Model.brand_model_list', ['productModels' => $productModels]);
     }
 
@@ -27,7 +28,7 @@ class BrandModelController extends Controller
     {
         $this->vali($request);
         $data =  $this->dataArrange($request);
-        product_models::create($data);
+        ProductModel::create($data);
         return redirect()->route('model.list')->with(['success' => 'Model  Creation  Success']);
     }
 
@@ -35,7 +36,7 @@ class BrandModelController extends Controller
 
    //Model Edit
    public function edit($id){
-   $modelData =  product_models::where('id', $id)->first();
+   $modelData =   ProductModel::where('id', $id)->first();
    $brandData = Brand::get();
 
    return view('admin/Model/brand_model_edit', compact('modelData' , 'brandData' ));
@@ -46,7 +47,7 @@ class BrandModelController extends Controller
         $this->vali($request);
         $data = $this->dataArrange($request);
 
-        product_models::where('id', $id)->update($data);
+        ProductModel::where('id', $id)->update($data);
         return redirect()->route('model.list')->with(['success' => 'Model update sucess']);
 
    }
@@ -55,7 +56,7 @@ class BrandModelController extends Controller
       public function delete($id)
       {
 
-          product_models::where('id', $id)->delete();
+        ProductModel::where('id', $id)->delete();
           return redirect()->route('model.list')->with(['success' => 'brand delete success']);
       }
 
