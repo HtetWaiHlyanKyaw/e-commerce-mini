@@ -52,7 +52,7 @@ class ProductController extends Controller
         Product::create([
 
             'name' => $request ->productName,
-            // 'image' =>$request->$file_name,
+            //
             'brand_id' => $request ->BrandId,
             'product_model_id' => $request->ModelName,
             'storage_option' => $request->storage_option,
