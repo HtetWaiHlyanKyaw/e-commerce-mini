@@ -7,5 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 class ProductController extends Controller
 {
-    //
+    public function page()
+    {
+
+    }
 }
