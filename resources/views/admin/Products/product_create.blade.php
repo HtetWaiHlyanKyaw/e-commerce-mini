@@ -1,4 +1,3 @@
-Mya Kay Khine, [3/22/2024 3:09 PM]
 @extends('admin.layouts.master')
 @section('title', 'Products')
 
@@ -35,8 +34,9 @@ Mya Kay Khine, [3/22/2024 3:09 PM]
                         </div>
                         <hr>
 
-                        <form action="{{ route('product.create') }}" method="post">
+                        <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
+
                             <label for="productName" class="form-label">Product Name</label>
                             <div class="form-group mb-3">
 
@@ -56,7 +56,8 @@ Mya Kay Khine, [3/22/2024 3:09 PM]
                             <div class="form-group mb-3">
 
                                 <input type="file" name="image"
-                                    class="form-control @error('image') is-invalid @enderror" placeholder="product image">
+                                    class="form-control @error('image') is-invalid @enderror"
+                                    placeholder="product image">
 
 
                                 @error('image')
@@ -67,12 +68,12 @@ Mya Kay Khine, [3/22/2024 3:09 PM]
                             </div>
 
                             {{-- Brand  --}}
-                            {{-- <div class="form-group mb-3">
+                            <div class="form-group mb-3">
                                 <label for="modelName" class="form-label">Brand</label>
-                                <select class="form-select @error('BrandId') is-invalid @enderror" name="BrandId"
-                                    aria-label="Default select example">
+                                <select class="form-select @error('BrandId') is-invalid @enderror"  name="BrandId"
+                                 aria-label="Default select example">
                                     <option value="">Choose Brand</option>
-                                    @foreach ($data as $brand)
+                                    @foreach ($brands as $brand)
                                         <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                                     @endforeach
                                 </select>
@@ -81,16 +82,15 @@ Mya Kay Khine, [3/22/2024 3:09 PM]
                                         {{ $message }}
                                     </div>
                                 @enderror
-                            </div> --}}
-
+                            </div>
 
                             {{-- Product_model_id  --}}
-                            {{-- <div class="form-group mb-3">
+                            <div class="form-group mb-3">
                                 <label for="ModelName" class="form-label">Model</label>
-                                <select class="form-select @error('ModelId') is-invalid @enderror" name="ModelName"
-                                    aria-label="Default select example">
+                                <select class="form-select @error('ModelId') is-invalid @enderror"  name="ModelName"
+                                 aria-label="Default select example">
                                     <option value="">Choose Model</option>
-                                    @foreach ($data as $model)
+                                    @foreach ($models as $model)
                                         <option value="{{ $model->id }}">{{ $model->name }}</option>
                                     @endforeach
                                 </select>
@@ -99,7 +99,7 @@ Mya Kay Khine, [3/22/2024 3:09 PM]
                                         {{ $message }}
                                     </div>
                                 @enderror
-                            </div> --}}
+                            </div>
 
                             <label for="storage_option" class="form-label">Storage Option</label>
                             <div class="form-group mb-3">
@@ -119,7 +119,8 @@ Mya Kay Khine, [3/22/2024 3:09 PM]
                             <div class="form-group mb-3">
 
                                 <input type="text" name="color"
-                                    class="form-control @error('color') is-invalid @enderror" placeholder="color">
+                                    class="form-control @error('color') is-invalid @enderror"
+                                    placeholder="color">
 
 
                                 @error('color')
@@ -132,7 +133,8 @@ Mya Kay Khine, [3/22/2024 3:09 PM]
                             <div class="form-group mb-3">
 
                                 <input type="text" name="price"
-                                    class="form-control @error('price') is-invalid @enderror" placeholder="price">
+                                    class="form-control @error('price') is-invalid @enderror"
+                                    placeholder="price">
 
 
                                 @error('price')
@@ -145,7 +147,8 @@ Mya Kay Khine, [3/22/2024 3:09 PM]
                             <div class="form-group mb-3">
 
                                 <input type="text" name="quantity"
-                                    class="form-control @error('quantity') is-invalid @enderror" placeholder="quatity">
+                                    class="form-control @error('quantity') is-invalid @enderror"
+                                    placeholder="quatity">
 
 
                                 @error('quantity')

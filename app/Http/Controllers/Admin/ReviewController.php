@@ -12,6 +12,6 @@ class ReviewController extends Controller
         $userdata =review::with('User')->get();
         // $productdata =review::with('product')->get();
         // $data = review::get();
-        return view('admin.Customer.customer_review' , ['userdata' =>  $userdata]);
+        return view('admin.Products.product_review' , ['userdata' =>  $userdata]);
     }
 }

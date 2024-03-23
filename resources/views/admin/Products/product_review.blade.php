@@ -1,6 +1,12 @@
 @extends('admin.layouts.master')
 @section('title', 'Reiviews list')
-
+@section('style')
+    <style>
+        .header-color {
+            color: #1da9dc;
+        }
+    </style>
+@endsection
 @section('content')
 
     <div class="container-fluid">
@@ -14,14 +20,15 @@
             @endif
         </div>
 
-        <h1>Reiviews</h1>
+        <h1 class="header-color">Reviews</h1>
+        <br>
         <div class="pagetitle">
-            <h3>Reiviews List Count -{{ $userdata->count() }}</h3>
+            <h3>Reviews List Count -{{ $userdata->count() }}</h3>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item">Home</li>
-                    <li class="breadcrumb-item">Customer</li>
-                    <li class="breadcrumb-item active">Reiviews List</li>
+                    <li class="breadcrumb-item ">Home</li>
+                    <li class="breadcrumb-item ">Product</li>
+                    <li class="breadcrumb-item "><b>Reiviews List</b></li>
                 </ol>
             </nav>
         </div>
@@ -33,7 +40,7 @@
                     {{-- <th>Product Name</th> --}}
                     <th>Rating</th>
                     <th>Comments</th>
-                    <th>created_at_date</th>
+                    <th>Date</th>
                 </tr>
             </thead>
             <tbody>
@@ -60,6 +67,3 @@
     </div>
 
 @endsection
-</body>
-
-</html>
