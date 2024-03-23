@@ -1,6 +1,9 @@
 @extends('admin.layouts.master')
 @section('title', 'Model Create')
 
+@section('style')
+<link href="select2.css" rel="stylesheet"/>
+@endsection
 
 @section('content')
     <div class="container-fluid">
@@ -42,8 +45,8 @@
                              {{-- Model  --}}
                              <div class="form-group mb-3">
                                 <label for="modelName" class="form-label">Brand</label>
-                                <select class="form-select @error('BrandId') is-invalid @enderror"  name="BrandId"
-                                 aria-label="Default select example">
+                                <select class="form-select js-example-basic-single @error('BrandId') is-invalid @enderror"  name="BrandId"
+                                 aria-label="Default select example" >
                                     <option value="">Choose Brand</option>
                                     @foreach ($data as $brand)
                                         <option value="{{ $brand->id }}">{{ $brand->name }}</option>
@@ -83,4 +86,13 @@
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+<script>
+    $(document).ready(function() {
+    $('.js-example-basic-single').select2();
+});
+</script>
+<script type="text/javascript" src="jquery.js"></script>          
+<script type="text/javascript" src="select2.js"></script>    
 @endsection

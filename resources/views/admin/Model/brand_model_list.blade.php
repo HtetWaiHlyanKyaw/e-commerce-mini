@@ -1,7 +1,8 @@
 <!-- In your view file -->
 @extends('admin.layouts.master')
 @section('title', 'Models')
-
+@section('style')
+@endsection
 @section('content')
 {{-- <div class="container-fluid">
 <table id="myTable">
@@ -56,7 +57,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @php
+                    @php 
                     $counter = 1; // Initialize counter variable
                     @endphp
                     @foreach ($productModels as $productModel)

@@ -1,8 +1,16 @@
 @extends('admin.layouts.master')
 @section('title', 'Suppliers list')
 @section('style')
-
- </style>
+<style>
+    .add-button{
+        font-size:18px;
+        font-weight: 400;
+        text-align: right;
+    }
+    .right-column{
+        min-width: 100px; 
+    }
+</style>
 @endsection
 @section('content')
 
@@ -28,9 +36,12 @@
                 </ol>   
             </nav>
         </div>
+        {{-- <a class="text-success add-button" 
+    href="{{ route('supplier.page') }}"><p class="font-weight-bold">+ Add Supplier</p></a> --}}
+
         <div class="bg-lighter p-4 border rounded">
         <table style="background-color:white"  id="myTable">
-            <thead style="background-color: #5DC5FF; color: white;">
+            <thead style="background-color: white; color: black; font-size: 15px;">
                 <tr>
                     <th>No</th>
                     <th>Name</th>
@@ -41,7 +52,7 @@
                     <th>Actions</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody style="font-size: 15px;">
                 @php
                 $counter = 1; // Initialize counter variable
                 @endphp
@@ -54,7 +65,7 @@
                         <td class="col-lg-1">{{ $supplier->phone_number }}</td>
                         <td class="col-lg-1">{{ $supplier->address }}</td>
                         <td class="col-lg-1">{{ $supplier->created_at->format('d / M /Y') }}</td>
-                        <td class="col-lg-1">
+                        <td class="col-lg-1 right-column">
                             <a href="{{route('supplier.edit', $supplier->id)}}">
                                 <button class="btn btn-outline-success btn-lg border-2" title="edit supplier">
                                     {{-- <i class="bi bi-pencil-square">edit</i> --}}
@@ -76,6 +87,8 @@
         </table>
     </div>
     </div>
+    
     @endsection
-</body>
+    
+    </body>
 </html>
