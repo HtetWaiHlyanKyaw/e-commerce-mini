@@ -52,15 +52,15 @@
                                 @enderror
                             </div>
 
-                            <label for="image" class="form-label">Product Image</label>
+                            <label for="photo" class="form-label">Product Image</label>
                             <div class="form-group mb-3">
 
-                                <input type="file" name="image"
-                                    class="form-control @error('image') is-invalid @enderror"
+                                <input type="file" name="photo"
+                                    class="form-control @error('photo ') is-invalid @enderror"
                                     placeholder="product image">
 
 
-                                @error('image')
+                                @error('photo')
                                     <div class="text-danger">
                                         {{ $message }}
                                     </div>
@@ -162,7 +162,7 @@
 
                                 <input type="text" name="low_stock"
                                     class="form-control @error('low_stock') is-invalid @enderror"
-                                    placeholder="product name">
+                                    placeholder="exit stop">
 
 
                                 @error('low_stock')
@@ -189,7 +189,7 @@
                             {{-- submit --}}
                             <div class="text-center">
                                 <input type="reset" value="cancel" class="btn btn-secondary px-3 me-3">
-                                <input type="submit" value="create" class="btn btn-primary px-3">
+                                <button type="submit" value="create" class="btn btn-primary px-3">Create</button>
                             </div>
                         </form>
 

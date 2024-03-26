@@ -54,7 +54,7 @@
                         <td class="col-lg-1">{{ $counter}}</td>
                         <td class="col-lg-1">{{ $plist->name }}</td>
                         <td class="col-lg-1">
-                            <img src="{{ asset('images/' . $plist->image) }}" alt="">
+                            <th><img src="{{asset('images')}}/{{$plist->photo}}" alt="" style="width:100px;height:auto;"></th>
                         </td>
                         <td class="col-lg-1">{{ $plist->brand_id }}</td>
                         <td class="col-lg-1">{{ $plist->product_model_id }}</td>
@@ -79,7 +79,7 @@
                         </td>
                     </tr>
                     @php
-                    $counter++; // Increment counter for the next row
+                    $counter++;
                 @endphp
                 @endforeach
             </tbody>
