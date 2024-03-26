@@ -81,7 +81,7 @@
                     <span class="hide-menu">Products</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{route('product.index')}}{{route('product.index')}}" aria-expanded="false">
+                    <a class="sidebar-link" href="{{route('product.index')}}" aria-expanded="false">
                         <span>
                             <i class="ti ti-list"></i>
                         </span>
@@ -158,7 +158,7 @@
 
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="#" aria-expanded="false">
+                    <a class="sidebar-link" href="{{route('customer_purchase.list')}}" aria-expanded="false">
                         <span>
                             <i class="ti ti-receipt-2"></i>
                         </span>
