@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', 'Brands list')
+@section('title', 'Models')
 @section('style')
     <style>
         .header-color {
@@ -7,10 +7,11 @@
         }
     </style>
 @endsection
+
 @section('content')
 
     <div class="container-fluid">
-        {{-- Brand Create Success Message --}}
+        {{-- Admin List Success Message --}}
 
         <div>
             @if (session('success'))
@@ -20,15 +21,15 @@
             @endif
         </div>
 
-        <h1 class="header-color">Brands</h1>
+        <h1 class="header-color">Admin List</h1>
         <br>
         <div class="pagetitle">
-            <h3>Category List Count -{{ $data->count() }}</h3>
+            <h3>Admin List Count -{{ $data->count() }}</h3>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item ">Home</li>
-                    <li class="breadcrumb-item ">Brand</li>
-                    <li class="breadcrumb-item "><b>Brand List</b></li>
+                    <li class="breadcrumb-item "> Home</li>
+                    <li class="breadcrumb-item ">Admin</li>
+                    <li class="breadcrumb-item "><b>Admin List</b></li>
                 </ol>
             </nav>
         </div>
@@ -37,29 +38,29 @@
                 <tr>
                     <th class="float:left;">No</th>
                     <th>Name</th>
-                    <th>Date</th>
+                    <th>Email</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @php
-                    $counter = 1; // Initialize counter variable
-                @endphp
-                @foreach ($data as $blist)
+                $counter = 1; // Initialize counter variable
+            @endphp
+                @foreach ($data as $Alist)
                     <tr class="tr-shadow">
-                        {{-- <td class="col-lg-1">{{ $blist->id }}</td> --}}
-                        <td class="col-lg-1">{{ $counter++ }}</td>
-                        <td class="col-lg-1">{{ $blist->name }}</td>
-                        <td class="col-lg-1">{{ $blist->created_at->format('d / M /Y') }}</td>
+                        {{-- <td class="col-lg-1">{{ $productModel->id }}</td> --}}
+                        <td class="col-lg-1">{{ $counter++}}</td>
+                        <td class="col-lg-1">{{ $Alist->name }}</td>
+                        <td class="col-lg-1">{{ $Alist->email }}</td>
                         <td class="col-lg-1">
-                            <a href="{{ route('brand.edit', $blist->id) }}">
-                                <button class="btn btn-warning me-2" title="edit brand">
+                            <a href="{{route('Admin.edit',$Alist->id)}}">
+                                <button class="btn btn-warning me-2" title="Edit Admin">
                                     {{-- <i class="bi bi-pencil-square">edit</i> --}}
                                     <i class="ti ti-edit"></i>
                                 </button>
                             </a>
-                            <a href="{{ route('Admin.delete', $blist->id) }}">
-                                <button class="btn btn-danger" title="delete brand">
+                            <a href="{{ route('Admin.delete', $Alist->id) }}">
+                                <button class="btn btn-danger" title="delete Admin">
                                     <i class="ti ti-trash"></i>
                                 </button>
                             </a>
@@ -71,5 +72,4 @@
 
         </table>
     </div>
-
 @endsection

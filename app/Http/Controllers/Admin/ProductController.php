@@ -9,7 +9,7 @@ use App\Models\ProductModel;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Validator;
+
 class ProductController extends Controller
 {
     public function index()
@@ -75,8 +75,5 @@ class ProductController extends Controller
         Product::where('id', $id)->delete();
         return redirect()->route('product.index')->with(['success' => 'product delete success']);
     }
-
-
-
 
 }

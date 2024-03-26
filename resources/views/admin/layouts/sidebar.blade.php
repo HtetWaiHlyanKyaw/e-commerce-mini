@@ -111,16 +111,9 @@
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Admin</span>
                 </li>
-                {{-- <li class="sidebar-item">
-          <a class="sidebar-link" href="#" aria-expanded="false">
-            <span>
-              <i class="ti ti-user-circle"></i>
-            </span>
-            <span class="hide-menu">Admin</span>
-          </a>
-        </li> --}}
+
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="#" aria-expanded="false">
+                    <a class="sidebar-link" href="{{(route('Admin.list'))}}" aria-expanded="false">
                         <span>
                             <i class="ti ti-list"></i>
                         </span>
@@ -128,7 +121,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="#" aria-expanded="false">
+                    <a class="sidebar-link" href="{{route('Admin.page')}}" aria-expanded="false">
                         <span>
                             <i class="ti ti-circle-plus"></i>
                         </span>
