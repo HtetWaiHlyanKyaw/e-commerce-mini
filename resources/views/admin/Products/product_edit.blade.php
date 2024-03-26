@@ -1,6 +1,9 @@
 @extends('admin.layouts.master')
 @section('title', 'Product Edit Page')
 
+@section('style')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+@endsection
 
 @section('content')
     <div class="container-fluid">
@@ -34,47 +37,42 @@
                         </div>
                         <hr>
 
-                        <form action="{{ route('product.update', $data->id) }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('product.update', $data->id) }}" method="post">
                             @csrf
-                            <label for="productName" class="form-label">Product Name</label>
+
+                            <label for="name" class="form-label">Product Name</label>
                             <div class="form-group mb-3">
                                 <input type="text" name="productName"
-                                    class="form-control @error('productName') is-invalid @enderror"
-                                    value="{{ old('name', $data->name) }}">
+                                    class="form-control @error('productName') is-invalid @enderror" value="{{old('name', $data->name)}}">
 
 
-                                @error('productName')
+                                @error('name')
                                     <div class="text-danger">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
-                            <label for="photo" class="form-label">Product Image</label>
+                            <label for="image" class="form-label">Product Image</label>
                             <div class="form-group mb-3">
 
-                                <input type="file" name="photo"
-                                    class="form-control @error('photo') is-invalid @enderror" placeholder="product image">
-
-                                <input type="hidden" name="curr_photo" value="{{ $plist->photo }}">
-                                <ul>
-                                    <li><img src="{{ asset('images') }}/{{ $plist->photo }}" alt=""
-                                            style="width:100px;"></li>
-                                    <li>current photo</li>
-                                </ul>
-                                <input type="file" name="new_photo" class="form-control"><br>
+                                <input type="file" name="image"
+                                    class="form-control @error('image') is-invalid @enderror"
+                                    placeholder="product image">
 
 
-                                @error('photo')
+                                @error('image')
                                     <div class="text-danger">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
-                            <label for="brand_id" class="form-label">Brand ID</label>
+
+                            {{-- Brand Call --}}
                             <div class="form-group mb-3">
 
                                 <input type="text" name="brand_id"
-                                    class="form-control @error('brand_id') is-invalid @enderror" placeholder="brand ID">
+                                    class="form-control @error('brand_id') is-invalid @enderror"
+                                    placeholder="brand ID">
 
 
                                 @error('brand_id')
@@ -83,11 +81,13 @@
                                     </div>
                                 @enderror
                             </div>
-                            <label for="model_id" class="form-label">Product Model ID</label>
+
+                            {{-- Model Call --}}
                             <div class="form-group mb-3">
 
                                 <input type="text" name="model_id"
-                                    class="form-control @error('model_id') is-invalid @enderror" placeholder="model ID">
+                                    class="form-control @error('model_id') is-invalid @enderror"
+                                    placeholder="model ID">
 
 
                                 @error('model_id')
@@ -96,12 +96,14 @@
                                     </div>
                                 @enderror
                             </div>
+
+
                             <label for="storage_option" class="form-label">Storage Option</label>
                             <div class="form-group mb-3">
 
                                 <input type="text" name="storage_option"
                                     class="form-control @error('storage_option') is-invalid @enderror"
-                                    placeholder="Storage Option">
+                                    value="{{old('storage_option' , $product->storage_option)}}">
 
 
                                 @error('storage_option')
@@ -110,11 +112,13 @@
                                     </div>
                                 @enderror
                             </div>
+
                             <label for="color" class="form-label">Color</label>
                             <div class="form-group mb-3">
 
                                 <input type="text" name="color"
-                                    class="form-control @error('color') is-invalid @enderror" placeholder="color">
+                                    class="form-control @error('color') is-invalid @enderror"
+                                    placeholder="color">
 
 
                                 @error('color')
@@ -123,11 +127,13 @@
                                     </div>
                                 @enderror
                             </div>
+
                             <label for="price" class="form-label">Price</label>
                             <div class="form-group mb-3">
 
                                 <input type="text" name="price"
-                                    class="form-control @error('price') is-invalid @enderror" placeholder="price">
+                                    class="form-control @error('price') is-invalid @enderror"
+                                    placeholder="price">
 
 
                                 @error('price')
@@ -136,11 +142,13 @@
                                     </div>
                                 @enderror
                             </div>
+
                             <label for="quantity" class="form-label">Quantity</label>
                             <div class="form-group mb-3">
 
                                 <input type="text" name="quantity"
-                                    class="form-control @error('quantity') is-invalid @enderror" placeholder="quatity">
+                                    class="form-control @error('quantity') is-invalid @enderror"
+                                    placeholder="quatity">
 
 
                                 @error('quantity')
@@ -149,12 +157,13 @@
                                     </div>
                                 @enderror
                             </div>
+
                             <label for="low_stock" class="form-label">Low Stock</label>
                             <div class="form-group mb-3">
 
                                 <input type="text" name="low_stock"
                                     class="form-control @error('low_stock') is-invalid @enderror"
-                                    placeholder="product name">
+                                    value="{{old('low_stock' , $product->low_stock)}}">
 
 
                                 @error('low_stock')
@@ -163,12 +172,13 @@
                                     </div>
                                 @enderror
                             </div>
+
                             <label for="description" class="form-label">Description</label>
                             <div class="form-group mb-3">
 
                                 <input type="text" name="description"
                                     class="form-control @error('description') is-invalid @enderror"
-                                    placeholder="description">
+                                    value="{{old('description' , $product->description)}}">
 
 
                                 @error('description')
@@ -189,5 +199,22 @@
             </div>
         </div>
     </div>
+
+@endsection
+
+@section('script')
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    // In your Javascript (external .js resource or <script> tag)
+$(document).ready(function() {
+    $('.brandname').select2();
+});
+
+$(document).ready(function() {
+    $('.modelname').select2();
+});
+
+
+</script>
 
 @endsection

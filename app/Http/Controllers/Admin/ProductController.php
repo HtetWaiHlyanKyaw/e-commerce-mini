@@ -21,10 +21,11 @@ class ProductController extends Controller
         return view('admin.Products.product_list', compact('datas'));
 
     }
+}
 
 
 
-    public function create()
+ create()
     {
         $brands = Brand::all();
         $models = ProductModel::all();
@@ -75,9 +76,9 @@ class ProductController extends Controller
 
         Product::create([
 
-            'name' => $request->productName,
-            'photo' =>$file_name,
-            'brand_id' => $request->BrandId,
+            'name' => $request ->productName,
+            // 'image' =>$request->$file_name,
+            'brand_id' => $request ->BrandId,
             'product_model_id' => $request->ModelName,
             'storage_option' => $request->storage_option,
             'color' => $request->color,
@@ -88,7 +89,7 @@ class ProductController extends Controller
 
         ]);
 
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with(['success' => 'Product created successfully']);
     }
 
 
@@ -97,27 +98,6 @@ class ProductController extends Controller
     {
         Product::where('id', $id)->delete();
         return redirect()->route('product.index')->with(['success' => 'product delete success']);
-    }
-
-    public function update(Request $request, $id)
-    {
-        $photo_name="";
-        $new_file=$request->new_photo;
-        if($new_file)
-        {
-           $photo_name= $new_file->getClientOriginalName();
-           $new_file->move(public_path('images'),$photo_name);
-        }
-        else{
-            $photo_name=$request->curr_photo;
-        }
-
-        $plist = Product::findOrFail($id);
-        $plist->update([
-            'name' => $request->productName,
-
-        ]);
-        return redirect()->route('product.index');
     }
 
 

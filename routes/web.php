@@ -1,14 +1,15 @@
 <?php
 
-use App\Http\Controllers\Admin\CustomerController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\BrandModelController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\admin\ReviewController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\SupplierController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SupplierPurchaseController;
 /*
 |--------------------------------------------------------------------------
@@ -83,6 +84,15 @@ Route::prefix('admin/supplier purchase')->group(function(){
     // Route::get('/edit/{id}', [SupplierPurchaseController::class, 'edit'])->name('supplier.edit');
     // Route::post('/update/{id}', [SupplierPurchaseController::class, 'update'])->name('supplier.update');
     // Route::get('/delete/{id}', [SupplierPurchaseController::class, 'delete'])->name('supplier.delete');
+});
+
+Route::prefix('admin/Admin')->group(function(){
+Route::get('/page',[AdminController::class, 'page'])->name('Admin.page');
+Route::post('/create', [AdminController::class, 'create'])->name('Admin.create');
+Route::get('/list',[AdminController::class, 'list'])->name('Admin.list');
+Route::get('/edit/{id}', [AdminController::class, 'edit'])->name('Admin.edit');
+Route::post('/update/{id}', [AdminController::class, 'update'])->name('Admin.update');
+Route::get('/delete/{id}', [AdminController::class, 'delete'])->name('Admin.delete');
 });
 
 Auth::routes();

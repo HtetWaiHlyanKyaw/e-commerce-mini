@@ -1,6 +1,10 @@
 @extends('admin.layouts.master')
 @section('title', 'Products')
 
+@section('style')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+@endsection
+
 
 @section('content')
     <div class="container-fluid">
@@ -23,6 +27,7 @@
                 </div>
             @endif
         </div>
+
 
         {{-- Product Create Card --}}
         <div class="container-fluid">
@@ -70,7 +75,7 @@
                             {{-- Brand  --}}
                             <div class="form-group mb-3">
                                 <label for="modelName" class="form-label">Brand</label>
-                                <select class="form-select @error('BrandName') is-invalid @enderror"  name="BrandName"
+                                <select class="form-select @error('BrandName') is-invalid @enderror brandname"  name="BrandName"
                                  aria-label="Default select example">
                                     <option value="">Choose Brand</option>
                                     @foreach ($brands as $brand)
@@ -87,7 +92,7 @@
                             {{-- Product_model_id  --}}
                             <div class="form-group mb-3">
                                 <label for="ModelName" class="form-label">Model</label>
-                                <select class="form-select @error('ModelName') is-invalid @enderror"  name="ModelName"
+                                <select class="form-select @error('ModelName') is-invalid @enderror modelname"  name="ModelName"
                                  aria-label="Default select example">
                                     <option value="">Choose Model</option>
                                     @foreach ($models as $model)
@@ -198,4 +203,21 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    // In your Javascript (external .js resource or <script> tag)
+$(document).ready(function() {
+    $('.brandname').select2();
+});
+
+$(document).ready(function() {
+    $('.modelname').select2();
+});
+
+
+</script>
+
 @endsection
