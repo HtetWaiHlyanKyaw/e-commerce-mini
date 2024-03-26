@@ -9,7 +9,6 @@ use App\Models\ProductModel;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Database\Eloquent\Model;
-
 class ProductController extends Controller
 {
     public function index()
@@ -53,7 +52,7 @@ class ProductController extends Controller
         Product::create([
 
             'name' => $request ->productName,
-            // 'image' =>$request->$file_name,
+            //
             'brand_id' => $request ->BrandId,
             'product_model_id' => $request->ModelName,
             'storage_option' => $request->storage_option,

@@ -65,26 +65,26 @@
                             <label for="brand_id" class="form-label">Brand ID</label>
                             <div class="form-group mb-3">
 
-                                <input type="text" name="brand_id"
-                                    class="form-control @error('brand_id') is-invalid @enderror"
+                                <input type="text" name="BrandId"
+                                    class="form-control @error('BrandId') is-invalid @enderror"
                                     placeholder="brand ID">
 
 
-                                @error('brand_id')
+                                @error('BrandId')
                                     <div class="text-danger">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
-                            <label for="model_id" class="form-label">Product Model ID</label>
+                            <label for="model_id" class="form-label">Model</label>
                             <div class="form-group mb-3">
 
-                                <input type="text" name="model_id"
-                                    class="form-control @error('model_id') is-invalid @enderror"
+                                <input type="text" name="ModelName"
+                                    class="form-control @error('ModelName') is-invalid @enderror"
                                     placeholder="model ID">
 
 
-                                @error('model_id')
+                                @error('ModelName')
                                     <div class="text-danger">
                                         {{ $message }}
                                     </div>
