@@ -39,8 +39,8 @@
         </div>
         <div class="bg-lighter p-4 border rounded">
             <table style="background-color:white" id="myTable">
-                <thead style="background-color: white; color:black;">
-                    <tr>
+                <thead>
+                    <tr style="color: #1da9dc">
                         <th>No</th>
                         <th>Supplier</th>
                         {{-- <th>Product</th> --}}

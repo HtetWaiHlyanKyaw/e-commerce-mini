@@ -34,7 +34,7 @@
         </div>
         <table border="1" id="myTable">
             <thead>
-                <tr>
+                <tr style="color: #1da9dc">
                     <th class="float:left;">No</th>
                     <th>Name</th>
                     <th>Date</th>
@@ -53,7 +53,7 @@
                         <td class="col-lg-1">{{ $blist->created_at->format('d / M /Y') }}</td>
                         <td class="col-lg-1">
                             <a href="{{ route('brand.edit', $blist->id) }}">
-                                <button class="btn btn-warning me-2" title="edit brand">
+                                <button class="btn btn-success me-2" title="edit brand">
                                     {{-- <i class="bi bi-pencil-square">edit</i> --}}
                                     <i class="ti ti-edit"></i>
                                 </button>
