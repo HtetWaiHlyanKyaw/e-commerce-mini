@@ -109,7 +109,7 @@
 
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                    <span class="hide-menu">Admin</span>
+                    <span class="hide-menu">Admins</span>
                 </li>
 
                 <li class="sidebar-item">
@@ -131,7 +131,7 @@
                 </li>
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                    <span class="hide-menu">Customer</span>
+                    <span class="hide-menu">Customers</span>
                 </li>
                 {{-- <li class="sidebar-item">
           <a class="sidebar-link" href="#" aria-expanded="false">
@@ -151,7 +151,7 @@
 
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="#" aria-expanded="false">
+                    <a class="sidebar-link" href="{{route('customer_purchase.list')}}" aria-expanded="false">
                         <span>
                             <i class="ti ti-receipt-2"></i>
                         </span>

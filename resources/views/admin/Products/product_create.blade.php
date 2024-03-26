@@ -61,8 +61,9 @@
                             <div class="form-group mb-3">
 
                                 <input type="file" name="photo"
-                                    class="form-control @error('photo ') is-invalid @enderror"
-                                    placeholder="product image">
+                                class="form-control @error('photo') is-invalid @enderror"
+                                placeholder="product image">
+
 
 
                                 @error('photo')
@@ -79,7 +80,7 @@
                                  aria-label="Default select example">
                                     <option value="">Choose Brand</option>
                                     @foreach ($brands as $brand)
-                                        <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                        <option value="{{ $brand->id }}">{{ $brand->id }}</option>
                                     @endforeach
                                 </select>
                                 @error('BrandName')
@@ -105,7 +106,6 @@
                                     </div>
                                 @enderror
                             </div>
-
                             <label for="storage_option" class="form-label">Storage Option</label>
                             <div class="form-group mb-3">
 

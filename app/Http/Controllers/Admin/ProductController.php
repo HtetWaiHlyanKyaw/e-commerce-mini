@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
 use Illuminate\Support\Facades\Validator;
 use App\Models\Brand;
 use App\Models\Product;
@@ -15,47 +14,22 @@ class ProductController extends Controller
 {
     public function index()
     {
-
         $datas = Product::with('brand')->get();
-
-        return view('admin.Products.product_list', compact('datas'));
-
+        return view ('admin.Products.product_list',  compact('datas'));
     }
-}
 
-
-
- create()
+    public function create()
     {
         $brands = Brand::all();
         $models = ProductModel::all();
         return view('admin.Products.product_create', compact('brands', 'models'));
     }
 
-    // private function vali($request)
-    // {
-    //     $rules = [
-    //         'productName' => 'required',
-    //         'image' => 'required | image | mimes:jpeg,jpg,png',
-    //         'BrandName' => 'required',
-    //         'Name' => 'required',
-    //         'storage_option' => 'required',
-    //         'color' => 'required',
-    //         'price' => 'required',
-    //         'quantity' => 'required',
-    //         'low_stock' => 'required',
-    //         'description' => 'required',
-
-    //     ];
-    //     Validator::make($request->all(), $rules)->validate();
-    // }
-
-    public function store(Request $request)
+    public function vali($request)
     {
-        $request->validate([
-
+        $rules = [
             'productName' => 'required',
-            'photo' => 'required | image | mimes:jpeg,jpg,png',
+            'photo' => 'required | photo | mimes:jpeg,jpg,png',
             'BrandName' => 'required',
             'Name' => 'required',
             'storage_option' => 'required',
@@ -64,21 +38,26 @@ class ProductController extends Controller
             'quantity' => 'required',
             'low_stock' => 'required',
             'description' => 'required',
+        ];
+        Validator::make($request->all(), $rules)->validate();
+    }
 
-        ]);
-        $file=$request->photo;
-         if($file)
-         {
-            $file_name=$file->getClientOriginalName();
-            $file->move(public_path('images'),$file_name);
-         }
+    public function store(Request $request)
+    {
+        $file_name= "";
+        $file = $request->photo;
+       // Default value if no photo is uploaded
+        if ($file) {
+            $file_name = $file->getClientOriginalName();
+            $file->move(public_path('images'), $file_name);
+        }
+
 
 
         Product::create([
-
-            'name' => $request ->productName,
-            // 'image' =>$request->$file_name,
-            'brand_id' => $request ->BrandId,
+            'name' => $request->productName,
+            'photo' => $file_name,
+            'brand_id' => $request->BrandId,
             'product_model_id' => $request->ModelName,
             'storage_option' => $request->storage_option,
             'color' => $request->color,
@@ -86,21 +65,18 @@ class ProductController extends Controller
             'quantity' => $request->quantity,
             'low_stock' => $request->low_stock,
             'description' => $request->description,
-
         ]);
 
-        return redirect()->route('product.index')->with(['success' => 'Product created successfully']);
+        return redirect()->route('product.index');
     }
+
+
 
 
 
     public function delete($id)
     {
         Product::where('id', $id)->delete();
-        return redirect()->route('product.index')->with(['success' => 'product delete success']);
+        return redirect()->route('product.index');
     }
-
-
-
-
 }
