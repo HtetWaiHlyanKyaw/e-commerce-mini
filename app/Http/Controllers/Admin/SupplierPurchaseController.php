@@ -28,12 +28,12 @@ class SupplierPurchaseController extends Controller
         // Validate the request data
         // dd($request->selectedProducts);
         $request->validate([
-            // 'invoice_id' => 'required|string',
-            // 'supplier' => 'required|exists:suppliers,id',
-            // 'payment' => 'required|in:credit_card,paypal',
-            // 'selectedProductsInput' => 'required|array|min:1',
-            // 'totalQuantity' => 'required|integer|min:1',
-            // 'totalPrice' => 'required|numeric|min:0',
+            'invoice_id' => 'required|string',
+            'supplier' => 'required|exists:suppliers,id',
+            'payment' => 'required',
+            'selectedProducts' => 'required|min:1',
+            'totalQuantity' => 'required|integer|min:1',
+            'totalPrice' => 'required|numeric|min:0',
         ]);
         $selectedProducts = json_decode($request->selectedProducts, true);
         // Wrap the database operations in a try-catch block to handle any exceptions
@@ -62,5 +62,17 @@ class SupplierPurchaseController extends Controller
 
             // Redirect back with success message
             return redirect()->route('supplier_purchase.list')->with('success', 'Purchase completed successfully.');
+    }
+    public function detail($id)
+    {//    $supplierPurchase = SupplierPurchase::where('id', $id)->get();
+
+    //     $details = SupplierPurchaseDetail::where('supplier_purchase_id', $id)->get();
+    //     return view('admin.SupplierPurchases.supplier_purchase_detail', compact('details', 'supplierPurchase'));
+
+        $supplierPurchase = SupplierPurchase::with('supplier')->findOrFail($id);
+
+    $details = SupplierPurchaseDetail::where('supplier_purchase_id', $id)->paginate(10);
+
+    return view('admin.SupplierPurchases.supplier_purchase_detail', compact('details', 'supplierPurchase'));
     }
 }

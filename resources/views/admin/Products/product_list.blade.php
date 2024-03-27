@@ -27,7 +27,7 @@
         </div>
         <table border="1" id="myTable">
             <thead>
-                <tr>
+                <tr style="color: #1da9dc">
                     <th class="float:left;">No</th>
                     <th>Name</th>
                     <th>Image</th>
@@ -66,7 +66,7 @@
                         <td class="col-lg-1">{{ $plist->description }}</td>
                         <td class="col-lg-1">
                             <a href="{{route('product.edit', $plist->id)}}">
-                                <button class="btn btn-warning me-2" title="edit product">
+                                <button class="btn btn-success me-2" title="edit product">
                                     {{-- <i class="bi bi-pencil-square">edit</i> --}}
                                     <i class="ti ti-edit"></i>
                                 </button>
@@ -88,5 +88,4 @@
     </div>
 
     @endsection
-</body>
-</html>
+

@@ -40,7 +40,7 @@
         {{-- <a class="text-success add-button"
     href="{{ route('supplier.page') }}"><p class="fon   t-weight-bold">+ Add Supplier</p></a> --}}
 
-        <div class="bg-lighter p-4 border rounded">
+        {{-- <div class="bg-lighter p-4 border rounded"> --}}
             <table style="background-color:white" id="myTable" class="hover compact">
                 <thead style="background-color: white; color: black;">
                     <tr>
@@ -87,6 +87,6 @@
                     @endforeach
                 </tbody>
             </table>
-        </div>
+        {{-- </div> --}}
     </div>
 @endsection

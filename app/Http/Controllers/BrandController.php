@@ -49,7 +49,7 @@ class BrandController extends Controller
         $this->vali($request);
         $data = $this->dataArrange($request);
         Brand::where('id', $id)->update($data);
-        return back()->with(['success' => 'Brand  Edit Success']);
+        return redirect()->route('brand.list')->with(['success' => 'Brand  Edit Success']);
     }
 
     //brand delete
