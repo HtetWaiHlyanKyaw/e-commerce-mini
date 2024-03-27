@@ -66,13 +66,13 @@
         <hr>
         <div class="row">
             <div class="col-md-6">
-                <h4 class="header-color">Order information</h4>
+                <h4 class="header-color">Order Summary</h4>
                 <div class="supplier-details">
                     <h6>Invoice ID: {{ $supplierPurchase->invoice_id }}</h6>
                     <h6>Payment Method: {{ $supplierPurchase->payment_method }}</h6>
                     <h6>Total Quantity: {{ $supplierPurchase->total_quantity }}</h6>
                     <h6>Total Price: {{ $supplierPurchase->total_price }}</h6>
-                    <h6>Date of Purchase: {{ $supplierPurchase->created_at->format('d / M / Y') }}</h6>
+                    <h6>Date: {{ \Carbon\Carbon::parse($supplierPurchase->created_at)->format('F j, Y') }}</h6>
                 </div>
                 <h4 class="header-color">Supplier information</h4>
                 <div class="supplier-details">
@@ -83,7 +83,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <h4 class="header-color">Product information</h4>
+                <h4 class="header-color">Ordered Products</h4>
                 <div class="slip-wrapper">
                     @php $counter = 0 @endphp
                     @foreach ($details as $detail)
@@ -93,7 +93,6 @@
                             <div><strong>Quantity:</strong> {{ $detail->quantity }}</div>
                             <div><strong>Price:</strong> {{ $detail->price }}</div>
                             <div><strong>Sub Total:</strong> {{ $detail->sub_total }}</div>
-                            <div><strong>Date:</strong> {{ $detail->created_at->format('d / M / Y') }}</div>
                         </div>
                         @php $counter++ @endphp
                         @if ($counter % 10 == 0)
