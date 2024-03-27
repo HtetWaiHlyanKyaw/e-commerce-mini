@@ -30,7 +30,7 @@
                 <tr style="color: #1da9dc">
                     <th class="float:left;">No</th>
                     <th>Name</th>
-                    <th>Image</th>
+                    {{-- <th>Image</th> --}}
                     <th>Brand</th>
                     <th>Model</th>
                     <th>Storage Option</th>
@@ -53,9 +53,9 @@
                         {{-- <td class="col-lg-1">{{ $blist->id }}</td> --}}
                         <td class="col-lg-1">{{ $counter}}</td>
                         <td class="col-lg-1">{{ $plist->name }}</td>
-                        <td class="col-lg-1">
+                        {{-- <td class="col-lg-1">
                             <img src="{{ asset('images/' . $plist->image) }}" alt="">
-                        </td>
+                        </td> --}}
                         <td class="col-lg-1">{{ $plist->brand_id }}</td>
                         <td class="col-lg-1">{{ $plist->product_model_id }}</td>
                         <td class="col-lg-1">{{ $plist->storage_option }}</td>
