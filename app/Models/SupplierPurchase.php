@@ -9,18 +9,24 @@ class SupplierPurchase extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'invoice_id',
         'supplier_id',
-        'product_id',
-        'quantity',
-        'unit_price',
+        'total_quantity',
         'total_price',
+        'payment_method',
     ];
     public function supplier()
     {
         return $this->belongsTo(supplier::class);
     }
-    // public function brand()
+
+    public function details()
+    {
+        return $this->hasMany(SupplierPurchaseDetail::class);
+    }
+
+    // public function product()
     // {
-    //     return $this->belongsTo(Brand::class);
+    //     return $this->hasMany(Product::class);
     // }
 }

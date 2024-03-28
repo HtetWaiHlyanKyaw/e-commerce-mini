@@ -30,7 +30,7 @@
             @endif
         </div>
 
-        {{-- Brand Create Card --}}
+        {{-- Brand Create Card --}} 
         <div class="container-fluid">
             <div class="col-lg-6 offset-lg-3">
                 <div class="card">

@@ -47,7 +47,7 @@
 
                                 <input type="text" name="productName"
                                     class="form-control @error('productName') is-invalid @enderror"
-                                    placeholder="product name">
+                                    placeholder="product name" value="{{old('productName')}}">
 
 
                                 @error('productName')
@@ -61,8 +61,8 @@
                             <div class="form-group mb-3">
 
                                 <input type="file" name="image"
-                                    class="form-control @error('image') is-invalid @enderror"
-                                    placeholder="product image">
+                                    class="form-control @error('image') is-invalid @enderror">
+
 
 
                                 @error('image')
@@ -74,7 +74,7 @@
 
                             {{-- Brand  --}}
                             <div class="form-group mb-3">
-                                <label for="modelName" class="form-label">Brand</label>
+                                <label for="BrandName" class="form-label">Brand</label>
                                 <select class="form-select @error('BrandName') is-invalid @enderror brandname"  name="BrandName"
                                  aria-label="Default select example">
                                     <option value="">Choose Brand</option>
@@ -111,7 +111,7 @@
 
                                 <input type="text" name="storage_option"
                                     class="form-control @error('storage_option') is-invalid @enderror"
-                                    placeholder="Storage Option">
+                                    placeholder="Storage Option" value="{{ old('storage_option') }}">
 
 
                                 @error('storage_option')
@@ -139,7 +139,7 @@
 
                                 <input type="text" name="price"
                                     class="form-control @error('price') is-invalid @enderror"
-                                    placeholder="price">
+                                    placeholder="price" value="{{ old('price') }}">
 
 
                                 @error('price')
@@ -153,7 +153,7 @@
 
                                 <input type="text" name="quantity"
                                     class="form-control @error('quantity') is-invalid @enderror"
-                                    placeholder="quatity">
+                                    placeholder="quatity" value="{{ old('quantity') }}">
 
 
                                 @error('quantity')
@@ -167,7 +167,7 @@
 
                                 <input type="text" name="low_stock"
                                     class="form-control @error('low_stock') is-invalid @enderror"
-                                    placeholder="product name">
+                                    placeholder="low_stock" value="{{ old('low_stock') }}">
 
 
                                 @error('low_stock')
@@ -181,7 +181,7 @@
 
                                 <input type="text" name="description"
                                     class="form-control @error('description') is-invalid @enderror"
-                                    placeholder="description">
+                                    placeholder="description" value="{{ old('description') }}">
 
 
                                 @error('description')
