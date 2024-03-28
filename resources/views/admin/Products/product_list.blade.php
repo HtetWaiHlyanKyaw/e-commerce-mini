@@ -1,22 +1,28 @@
 @extends('admin.layouts.master')
 @section('title', 'Products list')
+@section('style')
+    <style>
 
+        .header-color {
+            color: #1da9dc;
+        }
+
+        .bg-lighter {
+            background-color: #f6f7ff;
+            /* Slightly darker shade */
+        }
+    </style>
+@endsection
 @section('content')
 
     <div class="container-fluid">
-{{-- Brand Create Success Message --}}
+        {{-- Brand Create Success Message --}}
 
-        <div>
-            @if (session('success'))
-                <div class="alert alert-success text-center" role="alert">
-                    {{ session('success') }}
-                </div>
-            @endif
-        </div>
+
 
         <h1>Products</h1>
         <div class="pagetitle">
-            <h3>Category List Count - {{ $datas->count()}}</h3>
+            <h3>Category List Count - {{ $datas->count() }}</h3>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">Home</li>
@@ -55,14 +61,14 @@
                         {{-- <td class="col-lg-1">{{ $blist->id }}</td> --}}
                         <td class="col-lg-1">{{ $counter}}</td>
                         <td class="col-lg-1">{{ $plist->name }}</td>
-                        {{-- <td class="col-lg-1">
-                            <img src="{{ asset('storage/products/'. $plist->image)}}" alt="product image" width="100px" height="auto">
-                        </td> --}}
-                        <td class="col-lg-1">{{ $plist->brand->name }}</td>
-                        {{-- <td class="col-lg-1">{{ $plist->ProductModel->name }}</td> --}}
-                        {{-- <td class="col-lg-1">{{ $plist->storage_option }}</td> --}}
-                        {{-- <td class="col-lg-1">{{ $plist->color }}</td> --}}
-                        {{-- <td class="col-lg-1">{{ $plist->price }}</td> --}}
+                        <td class="col-lg-1">
+                            <img src="{{ asset('images/' . $plist->image) }}" alt="">
+                        </td>
+                        <td class="col-lg-1">{{ $plist->brand_id }}</td>
+                        <td class="col-lg-1">{{ $plist->product_model_id }}</td>
+                        <td class="col-lg-1">{{ $plist->storage_option }}</td>
+                        <td class="col-lg-1">{{ $plist->color }}</td>
+                        <td class="col-lg-1">{{ $plist->price }}</td>
                         <td class="col-lg-1">{{ $plist->quantity }}</td>
                         <td class="col-lg-1">{{ $plist->low_stock }}</td>
                         {{-- <td class="col-lg-1">{{ $plist->description }}</td> --}}
@@ -89,12 +95,11 @@
                         </td>
                     </tr>
                     @php
-                    $counter++; // Increment counter for the next row
+                    $counter++;
                 @endphp
                 @endforeach
             </tbody>
         </table>
     </div>
 
-    @endsection
-
+@endsection

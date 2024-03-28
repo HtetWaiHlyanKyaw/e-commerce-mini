@@ -20,13 +20,6 @@
 @section('content')
 
     <div class="container-fluid">
-        <div>
-            @if (session('success'))
-                <div class="alert alert-success text-center" role="alert">
-                    {{ session('success') }}
-                </div>
-            @endif
-        </div>
 
         <h1 class="header-color">Supplier Purchase List</h1>
         <br>
@@ -39,6 +32,13 @@
                     <li class="breadcrumb-item "><b>Supplier Purchase List</b></li>
                 </ol>
             </nav>
+        </div>
+        <div>
+            @if (session('success'))
+                <div class="alert alert-success text-center" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
         </div>
 
         <table style="background-color:white" id="myTable" class="hover compact">
