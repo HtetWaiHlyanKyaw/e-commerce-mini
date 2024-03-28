@@ -2,7 +2,7 @@
 @section('title', 'Products')
 
 @section('style')
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
 
 
@@ -47,7 +47,7 @@
 
                                 <input type="text" name="productName"
                                     class="form-control @error('productName') is-invalid @enderror"
-                                    placeholder="product name" value="{{old('productName')}}">
+                                    placeholder="product name" value="{{ old('productName') }}">
 
 
                                 @error('productName')
@@ -57,15 +57,15 @@
                                 @enderror
                             </div>
 
-                            <label for="photo" class="form-label">Product Image</label>
+                            <label for="image" class="form-label">Product Image</label>
                             <div class="form-group mb-3">
 
                                 <input type="file" name="image"
-                                    class="form-control @error('image') is-invalid @enderror"
-                                    placeholder="product image">
+                                    class="form-control @error('image') is-invalid @enderror">
 
 
-                                @error('photo')
+
+                                @error('image')
                                     <div class="text-danger">
                                         {{ $message }}
                                     </div>
@@ -75,11 +75,11 @@
                             {{-- Brand  --}}
                             <div class="form-group mb-3">
                                 <label for="BrandName" class="form-label">Brand</label>
-                                <select class="form-select @error('BrandName') is-invalid @enderror brandname"  name="BrandName"
-                                 aria-label="Default select example">
+                                <select class="form-select @error('BrandName') is-invalid @enderror brandname"
+                                    name="BrandName" aria-label="Default select example">
                                     <option value="">Choose Brand</option>
                                     @foreach ($brands as $brand)
-                                        <option value="{{ $brand->id }}">{{ $brand->id }}</option>
+                                        <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('BrandName')
@@ -88,12 +88,11 @@
                                     </div>
                                 @enderror
                             </div>
-
                             {{-- Product_model_id  --}}
                             <div class="form-group mb-3">
                                 <label for="ModelName" class="form-label">Model</label>
-                                <select class="form-select @error('ModelName') is-invalid @enderror modelname"  name="ModelName"
-                                 aria-label="Default select example">
+                                <select class="form-select @error('ModelName') is-invalid @enderror modelname"
+                                    name="ModelName" aria-label="Default select example">
                                     <option value="">Choose Model</option>
                                     @foreach ($models as $model)
                                         <option value="{{ $model->id }}">{{ $model->name }}</option>
@@ -105,6 +104,7 @@
                                     </div>
                                 @enderror
                             </div>
+
                             <label for="storage_option" class="form-label">Storage Option</label>
                             <div class="form-group mb-3">
 
@@ -123,8 +123,7 @@
                             <div class="form-group mb-3">
 
                                 <input type="text" name="color"
-                                    class="form-control @error('color') is-invalid @enderror"
-                                    placeholder="color">
+                                    class="form-control @error('color') is-invalid @enderror" placeholder="color">
 
 
                                 @error('color')
@@ -137,8 +136,8 @@
                             <div class="form-group mb-3">
 
                                 <input type="text" name="price"
-                                    class="form-control @error('price') is-invalid @enderror"
-                                    placeholder="price" value="{{ old('price') }}">
+                                    class="form-control @error('price') is-invalid @enderror" placeholder="price"
+                                    value="{{ old('price') }}">
 
 
                                 @error('price')
@@ -151,8 +150,8 @@
                             <div class="form-group mb-3">
 
                                 <input type="text" name="quantity"
-                                    class="form-control @error('quantity') is-invalid @enderror"
-                                    placeholder="quatity" value="{{ old('quantity') }}">
+                                    class="form-control @error('quantity') is-invalid @enderror" placeholder="quatity"
+                                    value="{{ old('quantity') }}">
 
 
                                 @error('quantity')
@@ -163,10 +162,9 @@
                             </div>
                             <label for="low_stock" class="form-label">Low Stock</label>
                             <div class="form-group mb-3">
-
                                 <input type="text" name="low_stock"
-                                    class="form-control @error('low_stock') is-invalid @enderror"
-                                    placeholder="low_stock" value="{{ old('low_stock') }}">
+                                    class="form-control @error('low_stock') is-invalid @enderror" placeholder="low_stock"
+                                    value="{{ old('low_stock') }}">
 
 
                                 @error('low_stock')
@@ -193,7 +191,7 @@
                             {{-- submit --}}
                             <div class="text-center">
                                 <input type="reset" value="cancel" class="btn btn-secondary px-3 me-3">
-                                <button type="submit" value="create" class="btn btn-primary px-3">Create</button>
+                                <input type="submit" value="create" class="btn btn-primary px-3">
                             </div>
                         </form>
 
@@ -205,18 +203,16 @@
 @endsection
 
 @section('script')
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script>
-    // In your Javascript (external .js resource or <script> tag)
-$(document).ready(function() {
-    $('.brandname').select2();
-});
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        // In your Javascript (external .js resource or <script> tag)
+        $(document).ready(function() {
+            $('.brandname').select2();
+        });
 
-$(document).ready(function() {
-    $('.modelname').select2();
-});
-
-
-</script>
+        $(document).ready(function() {
+            $('.modelname').select2();
+        });
+    </script>
 
 @endsection

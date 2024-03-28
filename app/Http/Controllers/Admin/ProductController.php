@@ -1,26 +1,25 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Models\Brand;
 use App\Models\Product;
 use App\Models\ProductModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Model;
+
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
     public function index()
-     {
-         // Eager load brand and model information
-         $datas = Product::with('brand')->get();
-
-         return view('admin.Products.product_list', compact('datas'));
-     }
-
-
+    {
+        // Eager load brand and model information
+        $datas = Product::with('brand', 'ProductModel')->get();
+        return view('admin.Products.product_list', compact('datas'));
+    }
 
     public function create()
     {
@@ -43,8 +42,9 @@ class ProductController extends Controller
     }
 
 
-    public function detail($id){
-        $data = Product::where('id', $id)->with('brand','ProductModel')->first();
+    public function detail($id)
+    {
+        $data = Product::where('id', $id)->with('brand', 'ProductModel')->first();
         return view('admin.Products.product_detail', compact('data'));
     }
 
@@ -65,15 +65,15 @@ class ProductController extends Controller
         $this->vali($request);
         $data = $this->dataArrange($request);
 
-        if($request->hasFile('image')){
-           $dbImage = Product::where('id', $id)->value('image');
+        if ($request->hasFile('image')) {
+            $dbImage = Product::where('id', $id)->value('image');
             // Delete old image storage file
-            if($dbImage !=null){
+            if ($dbImage != null) {
                 Storage::delete('public/products/' . $dbImage);
             }
-          $imageName =uniqid() . $request->file('image')->getClientOriginalName();
-          $request->file('image')->storeAs('public/products', $imageName);
-          $data['image']= $imageName;
+            $imageName = uniqid() . $request->file('image')->getClientOriginalName();
+            $request->file('image')->storeAs('public/products', $imageName);
+            $data['image'] = $imageName;
         }
         Product::where('id', $id)->update($data);
 
@@ -83,19 +83,20 @@ class ProductController extends Controller
 
 
 
-    public function vali($request)
+    private function vali($request)
     {
         $rules = [
             'productName' => 'required',
-            'image' => 'image | mimes:jpeg,jpg,png',
+            'image' => 'image | mimes:jpeg,jpg,png,webp',
             'BrandName' => 'required',
-            'Name' => 'required',
+            'ModelName' => 'required',
             'storage_option' => 'required',
             'color' => 'required',
             'price' => 'required',
             'quantity' => 'required',
             'low_stock' => 'required',
             'description' => 'required',
+
         ];
 
         Validator::make($request->all(), $rules)->validate();
@@ -119,6 +120,6 @@ class ProductController extends Controller
     public function delete($id)
     {
         Product::where('id', $id)->delete();
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with(['success' => 'product delete success']);
     }
 }
