@@ -64,8 +64,10 @@ Route::prefix('admin/customer')->group(function () {
 });
 
 //Customer Purchase URL
-Route::prefix('admin/customer')->group(function () {
-    Route::get('/purchase', [CustomerPurchaseController::class, 'purchase'])->name('customer_purchase.list');
+Route::prefix('admin/customer purchase')->group(function () {
+    Route::get('/page', [CustomerPurchaseController::class, 'page'])->name('customer_purchase.page');
+    Route::get('/list', [CustomerPurchaseController::class, 'list'])->name('customer_purchase.list');
+    Route::get('/detail/{id}', [CustomerPurchaseController::class, 'detail'])->name('customer_purchase.detail');
 });
 
 //review Url
@@ -81,6 +83,7 @@ Route::prefix('admin/supplier')->group(function () {
     Route::get('/delete/{id}', [SupplierController::class, 'delete'])->name('supplier.delete');
 });
 
+//supplier purchase URL
 Route::prefix('admin/supplier purchase')->group(function(){
     Route::get('/page', [SupplierPurchaseController::class, 'page'])->name('supplier_purchase.page');
     Route::post('/create', [SupplierPurchaseController::class, 'create'])->name('supplier_purchase.create');

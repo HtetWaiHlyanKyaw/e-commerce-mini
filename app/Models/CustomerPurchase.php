@@ -9,6 +9,7 @@ class CustomerPurchase extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'invoice_id',
         'user_id',
         'quantity',
         'unit_price',
