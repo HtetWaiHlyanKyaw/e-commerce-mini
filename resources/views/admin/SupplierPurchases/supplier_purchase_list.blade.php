@@ -17,13 +17,7 @@
     <div class="container-fluid">
         {{-- Brand Create Success Message --}}
 
-        <div>
-            @if (session('success'))
-                <div class="alert alert-success text-center" role="alert">
-                    {{ session('success') }}
-                </div>
-            @endif
-        </div>
+
 
         <h1 class="header-color">Supplier Purchase List</h1>
         <br>
@@ -37,17 +31,24 @@
                 </ol>
             </nav>
         </div>
+        <div>
+            @if (session('success'))
+                <div class="alert alert-success text-center" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
+        </div>
         <div class="bg-lighter p-4 border rounded">
-            <table style="background-color:white" id="myTable">
+            <table  id="myTable" class="hover">
                 <thead>
-                    <tr style="color: #1da9dc">
-                        <th>No</th>
-                        <th>Supplier</th>
+                    <tr>
+                        <th style="color: #1da9dc">No</th>
+                        <th style="color: #1da9dc">Supplier</th>
                         {{-- <th>Product</th> --}}
-                        <th>Quantity</th>
-                        <th>Unit Price</th>
-                        <th>Total Price</th>
-                        <th>Date</th>
+                        <th style="color: #1da9dc">Quantity</th>
+                        <th style="color: #1da9dc">Unit Price</th>
+                        <th style="color: #1da9dc">Total Price</th>
+                        <th style="color: #1da9dc">Date</th>
                         {{-- <th>Actions</th> --}}
                     </tr>
                 </thead>

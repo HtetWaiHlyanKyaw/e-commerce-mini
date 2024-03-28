@@ -91,7 +91,7 @@
                             <div class="text-center">
                                 <a href="{{ route('brand.list') }}"><input type="button" value="cancel"
                                         class="btn btn-outline-danger btn-lg border-2 px-3 me-3"></a>
-                                <input type="submit" value="create" class="btn btn-primary btn-lg px-3">
+                                <input type="submit" value="update" class="btn btn-primary btn-lg px-3">
                             </div>
                         </form>
                     </div>

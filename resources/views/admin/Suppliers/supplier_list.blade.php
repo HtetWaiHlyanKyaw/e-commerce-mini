@@ -17,13 +17,6 @@
     <div class="container-fluid">
         {{-- Brand Create Success Message --}}
 
-        <div>
-            @if (session('success'))
-                <div class="alert alert-success text-center" role="alert">
-                    {{ session('success') }}
-                </div>
-            @endif
-        </div>
 
         <h1 class="header-color">Supplier List</h1>
         <br>
@@ -37,17 +30,25 @@
                 </ol>
             </nav>
         </div>
+        <div>
+            @if (session('success'))
+                <div class="alert alert-success text-center" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
+        </div>
+
         <div class="bg-lighter p-4 border rounded">
-            <table style="background-color:white" id="myTable">
+            <table  id="myTable" class="hover">
                 <thead>
-                    <tr style="color: #1da9dc">
-                        <th>No</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Address</th>
-                        <th>created_at</th>
-                        <th>Actions</th>
+                    <tr>
+                        <th style="color: #1da9dc">No</th>
+                        <th style="color: #1da9dc">Name</th>
+                        <th style="color: #1da9dc">Email</th>
+                        <th style="color: #1da9dc">Phone</th>
+                        <th style="color: #1da9dc">Address</th>
+                        <th style="color: #1da9dc">created_at</th>
+                        <th style="color: #1da9dc">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -65,15 +66,15 @@
                             <td class="col-lg-1">{{ $supplier->created_at->format('d / M /Y') }}</td>
                             <td class="col-lg-1">
                                 <a href="{{ route('supplier.edit', $supplier->id) }}">
-                                    <button class="btn btn-outline-success btn-lg border-2" title="edit supplier">
+                                    <button class="btn btn-outline-success border-0 me-2" title="edit supplier">
                                         {{-- <i class="bi bi-pencil-square">edit</i> --}}
-                                        <i class="ti ti-edit"></i>
+                                        <i class="ti ti-edit" style="font-size:19px;"></i>
                                     </button>
                                 </a>
                                 <a href="{{ route('supplier.delete', $supplier->id) }}">
-                                    <button class="btn btn-outline-danger btn-lg border-2" title="delete supplier"
+                                    <button class="btn btn-outline-danger border-0" title="delete supplier"
                                         onclick="return confirm('Are you sure you want to delete this supplier?');"">
-                                        <i class="ti ti-trash"></i>
+                                        <i class="ti ti-trash" style="font-size:19px;"></i>
                                     </button>
                                 </a>
                             </td>

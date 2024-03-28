@@ -5,6 +5,10 @@
         .header-color {
             color: #1da9dc;
         }
+       .bg-lighter {
+            background-color: #f6f7ff;
+            /* Slightly darker shade */
+        }
     </style>
 @endsection
 
@@ -13,13 +17,7 @@
     <div class="container-fluid">
         {{-- Admin List Success Message --}}
 
-        <div>
-            @if (session('success'))
-                <div class="alert alert-success text-center" role="alert">
-                    {{ session('success') }}
-                </div>
-            @endif
-        </div>
+
 
         <h1 class="header-color">Admin List</h1>
         <br>
@@ -33,43 +31,52 @@
                 </ol>
             </nav>
         </div>
-        <table border="1" id="myTable">
-            <thead>
-                <tr>
-                    <th class="float:left;">No</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @php
-                $counter = 1; // Initialize counter variable
-            @endphp
-                @foreach ($data as $Alist)
-                    <tr class="tr-shadow">
-                        {{-- <td class="col-lg-1">{{ $productModel->id }}</td> --}}
-                        <td class="col-lg-1">{{ $counter++}}</td>
-                        <td class="col-lg-1">{{ $Alist->name }}</td>
-                        <td class="col-lg-1">{{ $Alist->email }}</td>
-                        <td class="col-lg-1">
-                            <a href="{{route('Admin.edit',$Alist->id)}}">
-                                <button class="btn btn-warning me-2" title="Edit Admin">
-                                    {{-- <i class="bi bi-pencil-square">edit</i> --}}
-                                    <i class="ti ti-edit"></i>
-                                </button>
-                            </a>
-                            <a href="{{ route('Admin.delete', $Alist->id) }}">
-                                <button class="btn btn-danger" title="delete Admin">
-                                    <i class="ti ti-trash"></i>
-                                </button>
-                            </a>
-                        </td>
+        <div>
+            @if (session('success'))
+                <div class="alert alert-success text-center" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
+        </div>
+        <div class="bg-lighter p-4 border rounded">
+            <table  id="myTable" class="hover">
+                <thead>
+                    <tr>
+                        <th class="float:left;" style="color: #1da9dc">No</th>
+                        <th style="color: #1da9dc">Name</th>
+                        <th style="color: #1da9dc">Email</th>
+                        <th style="color: #1da9dc">Actions</th>
                     </tr>
+                </thead>
+                <tbody>
+                    @php
+                    $counter = 1; // Initialize counter variable
+                @endphp
+                    @foreach ($data as $Alist)
+                        <tr class="tr-shadow">
+                            {{-- <td class="col-lg-1">{{ $productModel->id }}</td> --}}
+                            <td class="col-lg-1">{{ $counter++}}</td>
+                            <td class="col-lg-1">{{ $Alist->name }}</td>
+                            <td class="col-lg-1">{{ $Alist->email }}</td>
+                            <td class="col-lg-1">
+                                <a href="{{route('Admin.edit',$Alist->id)}}">
+                                    <button class="btn btn-outline-success border-0 me-2" title="Edit Admin">
+                                        {{-- <i class="bi bi-pencil-square">edit</i> --}}
+                                        <i class="ti ti-edit" style="font-size:19px;"></i>
+                                    </button>
+                                </a>
+                                <a href="{{ route('Admin.delete', $Alist->id) }}">
+                                    <button class="btn btn-outline-danger border-0" title="delete Admin">
+                                        <i class="ti ti-trash" style="font-size:19px;"></i>
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
 
-                @endforeach
-            </tbody>
+                    @endforeach
+                </tbody>
 
-        </table>
+            </table>
+        </div>
     </div>
 @endsection

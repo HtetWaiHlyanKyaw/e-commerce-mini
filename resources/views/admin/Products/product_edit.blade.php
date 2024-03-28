@@ -210,7 +210,7 @@
                             {{-- submit --}}
                             <div class="text-center">
                                 <input type="reset" value="cancel" class="btn btn-secondary px-3 me-3">
-                                <input type="submit" value="save" class="btn btn-primary px-3">
+                                <input type="submit" value="update" class="btn btn-primary px-3">
                             </div>
                         </form>
                     </div>

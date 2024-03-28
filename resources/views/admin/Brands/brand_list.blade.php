@@ -5,6 +5,10 @@
         .header-color {
             color: #1da9dc;
         }
+       .bg-lighter {
+            background-color: #f6f7ff;
+            /* Slightly darker shade */
+        }
     </style>
 @endsection
 @section('content')
@@ -12,13 +16,7 @@
     <div class="container-fluid">
         {{-- Brand Create Success Message --}}
 
-        <div>
-            @if (session('success'))
-                <div class="alert alert-success text-center" role="alert">
-                    {{ session('success') }}
-                </div>
-            @endif
-        </div>
+
 
         <h1 class="header-color">Brands</h1>
         <br>
@@ -32,44 +30,55 @@
                 </ol>
             </nav>
         </div>
-        <table border="1" id="myTable">
-            <thead>
-                <tr style="color: #1da9dc">
-                    <th class="float:left;">No</th>
-                    <th>Name</th>
-                    <th>Date</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @php
-                    $counter = 1; // Initialize counter variable
-                @endphp
-                @foreach ($data as $blist)
-                    <tr class="tr-shadow">
-                        {{-- <td class="col-lg-1">{{ $blist->id }}</td> --}}
-                        <td class="col-lg-1">{{ $counter++ }}</td>
-                        <td class="col-lg-1">{{ $blist->name }}</td>
-                        <td class="col-lg-1">{{ $blist->created_at->format('d / M /Y') }}</td>
-                        <td class="col-lg-1">
-                            <a href="{{ route('brand.edit', $blist->id) }}">
-                                <button class="btn btn-success me-2" title="edit brand">
-                                    {{-- <i class="bi bi-pencil-square">edit</i> --}}
-                                    <i class="ti ti-edit"></i>
-                                </button>
-                            </a>
-                            <a href="{{ route('Admin.delete', $blist->id) }}">
-                                <button class="btn btn-danger" title="delete brand">
-                                    <i class="ti ti-trash"></i>
-                                </button>
-                            </a>
-                        </td>
+
+        <div>
+            @if (session('success'))
+                <div class="alert alert-success text-center" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
+        </div>
+
+        <div class="bg-lighter p-4 border rounded">
+            <table id="myTable" class="hover">
+                <thead>
+                    <tr>
+                        <th class="float:left;" style="color: #1da9dc">No</th>
+                        <th style="color: #1da9dc">Name</th>
+                        <th style="color: #1da9dc">Date</th>
+                        <th style="color: #1da9dc">Actions</th>
                     </tr>
+                </thead>
+                <tbody>
+                    @php
+                        $counter = 1; // Initialize counter variable
+                    @endphp
+                    @foreach ($data as $blist)
+                        <tr>
+                            {{-- <td class="col-lg-1">{{ $blist->id }}</td> --}}
+                            <td class="col-lg-1">{{ $counter++ }}</td>
+                            <td class="col-lg-1">{{ $blist->name }}</td>
+                            <td class="col-lg-1">{{ $blist->created_at->format('d / M /Y') }}</td>
+                            <td class="col-lg-1">
+                                <a href="{{ route('brand.edit', $blist->id) }}">
+                                    <button class="btn btn-outline-success border-0 me-2" title="edit brand">
+                                        {{-- <i class="bi bi-pencil-square">edit</i> --}}
+                                        <i class="ti ti-edit" style="font-size:19px;"></i>
+                                    </button>
+                                </a>
+                                <a href="{{ route('brand.delete', $blist->id) }}">
+                                    <button class="btn btn-outline-danger border-0" title="delete brand">
+                                        <i class="ti ti-trash" style="font-size:19px;"></i>
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
 
-                @endforeach
-            </tbody>
+                    @endforeach
+                </tbody>
 
-        </table>
+            </table>
+        </div>
     </div>
 
 @endsection
