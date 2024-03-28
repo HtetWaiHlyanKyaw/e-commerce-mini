@@ -1,38 +1,92 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-use Illuminate\Support\Facades\Validator;
+
 use App\Models\Brand;
 use App\Models\Product;
-use Illuminate\Http\Request;
 use App\Models\ProductModel;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
 use Illuminate\Database\Eloquent\Model;
+
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+
 class ProductController extends Controller
 {
     public function index()
-     {
-         // Eager load brand and model information
-         $datas = Product::with('brand')->get();
+    {
+        // Eager load brand and model information
+        $datas = Product::with('brand','ProductModel')->get();
+        return view('admin.Products.product_list', compact('datas'));
+    }
 
-         return view('admin.Products.product_list', compact('datas'));
-     }
-
-
-
-     public function create()
-     {
+    public function create()
+    {
         $brands = Brand::all();
         $models = ProductModel::all();
         return view('admin.Products.product_create', compact('brands', 'models'));
-     }
+    }
+
+    public function store(Request $request)
+    {
+        $this->vali($request);
+        $data = $this->dataArrange($request);
+        if ($request->hasfile('image')) {
+            $imageName = uniqid() . $request->file('image')->getClientOriginalName();
+            $request->file('image')->storeAs('public/products',  $imageName);
+            $data['image'] = $imageName;
+        }
+        Product::create($data);
+        return redirect()->route('product.index')->with(['success' => 'Product creation successfully']);
+    }
+
+
+    public function detail($id){
+        $data = Product::where('id', $id)->with('brand','ProductModel')->first();
+        return view('admin.Products.product_detail', compact('data'));
+    }
+
+
+    public function edit($id)
+    {
+
+        // $product = Product::findOrFail($id);
+        $product =   Product::where('id', $id)->first();
+        $brands = Brand::all();
+        $models = ProductModel::all();
+        return view('admin.Products.product_edit', compact('product', 'brands', 'models'));
+    }
+
+
+    public function update($id, Request $request)
+    {
+        $this->vali($request);
+        $data = $this->dataArrange($request);
+
+        if($request->hasFile('image')){
+           $dbImage = Product::where('id', $id)->value('image');
+            // Delete old image storage file
+            if($dbImage !=null){
+                Storage::delete('public/products/' . $dbImage);
+            }
+          $imageName =uniqid() . $request->file('image')->getClientOriginalName();
+          $request->file('image')->storeAs('public/products', $imageName);
+          $data['image']= $imageName;
+        }
+        Product::where('id', $id)->update($data);
+
+        return redirect()->route('product.index')->with('success', 'Product updated successfully');
+    }
+
+
+
 
     private function vali($request)
     {
         $rules = [
             'productName' => 'required',
-            'image' => 'required | image | mimes:jpeg,jpg,png',
+            'image' => 'image | mimes:jpeg,jpg,png',
             'BrandName' => 'required',
             'ModelName' => 'required',
             'storage_option' => 'required',
@@ -44,98 +98,22 @@ class ProductController extends Controller
 
         ];
 
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->storeAs('public/images', $imageName); // Store the image in storage/app/public/images directory
-        }
-
-
         Validator::make($request->all(), $rules)->validate();
     }
 
-
-    public function store(Request $request){
-
-        $this->vali($request);
-        Product::create([
-
-            'name' => $request ->productName,
-            'image' => $request ->imageName,
-            'brand_id' => $request ->BrandName,
+    private function dataArrange($request)
+    {
+        return [
+            'name' => $request->productName,
+            'brand_id' => $request->BrandName,
             'product_model_id' => $request->ModelName,
             'storage_option' => $request->storage_option,
             'color' => $request->color,
-            'price' => $request ->price,
-            'quantity' => $request ->quantity,
-            'low_stock' => $request ->low_stock,
-            'description' => $request ->description,
-
-        ]);
-
-        return redirect()->route('product.index')->with(['success' => 'Product created successfully']);
-    }
-
-//Model Edit
-
-// public function edit($id){
-//     $modelData =   Product::where('id', $id)->first();
-//     $brandData = Brand::get();
-
-//     return view('admin/Products/product_edit', compact('modelData' , 'brandData' ));
-//     }
-
-    public function edit($id)
-    {
-        // $product = Product::findOrFail($id);
-        $product =   Product::where('id', $id)->first();
-        $brands = Brand::all();
-        $models = ProductModel::all();
-        return view('admin.Products.product_edit', compact('product', 'brands', 'models'));
-    }
-
-    //Product update
-
-    // public function update($id, Request $request){
-    //      $this->vali($request);
-    //      $data = $this->dataArrange($request);
-
-    //      Product::where('id', $id)->update($data);
-    //      return redirect()->route('product.list')->with(['success' => 'Product update sucess']);
-
-    // }
-
-    public function update($id, Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'image' => 'required',
-            'brand_id' => 'required|exists:brands,id',
-            'product_model_id' => 'required',
-            'storage_option' => 'required',
-            'color' => 'required',
-            'price' => 'required|numeric',
-            'quantity' => 'required',
-            'low_stock' => 'required',
-            'description' => 'required',
-
-        ]);
-
-        $product = Product::findOrFail($id);
-        $product->name = $request->name;
-        $product->image = $request->image;
-        $product->brand_id = $request->brand_id;
-        $product->product_model_id = $request->product_model_id;
-        $product->storage_option = $request->storage_option;
-        $product->color = $request->color;
-        $product->price = $request->price;
-        $product->quantity = $request->quantity;
-        $product->low_stock = $request->low_stock;
-        $product->description = $request->description;
-
-        $product->save();
-
-        return redirect()->route('product.list')->with('success', 'Product updated successfully');
+            'price' => $request->price,
+            'quantity' => $request->quantity,
+            'low_stock' => $request->low_stock,
+            'description' => $request->description,
+        ];
     }
 
     public function delete($id)
@@ -143,5 +121,4 @@ class ProductController extends Controller
         Product::where('id', $id)->delete();
         return redirect()->route('product.index')->with(['success' => 'product delete success']);
     }
-
 }

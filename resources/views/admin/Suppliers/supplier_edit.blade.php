@@ -108,7 +108,7 @@
                                     </div>
                                 @enderror
                             </div> --}}
-                            {{-- submit --}}
+                            {{-- Update --}}
                             <div class="text-center">
                                 <a href="{{ route('supplier.list') }}"><input type="button" value="cancel"
                                         class="btn btn-outline-danger btn-lg border-2 px-3 me-3"></a>
