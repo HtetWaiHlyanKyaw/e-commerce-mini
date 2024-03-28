@@ -79,7 +79,7 @@
                                  aria-label="Default select example">
                                     <option value="">Choose Brand</option>
                                     @foreach ($brands as $brand)
-                                        <option value="{{ $brand->id }}">{{ $brand->id }}</option>
+                                        <option value="{{ $brand->name}}">{{ $brand->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('BrandName')
