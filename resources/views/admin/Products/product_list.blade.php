@@ -97,5 +97,4 @@
     </div>
 
     @endsection
-</body>
-</html>
+
