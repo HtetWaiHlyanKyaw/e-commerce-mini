@@ -5,6 +5,7 @@
                 bcakground-color: white;
             }
     </style>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
 @section('content')
     <div class="container-fluid">
@@ -12,7 +13,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <h4>Select Products to Order</h4>
-                    <table class="table"  style="background-color:white" id="">
+                    <table class="table"  style="background-color:white" id="myTable">
                         <thead>
                             <tr>
                                 <th></th>
@@ -37,7 +38,7 @@
                                     <td>{{ $product->price }}</td>
                                     <td>
                                         <input type="number" class="form-control" value="1" min="1"
-                                            onchange="updateSelectedProducts(this)">
+                                            onchange="handleQuantityChange(this)">
                                     </td>
                                 </tr>
                             @endforeach
@@ -142,49 +143,117 @@
 @endsection
 @section('script')
 <script>
+// Initialize selected products object
+var selectedProducts = {};
 
-    function updateSelectedProducts(checkbox) {
-        var selectedProducts = [];
-        var totalQuantity = 0;
-        var totalPrice = 0;
-        var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+// Function to update selected products based on the checkboxes
+// Function to update selected products based on the checkboxes
+function updateSelectedProducts() {
+    var totalQuantity = 0;
+    var totalPrice = 0;
 
-        checkboxes.forEach(function(checkbox) {
-            var row = checkbox.closest('tr');
+    // Iterate over selected products and update total quantity and price
+    Object.values(selectedProducts).forEach(function(product) {
+        totalQuantity += product.quantity;
+        totalPrice += product.price * product.quantity;
+    });
 
-            var productNameCell = row.querySelector(
-                'td:nth-child(3)');
-            var quantityInput = row.querySelector('input[type="number"]');
-            var priceCell = row.querySelector('td:nth-child(4)');
-            var productId = checkbox.value;
-            var productName = productNameCell.innerText;
-            var quantity = parseInt(quantityInput.value);
-            var price = parseFloat(priceCell.innerText.replace('$', ''));
+    // Update total quantity and total price in the form
+    document.getElementById('totalQuantity').value = totalQuantity;
+    document.getElementById('totalPrice').value = totalPrice.toFixed(2);
 
-            totalQuantity += quantity;
-            totalPrice += price * quantity;
+    // Update the selected products textarea with the names and quantities of selected products
+    var selectedProductsTextarea = document.getElementById('selectedProducts');
+    selectedProductsTextarea.value = Object.values(selectedProducts).map(function(product) {
+        return product.name + ' x ' + product.quantity;
+    }).join('\n');
 
-            selectedProducts.push({
-                id: productId,
-                name: productName,
-                quantity: quantity,
-                price: price
-            });
-        });
+    // Update the hidden input field with selectedProducts data
+    document.getElementById('selectedProductsInput').value = JSON.stringify(selectedProducts);
+}
 
-        document.getElementById('selectedProductsInput').value = JSON.stringify(selectedProducts);
-        document.getElementById('totalQuantity').value = totalQuantity;
-        document.getElementById('totalPrice').value = totalPrice.toFixed(2);
 
-        // Update the selected products textarea
-        var selectedProductsTextarea = document.getElementById('selectedProducts');
-        selectedProductsTextarea.value = selectedProducts.map(function(product) {
-            return product.name + ' x ' + product.quantity;
-        }).join('\n');
+// Function to handle checkbox change event
+function handleCheckboxChange(checkbox) {
+    var productId = checkbox.value;
+    var row = checkbox.closest('tr');
+    var productNameCell = row.querySelector('td:nth-child(3)');
+    var productName = productNameCell.innerText;
+    var priceCell = row.querySelector('td:nth-child(4)');
+    var price = parseFloat(priceCell.innerText);
+
+    if (checkbox.checked) {
+        // If checkbox is checked, add the product to selectedProducts
+        selectedProducts[productId] = {
+            id: productId,
+            name: productName,
+            quantity: 1, // You may adjust the initial quantity as needed
+            price: price
+        };
+    } else {
+        // If checkbox is unchecked, remove the product from selectedProducts
+        delete selectedProducts[productId];
     }
 
-    // Call the function initially to populate the selected products textarea
+    // Update selected products
     updateSelectedProducts();
+}
+
+// Function to handle quantity change
+// function handleQuantityChange(input) {
+//     var productId = input.closest('tr').querySelector('input[type="checkbox"]').value;
+//     var quantity = parseInt(input.value);
+//     if (selectedProducts[productId]) {
+//         selectedProducts[productId].quantity = quantity;
+//     }
+//     updateSelectedProducts();
+// }
+
+// Bind the handleCheckboxChange function to checkbox change event
+document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
+    checkbox.addEventListener('change', function() {
+        handleCheckboxChange(this);
+    });
+});
+
+// Bind the handleQuantityChange function to input and change events of quantity input fields
+document.querySelectorAll('input[type="number"]').forEach(function(quantityInput) {
+    quantityInput.addEventListener('input', function() {
+        handleQuantityChange(this);
+    });
+    quantityInput.addEventListener('change', function() {
+        handleQuantityChange(this);
+    });
+});
+
+// Initialize Select2
+$(document).ready(function() {
+    $('.paymentSelect').select2();
+    $('.supplier').select2();
+});
+
+// Call the function initially to populate the selected products textarea
+updateSelectedProducts();
 
 </script>
+<script>
+    // Function to handle quantity change
+    function handleQuantityChange(input) {
+        var checkbox = input.closest('tr').querySelector('input[type="checkbox"]');
+        // Check if the corresponding checkbox is checked
+        if (!checkbox.checked) {
+            // If not checked, reset the quantity input value to 1
+            input.value = 1;
+            return; // Exit the function, preventing further execution
+        }
+
+        var productId = checkbox.value;
+        var quantity = parseInt(input.value);
+        if (selectedProducts[productId]) {
+            selectedProducts[productId].quantity = quantity;
+        }
+        updateSelectedProducts();
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 @endsection
