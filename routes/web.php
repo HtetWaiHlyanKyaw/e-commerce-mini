@@ -52,12 +52,11 @@ Route::prefix('admin/product')->group(function () {
     Route::get('/index', [ProductController::class, 'index'])->name('product.index');
     Route::get('/create', [ProductController::class, 'create'])->name('product.create');
     Route::post('/store', [ProductController::class, 'store'])->name('product.store');
+    Route::get('/detail/{id}', [ProductController::class, 'detail'])->name('product.detail');
     Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
     Route::post('/update/{id}', [ProductController::class, 'update'])->name('product.update');
     Route::get('/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
 });
-
-
 
 //Customer URL
 Route::prefix('admin/customer')->group(function () {
@@ -82,12 +81,11 @@ Route::prefix('admin/supplier')->group(function () {
     Route::get('/delete/{id}', [SupplierController::class, 'delete'])->name('supplier.delete');
 });
 
-Route::prefix('admin/supplier purchase')->group(function () {
-    // Route::get('/page', [SupplierPurchaseController::class, 'page'])->name('supplier.page');
-    // Route::post('/create', [SupplierPurchaseController::class, 'create'])->name('supplier.create');
-    Route::get('/list', [SupplierPurchaseController::class, 'list'])->name('supplier_purchase.list');
-    // Route::get('/edit/{id}', [SupplierPurchaseController::class, 'edit'])->name('supplier.edit');
-    // Route::post('/update/{id}', [SupplierPurchaseController::class, 'update'])->name('supplier.update');
+Route::prefix('admin/supplier purchase')->group(function(){
+    Route::get('/page', [SupplierPurchaseController::class, 'page'])->name('supplier_purchase.page');
+    Route::post('/create', [SupplierPurchaseController::class, 'create'])->name('supplier_purchase.create');
+    Route::get('/list',[SupplierPurchaseController::class, 'list'])->name('supplier_purchase.list');
+    Route::get('/detail/{id}', [SupplierPurchaseController::class, 'detail'])->name('supplier_purchase.detail');
     // Route::get('/delete/{id}', [SupplierPurchaseController::class, 'delete'])->name('supplier.delete');
 });
 

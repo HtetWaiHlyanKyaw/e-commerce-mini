@@ -92,3 +92,12 @@
         </div>
     </div>
 @endsection
+@section('script')
+<script>
+    $(document).ready(function() {
+    $('.js-example-basic-single').select2();
+});
+</script>
+<script type="text/javascript" src="jquery.js"></script>          
+<script type="text/javascript" src="select2.js"></script>    
+@endsection

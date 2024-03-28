@@ -37,10 +37,13 @@
                 </ol>
             </nav>
         </div>
-        <div class="bg-lighter p-4 border rounded">
-            <table style="background-color:white" id="myTable">
-                <thead>
-                    <tr style="color: #1da9dc">
+        {{-- <a class="text-success add-button"
+    href="{{ route('supplier.page') }}"><p class="fon   t-weight-bold">+ Add Supplier</p></a> --}}
+
+        {{-- <div class="bg-lighter p-4 border rounded"> --}}
+            <table style="background-color:white" id="myTable" class="hover compact">
+                <thead style="background-color: white; color: black;">
+                    <tr>
                         <th>No</th>
                         <th>Name</th>
                         <th>Email</th>
@@ -65,13 +68,13 @@
                             <td class="col-lg-1">{{ $supplier->created_at->format('d / M /Y') }}</td>
                             <td class="col-lg-1">
                                 <a href="{{ route('supplier.edit', $supplier->id) }}">
-                                    <button class="btn btn-outline-success btn-lg border-2" title="edit supplier">
+                                    <button class="btn btn-outline-success btn-lg border-0" title="edit supplier">
                                         {{-- <i class="bi bi-pencil-square">edit</i> --}}
                                         <i class="ti ti-edit"></i>
                                     </button>
                                 </a>
                                 <a href="{{ route('supplier.delete', $supplier->id) }}">
-                                    <button class="btn btn-outline-danger btn-lg border-2" title="delete supplier"
+                                    <button class="btn btn-outline-danger btn-lg border-0" title="delete supplier"
                                         onclick="return confirm('Are you sure you want to delete this supplier?');"">
                                         <i class="ti ti-trash"></i>
                                     </button>
@@ -84,6 +87,6 @@
                     @endforeach
                 </tbody>
             </table>
-        </div>
+        {{-- </div> --}}
     </div>
 @endsection
