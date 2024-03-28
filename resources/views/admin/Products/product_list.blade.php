@@ -1,22 +1,28 @@
 @extends('admin.layouts.master')
 @section('title', 'Products list')
+@section('style')
+    <style>
 
+        .header-color {
+            color: #1da9dc;
+        }
+
+        .bg-lighter {
+            background-color: #f6f7ff;
+            /* Slightly darker shade */
+        }
+    </style>
+@endsection
 @section('content')
 
     <div class="container-fluid">
-{{-- Brand Create Success Message --}}
+        {{-- Brand Create Success Message --}}
 
-        <div>
-            @if (session('success'))
-                <div class="alert alert-success text-center" role="alert">
-                    {{ session('success') }}
-                </div>
-            @endif
-        </div>
+
 
         <h1>Products</h1>
         <div class="pagetitle">
-            <h3>Category List Count - {{ $datas->count()}}</h3>
+            <h3>Category List Count - {{ $datas->count() }}</h3>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">Home</li>
@@ -96,5 +102,4 @@
         </table>
     </div>
 
-    @endsection
-
+@endsection
