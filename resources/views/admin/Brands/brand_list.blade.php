@@ -34,12 +34,13 @@
         </div>
         <table border="1" id="myTable">
             <thead>
-                <tr style="color: #1da9dc">
+                <tr>
                     <th class="float:left;">No</th>
                     <th>Name</th>
                     <th>Date</th>
                     <th>Actions</th>
                 </tr>
+
             </thead>
             <tbody>
                 @php
