@@ -13,14 +13,14 @@ class SupplierPurchaseController extends Controller
     //
     public function list()
     {
-        $supplierPurchases = SupplierPurchase::with('details', 'supplier')->get();
+        $supplierPurchases = SupplierPurchase::with('details', 'supplier')->latest()->get();
         return view('admin.SupplierPurchases.supplier_purchase_list', compact('supplierPurchases'));
     }
 
     public function page()
     {
-        $products = Product::all();
-        $suppliers = Supplier::all();
+        $products = Product::latest()->get();
+        $suppliers = Supplier::latest()->get();
     return view('admin.SupplierPurchases.supplier_purchase_create', compact('products','suppliers'));
     }
 
@@ -31,7 +31,7 @@ class SupplierPurchaseController extends Controller
             'invoice_id' => 'required|string',
             'supplier' => 'required|exists:suppliers,id',
             'payment' => 'required',
-            'selectedProducts' => 'required|min:1',
+            // 'selectedProducts' => 'required|min:1',
             'totalQuantity' => 'required|integer|min:1',
             'totalPrice' => 'required|numeric|min:0',
         ]);
