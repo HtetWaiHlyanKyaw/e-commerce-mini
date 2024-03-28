@@ -52,12 +52,11 @@ Route::prefix('admin/product')->group(function(){
     Route::get('/index', [ProductController::class, 'index'])->name('product.index');
     Route::get('/create', [ProductController::class, 'create'])->name('product.create');
     Route::post('/store', [ProductController::class, 'store'])->name('product.store');
+    Route::get('/detail/{id}', [ProductController::class, 'detail'])->name('product.detail');
     Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
     Route::post('/update/{id}', [ProductController::class, 'update'])->name('product.update');
     Route::get('/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
 });
-
-
 
 //Customer URL
 Route::prefix('admin/customer')->group(function(){
