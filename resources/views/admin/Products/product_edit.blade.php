@@ -112,12 +112,7 @@
                                 @error('product_model_id')
                                     <div class="text-danger">
                                         {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-
-
-                            <label for="storage_option" class="form-label">Storage Option</label>
+                                    </div> @enderror </div> <label for="storage_option" class="form-label">Storage Option</label>
                             <div class="form-group mb-3">
 
                                 <input type="text" name="storage_option"
