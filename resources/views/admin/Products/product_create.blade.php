@@ -57,15 +57,15 @@
                                 @enderror
                             </div>
 
-                            <label for="image" class="form-label">Product Image</label>
+                            <label for="photo" class="form-label">Product Image</label>
                             <div class="form-group mb-3">
 
                                 <input type="file" name="image"
-                                    class="form-control @error('image') is-invalid @enderror">
+                                    class="form-control @error('image') is-invalid @enderror"
+                                    placeholder="product image">
 
 
-
-                                @error('image')
+                                @error('photo')
                                     <div class="text-danger">
                                         {{ $message }}
                                     </div>
@@ -79,7 +79,7 @@
                                  aria-label="Default select example">
                                     <option value="">Choose Brand</option>
                                     @foreach ($brands as $brand)
-                                        <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                        <option value="{{ $brand->id }}">{{ $brand->id }}</option>
                                     @endforeach
                                 </select>
                                 @error('BrandName')
@@ -105,7 +105,6 @@
                                     </div>
                                 @enderror
                             </div>
-
                             <label for="storage_option" class="form-label">Storage Option</label>
                             <div class="form-group mb-3">
 
@@ -194,7 +193,7 @@
                             {{-- submit --}}
                             <div class="text-center">
                                 <input type="reset" value="cancel" class="btn btn-secondary px-3 me-3">
-                                <input type="submit" value="create" class="btn btn-primary px-3">
+                                <button type="submit" value="create" class="btn btn-primary px-3">Create</button>
                             </div>
                         </form>
 

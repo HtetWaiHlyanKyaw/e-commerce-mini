@@ -1,25 +1,26 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
 use App\Models\Brand;
 use App\Models\Product;
 use App\Models\ProductModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Model;
-
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
     public function index()
-    {
-        // Eager load brand and model information
-        $datas = Product::with('brand','ProductModel')->get();
-        return view('admin.Products.product_list', compact('datas'));
-    }
+     {
+         // Eager load brand and model information
+         $datas = Product::with('brand')->get();
+
+         return view('admin.Products.product_list', compact('datas'));
+     }
+
+
 
     public function create()
     {
@@ -82,20 +83,19 @@ class ProductController extends Controller
 
 
 
-    private function vali($request)
+    public function vali($request)
     {
         $rules = [
             'productName' => 'required',
             'image' => 'image | mimes:jpeg,jpg,png',
             'BrandName' => 'required',
-            'ModelName' => 'required',
+            'Name' => 'required',
             'storage_option' => 'required',
             'color' => 'required',
             'price' => 'required',
             'quantity' => 'required',
             'low_stock' => 'required',
             'description' => 'required',
-
         ];
 
         Validator::make($request->all(), $rules)->validate();
@@ -119,6 +119,6 @@ class ProductController extends Controller
     public function delete($id)
     {
         Product::where('id', $id)->delete();
-        return redirect()->route('product.index')->with(['success' => 'product delete success']);
+        return redirect()->route('product.index');
     }
 }

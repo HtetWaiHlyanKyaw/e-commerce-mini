@@ -61,14 +61,14 @@
                         {{-- <td class="col-lg-1">{{ $blist->id }}</td> --}}
                         <td class="col-lg-1">{{ $counter}}</td>
                         <td class="col-lg-1">{{ $plist->name }}</td>
-                        {{-- <td class="col-lg-1">
-                            <img src="{{ asset('storage/products/'. $plist->image)}}" alt="product image" width="100px" height="auto">
-                        </td> --}}
-                        <td class="col-lg-1">{{ $plist->brand->name }}</td>
-                        {{-- <td class="col-lg-1">{{ $plist->ProductModel->name }}</td> --}}
-                        {{-- <td class="col-lg-1">{{ $plist->storage_option }}</td> --}}
-                        {{-- <td class="col-lg-1">{{ $plist->color }}</td> --}}
-                        {{-- <td class="col-lg-1">{{ $plist->price }}</td> --}}
+                        <td class="col-lg-1">
+                            <img src="{{ asset('images/' . $plist->image) }}" alt="">
+                        </td>
+                        <td class="col-lg-1">{{ $plist->brand_id }}</td>
+                        <td class="col-lg-1">{{ $plist->product_model_id }}</td>
+                        <td class="col-lg-1">{{ $plist->storage_option }}</td>
+                        <td class="col-lg-1">{{ $plist->color }}</td>
+                        <td class="col-lg-1">{{ $plist->price }}</td>
                         <td class="col-lg-1">{{ $plist->quantity }}</td>
                         <td class="col-lg-1">{{ $plist->low_stock }}</td>
                         {{-- <td class="col-lg-1">{{ $plist->description }}</td> --}}
@@ -95,7 +95,7 @@
                         </td>
                     </tr>
                     @php
-                    $counter++; // Increment counter for the next row
+                    $counter++;
                 @endphp
                 @endforeach
             </tbody>
