@@ -78,8 +78,8 @@
                 <div class="customer-details">
                     <h6>Name: {{ $customerPurchase->user->name }}</h6>
                     <h6>Email: {{ $customerPurchase->user->email }}</h6>
-                    <h6>Phone: {{ $customerPurchase->user->phone_number }}</h6>
-                    <h6>Address: {{ $customerPurchase->user->address }}</h6>
+                    {{-- <h6>Phone: {{ $customerPurchase->user->phone_number }}</h6>
+                    <h6>Address: {{ $customerPurchase->user->address }}</h6> --}}
                 </div>
             </div>
             <div class="col-md-6">
