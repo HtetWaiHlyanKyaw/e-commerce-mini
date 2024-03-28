@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('invoice_id', 255);
             $table->foreignId('supplier_id')->constrained()->onDelete('cascade');
-            $table->string('payment_method', 100);           
+            $table->string('payment_method', 100);
             $table->decimal('total_price', 10, 2);
             $table->integer('total_quantity');
-            $table->timestamps(); 
+            $table->timestamps();
         });
     }
 
