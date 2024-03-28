@@ -5,24 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SupplierPurchase extends Model
+class CustomerPurchase extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'invoice_id',
-        'supplier_id',
-        'total_quantity',
+        'user_id',
+        'quantity',
+        'unit_price',
         'total_price',
-        'payment_method',
     ];
-    public function supplier()
+    public function user()
     {
-        return $this->belongsTo(supplier::class);
+        return $this->belongsTo(User::class);
     }
 
     public function details()
     {
-        return $this->hasMany(SupplierPurchaseDetail::class);
+        return $this->hasMany(CustomerPurchaseDetail::class);
     }
 
     // public function product()
