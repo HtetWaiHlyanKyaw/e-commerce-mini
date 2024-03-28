@@ -78,7 +78,7 @@
                 <div class="supplier-details">
                     <h6>Name: {{ $supplierPurchase->supplier->name }}</h6>
                     <h6>Email: {{ $supplierPurchase->supplier->email }}</h6>
-                    <h6>Phone: {{ $supplierPurchase->supplier->phone }}</h6>
+                    <h6>Phone: {{ $supplierPurchase->supplier->phone_number }}</h6>
                     <h6>Address: {{ $supplierPurchase->supplier->address }}</h6>
                 </div>
             </div>
@@ -88,7 +88,8 @@
                     @php $counter = 0 @endphp
                     @foreach ($details as $detail)
                         <div class="slip">
-                            <img src="{{ asset('images/'.$detail->product->image) }}"  style="width: 100%; height: 200px; object-fit: cover;" alt="Product Image" class="product-image">
+
+                            <img src="{{ asset('storage/products/'.$detail->product->image)}}" style="width: 100%; height: 200px; object-fit: cover;" alt="Product Image" class="product-image">
                             <div><strong>{{ $detail->product->name }}</strong></div>
                             <div><strong>Quantity:</strong> {{ $detail->quantity }}</div>
                             <div><strong>Price:</strong> {{ $detail->price }}</div>

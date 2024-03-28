@@ -67,7 +67,7 @@
                             <td style="text-align:center; color: black">
                                 <a href="{{ route('supplier_purchase.detail', $supplierPurchase->id) }}">
                                     <button class="btn btn-outline-primary btn-lg border-0" title="supplier purchase detail">
-                                        <i class="ti ti-article"></i>
+                                        <i class="ti ti-dots"></i>
                                     </button>
                                 </a>
                             </td>
