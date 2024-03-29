@@ -20,10 +20,10 @@
 
 
 
-        <h1 class="header-color">Products</h1>
+        <h1 class="header-color">Product List</h1>
         <br>
         <div class="pagetitle">
-            <h3>Category List Count - {{ $datas->count() }}</h3>
+            <h3>Total Products - {{ $datas->count() }}</h3>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">Home</li>
@@ -71,7 +71,7 @@
                                 {{-- <a href="{{route('product.edit', $plist->id)}}"> --}}
                                 <a href="{{ route('product.detail', $plist->id) }}">
                                     <button class="btn btn-outline-info border-0" title="product info">
-                                        <i class="ti ti-category" style="font-size:19px;"></i>
+                                        <i class="ti ti-file-description" style="font-size:19px;"></i>
                                     </button>
                                 </a>
 
