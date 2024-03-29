@@ -63,7 +63,8 @@
                         <td class="col-lg-1">{{ $plist->storage_option }}</td>
                         <td class="col-lg-1">{{ $plist->color }}</td> --}}
                             <td class="col-lg-1" style="text-align:center;">{{ $plist->price }}</td>
-                            <td class="col-lg-1" style="text-align:center;">{{ $plist->quantity }}</td>
+
+                            <td class="col-lg-1" style="text-align:center; color: {{ $plist->quantity <= $plist->low_stock ? 'red' : 'inherit' }}">{{ $plist->quantity }}</td>
                             {{-- <td class="col-lg-1">{{ $plist->low_stock }}</td> --}}
                             {{-- <td class="col-lg-1">{{ $plist->description }}</td> --}}
                             <td class="col-lg-1" style="text-align:center;">
