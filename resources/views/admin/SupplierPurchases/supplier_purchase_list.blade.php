@@ -48,7 +48,7 @@
                         <th style="text-align:center;color: #5d9bff">Supplier Name</th>
                         <th style="text-align:center;color: #5d9bff">Total Quantity</th>
                         <th style="text-align:center;color: #5d9bff">Total Price</th>
-                        <th style="text-align:center;color: #5d9bff">Payment Method</th>
+                        {{-- <th style="text-align:center;color: #5d9bff">Payment Method</th> --}}
                         <th style="text-align:center;color: #5d9bff">Date</th>
                         <th style="text-align:center;color: #5d9bff">Action</th>
                     </tr>
@@ -61,7 +61,7 @@
                             <td style="text-align:center;">{{ $supplierPurchase->supplier->name }}</td>
                             <td style="text-align:center;">{{ $supplierPurchase->total_quantity }}</td>
                             <td style="text-align:center;">{{ $supplierPurchase->total_price }}</td>
-                            <td style="text-align:center;">{{ $supplierPurchase->payment_method }}</td>
+                            {{-- <td style="text-align:center;">{{ $supplierPurchase->payment_method }}</td> --}}
                             <td style="text-align:center;">
                                 {{ \Carbon\Carbon::parse($supplierPurchase->created_at)->format('F j, Y') }}</td>
                             <td style="text-align:center;">
