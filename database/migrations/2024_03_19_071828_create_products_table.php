@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('photo')->nullable();
+            $table->string('image')->nullable();
             $table->foreignId('brand_id')->constrained()->onDelete('cascade');
             $table->foreignId('product_model_id')->constrained()->onDelete('cascade');
             $table->string('storage_option', 50);
