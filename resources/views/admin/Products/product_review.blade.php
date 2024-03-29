@@ -20,10 +20,10 @@
             @endif
         </div>
 
-        <h1 class="header-color">Reviews</h1>
+        <h1 class="header-color">Review List</h1>
         <br>
         <div class="pagetitle">
-            <h3>Reviews List Count -{{ $userdata->count() }}</h3>
+            <h3>Total Reviews -{{ $userdata->count() }}</h3>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item ">Home</li>
