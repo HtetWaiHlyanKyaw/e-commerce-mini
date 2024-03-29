@@ -53,20 +53,20 @@
                     @php
                         $counter = 1; // Initialize counter variable
                     @endphp
-                    @foreach ($data as $blist)
+                    @foreach ($data as $bList)
                         <tr>
-                            {{-- <td class="col-lg-1">{{ $blist->id }}</td> --}}
+                            {{-- <td class="col-lg-1">{{ $bList->id }}</td> --}}
                             <td class="col-lg-1">{{ $counter++ }}</td>
-                            <td class="col-lg-1">{{ $blist->name }}</td>
-                            <td class="col-lg-1">{{ $blist->created_at->format('d / M /Y') }}</td>
+                            <td class="col-lg-1">{{ $bList->name }}</td>
+                            <td class="col-lg-1">{{ $bList->created_at->format('d / M /Y') }}</td>
                             <td class="col-lg-1">
-                                <a href="{{ route('brand.edit', $blist->id) }}">
+                                <a href="{{ route('brand.edit', $bList->id) }}">
                                     <button class="btn btn-outline-success border-0 me-2" title="edit brand">
                                         {{-- <i class="bi bi-pencil-square">edit</i> --}}
                                         <i class="ti ti-edit" style="font-size:19px;"></i>
                                     </button>
                                 </a>
-                                <a href="{{ route('brand.delete', $blist->id) }}">
+                                <a href="{{ route('brand.delete', $bList->id) }}">
                                     <button class="btn btn-outline-danger border-0" title="delete brand">
                                         <i class="ti ti-trash" style="font-size:19px;"></i>
                                     </button>
