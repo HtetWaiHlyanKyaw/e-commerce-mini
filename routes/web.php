@@ -32,6 +32,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // Admin Middleware
 Route::middleware(['admin'])->group(function () {
 
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     //Brand URLs
     Route::prefix('admin/brand')->group(function () {
         Route::get('/page', [BrandController::class, 'page'])->name('brand.page');
@@ -97,7 +98,7 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/detail/{id}', [SupplierPurchaseController::class, 'detail'])->name('supplier_purchase.detail');
         // Route::get('/delete/{id}', [SupplierPurchaseController::class, 'delete'])->name('supplier.delete');
     });
-
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::prefix('admin/Admin')->group(function () {
         Route::get('/page', [AdminController::class, 'page'])->name('Admin.page');
         Route::post('/create', [AdminController::class, 'create'])->name('Admin.create');
@@ -109,7 +110,7 @@ Route::middleware(['admin'])->group(function () {
 });
 
 Auth::routes();
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
 Route::get('/brands/brands_list', function () {
     return view('admin.brands.index');
 });

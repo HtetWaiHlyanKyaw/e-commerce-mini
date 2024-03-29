@@ -25,6 +25,17 @@ class SupplierPurchase extends Model
         return $this->hasMany(SupplierPurchaseDetail::class);
     }
 
+    public static function generateInvoiceId()
+    {
+        // Your logic to generate the invoice ID
+        $prefix = 'SPP-';
+        $date = now()->format('Ymd'); // Current date in the format YearMonthDay
+        $lastInvoice = self::where('invoice_id', 'like', "$prefix$date%")->orderBy('invoice_id', 'desc')->first();
+        $sequentialPart = $lastInvoice ? intval(substr($lastInvoice->invoice_id, strlen($prefix) + strlen($date))) + 1 : 1;
+
+        return "$prefix$date" . str_pad($sequentialPart, 5, '0', STR_PAD_LEFT); // 5-digit sequential number
+    }
+
     // public function product()
     // {
     //     return $this->hasMany(Product::class);

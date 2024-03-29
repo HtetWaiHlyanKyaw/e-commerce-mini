@@ -71,7 +71,7 @@
                     <h6>Invoice ID: {{ $supplierPurchase->invoice_id }}</h6>
                     <h6>Payment Method: {{ $supplierPurchase->payment_method }}</h6>
                     <h6>Total Quantity: {{ $supplierPurchase->total_quantity }}</h6>
-                    <h6>Total Price: {{ $supplierPurchase->total_price }}</h6>
+                    <h6>Total Price: {{ $supplierPurchase->total_price }} $</h6>
                     <h6>Date: {{ \Carbon\Carbon::parse($supplierPurchase->created_at)->format('F j, Y') }}</h6>
                 </div>
                 <h4 class="header-color">Supplier information</h4>
@@ -92,8 +92,8 @@
                             <img src="{{ asset('storage/products/'.$detail->product->image)}}" style="width: 100%; height: 200px; object-fit: cover;" alt="Product Image" class="product-image">
                             <div><strong>{{ $detail->product->name }}</strong></div>
                             <div><strong>Quantity:</strong> {{ $detail->quantity }}</div>
-                            <div><strong>Price:</strong> {{ $detail->price }}</div>
-                            <div><strong>Sub Total:</strong> {{ $detail->sub_total }}</div>
+                            <div><strong>Price:</strong> {{ $detail->price }} $</div>
+                            <div><strong>Sub Total:</strong> {{ $detail->sub_total }} $</div>
                         </div>
                         @php $counter++ @endphp
                         @if ($counter % 10 == 0)

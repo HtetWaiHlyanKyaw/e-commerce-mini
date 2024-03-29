@@ -17,7 +17,7 @@ class User
     public function handle(Request $request, Closure $next): Response
     {
         if(Auth::user()->usertype != 'user'){
-            abort(404);
+            return redirect()->route('admin.auth.login');
         }
         return $next($request);
     }
