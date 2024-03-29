@@ -3,7 +3,7 @@
 @section('style')
     <style>
         .header-color {
-            color: #1da9dc;
+            color: #5d9bff;
         }
 
         .bg-lighter {
@@ -46,16 +46,16 @@
             <table style="background-color:white" id="myTable" class="hover compact">
                 <thead style="background-color: white; color:black;">
                     <tr>
-                        <th style="text-align:center">Invoice ID</th>
-                        <th style="text-align:center">Customer Name</th>
-                        <th style="text-align:center">Payment Method</th>
-                        <th style="text-align:center">Total Price</th>
+                        <th  style="text-align:center; color: #5d9bff">Invoice ID</th>
+                        <th style="text-align:center;color: #5d9bff">Customer Name</th>
+                        <th style="text-align:center;color: #5d9bff">Payment Method</th>
+                        <th style="text-align:center;color: #5d9bff">Total Price</th>
                         {{-- <th style="text-align:center">Puchase ID</th> --}}
-                        <th style="text-align:center">Product ID</th>
-                        <th style="text-align:center">Quantity</th>
-                        <th style="text-align:center">Price</th>
-                        <th style="text-align:center">Subtotal</th>
-                        <th style="text-align:center">Date</th>
+                        <th style="text-align:center;color: #5d9bff">Product ID</th>
+                        <th style="text-align:center;color: #5d9bff">Quantity</th>
+                        <th style="text-align:center;color: #5d9bff">Price</th>
+                        <th style="text-align:center;color: #5d9bff">Subtotal</th>
+                        <th style="text-align:center;color: #5d9bff">Date</th>
                     </tr>
                 </thead>
                 <tbody >

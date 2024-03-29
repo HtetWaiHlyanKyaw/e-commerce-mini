@@ -52,7 +52,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <h1 class="header-color">Supplier List</h1>
+        <h1 class="header-color">Supplier Purchase List</h1>
         <br>
         <div class="pagetitle ">
             <nav>
@@ -68,18 +68,18 @@
             <div class="col-md-6">
                 <h4 class="header-color">Order Summary</h4>
                 <div class="supplier-details">
-                    <h6>Invoice ID: {{ $supplierPurchase->invoice_id }}</h6>
-                    <h6>Payment Method: {{ $supplierPurchase->payment_method }}</h6>
-                    <h6>Total Quantity: {{ $supplierPurchase->total_quantity }}</h6>
-                    <h6>Total Price: {{ $supplierPurchase->total_price }}</h6>
-                    <h6>Date: {{ \Carbon\Carbon::parse($supplierPurchase->created_at)->format('F j, Y') }}</h6>
+                    <h6 ><strong>Invoice ID: </strong>{{ $supplierPurchase->invoice_id }}</h6>
+                    <h6><strong>Payment Method:</strong> {{ $supplierPurchase->payment_method }}</h6>
+                    <h6><strong>Total Quantity:</strong> {{ $supplierPurchase->total_quantity }}</h6>
+                    <h6><strong>Total Price:</strong> {{ $supplierPurchase->total_price }}</h6>
+                    <h6><strong>Date:</strong> {{ \Carbon\Carbon::parse($supplierPurchase->created_at)->format('F j, Y') }}</h6>
                 </div>
                 <h4 class="header-color">Supplier information</h4>
                 <div class="supplier-details">
-                    <h6>Name: {{ $supplierPurchase->supplier->name }}</h6>
-                    <h6>Email: {{ $supplierPurchase->supplier->email }}</h6>
-                    <h6>Phone: {{ $supplierPurchase->supplier->phone_number }}</h6>
-                    <h6>Address: {{ $supplierPurchase->supplier->address }}</h6>
+                    <h6><strong>Name:</strong> {{ $supplierPurchase->supplier->name }}</h6>
+                    <h6><strong>Email:</strong> {{ $supplierPurchase->supplier->email }}</h6>
+                    <h6><strong>Phone:</strong> {{ $supplierPurchase->supplier->phone_number }}</h6>
+                    <h6><strong>Address:</strong> {{ $supplierPurchase->supplier->address }}</h6>
                 </div>
             </div>
             <div class="col-md-6">

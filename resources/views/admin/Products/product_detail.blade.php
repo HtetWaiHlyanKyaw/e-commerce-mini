@@ -1,6 +1,12 @@
 @extends('admin.layouts.master')
 @section('title', 'Products list')
-
+@section('style')
+<style>
+    .header-color{
+        color: #5d9bff;
+    }
+</style>
+@endsection
 @section('content')
 
     <div class="container-fluid">
@@ -14,7 +20,7 @@
             @endif
         </div>
 
-        <h1>Products</h1>
+        <h1 class="header-color">Products</h1>
         <div class="pagetitle">
             <nav>
                 <ol class="breadcrumb">
@@ -28,26 +34,26 @@
         <div class="card col-xl-5 col-md-6  mx-auto p-3" >
             @if ($data->image == null)
                 <div class="m-3 text-center">
-                    <img src="{{asset('storage/products/noimage.jpg')}}" class="rounded img-thumbnail" alt="" width="350px">
+                    <img src="{{asset('storage/products/noimage.jpg')}}"  alt="" width="350px">
                 </div>
             @else
             <div class="text-center m-3">
-                <img src="{{ asset('storage/products/'. $data->image)}}" class="rounded img-thumbnail" width="350" alt="Product Image">
+                <img src="{{ asset('storage/products/'. $data->image)}}"  width="350" alt="Product Image" style="border-radius: 3px;">
             </div>
             @endif
 
-            <div class="card-body">
-                {{-- <h5 class="card-title text-center"><i class="ti ti-device-mobile bold me-2"></i>{{$data->ProductModel->name}}</h5> --}}
-                <h5 class="card-title text-center"><i class="ti ti-device-mobile bold me-2"></i>{{$data->name}}</h5>
-            </div>
+
+
+                <h5 class="card-title text-center">{{$data->name}}</h5>
+
 
             <ul class="list-group list-group-flush">
-                <li class="list-group-item"><i class="ti ti-clipboard-list me-2"></i>{{$data->brand->name}}</li>
-                <li class="list-group-item"><i class="ti ti-clipboard-data me-2"></i>{{$data->storage_option}}</li>
-                <li class="list-group-item"><i class="ti ti-palette me-2"></i>{{$data->color}}</li>
-                <li class="list-group-item">{{$data->description}}</li>
-                <li class="list-group-item"><i class="ti ti-cash me-2"></i>{{$data->price}} ks</li>
-                <li class="list-group-item"><i class="ti ti-calendar me-2"></i>{{$data->created_at->format('j / F / Y')}}</li>
+                <li class="list-group-item"><i class="ti ti-device-mobile bold me-2" style="font-size:20px;color:blue;"></i>{{$data->brand->name}}</li>
+                <li class="list-group-item"><i class="ti ti-clipboard-data me-2" style="font-size:20px;color:blue;"></i>{{$data->storage_option}}</li>
+                <li class="list-group-item"><i class="ti ti-palette me-2" style="font-size:20px;color:blue;"></i>{{$data->color}}</li>
+                <li class="list-group-item"><i class="ti ti-file-description me-2" style="font-size:20px;color:blue;"></i>{{$data->description}}</li>
+                <li class="list-group-item"><i class="ti ti-cash me-2" style="font-size:20px;color:blue;"></i>{{$data->price}} ks</li>
+                <li class="list-group-item"><i class="ti ti-calendar me-2" style="font-size:20px;color:blue;"></i> {{ \Carbon\Carbon::parse($data->created_at)->format('F j, Y') }}</li>
             </ul>
         </div>
 

@@ -2,6 +2,11 @@
 @section('title', 'Product Edit Page')
 
 @section('style')
+<style>
+    .header-color {
+        color: #5d9bff;
+    }
+</style>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
 
@@ -9,7 +14,7 @@
     <div class="container-fluid">
         {{-- Page Title --}}
         <div class="pagetitle">
-            <h1>Product Edit</h1>
+            <h1 class="header-color">Product Edit</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">Home</li>
@@ -45,7 +50,7 @@
                             </div>
                         @else
                             <div class="text-center m-3">
-                                <img src="{{ asset('storage/products/' . $product->image) }}" class="rounded img-thumbnail"
+                                <img src="{{ asset('storage/products/' . $product->image) }}" style="border-radius: 3px"
                                     width="350" alt="Product Image">
                             </div>
                         @endif
@@ -105,6 +110,7 @@
                                     </div>
                                 @enderror
                             </div>
+
 
                             {{-- Model Call --}}
                             <div class="form-group mb-3">
@@ -207,9 +213,8 @@
                             <label for="description" class="form-label">Description</label>
                             <div class="form-group mb-3">
 
-                                <input type="text" name="description"
-                                    class="form-control @error('description') is-invalid @enderror"
-                                    value="{{ old('description', $product->description) }}">
+                                <textarea name="description" cols="20" rows="5" class="form-control  @error('description') is-invalid @enderror"
+                                    >{{old('description', $product->description)}}</textarea>
 
 
                                 @error('description')
@@ -221,8 +226,9 @@
 
                             {{-- update --}}
                             <div class="text-center">
-                                <input type="reset" value="cancel" class="btn btn-secondary px-3 me-3">
-                                <input type="submit" value="update" class="btn btn-primary px-3">
+                                <a href="{{ route('product.index') }}"><input type="button" value="cancel"
+                                    class="btn btn-outline-danger btn-lg border-2 px-3 me-3"></a>
+                                <input type="submit" value="update" class="btn btn-lg btn-primary px-3">
                             </div>
                         </form>
                     </div>

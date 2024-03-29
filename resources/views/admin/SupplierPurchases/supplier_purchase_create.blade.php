@@ -2,25 +2,31 @@
 @section('style')
     <style>
             .table{
-                bcakground-color: white;
+                background-color: white;
+            }
+
+            .header-color{
+                color: #5d9bff;
             }
     </style>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
+
+
 @section('content')
     <div class="container-fluid">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h4>Select Products to Order</h4>
+                    <h4 class="header-color">Select Products to Order</h4>
                     <table class="table"  style="background-color:white" id="myTable">
                         <thead>
                             <tr>
-                                <th></th>
-                                <th>No</th>
-                                <th>Product Name</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
+                                <th style="color: #5d9bff"></th>
+                                <th style="color: #5d9bff">No</th>
+                                <th style="color: #5d9bff">Product Name</th>
+                                <th style="color: #5d9bff">Price</th>
+                                <th style="color: #5d9bff">Quantity</th>
                             </tr>
                         </thead>
                         <tbody id="productTable">
@@ -66,7 +72,7 @@
                                 <br>
                                 <div class="form-group">
                                     <label for="supplier" class="form-label">Supplier Name</label>
-                                    <select id="supplier" name="supplier" class="form-control">
+                                    <select id="supplier" name="supplier" class="form-control" class="form-select @error('supplier') is-invalid @enderror supplier" aria-label="Default select example">
                                         <option value="">Choose Supplier</option>
                                         @foreach ($suppliers as $supplier)
                                             <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
@@ -79,6 +85,7 @@
                                     </div>
                                 @enderror
                                 <br>
+
                                 <div class="form-group">
                                     <label for="payment" class="form-label">Payment Method</label>
                                     <select id="payment" name="payment" class="form-control">
@@ -226,11 +233,7 @@ document.querySelectorAll('input[type="number"]').forEach(function(quantityInput
     });
 });
 
-// Initialize Select2
-$(document).ready(function() {
-    $('.paymentSelect').select2();
-    $('.supplier').select2();
-});
+
 
 // Call the function initially to populate the selected products textarea
 updateSelectedProducts();
@@ -256,4 +259,20 @@ updateSelectedProducts();
     }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script>
+    // In your Javascript (external .js resource or <script> tag)
+    $(document).ready(function() {
+        $('#supplier').select2({
+
+
+        });
+    });
+
+    $(document).ready(function() {
+        $('#payment').select2();
+    });
+</script>
 @endsection
+
+

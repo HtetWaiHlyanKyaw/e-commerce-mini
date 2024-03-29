@@ -3,7 +3,7 @@
 @section('style')
     <style>
         .header-color {
-            color: #1da9dc;
+              color: #5d9bff;
         }
        .bg-lighter {
             background-color: #f6f7ff;
@@ -38,14 +38,14 @@
                 </div>
             @endif
         </div>
-        <div class="bg-lighter p-4 border rounded">
+        <div class="bg-white p-4 border rounded">
             <table  id="myTable" class="hover">
                 <thead>
                     <tr>
-                        <th class="float:left;" style="color: #1da9dc">No</th>
-                        <th style="color: #1da9dc">Name</th>
-                        <th style="color: #1da9dc">Email</th>
-                        <th style="color: #1da9dc">Actions</th>
+                        <th  style="color: #5d9bff; text-align:center;">No</th>
+                        <th style="color: #5d9bff; text-align:center;">Name</th>
+                        <th style="color: #5d9bff; text-align:center;">Email</th>
+                        <th style="color: #5d9bff; text-align:center;">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,10 +55,10 @@
                     @foreach ($data as $Alist)
                         <tr class="tr-shadow">
                             {{-- <td class="col-lg-1">{{ $productModel->id }}</td> --}}
-                            <td class="col-lg-1">{{ $counter++}}</td>
-                            <td class="col-lg-1">{{ $Alist->name }}</td>
-                            <td class="col-lg-1">{{ $Alist->email }}</td>
-                            <td class="col-lg-1">
+                            <td class="col-lg-1" style="text-align:center;">{{ $counter++}}</td>
+                            <td class="col-lg-1" style="text-align:center;">{{ $Alist->name }}</td>
+                            <td class="col-lg-1" style="text-align:center;">{{ $Alist->email }}</td>
+                            <td class="col-lg-1" style="text-align:center;">
                                 <a href="{{route('Admin.edit',$Alist->id)}}">
                                     <button class="btn btn-outline-success border-0 me-2" title="Edit Admin">
                                         {{-- <i class="bi bi-pencil-square">edit</i> --}}

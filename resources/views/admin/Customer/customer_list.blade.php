@@ -1,14 +1,16 @@
 @extends('admin.layouts.master')
 @section('title', 'Customer list')
-<style>
+@section('style')
+    <style>
         .header-color {
-            color: #1da9dc;
+            color: #5d9bff;
         }
-        .bg-lighter {
+       .bg-lighter {
             background-color: #f6f7ff;
             /* Slightly darker shade */
         }
-</style>
+    </style>
+@endsection
 @section('content')
 
     <div class="container-fluid">
@@ -19,15 +21,16 @@
         <h1 class="header-color">Customer</h1>
         <br>
         <div class="pagetitle">
-            <h3>Customer List Count -{{ $data->count() }}</h3>
+            <h3>Category List Count -{{ $data->count() }}</h3>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item">Home</li>
-                    <li class="breadcrumb-item">Customer</li>
+                    <li class="breadcrumb-item ">Home</li>
+                    <li class="breadcrumb-item ">Customer</li>
                     <li class="breadcrumb-item "><b>Customer List</b></li>
                 </ol>
             </nav>
         </div>
+
         <div>
             @if (session('success'))
                 <div class="alert alert-success text-center" role="alert">
@@ -35,14 +38,16 @@
                 </div>
             @endif
         </div>
-        <div class="bg-lighter p-4 border rounded">
-            <table  id="myTable" class="hover">
+
+        <div class="bg-white p-4 border rounded">
+            <table id="myTable" class="hover">
                 <thead>
                     <tr>
-                        <th style="color: #1da9dc">No</th>
-                        <th style="color: #1da9dc">Name</th>
-                        <th style="color: #1da9dc">Email</th>
-                        <th style="color: #1da9dc">Date</th>
+                        <th  style="color: #5d9bff; text-align:center;">No</th>
+                        <th style="color: #5d9bff; text-align:center;">Name</th>
+                        <th style="color: #5d9bff; text-align:center;">Email</th>
+
+                        <th style="color: #5d9bff; text-align:center;">Date</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,16 +55,14 @@
                         $counter = 1; // Initialize counter variable
                     @endphp
                     @foreach ($data as $clist)
-                        <tr class="tr-shadow">
+                        <tr>
                             {{-- <td class="col-lg-1">{{ $blist->id }}</td> --}}
-                            <td class="col-lg-1">{{ $counter }}</td>
-                            <td class="col-lg-1">{{ $clist->name }}</td>
-                            <td class="col-lg-1">{{ $clist->email }}</td>
-                            <td class="col-lg-1">{{ $clist->created_at->format('d / M /Y') }}</td>
+                            <td class="col-lg-1" style="text-align:center;">{{ $counter++ }}</td>
+                            <td class="col-lg-1" style="text-align:center;">{{ $clist->name }}</td>
+                            <th class="col-lg-1" style="text-align:center;"> {{ \Carbon\Carbon::parse($clist->created_at)->format('F j, Y') }}</th>
+
                         </tr>
-                        @php
-                            $counter++; // Increment counter for the next row
-                        @endphp
+
                     @endforeach
                 </tbody>
 

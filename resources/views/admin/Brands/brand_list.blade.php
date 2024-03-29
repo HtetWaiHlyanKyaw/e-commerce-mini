@@ -3,7 +3,7 @@
 @section('style')
     <style>
         .header-color {
-            color: #1da9dc;
+            color: #5d9bff;
         }
        .bg-lighter {
             background-color: #f6f7ff;
@@ -39,14 +39,15 @@
             @endif
         </div>
 
-        <div class="bg-lighter p-4 border rounded">
+        <div class="bg-white p-4 border rounded">
             <table id="myTable" class="hover">
                 <thead>
                     <tr>
-                        <th class="float:left;" style="color: #1da9dc">No</th>
-                        <th style="color: #1da9dc">Name</th>
-                        <th style="color: #1da9dc">Date</th>
-                        <th style="color: #1da9dc">Actions</th>
+                        <th style="color: #5d9bff; text-align:center;">No</th>
+                        <th style="color: #5d9bff; text-align:center;">Name</th>
+                        <th style="color: #5d9bff; text-align:center;">Date</th>
+
+                        <th style="color: #5d9bff; text-align:center;">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,10 +57,10 @@
                     @foreach ($data as $blist)
                         <tr>
                             {{-- <td class="col-lg-1">{{ $blist->id }}</td> --}}
-                            <td class="col-lg-1">{{ $counter++ }}</td>
-                            <td class="col-lg-1">{{ $blist->name }}</td>
-                            <td class="col-lg-1">{{ $blist->created_at->format('d / M /Y') }}</td>
-                            <td class="col-lg-1">
+                            <td class="col-lg-1" style="text-align:center;">{{ $counter++ }}</td>
+                            <td class="col-lg-1" style="text-align:center;">{{ $blist->name }}</td>
+                            <td class="col-lg-1" style="text-align:center;"> {{ \Carbon\Carbon::parse($blist->created_at)->format('F j, Y') }}</td>
+                            <td class="col-lg-1" style="text-align:center;">
                                 <a href="{{ route('brand.edit', $blist->id) }}">
                                     <button class="btn btn-outline-success border-0 me-2" title="edit brand">
                                         {{-- <i class="bi bi-pencil-square">edit</i> --}}

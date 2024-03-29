@@ -3,7 +3,7 @@
 @section('style')
     <style>
         .header-color {
-            color: #1da9dc;
+            color: #5d9bff;
         }
     </style>
 @endsection
@@ -44,11 +44,11 @@
 
                         <form action="{{route('Admin.create')}}" method="post">
                             @csrf
-                            <label for="AdminName" class="form-label">Admin Name</label>
+                            <label for="AdminName" class="form-label">Name</label>
                             <div class="form-group mb-3">
 
                                 <input type="text" name="AdminName"
-                                    class="form-control @error('AdminName') is-invalid @enderror" placeholder="Admin name">
+                                    class="form-control @error('AdminName') is-invalid @enderror" placeholder="Admin Name">
 
                                 @error('AdminName')
                                     <div class="text-danger">
@@ -57,7 +57,7 @@
                                 @enderror
                             </div>
 
-                            <label for="AdminEmail" class="form-label">Admin Email</label>
+                            <label for="AdminEmail" class="form-label">Email</label>
                             <div class="form-group mb-3">
 
                                 <input type="text" name="AdminEmail"
@@ -71,7 +71,7 @@
                             </div>
 
 
-                            <label for="AdminPassword" class="form-label">Admin Password</label>
+                            <label for="AdminPassword" class="form-label">Password</label>
                             <div class="form-group mb-3">
 
                                 <input type="text" name="AdminPassword"
