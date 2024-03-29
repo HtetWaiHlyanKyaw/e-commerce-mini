@@ -52,7 +52,7 @@
                     @php
                     $counter = 1; // Initialize counter variable
                 @endphp
-                    @foreach ($data as $Alist)
+                    @foreach ($data as $aList)
                         <tr class="tr-shadow">
                             {{-- <td class="col-lg-1">{{ $productModel->id }}</td> --}}
                             <td class="col-lg-1" style="text-align:center;">{{ $counter++}}</td>
@@ -65,7 +65,7 @@
                                         <i class="ti ti-edit" style="font-size:19px;"></i>
                                     </button>
                                 </a>
-                                <a href="{{ route('Admin.delete', $Alist->id) }}">
+                                <a href="{{ route('Admin.delete', $aList->id) }}">
                                     <button class="btn btn-outline-danger border-0" title="delete Admin">
                                         <i class="ti ti-trash" style="font-size:19px;"></i>
                                     </button>

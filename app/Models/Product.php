@@ -31,4 +31,11 @@ class Product extends Model
     {
         return $this->belongsTo(ProductModel::class);
     }
+
+    public static function updateQuantity($productId, $quantity)
+    {
+        $product = self::findOrFail($productId); // Find the product by its ID
+        $product->quantity += $quantity; // Subtract the purchased quantity
+        $product->save(); // Save the updated product
+    }
 }

@@ -54,7 +54,7 @@
                     @php
                         $counter = 1; // Initialize counter variable
                     @endphp
-                    @foreach ($data as $blist)
+                    @foreach ($data as $bList)
                         <tr>
                             {{-- <td class="col-lg-1">{{ $blist->id }}</td> --}}
                             <td class="col-lg-1" style="text-align:center;">{{ $counter++ }}</td>
@@ -67,7 +67,7 @@
                                         <i class="ti ti-edit" style="font-size:19px;"></i>
                                     </button>
                                 </a>
-                                <a href="{{ route('brand.delete', $blist->id) }}">
+                                <a href="{{ route('brand.delete', $bList->id) }}">
                                     <button class="btn btn-outline-danger border-0" title="delete brand">
                                         <i class="ti ti-trash" style="font-size:19px;"></i>
                                     </button>
