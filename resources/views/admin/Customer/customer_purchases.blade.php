@@ -3,7 +3,7 @@
 @section('style')
     <style>
         .header-color {
-            color: #1da9dc;
+            color: #5d9bff;
         }
 
         .bg-lighter {

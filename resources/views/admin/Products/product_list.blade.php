@@ -2,15 +2,15 @@
 @section('title', 'Products list')
 @section('style')
     <style>
-
         .header-color {
-            color: #1da9dc;
+            color: #5d9bff;
         }
 
         .bg-lighter {
             background-color: #f6f7ff;
             /* Slightly darker shade */
         }
+
     </style>
 @endsection
 @section('content')
@@ -20,7 +20,8 @@
 
 
 
-        <h1>Products</h1>
+        <h1 class="header-color">Products</h1>
+        <br>
         <div class="pagetitle">
             <h3>Category List Count - {{ $datas->count() }}</h3>
             <nav>
@@ -31,75 +32,69 @@
                 </ol>
             </nav>
         </div>
-        <table border="1" id="myTable">
-            <thead>
-                <tr style="color: #1da9dc">
-                    <th class="float:left;">No</th>
-                    <th>Name</th>
-                    {{-- <th>Image</th> --}}
-                    <th>Brand</th>
-                    {{-- <th>Model</th> --}}
-                    {{-- <th>Storage Option</th> --}}
-                    {{-- <th>Color</th>--}}
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    {{-- <th>Low Stock</th> --}}
-                    {{-- <th>Description</th> --}}
-                    <th>Action</th>
+        <div class="bg-white p-4 border rounded">
+            <table id="myTable">
+                <thead>
+                    <tr>
+                        <th style="text-align:center; color: #5d9bff;">No</th>
+                        <th style="text-align:center; color: #5d9bff;">Name</th>
+                        <th style="text-align:center; color: #5d9bff;">Brand</th>
+                        <th style="text-align:center; color: #5d9bff;">Price</th>
+                        <th style="text-align:center; color: #5d9bff;">Quantity</th>
+                        <th style="text-align:center; color: #5d9bff;">Action</th>
 
-                </tr>
-            </thead>
-            <tbody>
+                    </tr>
+                </thead>
+                <tbody>
 
-                @php
-                $counter = 1; // Initialize counter variable
-                @endphp
-                @foreach ($datas as $plist)
-
-
-                    <tr class="tr-shadow">
-                        {{-- <td class="col-lg-1">{{ $blist->id }}</td> --}}
-                        <td class="col-lg-1">{{ $counter}}</td>
-                        <td class="col-lg-1">{{ $plist->name }}</td>
-                        {{-- <td class="col-lg-1">
+                    @php
+                        $counter = 1; // Initialize counter variable
+                    @endphp
+                    @foreach ($datas as $plist)
+                        <tr class="tr-shadow">
+                            {{-- <td class="col-lg-1">{{ $blist->id }}</td> --}}
+                            <td class="col-lg-1" style="text-align:center;">{{ $counter }}</td>
+                            <td class="col-lg-1" style="text-align:center;">{{ $plist->name }}</td>
+                            {{-- <td class="col-lg-1">
                             <img src="{{ asset('images/' . $plist->image) }}" alt="">
                         </td> --}}
-                        <td class="col-lg-1">{{ $plist->brand->name }}</td>
-                        {{-- <td class="col-lg-1">{{ $plist->product_model_id }}</td>
+                            <td class="col-lg-1" style="text-align:center;">{{ $plist->brand->name }}</td>
+                            {{-- <td class="col-lg-1">{{ $plist->product_model_id }}</td>
                         <td class="col-lg-1">{{ $plist->storage_option }}</td>
                         <td class="col-lg-1">{{ $plist->color }}</td> --}}
-                        <td class="col-lg-1">{{ $plist->price }}</td>
-                        <td class="col-lg-1">{{ $plist->quantity }}</td>
-                        {{-- <td class="col-lg-1">{{ $plist->low_stock }}</td> --}}
-                        {{-- <td class="col-lg-1">{{ $plist->description }}</td> --}}
-                        <td class="col-lg-1">
+                            <td class="col-lg-1" style="text-align:center;">{{ $plist->price }}</td>
+                            <td class="col-lg-1" style="text-align:center;">{{ $plist->quantity }}</td>
+                            {{-- <td class="col-lg-1">{{ $plist->low_stock }}</td> --}}
+                            {{-- <td class="col-lg-1">{{ $plist->description }}</td> --}}
+                            <td class="col-lg-1" style="text-align:center;">
 
-                            {{-- <a href="{{route('product.edit', $plist->id)}}"> --}}
-                                <a href="{{route('product.detail', $plist->id)}}">
-                                <button class="btn btn-info" title="product info">
-                                    <i class="ti ti-info-square"></i>
-                                </button>
-                            </a>
+                                {{-- <a href="{{route('product.edit', $plist->id)}}"> --}}
+                                <a href="{{ route('product.detail', $plist->id) }}">
+                                    <button class="btn btn-outline-info border-0" title="product info">
+                                        <i class="ti ti-category" style="font-size:19px;"></i>
+                                    </button>
+                                </a>
 
-                            <a href="{{route('product.edit', $plist->id)}}">
-                                <button class="btn btn-success" title="edit product">
-                                    {{-- <i class="bi bi-pencil-square">edit</i> --}}
-                                    <i class="ti ti-edit"></i>
-                                </button>
-                            </a>
-                            <a href="{{route('product.delete', $plist->id)}}">
-                                <button class="btn btn-danger" title="delete product">
-                                    <i class="ti ti-trash"></i>
-                                </button>
-                            </a>
-                        </td>
-                    </tr>
-                    @php
-                    $counter++;
-                @endphp
-                @endforeach
-            </tbody>
-        </table>
+                                <a href="{{ route('product.edit', $plist->id) }}">
+                                    <button class="btn btn-outline-success border-0" title="edit product">
+                                        {{-- <i class="bi bi-pencil-square">edit</i> --}}
+                                        <i class="ti ti-edit" style="font-size:19px;"></i>
+                                    </button>
+                                </a>
+                                <a href="{{ route('product.delete', $plist->id) }}">
+                                    <button class="btn btn-outline-danger border-0" title="delete product">
+                                        <i class="ti ti-trash" style="font-size:19px;"></i>
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                        @php
+                            $counter++;
+                        @endphp
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 
 @endsection
