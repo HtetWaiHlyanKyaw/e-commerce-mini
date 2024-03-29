@@ -56,10 +56,10 @@
                         <tr class="tr-shadow">
                             {{-- <td class="col-lg-1">{{ $productModel->id }}</td> --}}
                             <td class="col-lg-1" style="text-align:center;">{{ $counter++}}</td>
-                            <td class="col-lg-1" style="text-align:center;">{{ $Alist->name }}</td>
-                            <td class="col-lg-1" style="text-align:center;">{{ $Alist->email }}</td>
+                            <td class="col-lg-1" style="text-align:center;">{{ $aList->name }}</td>
+                            <td class="col-lg-1" style="text-align:center;">{{ $aList->email }}</td>
                             <td class="col-lg-1" style="text-align:center;">
-                                <a href="{{route('Admin.edit',$Alist->id)}}">
+                                <a href="{{route('Admin.edit',$aList->id)}}">
                                     <button class="btn btn-outline-success border-0 me-2" title="Edit Admin">
                                         {{-- <i class="bi bi-pencil-square">edit</i> --}}
                                         <i class="ti ti-edit" style="font-size:19px;"></i>

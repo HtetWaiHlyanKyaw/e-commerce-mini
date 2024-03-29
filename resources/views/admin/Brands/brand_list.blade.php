@@ -58,10 +58,10 @@
                         <tr>
                             {{-- <td class="col-lg-1">{{ $blist->id }}</td> --}}
                             <td class="col-lg-1" style="text-align:center;">{{ $counter++ }}</td>
-                            <td class="col-lg-1" style="text-align:center;">{{ $blist->name }}</td>
-                            <td class="col-lg-1" style="text-align:center;"> {{ \Carbon\Carbon::parse($blist->created_at)->format('F j, Y') }}</td>
+                            <td class="col-lg-1" style="text-align:center;">{{ $bList->name }}</td>
+                            <td class="col-lg-1" style="text-align:center;"> {{ \Carbon\Carbon::parse($bList->created_at)->format('F j, Y') }}</td>
                             <td class="col-lg-1" style="text-align:center;">
-                                <a href="{{ route('brand.edit', $blist->id) }}">
+                                <a href="{{ route('brand.edit', $bList->id) }}">
                                     <button class="btn btn-outline-success border-0 me-2" title="edit brand">
                                         {{-- <i class="bi bi-pencil-square">edit</i> --}}
                                         <i class="ti ti-edit" style="font-size:19px;"></i>
