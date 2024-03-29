@@ -49,13 +49,13 @@
                     @php
                         $counter = 1; // Initialize counter variable
                     @endphp
-                    @foreach ($data as $clist)
+                    @foreach ($data as $cList)
                         <tr class="tr-shadow">
                             {{-- <td class="col-lg-1">{{ $blist->id }}</td> --}}
                             <td class="col-lg-1">{{ $counter }}</td>
-                            <td class="col-lg-1">{{ $clist->name }}</td>
-                            <td class="col-lg-1">{{ $clist->email }}</td>
-                            <td class="col-lg-1">{{ $clist->created_at->format('d / M /Y') }}</td>
+                            <td class="col-lg-1">{{ $cList->name }}</td>
+                            <td class="col-lg-1">{{ $cList->email }}</td>
+                            <td class="col-lg-1">{{ $cList->created_at->format('d / M /Y') }}</td>
                         </tr>
                         @php
                             $counter++; // Increment counter for the next row

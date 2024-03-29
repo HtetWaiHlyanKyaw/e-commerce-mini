@@ -79,6 +79,7 @@ Route::middleware(['admin'])->group(function () {
     Route::prefix('admin/product')->group(function () {
         Route::get('/reviews', [ReviewController::class, 'review'])->name('product.reviews');
     });
+
     Route::prefix('admin/supplier')->group(function () {
         Route::get('/page', [SupplierController::class, 'page'])->name('supplier.page');
         Route::post('/create', [SupplierController::class, 'create'])->name('supplier.create');

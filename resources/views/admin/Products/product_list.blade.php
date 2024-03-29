@@ -54,40 +54,40 @@
                 @php
                 $counter = 1; // Initialize counter variable
                 @endphp
-                @foreach ($datas as $plist)
+                @foreach ($datas as $pList)
 
 
                     <tr class="tr-shadow">
                         {{-- <td class="col-lg-1">{{ $blist->id }}</td> --}}
                         <td class="col-lg-1">{{ $counter}}</td>
-                        <td class="col-lg-1">{{ $plist->name }}</td>
+                        <td class="col-lg-1">{{ $pList->name }}</td>
                         {{-- <td class="col-lg-1">
                             <img src="{{ asset('images/' . $plist->image) }}" alt="">
                         </td> --}}
-                        <td class="col-lg-1">{{ $plist->brand->name }}</td>
+                        <td class="col-lg-1">{{ $pList->brand->name }}</td>
                         {{-- <td class="col-lg-1">{{ $plist->product_model_id }}</td>
                         <td class="col-lg-1">{{ $plist->storage_option }}</td>
                         <td class="col-lg-1">{{ $plist->color }}</td> --}}
-                        <td class="col-lg-1">{{ $plist->price }}</td>
-                        <td class="col-lg-1">{{ $plist->quantity }}</td>
+                        <td class="col-lg-1">{{ $pList->price }}</td>
+                        <td class="col-lg-1">{{ $pList->quantity }}</td>
                         {{-- <td class="col-lg-1">{{ $plist->low_stock }}</td> --}}
                         {{-- <td class="col-lg-1">{{ $plist->description }}</td> --}}
                         <td class="col-lg-1">
 
                             {{-- <a href="{{route('product.edit', $plist->id)}}"> --}}
-                                <a href="{{route('product.detail', $plist->id)}}">
+                                <a href="{{route('product.detail', $pList->id)}}">
                                 <button class="btn btn-info" title="product info">
                                     <i class="ti ti-info-square"></i>
                                 </button>
                             </a>
 
-                            <a href="{{route('product.edit', $plist->id)}}">
+                            <a href="{{route('product.edit', $pList->id)}}">
                                 <button class="btn btn-success" title="edit product">
                                     {{-- <i class="bi bi-pencil-square">edit</i> --}}
                                     <i class="ti ti-edit"></i>
                                 </button>
                             </a>
-                            <a href="{{route('product.delete', $plist->id)}}">
+                            <a href="{{route('product.delete', $pList->id)}}">
                                 <button class="btn btn-danger" title="delete product">
                                     <i class="ti ti-trash"></i>
                                 </button>
