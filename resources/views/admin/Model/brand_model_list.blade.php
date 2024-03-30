@@ -3,7 +3,7 @@
 @section('style')
     <style>
         .header-color {
-            color: #1da9dc;
+            color: #5d9bff;
         }
         .bg-lighter {
             background-color: #f6f7ff;
@@ -38,10 +38,10 @@
 
 
 
-        <h1 class="header-color">Product Models</h1>
+        <h1 class="header-color">Model List</h1>
         <br>
         <div class="pagetitle">
-            <h3>Category List Count -{{ $productModels->count() }}</h3>
+            <h3>Total Models - {{ $productModels->count() }}</h3>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item "> Home</li>
@@ -57,15 +57,15 @@
                 </div>
             @endif
         </div>
-        <div class="bg-lighter p-4 border rounded">
+        <div class="bg-white p-4 border rounded">
             <table  id="myTable" class="hover">
                 <thead>
                     <tr>
-                        <th class="float:left;" style="color: #1da9dc">No</th>
-                        <th style="color: #1da9dc">Name</th>
-                        <th style="color: #1da9dc">Brand</th>
-                        <th style="color: #1da9dc">Date</th>
-                        <th style="color: #1da9dc">Actions</th>
+                        <th style="color: #5d9bff; text-align:center;">No</th>
+                        <th style="color: #5d9bff; text-align:center;">Name</th>
+                        <th style="color: #5d9bff; text-align:center;">Brand</th>
+                        <th style="color: #5d9bff; text-align:center;">Date</th>
+                        <th style="color: #5d9bff; text-align:center;">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -75,11 +75,11 @@
                     @foreach ($productModels as $productModel)
                         <tr class="tr-shadow">
                             {{-- <td class="col-lg-1">{{ $productModel->id }}</td> --}}
-                            <td class="col-lg-1">{{ $counter }}</td>
-                            <td class="col-lg-1">{{ $productModel->name }}</td>
-                            <td class="col-lg-1">{{ $productModel->brand->name }}</td>
-                            <td class="col-lg-1">{{ $productModel->created_at->format('d / M /Y') }}</td>
-                            <td class="col-lg-1">
+                            <td class="col-lg-1" style="text-align:center;">{{ $counter }}</td>
+                            <td class="col-lg-1" style="text-align:center;">{{ $productModel->name }}</td>
+                            <td class="col-lg-1" style="text-align:center;">{{ $productModel->brand->name }}</td>
+                            <td class="col-lg-1" style="text-align:center;"> {{ \Carbon\Carbon::parse($productModel->created_at)->format('F j, Y') }}</td>
+                            <td class="col-lg-1" style="text-align:center;">
                                 <a href="{{ route('model.edit', $productModel->id) }}">
                                     <button class="btn btn-outline-success border-0 me-2" title="edit brand">
                                         {{-- <i class="bi bi-pencil-square">edit</i> --}}

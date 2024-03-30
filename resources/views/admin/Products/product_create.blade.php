@@ -2,6 +2,12 @@
 @section('title', 'Products')
 
 @section('style')
+
+    <style>
+        .header-color {
+            color: #5d9bff;
+        }
+    </style>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
 
@@ -10,7 +16,8 @@
     <div class="container-fluid">
         {{-- Page Title --}}
         <div class="pagetitle">
-            <h1>Product Create</h1>
+            <h1 class="header-color">Product Create</h1>
+            <br>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">Home</li>
@@ -42,12 +49,12 @@
                         <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
-                            <label for="productName" class="form-label">Product Name</label>
+                            <label for="productName" class="form-label">Name</label>
                             <div class="form-group mb-3">
 
                                 <input type="text" name="productName"
                                     class="form-control @error('productName') is-invalid @enderror"
-                                    placeholder="product name" value="{{ old('productName') }}">
+                                    placeholder="Product Name" value="{{ old('productName') }}">
 
 
                                 @error('productName')
@@ -57,7 +64,7 @@
                                 @enderror
                             </div>
 
-                            <label for="image" class="form-label">Product Image</label>
+                            <label for="image" class="form-label">Image</label>
                             <div class="form-group mb-3">
 
                                 <input type="file" name="image"
@@ -123,7 +130,7 @@
                             <div class="form-group mb-3">
 
                                 <input type="text" name="color"
-                                    class="form-control @error('color') is-invalid @enderror" placeholder="color">
+                                    class="form-control @error('color') is-invalid @enderror" placeholder="Color">
 
 
                                 @error('color')
@@ -136,7 +143,7 @@
                             <div class="form-group mb-3">
 
                                 <input type="text" name="price"
-                                    class="form-control @error('price') is-invalid @enderror" placeholder="price"
+                                    class="form-control @error('price') is-invalid @enderror" placeholder="Price"
                                     value="{{ old('price') }}">
 
 
@@ -150,7 +157,7 @@
                             <div class="form-group mb-3">
 
                                 <input type="text" name="quantity"
-                                    class="form-control @error('quantity') is-invalid @enderror" placeholder="quatity"
+                                    class="form-control @error('quantity') is-invalid @enderror" placeholder="Quatity"
                                     value="{{ old('quantity') }}">
 
 
@@ -163,7 +170,7 @@
                             <label for="low_stock" class="form-label">Low Stock</label>
                             <div class="form-group mb-3">
                                 <input type="text" name="low_stock"
-                                    class="form-control @error('low_stock') is-invalid @enderror" placeholder="low_stock"
+                                    class="form-control @error('low_stock') is-invalid @enderror" placeholder="Low stock"
                                     value="{{ old('low_stock') }}">
 
 
@@ -175,10 +182,9 @@
                             </div>
                             <label for="description" class="form-label">Description</label>
                             <div class="form-group mb-3">
-
-                                <input type="text" name="description"
-                                    class="form-control @error('description') is-invalid @enderror"
-                                    placeholder="description" value="{{ old('description') }}">
+                                <textarea name="description" cols="20" rows="5"
+                                    class="form-control  @error('description') is-invalid @enderror" placeholder="Description"
+                                    value="{{ old('description') }}"></textarea>
 
 
                                 @error('description')
@@ -189,9 +195,14 @@
                             </div>
 
                             {{-- submit --}}
-                            <div class="text-center">
+                            {{-- <div class="text-center">
                                 <input type="reset" value="cancel" class="btn btn-secondary px-3 me-3">
                                 <input type="submit" value="create" class="btn btn-primary px-3">
+                            </div> --}}
+                            <div class="text-center">
+                                <a href="{{ route('product.index') }}"><input type="button" value="cancel"
+                                    class="btn btn-outline-danger btn-lg border-2 px-3 me-3"></a>
+                                <input type="submit" value="create" class="btn btn-lg btn-primary px-3">
                             </div>
                         </form>
 

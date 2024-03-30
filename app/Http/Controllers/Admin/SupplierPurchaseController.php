@@ -28,7 +28,7 @@ class SupplierPurchaseController extends Controller
         // Validate the request data
         // dd($request->selectedProducts);
         $request->validate([
-            'invoice_id' => 'required|string',
+            // 'invoice_id' => 'required|string',
             'supplier' => 'required|exists:suppliers,id',
             'payment' => 'required',
             // 'selectedProducts' => 'required|min:1',
@@ -42,7 +42,7 @@ class SupplierPurchaseController extends Controller
 
             // Create a new SupplierPurchase record
             $supplierPurchase = new SupplierPurchase();
-            $supplierPurchase->invoice_id = $request->invoice_id;
+            $supplierPurchase->invoice_id = SupplierPurchase::generateInvoiceId();
             $supplierPurchase->total_quantity = $request->totalQuantity;
             $supplierPurchase->total_price = $request->totalPrice;
             $supplierPurchase->payment_method = $request->payment;
@@ -58,6 +58,7 @@ class SupplierPurchaseController extends Controller
                 $detail->quantity = $product['quantity']; // Assuming you have product quantities in the selectedProducts array
                 $detail->sub_total = $product['price'] * $product['quantity'];
                 $detail->save();
+                Product::updateQuantity($product['id'], $product['quantity']);
             }
 
             // Redirect back with success message

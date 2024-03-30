@@ -3,9 +3,11 @@
 @section('style')
     <style>
         .header-color {
-            color: #1da9dc;
+            color: #5d9bff;
         }
+
     </style>
+
 @endsection
 @section('content')
     <div class="container-fluid">
@@ -64,9 +66,9 @@
                             </div>
 
                             <div class="form-group mb-3">
-                                <label for="modelName" class="form-label">Model Name</label>
+                                <label for="modelName" class="form-label">Name</label>
                                 <input type="text" name="modelName" id="modelName"
-                                    class="form-control @error('modelName') is-invalid @enderror" placeholder="Model's name"
+                                    class="form-control @error('modelName') is-invalid @enderror" placeholder="Model's Name"
                                     value="{{ old('modelName') }}">
 
 
@@ -92,12 +94,5 @@
         </div>
     </div>
 @endsection
-@section('script')
-<script>
-    $(document).ready(function() {
-    $('.js-example-basic-single').select2();
-});
-</script>
-<script type="text/javascript" src="jquery.js"></script>          
-<script type="text/javascript" src="select2.js"></script>    
-@endsection
+
+

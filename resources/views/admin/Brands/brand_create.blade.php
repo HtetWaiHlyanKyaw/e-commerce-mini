@@ -3,7 +3,7 @@
 @section('style')
     <style>
         .header-color {
-            color: #1da9dc;
+            color: #5d9bff;
         }
     </style>
 @endsection
@@ -44,11 +44,11 @@
 
                         <form action="{{ route('brand.create') }}" method="post">
                             @csrf
-                            <label for="brandName" class="form-label">Brand Name</label>
+                            <label for="brandName" class="form-label">Name</label>
                             <div class="form-group mb-3">
 
                                 <input type="text" name="brandName"
-                                    class="form-control @error('brandName') is-invalid @enderror" placeholder="brand name">
+                                    class="form-control @error('brandName') is-invalid @enderror" placeholder="Brand Name">
 
 
                                 @error('brandName')

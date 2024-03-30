@@ -3,7 +3,7 @@
 @section('style')
     <style>
         .header-color {
-            color: #1da9dc;
+            color: #5d9bff;
         }
 
         .bg-lighter {
@@ -38,17 +38,17 @@
             @endif
         </div>
 
-        <div class="bg-lighter p-4 border rounded">
+        <div class="bg-white p-4 border rounded">
             <table  id="myTable" class="hover">
                 <thead>
                     <tr>
-                        <th style="color: #1da9dc">No</th>
-                        <th style="color: #1da9dc">Name</th>
-                        <th style="color: #1da9dc">Email</th>
-                        <th style="color: #1da9dc">Phone</th>
-                        <th style="color: #1da9dc">Address</th>
-                        <th style="color: #1da9dc">created_at</th>
-                        <th style="color: #1da9dc">Actions</th>
+                        <th style="color: #5d9bff;text-align:center;">No</th>
+                        <th style="color: #5d9bff; text-align:center;">Name</th>
+                        <th style="color: #5d9bff; text-align:center;">Email</th>
+                        <th style="color: #5d9bff; text-align:center;">Phone</th>
+                        <th style="color: #5d9bff; text-align:center;">Address</th>
+                        <th style="color: #5d9bff; text-align:center;">created_at</th>
+                        <th style="color: #5d9bff; text-align:center;">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,13 +58,13 @@
                     @foreach ($suppliers as $supplier)
                         <tr class="tr-shadow">
                             {{-- <td class="col-lg-1">{{ $blist->id }}</td> --}}
-                            <td class="col-lg-1">{{ $counter }}</td>
-                            <td class="col-lg-1">{{ $supplier->name }}</td>
-                            <td class="col-lg-1">{{ $supplier->email }}</td>
-                            <td class="col-lg-1">{{ $supplier->phone_number }}</td>
-                            <td class="col-lg-1">{{ $supplier->address }}</td>
-                            <td class="col-lg-1">{{ $supplier->created_at->format('d / M /Y') }}</td>
-                            <td class="col-lg-1">
+                            <td class="col-lg-1" style="text-align:center;">{{ $counter }}</td>
+                            <td class="col-lg-1" style="text-align:center;">{{ $supplier->name }}</td>
+                            <td class="col-lg-1" style="text-align:center;">{{ $supplier->email }}</td>
+                            <td class="col-lg-1" style="text-align:center;">{{ $supplier->phone_number }}</td>
+                            <td class="col-lg-1" style="text-align:center;">{{ $supplier->address }}</td>
+                            <td class="col-lg-1" style="text-align:center;"> {{ \Carbon\Carbon::parse($supplier->created_at)->format('F j, Y') }}</td>
+                            <td class="col-lg-1" style="text-align:center;">
                                 <a href="{{ route('supplier.edit', $supplier->id) }}">
                                     <button class="btn btn-outline-success border-0 me-2" title="edit supplier">
                                         {{-- <i class="bi bi-pencil-square">edit</i> --}}

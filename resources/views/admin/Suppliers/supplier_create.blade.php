@@ -3,7 +3,7 @@
 @section('style')
     <style>
         .header-color {
-            color: #1da9dc;
+            color: #5d9bff;
         }
     </style>
 @endsection
@@ -30,7 +30,7 @@
             @endif
         </div>
 
-        {{-- Brand Create Card --}} 
+        {{-- Brand Create Card --}}
         <div class="container-fluid">
             <div class="col-lg-6 offset-lg-3">
                 <div class="card">
