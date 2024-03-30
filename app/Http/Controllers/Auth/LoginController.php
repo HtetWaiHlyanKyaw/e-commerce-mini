@@ -29,6 +29,12 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    protected function authenticated(Request $request, $userId)
+    {
+        // Store the authenticated user's ID in the session
+        session(['id' => $user->id]);
+    }
+
 
 
 }

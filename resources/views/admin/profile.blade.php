@@ -6,6 +6,11 @@
 @endsection
 
 @section('content')
+       <h2>User Profile</h2>
+      <p>User ID: {{ $user->id }}</p>
+
+
+
 
 @endsection
 

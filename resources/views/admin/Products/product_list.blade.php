@@ -71,7 +71,7 @@
                                 {{-- <a href="{{route('product.edit', $plist->id)}}"> --}}
                                 <a href="{{ route('product.detail', $plist->id) }}">
                                     <button class="btn btn-outline-info border-0" title="product info">
-                                        <i class="ti ti-category" style="font-size:19px;"></i>
+                                        <i class="ti ti-info-circle" style="font-size:19px;"></i>
                                     </button>
                                 </a>
 
