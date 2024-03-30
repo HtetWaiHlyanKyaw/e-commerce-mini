@@ -105,7 +105,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 
-    Route::get('profile/{id}', [ProfileController::class, 'index'])->name('admin.profile');
+    Route::get('profile', [ProfileController::class, 'index'])->name('admin.profile');
 
     Route::prefix('admin/Admin')->group(function () {
         Route::get('/page', [AdminController::class, 'page'])->name('Admin.page');

@@ -18,10 +18,10 @@
 
 
 
-        <h1 class="header-color">Brands</h1>
+        <h1 class="header-color">Brand List</h1>
         <br>
         <div class="pagetitle">
-            <h3>Category List Count -{{ $data->count() }}</h3>
+            <h3>Total Brands - {{ $data->count() }}</h3>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item ">Home</li>

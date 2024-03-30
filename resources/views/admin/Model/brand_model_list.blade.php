@@ -38,10 +38,10 @@
 
 
 
-        <h1 class="header-color">Product Models</h1>
+        <h1 class="header-color">Model List</h1>
         <br>
         <div class="pagetitle">
-            <h3>Category List Count -{{ $productModels->count() }}</h3>
+            <h3>Total Models - {{ $productModels->count() }}</h3>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item "> Home</li>

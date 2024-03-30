@@ -22,7 +22,7 @@
         <h1 class="header-color">Admin List</h1>
         <br>
         <div class="pagetitle">
-            <h3>Admin List Count -{{ $data->count() }}</h3>
+            <h3>Total Admins - {{ $data->count() }}</h3>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item "> Home</li>

@@ -195,9 +195,14 @@
                             </div>
 
                             {{-- submit --}}
-                            <div class="text-center">
+                            {{-- <div class="text-center">
                                 <input type="reset" value="cancel" class="btn btn-secondary px-3 me-3">
                                 <input type="submit" value="create" class="btn btn-primary px-3">
+                            </div> --}}
+                            <div class="text-center">
+                                <a href="{{ route('product.index') }}"><input type="button" value="cancel"
+                                    class="btn btn-outline-danger btn-lg border-2 px-3 me-3"></a>
+                                <input type="submit" value="create" class="btn btn-lg btn-primary px-3">
                             </div>
                         </form>
 

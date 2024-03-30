@@ -139,7 +139,7 @@
                                 <hr>
                                 <div class="form-group">
                                     <label for="selectedProducts" class="form-label">Selected Products</label>
-                                    <textarea id="selectedProducts" name="selectedProducts" rows="4" class="form-control" readonly></textarea>
+                                    <textarea id="selectedProducts" name="selectedProducts" rows="4" class="form-control" placeholder="Choose Products from the Products table" readonly></textarea>
                                 </div>
                                 @error('selectedProducts')
                                     <div class="text-danger">

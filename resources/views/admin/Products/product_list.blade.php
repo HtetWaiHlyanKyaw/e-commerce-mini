@@ -20,10 +20,10 @@
 
 
 
-        <h1 class="header-color">Products</h1>
+        <h1 class="header-color">Product List</h1>
         <br>
         <div class="pagetitle">
-            <h3>Category List Count - {{ $datas->count() }}</h3>
+            <h3>Total Products - {{ $datas->count() }}</h3>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">Home</li>
@@ -63,7 +63,8 @@
                         <td class="col-lg-1">{{ $plist->storage_option }}</td>
                         <td class="col-lg-1">{{ $plist->color }}</td> --}}
                             <td class="col-lg-1" style="text-align:center;">{{ $plist->price }}</td>
-                            <td class="col-lg-1" style="text-align:center;">{{ $plist->quantity }}</td>
+
+                            <td class="col-lg-1" style="text-align:center; color: {{ $plist->quantity <= $plist->low_stock ? 'red' : 'inherit' }}">{{ $plist->quantity }}</td>
                             {{-- <td class="col-lg-1">{{ $plist->low_stock }}</td> --}}
                             {{-- <td class="col-lg-1">{{ $plist->description }}</td> --}}
                             <td class="col-lg-1" style="text-align:center;">
@@ -71,7 +72,7 @@
                                 {{-- <a href="{{route('product.edit', $plist->id)}}"> --}}
                                 <a href="{{ route('product.detail', $plist->id) }}">
                                     <button class="btn btn-outline-info border-0" title="product info">
-                                        <i class="ti ti-info-circle" style="font-size:19px;"></i>
+                                        <i class="ti ti-file-description" style="font-size:19px;"></i>
                                     </button>
                                 </a>
 
