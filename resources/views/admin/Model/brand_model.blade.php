@@ -65,7 +65,7 @@
 
                             <div class="form-group mb-3">
                                 <label for="modelName" class="form-label">Brand</label>
-                                <select class="form-select @error('BrandId') is-invalid @enderror BrandId"
+                                <select class="form-select @error('BrandId') is-invalid @enderror BrandId " id="modelName"
                                     name="BrandName" aria-label="Default select example">
                                     <option value="">Choose Brand</option>
                                     @foreach ($data as $brand)
