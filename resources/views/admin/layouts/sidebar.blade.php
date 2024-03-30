@@ -106,60 +106,6 @@
                     </a>
                 </li>
                 <hr>
-
-                <li class="nav-small-cap">
-                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                    <span class="hide-menu">Admins</span>
-                </li>
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{(route('Admin.list'))}}" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-list"></i>
-                        </span>
-                        <span class="hide-menu">List</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{route('Admin.page')}}" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-circle-plus"></i>
-                        </span>
-                        <span class="hide-menu">Create</span>
-                    </a>
-                    <hr>
-                </li>
-                <li class="nav-small-cap">
-                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                    <span class="hide-menu">Customers</span>
-                </li>
-                {{-- <li class="sidebar-item">
-          <a class="sidebar-link" href="#" aria-expanded="false">
-            <span>
-              <i class="ti ti-users"></i>
-            </span>
-            <span class="hide-menu">Customer</span>
-          </a>
-        </li> --}}
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{ route('customer.page') }}" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-list"></i>
-                        </span>
-                        <span class="hide-menu">List</span>
-                    </a>
-
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{route('customer_purchase.list')}}" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-receipt-2"></i>
-                        </span>
-                        <span class="hide-menu">Purchases</span>
-                    </a>
-                </li>
-
-                <hr>
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Suppliers</span>
@@ -210,6 +156,49 @@
                     </a>
                 </li>
                 <hr>
+                <li class="nav-small-cap">
+                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                    <span class="hide-menu">Admins</span>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{(route('Admin.list'))}}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-list"></i>
+                        </span>
+                        <span class="hide-menu">List</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{route('Admin.page')}}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-circle-plus"></i>
+                        </span>
+                        <span class="hide-menu">Create</span>
+                    </a>
+                    <hr>
+                    <li class="nav-small-cap">
+                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                        <span class="hide-menu">Customers</span>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('customer.page') }}" aria-expanded="false">
+                            <span>
+                                <i class="ti ti-list"></i>
+                            </span>
+                            <span class="hide-menu">List</span>
+                        </a>
+
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{route('customer_purchase.list')}}" aria-expanded="false">
+                            <span>
+                                <i class="ti ti-receipt-2"></i>
+                            </span>
+                            <span class="hide-menu">Purchases</span>
+                        </a>
+                    </li>
+                </li>
             </ul>
         </nav>
         <!-- End Sidebar navigation -->
