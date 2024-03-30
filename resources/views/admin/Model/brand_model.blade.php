@@ -6,6 +6,7 @@
         .header-color {
             color: #5d9bff;
         }
+
     </style>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css" rel="stylesheet" />
 @endsection
@@ -113,23 +114,5 @@
 
 
 @endsection
-{{-- @section('script')
-<script>
-    $(document).ready(function() {
-    $('.js-example-basic-single').select2();
-});
-</script>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="select2.js"></script>
-@endsection --}}
 
-@section('script')
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
-    <script>
-        // In your Javascript (external .js resource or <script> tag)
-        $(document).ready(function() {
-            $('.BrandId').select2(); // Corrected class name
-        });
-    </script>
-@endsection

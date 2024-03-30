@@ -49,10 +49,10 @@
 
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><i class="ti ti-device-mobile bold me-2" style="font-size:20px;color:blue;"></i>{{$data->brand->name}}</li>
-                <li class="list-group-item"><i class="ti ti-clipboard-data me-2" style="font-size:20px;color:blue;"></i>{{$data->storage_option}}</li>
+                <li class="list-group-item"><i class="ti ti-device-sd-card me-2" style="font-size:20px;color:blue;"></i>{{$data->storage_option}}</li>
                 <li class="list-group-item"><i class="ti ti-palette me-2" style="font-size:20px;color:blue;"></i>{{$data->color}}</li>
                 <li class="list-group-item"><i class="ti ti-file-description me-2" style="font-size:20px;color:blue;"></i>{{$data->description}}</li>
-                <li class="list-group-item"><i class="ti ti-cash me-2" style="font-size:20px;color:blue;"></i>{{$data->price}} ks</li>
+                <li class="list-group-item"><i class="ti ti-premium-rights me-2" style="font-size:20px;color:blue;"></i>{{$data->price}} $</li>
                 <li class="list-group-item"><i class="ti ti-calendar me-2" style="font-size:20px;color:blue;"></i> {{ \Carbon\Carbon::parse($data->created_at)->format('F j, Y') }}</li>
             </ul>
         </div>

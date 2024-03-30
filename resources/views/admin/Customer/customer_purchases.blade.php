@@ -44,13 +44,13 @@
         <table style="background-color:white" id="myTable" class="hover compact">
             <thead style="background-color: white; color:black;">
                 <tr>
-                    <th style="text-align:center">Invoice ID</th>
-                    <th style="text-align:center">Customer Name</th>
-                    <th style="text-align:center">Total Quantity</th>
-                    <th style="text-align:center">Total Price</th>
-                    <th style="text-align:center">Payment Method</th>
-                    <th style="text-align:center">Date</th>
-                    <th style="text-align:center">Action</th>
+                    <th style="color: #5d9bff; text-align:center">Invoice ID</th>
+                    <th style="color: #5d9bff; text-align:center">Customer Name</th>
+                    <th style="color: #5d9bff; text-align:center">Total Quantity</th>
+                    <th style="color: #5d9bff; text-align:center">Total Price</th>
+                    {{-- <th style="color: #5d9bff; text-align:center">Payment Method</th> --}}
+                    <th style="color: #5d9bff; text-align:center">Date</th>
+                    <th style="color: #5d9bff; text-align:center">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -61,7 +61,7 @@
                             <td style="text-align:center; color: black">{{ $customerPurchase->user->name }}</td>
                             <td style="text-align:center; color: black">{{ $customerPurchase->total_quantity }}</td>
                             <td style="text-align:center; color: black">{{ $customerPurchase->total_price }}</td>
-                            <td style="text-align:center; color: black">{{ $customerPurchase->payment_method }}</td>
+                            {{-- <td style="text-align:center; color: black">{{ $customerPurchase->payment_method }}</td> --}}
                             <td style="text-align:center; color: black">
                                 {{ $customerPurchase->created_at->format('d / M /Y') }}</td>
                             <td style="text-align:center; color: black">
