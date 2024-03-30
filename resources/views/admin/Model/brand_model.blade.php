@@ -7,7 +7,7 @@
         }
 
     </style>
-
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
 @section('content')
     <div class="container-fluid">
@@ -48,9 +48,9 @@
 
 
                             {{-- Model  --}}
-                            <div class="form-group mb-3">
+                            {{-- <div class="form-group mb-3">
                                 <label for="modelName" class="form-label">Brand</label>
-                                <select class="form-select @error('BrandId') is-invalid @enderror" name="BrandId"
+                                <select class="form-select @error('BrandId') is-invalid @enderror BrandId" name="BrandId"
                                     aria-label="Default select example">
                                     <option value="">Choose Brand</option>
                                     @foreach ($data as $brand)
@@ -63,7 +63,23 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
-                            </div>
+                            </div> --}}
+
+                            <div class="form-group mb-3">
+                                <label for="modelName" class="form-label">Brand</label>
+                                <select class="form-select @error('BrandId') is-invalid @enderror BrandId"
+                                    name="BrandName" aria-label="Default select example">
+                                    <option value="">Choose Brand</option>
+                                    @foreach ($data as $brand)
+                                        <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('BrandName')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                             </div>
 
                             <div class="form-group mb-3">
                                 <label for="modelName" class="form-label">Name</label>
@@ -95,4 +111,18 @@
     </div>
 @endsection
 
+@section('script')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        // In your Javascript (external .js resource or <script> tag)
+        $(document).ready(function() {
+            $('.brandname').select2();
+        });
+
+        // $(document).ready(function() {
+        //     $('.modelname').select2();
+        // });
+    </script>
+
+@endsection
 
