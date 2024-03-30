@@ -1,12 +1,15 @@
 @extends('admin.layouts.master')
 @section('title', 'Model Create')
+
 @section('style')
     <style>
         .header-color {
             color: #5d9bff;
         }
     </style>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css" rel="stylesheet" />
 @endsection
+
 @section('content')
     <div class="container-fluid">
         {{-- Page Title --}}
@@ -46,7 +49,7 @@
 
 
                             {{-- Model  --}}
-                            <div class="form-group mb-3">
+                            {{-- <div class="form-group mb-3">
                                 <label for="modelName" class="form-label">Brand</label>
                                 <select class="form-select @error('BrandId') is-invalid @enderror" name="BrandId"
                                     aria-label="Default select example">
@@ -56,6 +59,22 @@
                                     @endforeach
                                 </select>
 
+                                @error('BrandId')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div> --}}
+
+                            <div class="form-group mb-3">
+                                <label for="BrandId" class="form-label">Brand</label>
+                                <select class="form-select @error('BrandId') is-invalid @enderror BrandId" name="BrandId"
+                                    aria-label="Default select example">
+                                    <option value="">Choose Brand</option>
+                                    @foreach ($data as $brand)
+                                        <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                    @endforeach
+                                </select>
                                 @error('BrandId')
                                     <div class="text-danger">
                                         {{ $message }}
@@ -91,8 +110,10 @@
             </div>
         </div>
     </div>
+
+
 @endsection
-@section('script')
+{{-- @section('script')
 <script>
     $(document).ready(function() {
     $('.js-example-basic-single').select2();
@@ -100,4 +121,15 @@
 </script>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="select2.js"></script>
+@endsection --}}
+
+@section('script')
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
+    <script>
+        // In your Javascript (external .js resource or <script> tag)
+        $(document).ready(function() {
+            $('.BrandId').select2(); // Corrected class name
+        });
+    </script>
 @endsection
