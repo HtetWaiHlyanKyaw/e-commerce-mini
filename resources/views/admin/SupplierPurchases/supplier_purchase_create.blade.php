@@ -272,8 +272,10 @@
 
         // Initialize Select2
         $(document).ready(function() {
-            $('.paymentSelect').select2();
-            $('.supplier').select2();
+
+            $('#supplier').select2();
+
+            $('#payment').select2();
         });
 
         // Call the function initially to populate the selected products textarea

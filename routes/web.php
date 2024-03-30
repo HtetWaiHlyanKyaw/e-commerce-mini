@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SupplierPurchaseController;
 use App\Http\Controllers\Admin\ProfileController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,6 +24,8 @@ use App\Http\Controllers\Admin\ProfileController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+// routes/web.php
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -100,7 +103,10 @@ Route::middleware(['admin'])->group(function () {
         // Route::get('/delete/{id}', [SupplierPurchaseController::class, 'delete'])->name('supplier.delete');
     });
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+
+
+    Route::get('profile', [ProfileController::class, 'index'])->name('admin.profile');
+
     Route::prefix('admin/Admin')->group(function () {
         Route::get('/page', [AdminController::class, 'page'])->name('Admin.page');
         Route::post('/create', [AdminController::class, 'create'])->name('Admin.create');
@@ -110,6 +116,9 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/delete/{id}', [AdminController::class, 'delete'])->name('Admin.delete');
     });
 });
+
+
+
 
 Auth::routes();
 
