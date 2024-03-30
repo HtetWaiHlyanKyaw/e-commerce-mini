@@ -59,7 +59,6 @@
                             {{-- <td class="col-lg-1">{{ $blist->id }}</td> --}}
                             <td class="col-lg-1" style="text-align:center;">{{ $counter++ }}</td>
                             <td class="col-lg-1" style="text-align:center;">{{ $clist->name }}</td>
-                            <td class="col-lg-1" style="text-align:center;">{{ $clist->email }}</td>
                             <th class="col-lg-1" style="text-align:center;"> {{ \Carbon\Carbon::parse($clist->created_at)->format('F j, Y') }}</th>
 
                         </tr>
