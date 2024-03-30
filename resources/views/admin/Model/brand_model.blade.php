@@ -5,7 +5,6 @@
         .header-color {
             color: #5d9bff;
         }
-
     </style>
 
 @endsection
