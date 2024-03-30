@@ -11,7 +11,7 @@
     <div class="container-fluid">
         {{-- Page Title --}}
         <div class="pagetitle">
-            <h1 class="header-color">Brand Update</h1>
+            <h1 class="header-color">Admin Update</h1>
             <br>
             <nav>
                 <ol class="breadcrumb">

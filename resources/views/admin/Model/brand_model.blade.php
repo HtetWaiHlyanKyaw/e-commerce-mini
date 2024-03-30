@@ -7,7 +7,7 @@
         }
 
     </style>
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
 @section('content')
     <div class="container-fluid">
@@ -50,8 +50,7 @@
                             {{-- Model  --}}
                             {{-- <div class="form-group mb-3">
                                 <label for="modelName" class="form-label">Brand</label>
-                                <select class="form-select @error('BrandId') is-invalid @enderror BrandId" name="BrandId"
-                                    aria-label="Default select example">
+                                <select class="form-select @error('BrandId') is-invalid @enderror" name="BrandId" id="modelName">
                                     <option value="">Choose Brand</option>
                                     @foreach ($data as $brand)
                                         <option value="{{ $brand->id }}">{{ $brand->name }}</option>
@@ -114,15 +113,12 @@
 @section('script')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
-        // In your Javascript (external .js resource or <script> tag)
-        $(document).ready(function() {
-            $('.brandname').select2();
-        });
 
-        // $(document).ready(function() {
-        //     $('.modelname').select2();
-        // });
+        $(document).ready(function() {
+            $('#modelName').select2();
+        });
     </script>
 
 @endsection
+
 
