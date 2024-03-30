@@ -11,7 +11,7 @@
 @section('content')
     <div class="container-fluid">
         {{-- Page Title --}}
-        <div class="pagetitle">
+        <div class="pagetitle">     
             <h1 class="header-color">Model Edit</h1>
             <br>
             <nav>
