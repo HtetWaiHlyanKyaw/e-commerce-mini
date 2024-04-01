@@ -25,8 +25,7 @@
             <h3>Total Brands - <span style="color: #5d9bff;">{{ $data->count() }}</span></h3>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item ">Home</li>
-                    <li class="breadcrumb-item ">Brand</li>
+                    <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
                     <li class="breadcrumb-item "><b>Brand List</b></li>
                 </ol>
             </nav>

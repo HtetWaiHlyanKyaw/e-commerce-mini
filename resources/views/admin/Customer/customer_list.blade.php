@@ -24,8 +24,7 @@
             <h3>Total Customers - <span style="color: #5d9bff;">{{ $data->count() }}</span></h3>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item ">Home</li>
-                    <li class="breadcrumb-item ">Customer</li>
+                    <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
                     <li class="breadcrumb-item "><b>Customer List</b></li>
                 </ol>
             </nav>
@@ -66,7 +65,8 @@
                             {{-- <td class="col-lg-1">{{ $blist->id }}</td> --}}
                             <td class="col-lg-1" style="text-align:center;">{{ $counter++ }}</td>
                             <td class="col-lg-1" style="text-align:center;">{{ $clist->name }}</td>
-                            <th class="col-lg-1" style="text-align:center;"> {{ \Carbon\Carbon::parse($clist->created_at)->format('F j, Y') }}</th>
+                            <td class="col-lg-1" style="text-align:center;">{{ $clist->email }}</td>
+                            <td class="col-lg-1" style="text-align:center;"> {{ \Carbon\Carbon::parse($clist->created_at)->format('F j, Y') }}</td>
 
                         </tr>
 

@@ -2,6 +2,7 @@
 @section('title', 'Models')
 @section('style')
     <style>
+
         .header-color {
             color: #5d9bff;
         }
@@ -45,8 +46,7 @@
             <h3>Total Models - <span style="color: #5d9bff;">{{ $productModels->count() }}</span></h3>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item "> Home</li>
-                    <li class="breadcrumb-item ">Product Models</li>
+                    <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
                     <li class="breadcrumb-item "><b>Product Models List</b></li>
                 </ol>
             </nav>

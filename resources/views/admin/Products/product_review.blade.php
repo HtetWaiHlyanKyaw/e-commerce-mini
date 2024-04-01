@@ -26,8 +26,8 @@
             <h3>Total Reviews - <span style="color: #5d9bff;">{{ $userdata->count() }}</span></h3>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item ">Home</li>
-                    <li class="breadcrumb-item ">Product</li>
+                    <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
+                    <a class="breadcrumb-item" href="{{ route('product.index') }}">Product List</a>
                     <li class="breadcrumb-item "><b>Reiviews List</b></li>
                 </ol>
             </nav>

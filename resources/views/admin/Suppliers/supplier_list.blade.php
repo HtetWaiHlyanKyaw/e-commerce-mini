@@ -24,9 +24,8 @@
             <h3> Total Suppliers - <span style="color: #5d9bff;">{{ $suppliers->count() }}</h4>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item ">Home</li>
-                    <li class="breadcrumb-item ">Suppliers</li>
-                    <li class="breadcrumb-item "><b>Suppliers List</b></li>
+                    <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
+                    <li class="breadcrumb-item " ><b>Supplier List</b></li>
                 </ol>
             </nav>
         </div>
@@ -94,4 +93,7 @@
             </table>
         {{-- </div> --}}
     </div>
+
+
 @endsection
+

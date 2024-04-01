@@ -15,13 +15,13 @@
             <br>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item ">Home</li>
-                    <li class="breadcrumb-item ">Suppliers</li>
+                    <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
+                    <a class="breadcrumb-item " href="{{ route('supplier.list') }}">Suppliers List</a>
                     <li class="breadcrumb-item "><b>Create Suppliers</b></li>
                 </ol>
             </nav>
         </div>
-        {{-- Brand Create Success Message --}}
+        {{-- Supplier Create Success Message --}}
         <div>
             @if (session('alert'))
                 <div id="alertMessage" class="text-center alert alert-{{ session('alert')['type'] }}">
@@ -36,6 +36,14 @@
                 }, 5000); // Adjust the duration (in milliseconds) as needed
             </script>
         </div>
+
+        {{-- <div>
+            @if (session('error'))
+                <div class="alert alert-danger text-center" role="alert">
+                    {{ session('error') }}
+                </div>
+            @endif
+        </div> --}}
 
         {{-- Brand Create Card --}}
         <div class="container-fluid">
@@ -54,7 +62,7 @@
 
                                 <input type="text" name="supplierName"
                                     class="form-control @error('supplierName') is-invalid @enderror"
-                                    placeholder="Supplier Name">
+                                    placeholder="Supplier Name" value="{{old('supplierName') }}">
 
                                 @error('supplierName')
                                     <div class="text-danger">
@@ -67,7 +75,7 @@
 
                                 <input type="text" name="supplierEmail"
                                     class="form-control @error('supplierEmail') is-invalid @enderror"
-                                    placeholder="Supplier Email">
+                                    placeholder="Supplier Email" value="{{ old('supplierEmail') }}">
 
                                 @error('supplierEmail')
                                     <div class="text-danger">
@@ -80,7 +88,7 @@
 
                                 <input type="text" name="supplierPhone"
                                     class="form-control @error('supplierPhone') is-invalid @enderror"
-                                    placeholder="Supplier Phone">
+                                    placeholder="Supplier Phone" value="{{ old('supplierPhone') }}">
 
                                 @error('supplierPhone')
                                     <div class="text-danger">
@@ -93,7 +101,7 @@
 
                                 <input type="text" name="supplierAddress"
                                     class="form-control @error('supplierAddress') is-invalid @enderror"
-                                    placeholder="Supplier Address">
+                                    placeholder="Supplier Address" value="{{ old('supplierAddress') }}">
 
                                 @error('supplierAddress')
                                     <div class="text-danger">

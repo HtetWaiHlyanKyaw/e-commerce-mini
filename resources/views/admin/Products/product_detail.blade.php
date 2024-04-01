@@ -24,10 +24,9 @@
         <div class="pagetitle">
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item">Home</li>
-                    <li class="breadcrumb-item">Product</li>
-                    <li class="breadcrumb-item ">Product List</li>
-                    <li class="breadcrumb-item active"><b>Product detail</b></li>
+                    <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
+                    <a class="breadcrumb-item" href="{{ route('product.index') }}">Product List</a>
+                    <li class="breadcrumb-item "><b>Product detail</b></li>
                 </ol>
             </nav>
         </div>

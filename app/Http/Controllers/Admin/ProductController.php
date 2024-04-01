@@ -66,7 +66,7 @@ class ProductController extends Controller
 
     public function update($id, Request $request)
     {
-        $this->vali($request);
+        $this->valiEdit($request);
         $data = $this->dataArrange($request);
 
         if ($request->hasFile('image')) {
@@ -93,7 +93,26 @@ class ProductController extends Controller
     private function vali($request)
     {
         $rules = [
-            'productName' => 'required',
+            'productName' => 'required|unique:products,name',
+            'image' => 'image | mimes:jpeg,jpg,png,webp',
+            'BrandName' => 'required',
+            'ModelName' => 'required',
+            'storage_option' => 'required',
+            'color' => 'required',
+            'price' => 'required',
+            'quantity' => 'required',
+            'low_stock' => 'required',
+            'description' => 'required',
+
+        ];
+
+        Validator::make($request->all(), $rules)->validate();
+    }
+
+    private function valiEdit($request)
+    {
+        $rules = [
+            'productName' => 'required|unique:products,name',
             'image' => 'image | mimes:jpeg,jpg,png,webp',
             'BrandName' => 'required',
             'ModelName' => 'required',

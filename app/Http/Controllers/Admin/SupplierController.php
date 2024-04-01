@@ -40,11 +40,22 @@ class SupplierController extends Controller
     {
         Validator::make($request->all(), [
             'supplierName' => 'required|string|max:255',
+            'supplierEmail' => 'required|email|max:255|unique:suppliers,email',
+            'supplierPhone' => 'required|string|regex:/^09\d{9}$/',
+            'supplierAddress' => 'required|string|max:255',
+        ])->validate();
+    }
+
+    private function valiEdit($request)
+    {
+        Validator::make($request->all(), [
+            'supplierName' => 'required|string|max:255',
             'supplierEmail' => 'required|email|max:255',
             'supplierPhone' => 'required|string|regex:/^09\d{9}$/',
             'supplierAddress' => 'required|string|max:255',
         ])->validate();
     }
+
     public function edit($id)
     {
         $suppliers = Supplier::where('id', $id)->first();
@@ -53,7 +64,7 @@ class SupplierController extends Controller
     public function update($id, Request $request)
     {
         //validation
-        $this->vali($request);
+        $this->valiEdit($request);
         $suppliers = $this->dataArrange($request);
         Supplier::where('id', $id)->update($suppliers);
         session()->flash('alert', [

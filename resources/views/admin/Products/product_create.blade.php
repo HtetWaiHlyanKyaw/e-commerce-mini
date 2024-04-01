@@ -20,8 +20,8 @@
             <br>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item">Home</li>
-                    <li class="breadcrumb-item">Product</li>
+                    <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
+                    <a class="breadcrumb-item" href="{{ route('product.index') }}">Product List</a>
                     <li class="breadcrumb-item active"><b>Create Product</b></li>
                 </ol>
             </nav>
@@ -93,7 +93,8 @@
                                     name="BrandName" aria-label="Default select example">
                                     <option value="">Choose Brand</option>
                                     @foreach ($brands as $brand)
-                                        <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                        <option value="{{ $brand->id }}"
+                                            @if (old('BrandName') == $brand->id) selected @endif>{{ $brand->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('BrandName')
@@ -109,8 +110,10 @@
                                     name="ModelName" aria-label="Default select example">
                                     <option value="">Choose Model</option>
                                     @foreach ($models as $model)
-                                        <option value="{{ $model->id }}">{{ $model->name }}</option>
+                                        <option value="{{ $model->id }}"
+                                            @if (old('ModelName') == $model->id) selected @endif>{{ $model->name }}</option>
                                     @endforeach
+
                                 </select>
                                 @error('ModelName')
                                     <div class="text-danger">
@@ -149,9 +152,9 @@
                             <label for="price" class="form-label">Price</label>
                             <div class="form-group mb-3">
 
-                                <input type="text" name="price"
+                                <input type="number" name="price"
                                     class="form-control @error('price') is-invalid @enderror" placeholder="Price"
-                                    value="{{ old('price') }}">
+                                    min="1" value="{{ old('price') }}">
 
 
                                 @error('price')
@@ -163,9 +166,9 @@
                             <label for="quantity" class="form-label">Quantity</label>
                             <div class="form-group mb-3">
 
-                                <input type="text" name="quantity"
+                                <input type="number" name="quantity"
                                     class="form-control @error('quantity') is-invalid @enderror" placeholder="Quatity"
-                                    value="{{ old('quantity') }}">
+                                    min="1" value="{{ old('quantity') }}">
 
 
                                 @error('quantity')
@@ -176,7 +179,7 @@
                             </div>
                             <label for="low_stock" class="form-label">Low Stock</label>
                             <div class="form-group mb-3">
-                                <input type="text" name="low_stock"
+                                <input type="number" name="low_stock"
                                     class="form-control @error('low_stock') is-invalid @enderror" placeholder="Low stock"
                                     value="{{ old('low_stock') }}">
 

@@ -17,9 +17,8 @@
             <h1 class="header-color">Product Edit</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item">Home</li>
-                    <li class="breadcrumb-item">Product</li>
-                    <li class="breadcrumb-item">Product List</li>
+                    <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
+                    <a class="breadcrumb-item" href="{{ route('product.index') }}">Product List</a>
                     <li class="breadcrumb-item active"><b>Edit Product</b></li>
                 </ol>
             </nav>

@@ -26,8 +26,7 @@
             <h3>Total Products - <span style="color: #5d9bff;">{{ $datas->count() }}</span></h3>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item">Home</li>
-                    <li class="breadcrumb-item">Product</li>
+                    <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
                     <li class="breadcrumb-item active"><b>Product List</b></li>
                 </ol>
             </nav>
@@ -55,6 +54,7 @@
                         <th style="text-align:center; color: #5d9bff;">Name</th>
                         <th style="text-align:center; color: #5d9bff;">Brand</th>
                         <th style="text-align:center; color: #5d9bff;">Price</th>
+                        <th style="text-align:center; color: #5d9bff;">Date</th>
                         <th style="text-align:center; color: #5d9bff;">Quantity</th>
                         <th style="text-align:center; color: #5d9bff;">Action</th>
 
@@ -69,7 +69,7 @@
                         <tr class="tr-shadow">
                             {{-- <td class="col-lg-1">{{ $blist->id }}</td> --}}
                             <td class="col-lg-1" style="text-align:center;">{{ $counter }}</td>
-                            <td class="col-lg-1" style="text-align:center;">{{ $plist->name }}</td>
+                            <td class="col-lg-2" style="text-align:center;">{{ $plist->name }}</td>
                             {{-- <td class="col-lg-1">
                             <img src="{{ asset('images/' . $plist->image) }}" alt="">
                         </td> --}}
@@ -78,11 +78,12 @@
                         <td class="col-lg-1">{{ $plist->storage_option }}</td>
                         <td class="col-lg-1">{{ $plist->color }}</td> --}}
                             <td class="col-lg-1" style="text-align:center;">{{ $plist->price }}</td>
+                            <td class="col-lg-2" style="text-align:center;"> {{ \Carbon\Carbon::parse($plist->created_at)->format('F j, Y') }}</td>
 
                             <td class="col-lg-1" style="text-align:center; color: {{ $plist->quantity <= $plist->low_stock ? 'red' : 'inherit' }}">{{ $plist->quantity }}</td>
                             {{-- <td class="col-lg-1">{{ $plist->low_stock }}</td> --}}
                             {{-- <td class="col-lg-1">{{ $plist->description }}</td> --}}
-                            <td class="col-lg-1" style="text-align:center;">
+                            <td class="col-lg-2" style="text-align:center;">
 
                                 {{-- <a href="{{route('product.edit', $plist->id)}}"> --}}
                                 <a href="{{ route('product.detail', $plist->id) }}">

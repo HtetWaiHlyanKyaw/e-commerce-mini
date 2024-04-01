@@ -15,10 +15,9 @@
             <br>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item">Home</li>
-                    <li class="breadcrumb-item">Brand</li>
-                    <li class="breadcrumb-item">Brand List</li>
-                    <li class="breadcrumb-item "><b>Edit Brand</b></li>
+                    <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
+                    <a class="breadcrumb-item " href="{{ route('brand.list') }}">Brand</a>
+                     <li class="breadcrumb-item "><b>Edit Brand</b></li>
                 </ol>
             </nav>
         </div>

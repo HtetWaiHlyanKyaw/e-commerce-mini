@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\SupplierPurchase;
-use App\Models\SupplierPurchaseDetail;
+use Carbon\Carbon;
 use App\Models\Product;
 use App\Models\Supplier;
+use Illuminate\Http\Request;
+use App\Models\SupplierPurchase;
+use App\Http\Controllers\Controller;
+use App\Models\SupplierPurchaseDetail;
+
 class SupplierPurchaseController extends Controller
 {
     //
@@ -16,6 +18,89 @@ class SupplierPurchaseController extends Controller
         $supplierPurchases = SupplierPurchase::with('details', 'supplier')->latest()->get();
         return view('admin.SupplierPurchases.supplier_purchase_list', compact('supplierPurchases'));
     }
+
+
+    // public function filter(Request $request){
+    //     // Retrieve start and end dates from the request
+    //     $start_date = $request->start_date;
+    //     $end_date = $request->end_date;
+
+
+    //     // Fetch supplier purchases with details and suppliers
+    //     $supplierPurchases = SupplierPurchase::with('details', 'supplier')
+    //         ->whereDate('created_at', '>=', $start_date)
+    //         ->whereDate('created_at', '<=', $end_date)
+    //         ->orderBy('created_at', 'desc')
+    //         ->get();
+
+    //     // Pass the variables to the view
+    //     return view('admin.SupplierPurchases.supplier_purchase_list', compact('supplierPurchases'));
+    // }
+
+
+    // public function filter(Request $request){
+    //     // Retrieve start and end dates from the request
+    //     $start_date = $request->start_date;
+    //     $end_date = $request->end_date;
+
+    //     // Check if the start date is greater than the end date
+    //     if ($start_date > $end_date) {
+    //         return redirect()->back()->with('success', 'Start date cannot be greater than end date.');
+    //     }
+    //     if ($start_date > $end_date) {
+    //         return redirect()->back()->with('success', 'Start date cannot be greater than end date.');
+    //     }
+
+    //     // Fetch supplier purchases with details and suppliers
+    //     $supplierPurchases = SupplierPurchase::with('details', 'supplier')
+    //         ->whereDate('created_at', '>=', $start_date)
+    //         ->whereDate('created_at', '<=', $end_date)
+    //         ->orderBy('created_at', 'desc')
+    //         ->get();
+
+    //     // Pass the variables to the view
+    //     return view('admin.SupplierPurchases.supplier_purchase_list', compact('supplierPurchases'));
+    // }
+
+
+    public function filter(Request $request){
+        // Retrieve start and end dates from the request
+        $start_date = $request->start_date;
+        $end_date = $request->end_date;
+
+        // Convert dates to Carbon instances for accurate comparison
+        $start_date = Carbon::parse($start_date);
+        $end_date = Carbon::parse($end_date);
+        $today = Carbon::today();
+        // Check if the start date is greater than the end date
+        if ($start_date->greaterThan($end_date)) {
+            return redirect()->back()->with('error', 'Start date cannot be greater than end date.');
+        }
+
+        // Fetch supplier purchases with details and suppliers
+        $supplierPurchases = SupplierPurchase::with('details', 'supplier')
+            ->whereDate('created_at', '>=', $start_date)
+            ->whereDate('created_at', '<=', $end_date)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // Pass the variables to the view
+        return view('admin.SupplierPurchases.supplier_purchase_list', compact('supplierPurchases'));
+    }
+
+
+
+    // public function filter(Request $request)
+    // {
+    //     if($request->ajax()){
+    //         $purchases = Supplier::all();
+    //         return response()->json([
+
+    //         ])
+    //     }else{
+    //         abort(403);
+    //     }
+    // }
 
     public function page()
     {

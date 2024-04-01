@@ -57,9 +57,9 @@
         <div class="pagetitle ">
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item ">Home</li>
-                    <li class="breadcrumb-item ">Customer</li>
-                    <li class="breadcrumb-item "><b>Customer List</b></li>
+                    <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
+                    <a class="breadcrumb-item " href="{{ route('customer_purchase.list') }}">Customer Purchase List</a>
+                    <li class="breadcrumb-item "><b>Customer Purchase Detail </b></li>
                 </ol>
             </nav>
         </div>

@@ -17,9 +17,8 @@
             <br>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item ">Home</li>
-                    <li class="breadcrumb-item ">Model</li>
-                    <li class="breadcrumb-item ">Model list</li>
+                    <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
+                    <a class="breadcrumb-item " href="{{ route('model.list') }}">Model List</a>
                     <li class="breadcrumb-item "><b>Model Edit</b></li>
                 </ol>
             </nav>
@@ -63,8 +62,6 @@
                                     @foreach ($brandData as $brand)
                                         <option value="{{ $brand->id }}"
                                             @if ($modelData->brand_id == $brand->id) selected @endif>
-
-
                                             {{ $brand->name }}
                                         </option>
                                     @endforeach

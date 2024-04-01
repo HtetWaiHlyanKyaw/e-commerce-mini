@@ -27,8 +27,8 @@
             <h3> Total Customer Purchases - <span style="color: #5d9bff;">{{ $customerPurchases->count() }}</span></h3>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item ">Home</li>
-                    <li class="breadcrumb-item ">Customer Purchases</li>
+                    <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
+                    <a class="breadcrumb-item " href="{{ route('customer.page') }}">Customer  List</a>
                     <li class="breadcrumb-item "><b>Customer Purchase List</b></li>
                 </ol>
             </nav>

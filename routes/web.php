@@ -100,7 +100,9 @@ Route::middleware(['admin'])->group(function () {
         Route::post('/create', [SupplierPurchaseController::class, 'create'])->name('supplier_purchase.create');
         Route::get('/list', [SupplierPurchaseController::class, 'list'])->name('supplier_purchase.list');
         Route::get('/detail/{id}', [SupplierPurchaseController::class, 'detail'])->name('supplier_purchase.detail');
+        Route::get('/filter', [SupplierPurchaseController::class, 'filter'])->name('supplier_purchase.filter');
         // Route::get('/delete/{id}', [SupplierPurchaseController::class, 'delete'])->name('supplier.delete');
+        Route::get('/export', [ExportController::class, 'exportSupplierPurchases'])->name('export.supplier.purchases');
     });
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 

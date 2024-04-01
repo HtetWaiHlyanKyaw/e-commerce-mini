@@ -17,8 +17,8 @@
             <br>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item ">Home</li>
-                    <li class="breadcrumb-item ">Admin</li>
+                    <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
+                    <a class="breadcrumb-item " href="{{ route('Admin.list') }}">Admin List</a>
                     <li class="breadcrumb-item "><b>Create New Admin</b></li>
                 </ol>
             </nav>
@@ -81,8 +81,13 @@
                             <label for="AdminPassword" class="form-label">Password</label>
                             <div class="form-group mb-3">
 
-                                <input type="text" name="AdminPassword"
-                                    class="form-control @error('AdminPassword') is-invalid @enderror" placeholder="Admin Password">
+                                {{-- <input type="text" name="AdminPassword"
+                                    class="form-control @error('AdminPassword') is-invalid @enderror" placeholder="Admin Password"> --}}
+
+                                    {{-- <label for="password">Password:</label> --}}
+                                    <input type="password" id="AdminPassword" name="AdminPassword" class="form-control @error('AdminPassword') is-invalid @enderror"
+                                      placeholder="Enter your password">
+                                    <input type="checkbox" id="showPassword" onclick="togglePasswordVisibility()"> Show Password
 
                                 @error('AdminPassword')
                                     <div class="text-danger">
@@ -104,4 +109,31 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+{{-- <script>
+    document.getElementById("showPassword").addEventListener("change", function() {
+        var passwordInput = document.getElementById("AdminPassword");
+        if (this.checked) {
+            passwordInput.type = "text";
+            passwordInput.setAttribute('data-typed', passwordInput.value); // Store the typed password
+            passwordInput.value = passwordInput.value; // Update the input value to refresh the displayed text
+        } else {
+            passwordInput.type = "AdminPassword";
+            passwordInput.value = passwordInput.getAttribute('data-typed'); // Restore the typed password
+        }
+    });
+</script> --}}
+
+<script>
+    function togglePasswordVisibility() {
+        var passwordField = document.getElementById("AdminPassword");
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+        } else {
+            passwordField.type = "password";
+        }
+    }
+</script>
 @endsection
