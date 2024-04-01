@@ -48,6 +48,21 @@
                 </ol>
             </nav>
         </div>
+        <div>
+            @if (session('alert'))
+                <div id="alertMessage" class="text-center alert alert-{{ session('alert')['type'] }}">
+                    {{ session('alert')['message'] }}
+                </div>
+            @endif
+
+            <script>
+                // JavaScript to hide the alert after a specific duration
+                setTimeout(function() {
+                    document.getElementById('alertMessage').style.display = 'none';
+                }, 5000); // Adjust the duration (in milliseconds) as needed
+            </script>
+        </div>
+
         <hr>
         <div class="container">
             <div class="row">
@@ -139,7 +154,11 @@
                                 <hr>
                                 <div class="form-group">
                                     <label for="selectedProducts" class="form-label">Selected Products</label>
-                                    <textarea id="selectedProducts" name="selectedProducts" rows="4" class="form-control" placeholder="Choose Products from the Products table" readonly></textarea>
+                                    <textarea id="selectedProducts" name="selectedProducts" rows="3" class="form-control" placeholder="Choose Products from the Products table" readonly></textarea>
+                                    {{-- <input type="text" id="selectedProducts" name="selectedProducts" class="form-control" placeholder="Choose Products from the Products table" readonly > --}}
+
+
+                                    <br>
                                 </div>
                                 @error('selectedProducts')
                                     <div class="text-danger">

@@ -23,7 +23,7 @@
         <h1 class="header-color">Review List</h1>
         <br>
         <div class="pagetitle">
-            <h3>Total Reviews -{{ $userdata->count() }}</h3>
+            <h3>Total Reviews - <span style="color: #5d9bff;">{{ $userdata->count() }}</span></h3>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item ">Home</li>

@@ -21,7 +21,7 @@
         <h1 class="header-color">Customer List</h1>
         <br>
         <div class="pagetitle">
-            <h3>Total Customers - {{ $data->count() }}</h3>
+            <h3>Total Customers - <span style="color: #5d9bff;">{{ $data->count() }}</span></h3>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item ">Home</li>
@@ -32,11 +32,18 @@
         </div>
 
         <div>
-            @if (session('success'))
-                <div class="alert alert-success text-center" role="alert">
-                    {{ session('success') }}
-                </div>
-            @endif
+            @if (session('alert'))
+            <div id="alertMessage" class="text-center alert alert-{{ session('alert')['type'] }}">
+                {{ session('alert')['message'] }}
+            </div>
+        @endif
+
+        <script>
+            // JavaScript to hide the alert after a specific duration
+            setTimeout(function() {
+                document.getElementById('alertMessage').style.display = 'none';
+            }, 5000); // Adjust the duration (in milliseconds) as needed
+        </script>
         </div>
 
         <div class="bg-white p-4 border rounded">

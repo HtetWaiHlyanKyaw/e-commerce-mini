@@ -38,7 +38,11 @@ class ProductController extends Controller
             $data['image'] = $imageName;
         }
         Product::create($data);
-        return redirect()->route('product.index')->with(['success' => 'Product creation successfully']);
+        session()->flash('alert', [
+            'type' => 'success',
+            'message' => 'Product Creation  Successfully!',
+        ]);
+        return redirect()->route('product.index');
     }
 
 
@@ -76,8 +80,11 @@ class ProductController extends Controller
             $data['image'] = $imageName;
         }
         Product::where('id', $id)->update($data);
-
-        return redirect()->route('product.index')->with('success', 'Product updated successfully');
+        session()->flash('alert', [
+            'type' => 'success',
+            'message' => 'Product Updated  Successfully!',
+        ]);
+        return redirect()->route('product.index');
     }
 
 
@@ -120,6 +127,10 @@ class ProductController extends Controller
     public function delete($id)
     {
         Product::where('id', $id)->delete();
+        session()->flash('alert', [
+            'type' => 'success',
+            'message' => 'Product Deleted  Successfully!',
+        ]);
         return redirect()->route('product.index')->with(['success' => 'product delete success']);
     }
 }

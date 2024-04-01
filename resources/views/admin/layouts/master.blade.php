@@ -20,8 +20,8 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> --}}
     @yield('style')
     <style>
-        .body-wrapper{
-           background-color: #f7faff;
+        .body-wrapper {
+            background-color: #f7faff;
         }
     </style>
 </head>
@@ -67,6 +67,9 @@
 
         });
     </script>
+
+
+
     @yield('script')
 
 </body>

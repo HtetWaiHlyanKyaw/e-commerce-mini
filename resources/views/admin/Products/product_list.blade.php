@@ -23,14 +23,29 @@
         <h1 class="header-color">Product List</h1>
         <br>
         <div class="pagetitle">
-            <h3>Total Products - {{ $datas->count() }}</h3>
+            <h3>Total Products - <span style="color: #5d9bff;">{{ $datas->count() }}</span></h3>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">Home</li>
                     <li class="breadcrumb-item">Product</li>
-                    <li class="breadcrumb-item active">Product List</li>
+                    <li class="breadcrumb-item active"><b>Product List</b></li>
                 </ol>
             </nav>
+        </div>
+
+        <div>
+            @if (session('alert'))
+                <div id="alertMessage" class="text-center alert alert-{{ session('alert')['type'] }}">
+                    {{ session('alert')['message'] }}
+                </div>
+            @endif
+
+            <script>
+                // JavaScript to hide the alert after a specific duration
+                setTimeout(function() {
+                    document.getElementById('alertMessage').style.display = 'none';
+                }, 5000); // Adjust the duration (in milliseconds) as needed
+            </script>
         </div>
         <div class="bg-white p-4 border rounded">
             <table id="myTable">

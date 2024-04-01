@@ -27,7 +27,7 @@
                     <li class="breadcrumb-item">Home</li>
                     <li class="breadcrumb-item">Product</li>
                     <li class="breadcrumb-item ">Product List</li>
-                    <li class="breadcrumb-item active">Product detail</li>
+                    <li class="breadcrumb-item active"><b>Product detail</b></li>
                 </ol>
             </nav>
         </div>
