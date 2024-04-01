@@ -86,7 +86,7 @@ class ProductController extends Controller
     private function vali($request)
     {
         $rules = [
-            'productName' => 'required',
+            'productName' => 'required|unique:products,name',
             'image' => 'image | mimes:jpeg,jpg,png,webp',
             'BrandName' => 'required',
             'ModelName' => 'required',

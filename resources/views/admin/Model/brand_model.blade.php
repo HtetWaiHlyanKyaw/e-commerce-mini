@@ -93,8 +93,6 @@
                                 @enderror
                             </div>
 
-
-
                             {{-- submit --}}
                             <div class="text-center">
                                 <a href="{{ route('brand.list') }}"><input type="button" value="cancel"
@@ -119,5 +117,3 @@
     </script>
 
 @endsection
-
-

@@ -21,7 +21,7 @@
                 </ol>
             </nav>
         </div>
-        {{-- Brand Create Success Message --}}
+        {{-- Supplier Create Success Message --}}
         <div>
             @if (session('success'))
                 <div class="alert alert-success text-center" role="alert">
@@ -29,6 +29,14 @@
                 </div>
             @endif
         </div>
+
+        {{-- <div>
+            @if (session('error'))
+                <div class="alert alert-danger text-center" role="alert">
+                    {{ session('error') }}
+                </div>
+            @endif
+        </div> --}}
 
         {{-- Brand Create Card --}}
         <div class="container-fluid">
@@ -47,7 +55,7 @@
 
                                 <input type="text" name="supplierName"
                                     class="form-control @error('supplierName') is-invalid @enderror"
-                                    placeholder="Supplier Name">
+                                    placeholder="Supplier Name" value="{{old('supplierName') }}">
 
                                 @error('supplierName')
                                     <div class="text-danger">
@@ -60,7 +68,7 @@
 
                                 <input type="text" name="supplierEmail"
                                     class="form-control @error('supplierEmail') is-invalid @enderror"
-                                    placeholder="Supplier Email">
+                                    placeholder="Supplier Email" value="{{ old('supplierEmail') }}">
 
                                 @error('supplierEmail')
                                     <div class="text-danger">
@@ -73,7 +81,7 @@
 
                                 <input type="text" name="supplierPhone"
                                     class="form-control @error('supplierPhone') is-invalid @enderror"
-                                    placeholder="Supplier Phone">
+                                    placeholder="Supplier Phone" value="{{ old('supplierPhone') }}">
 
                                 @error('supplierPhone')
                                     <div class="text-danger">
@@ -86,7 +94,7 @@
 
                                 <input type="text" name="supplierAddress"
                                     class="form-control @error('supplierAddress') is-invalid @enderror"
-                                    placeholder="Supplier Address">
+                                    placeholder="Supplier Address" value="{{ old('supplierAddress') }}">
 
                                 @error('supplierAddress')
                                     <div class="text-danger">
