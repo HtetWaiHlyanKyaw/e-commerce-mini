@@ -16,8 +16,8 @@
             <br>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item ">Home</li>
-                    <li class="breadcrumb-item ">Model</li>
+                    <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
+                    <a class="breadcrumb-item " href="{{ route('model.list') }}">Model List</a>
                     <li class="breadcrumb-item "><b>Create Model</b></li>
                 </ol>
             </nav>

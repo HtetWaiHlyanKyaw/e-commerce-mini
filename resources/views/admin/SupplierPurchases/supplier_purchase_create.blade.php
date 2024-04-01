@@ -1,4 +1,5 @@
 @extends('admin.layouts.master')
+@section('title', 'Suppliers Purchase Create')
 @section('style')
     <style>
         .table {
@@ -42,8 +43,8 @@
             {{-- <h4> Total Supplier Purchases -{{ $supplierPurchases->count() }}</h4> --}}
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item ">Home</li>
-                    <li class="breadcrumb-item ">Supplier Purchases</li>
+                    <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
+                    <a class="breadcrumb-item " href="{{ route('supplier_purchase.list') }}">Suppliers Purchase List</a>
                     <li class="breadcrumb-item "><b>Supplier Purchase Create</b></li>
                 </ol>
             </nav>

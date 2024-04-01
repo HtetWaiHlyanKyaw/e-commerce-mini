@@ -11,14 +11,13 @@
 @section('content')
     <div class="container-fluid">
         {{-- Page Title --}}
-        <div class="pagetitle">     
+        <div class="pagetitle">
             <h1 class="header-color">Model Edit</h1>
             <br>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item ">Home</li>
-                    <li class="breadcrumb-item ">Model</li>
-                    <li class="breadcrumb-item ">Model list</li>
+                    <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
+                    <a class="breadcrumb-item " href="{{ route('model.list') }}">Model List</a>
                     <li class="breadcrumb-item "><b>Model Edit</b></li>
                 </ol>
             </nav>

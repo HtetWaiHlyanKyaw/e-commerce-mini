@@ -26,9 +26,8 @@
             <h3>Total Products - {{ $datas->count() }}</h3>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item">Home</li>
-                    <li class="breadcrumb-item">Product</li>
-                    <li class="breadcrumb-item active">Product List</li>
+                    <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
+                    <li class="breadcrumb-item active"><b>Product List</b></li>
                 </ol>
             </nav>
         </div>

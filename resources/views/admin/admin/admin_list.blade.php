@@ -25,8 +25,7 @@
             <h3>Total Admins - {{ $data->count() }}</h3>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item "> Home</li>
-                    <li class="breadcrumb-item ">Admin</li>
+                    <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
                     <li class="breadcrumb-item "><b>Admin List</b></li>
                 </ol>
             </nav>

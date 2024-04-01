@@ -16,15 +16,8 @@
     <link rel="shortcut icon" type="png" href="{{ asset('admin/images/logos/Unity Source Logo.png') }}" />
     <link rel="stylesheet" href="{{ asset('admin/css/styles.min.css') }}" />
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.min.css">
-    <!-- Bootstrap CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Bootstrap JS (Optional) - If not already included -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
     {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> --}}
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     @yield('style')
     <style>
         .body-wrapper {
@@ -61,8 +54,6 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="//cdn.datatables.net/2.0.2/js/dataTables.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         // let table = new DataTable('#myTable');
         $(document).ready(function() {
@@ -75,62 +66,10 @@
             });
 
         });
-
-        $(function() {
-            $("#start_date").datepicker({
-                "dateFormat": "yy-mm-dd"
-            });
-            $("#end_date").datepicker({
-                "dateFormat": "yy-mm-dd"
-            });
-        });
-
-
-
-        //Fetch records
-
-        // function fetch(start_date, end_date) {
-        //     $.ajax({
-        //         url: "{{ route('supplier_purchase.filter') }}",
-        //         type: "GEt",
-        //         data: {
-        //             start_date: start_date,
-        //             end_date: end_date
-        //         },
-                // dateType: "json",
-                // success:function(data){
-                //     var i =1;
-                //     $('#recoreds').DataTable({
-                //         "data" :data.students,
-                //         // responsive
-                //         "responsive" :true,
-                //         "columns": [{
-                //             "data": "id",
-                //             "render": function(data, type, row, meta){
-                //                 return i++;
-                //             }
-                //         },
-                //     ]
-
-                //     });
-                // }
-        //     })
-        // }
-
-        // fetch();
-        // //Filter
-        // $(document).on("click", "#filter", function(e){
-        //     e.preventDefault();
-        //     var start_date = $("#start_date").val();
-        //     var end_date = $("#end_date").val();
-        //     if(start_date == "" || end_date == ""){
-        //         alert("Both date required");
-        //     } else{
-        //         $('#records').DataTable().destory();
-        //         fetch(start_date, end_date);
-        //     }
-        // });
     </script>
+
+
+
     @yield('script')
 
 </body>

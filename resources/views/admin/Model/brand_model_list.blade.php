@@ -45,8 +45,7 @@
             <h3>Total Models - {{ $productModels->count() }}</h3>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item "> Home</li>
-                    <li class="breadcrumb-item ">Product Models</li>
+                    <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
                     <li class="breadcrumb-item "><b>Product Models List</b></li>
                 </ol>
             </nav>

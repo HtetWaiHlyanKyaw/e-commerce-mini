@@ -17,8 +17,8 @@
             <br>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item ">Home</li>
-                    <li class="breadcrumb-item ">Admin</li>
+                    <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
+                    <a class="breadcrumb-item " href="{{ route('Admin.list') }}">Admin List</a>
                     <li class="breadcrumb-item "><b>Create New Admin</b></li>
                 </ol>
             </nav>

@@ -24,8 +24,7 @@
             <h3>Total Customers - {{ $data->count() }}</h3>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item ">Home</li>
-                    <li class="breadcrumb-item ">Customer</li>
+                    <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
                     <li class="breadcrumb-item "><b>Customer List</b></li>
                 </ol>
             </nav>

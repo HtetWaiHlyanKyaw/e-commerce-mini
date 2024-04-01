@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', 'Suppliers list')
+@section('title', 'Suppliers Purchase list')
 @section('style')
     <style>
         .header-color {
@@ -25,8 +25,7 @@
             <h4> Total Supplier Purchases -{{ $supplierPurchases->count() }}</h4>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item ">Home</li>
-                    <li class="breadcrumb-item ">Supplier Purchases</li>
+                    <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
                     <li class="breadcrumb-item "><b>Supplier Purchase List</b></li>
                 </ol>
             </nav>
