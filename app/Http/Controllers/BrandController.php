@@ -46,7 +46,7 @@ class BrandController extends Controller
     public function update($id, Request $request)
     {
         //validation
-        $this->vali($request);
+        $this->valiEdit($request);
         $data = $this->dataArrange($request);
         Brand::where('id', $id)->update($data);
         return redirect()->route('brand.list')->with(['success' => 'Brand  Edit Success']);
@@ -71,7 +71,16 @@ class BrandController extends Controller
     private function vali($request)
     {
         Validator::make($request->all(), [
+            'brandName' => 'required|unique:brands,name',
+
+        ])->validate();
+    }
+
+    private function valiEdit($request)
+    {
+        Validator::make($request->all(), [
             'brandName' => 'required',
+
         ])->validate();
     }
 }

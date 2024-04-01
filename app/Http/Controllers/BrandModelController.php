@@ -44,7 +44,7 @@ class BrandModelController extends Controller
 
    //Model update
    public function update($id, Request $request){
-        $this->vali($request);
+        $this->valiEdit($request);
         $data = $this->dataArrange($request);
 
         ProductModel::where('id', $id)->update($data);
@@ -74,6 +74,15 @@ class BrandModelController extends Controller
 
     //Private Function for Validation
     private function vali($request)
+    {
+        $rules = [
+            'modelName' => 'required|unique:product_models,name',
+            'BrandId' => 'required',
+        ];
+        Validator::make($request->all(), $rules)->validate();
+    }
+
+    private function valiEdit($request)
     {
         $rules = [
             'modelName' => 'required',
