@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', 'Suppliers list')
+@section('title', 'Suppliers Purchase list')
 @section('style')
     <style>
         .header-color {

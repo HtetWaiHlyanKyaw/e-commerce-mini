@@ -36,10 +36,16 @@
                                         <input id="email" type="email" class="form-control" name="email"
                                             value="{{ old('email') }}" required autofocus aria-describedby="emailHelp">
                                     </div>
-                                    <div class="mb-4">
+                                    {{-- <div class="mb-4">
                                         <label for="password" class="form-label">Password</label>
                                         <input id="password" type="password" class="form-control" name="password"
                                             value="{{ old('password') }}" required autofocus>
+                                    </div> --}}
+                                    <div class=" mb-4">
+
+                                        <label for="password" class="form-label">Password</label>
+                                        <input type="password" id="password" name="password" class="form-control" value="{{ old('password') }}" required autofocus>
+                                        <input type="checkbox" id="showPassword" onclick="togglePasswordVisibility()"> Show Password
                                     </div>
                                     @if ($errors->any())
                                         <div>
@@ -68,6 +74,16 @@
     </div>
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function togglePasswordVisibility() {
+            var passwordField = document.getElementById("password");
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+            } else {
+                passwordField.type = "password";
+            }
+        }
+    </script>
 </body>
 
 </html>

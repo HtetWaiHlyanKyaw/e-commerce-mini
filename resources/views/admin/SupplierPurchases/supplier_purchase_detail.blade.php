@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-
+@section('title', 'Suppliers Purchase Detail')
 @section('style')
     <style>
         .slip-wrapper {
@@ -52,14 +52,14 @@
 
 @section('content')
     <div class="container-fluid">
-        <h1 class="header-color">Supplier Purchase List</h1>
+        <h1 class="header-color">Supplier Purchase Detail</h1>
         <br>
         <div class="pagetitle ">
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item ">Home</li>
-                    <li class="breadcrumb-item ">Suppliers</li>
-                    <li class="breadcrumb-item "><b>Suppliers List</b></li>
+                    <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
+                    <a class="breadcrumb-item " href="{{ route('supplier_purchase.list') }}">Suppliers Purchase List</a>
+                    <li class="breadcrumb-item "><b>Suppliers Purchase Detail</b></li>
                 </ol>
             </nav>
         </div>
