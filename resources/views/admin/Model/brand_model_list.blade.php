@@ -2,6 +2,7 @@
 @section('title', 'Models')
 @section('style')
     <style>
+
         .header-color {
             color: #5d9bff;
         }
@@ -52,10 +53,21 @@
         </div>
         <div>
             @if (session('success'))
-                <div class="alert alert-success text-center" role="alert">
-                    {{ session('success') }}
-                </div>
-            @endif
+            <div id="alert" class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    setTimeout(function() {
+                        $("#alert").alert('close');
+                    }, 5000); // 5000 milliseconds = 5 seconds
+                });
+            </script>
+        @endif
         </div>
         <div class="bg-white p-4 border rounded">
             <table  id="myTable" class="hover">

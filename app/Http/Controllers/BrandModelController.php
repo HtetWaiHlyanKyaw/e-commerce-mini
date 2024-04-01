@@ -29,7 +29,7 @@ class BrandModelController extends Controller
         $this->vali($request);
         $data =  $this->dataArrange($request);
         ProductModel::create($data);
-        return redirect()->route('model.list')->with(['success' => 'Model  Creation  Success']);
+        return redirect()->route('model.list');
     }
 
 
