@@ -55,8 +55,6 @@
                                     @foreach ($brandData as $brand)
                                         <option value="{{ $brand->id }}"
                                             @if ($modelData->brand_id == $brand->id) selected @endif>
-
-
                                             {{ $brand->name }}
                                         </option>
                                     @endforeach

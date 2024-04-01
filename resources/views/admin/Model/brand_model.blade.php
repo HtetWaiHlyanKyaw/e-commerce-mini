@@ -6,7 +6,7 @@
             color: #5d9bff;
         }
     </style>
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
 @section('content')
     <div class="container-fluid">
@@ -46,13 +46,43 @@
                             @csrf
 
 
+<<<<<<< HEAD
                             {{-- Model  --}}
                             {{-- <div class="form-group mb-3">
                                 <label for="modelName" class="form-label">Brand</label>
                                 <select class="form-select @error('BrandId') is-invalid @enderror" name="BrandId" id="modelName">
                                     <option value="">Choose Brand</option>
+=======
+                            {{-- Model
+                            <div class="form-group mb-3">
+                                <label for="brandName" class="form-label">Brand</label>
+                                <select class="form-select @error('BrandId') is-invalid @enderror" name="BrandId"
+                                    id="brandName">
+                                    <option value="" selected>Choose Brand</option>
+>>>>>>> 421ae06a804c0ba25378d339caedebd0ca3caac7
                                     @foreach ($data as $brand)
-                                        <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                        <option value="{{ $brand->id }}"
+                                            @if (old('BrandId', $brand->id) == $brand->id) selected @endif>{{ $brand->name }}</option>
+                                    @endforeach
+                                </select>
+
+                                @error('BrandId')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div> --}}
+
+                            {{-- Brand  --}}
+                            <div class="form-group mb-3">
+                                <label for="brandName" class="form-label">Brand</label>
+                                <select class="form-select @error('BrandId') is-invalid @enderror" name="BrandId"
+                                    id="brandName">
+                                    <option value="" @if (old('BrandId') == '') selected @endif>Choose Brand
+                                    </option>
+                                    @foreach ($data as $brand)
+                                        <option value="{{ $brand->id }}"
+                                            @if (old('BrandId') == $brand->id) selected @endif>{{ $brand->name }}</option>
                                     @endforeach
                                 </select>
 
@@ -78,6 +108,7 @@
                                     </div>
                                 @enderror
                              </div>
+
 
                             <div class="form-group mb-3">
                                 <label for="modelName" class="form-label">Name</label>
@@ -110,9 +141,8 @@
 @section('script')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
-
         $(document).ready(function() {
-            $('#modelName').select2();
+            $('#brandName').select2();
         });
     </script>
 

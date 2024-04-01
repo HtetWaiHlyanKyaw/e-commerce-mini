@@ -15,7 +15,7 @@
         textarea {
 
             /* Adjust width as needed */
-           /* Adjust height as needed */
+            /* Adjust height as needed */
 
             /* Remove border */
             box-shadow: none !important;
@@ -27,7 +27,8 @@
             margin: 0;
             /* Optional: Remove margin */
         }
-        .header-color{
+
+        .header-color {
             color: #5d9bff;
         }
     </style>
@@ -54,7 +55,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <h4 class="header-color">Select Products to Order</h4>
-                    <table class="table"  style="background-color:white" id="myTable">
+                    <table class="table" style="background-color:white" id="myTable">
                         <thead>
                             <tr>
                                 <th style="color: #5d9bff"></th>
@@ -109,10 +110,14 @@
 
                                 <div class="form-group">
                                     <label for="supplier" class="form-label">Supplier Name</label>
-                                    <select id="supplier" name="supplier" class="form-control" class="form-select @error('supplier') is-invalid @enderror supplier" aria-label="Default select example">
+                                    <select id="supplier" name="supplier" class="form-control"
+                                        class="form-select @error('supplier') is-invalid @enderror supplier"
+                                        aria-label="Default select example">
                                         <option value="">Choose Supplier</option>
                                         @foreach ($suppliers as $supplier)
-                                            <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
+                                            <option value="{{ $supplier->id }}"
+                                                @if (old('supplier') == $supplier->id) selected @endif>{{ $supplier->name }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -127,20 +132,22 @@
                                     <label for="payment" class="form-label">Payment Method</label>
                                     <select id="payment" name="payment" class="form-control">
                                         <option value="">Choose Payment Method</option>
-                                        <option value="Credit Card">Credit Card</option>
-                                        <option value="Mobile Banking">Mobile Banking</option>
+                                        <option value="Credit Card" @if(old('payment') == 'Credit Card') selected @endif>Credit Card</option>
+                                        <option value="Mobile Banking" @if(old('payment') == 'Mobile Banking') selected @endif>Mobile Banking</option>
                                     </select>
+                                    @error('payment')
+                                        <div class="text-danger">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
-                                @error('payment')
-                                    <div class="text-danger">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+
                                 <br>
                                 <hr>
                                 <div class="form-group">
                                     <label for="selectedProducts" class="form-label">Selected Products</label>
-                                    <textarea id="selectedProducts" name="selectedProducts" rows="4" class="form-control" placeholder="Choose Products from the Products table" readonly></textarea>
+                                    <textarea id="selectedProducts" name="selectedProducts" rows="4" class="form-control"
+                                        placeholder="Choose Products from the Products table" readonly></textarea>
                                 </div>
                                 @error('selectedProducts')
                                     <div class="text-danger">
@@ -303,5 +310,3 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 @endsection
-
-
