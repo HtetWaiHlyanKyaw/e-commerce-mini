@@ -13,7 +13,7 @@ use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SupplierPurchaseController;
 use App\Http\Controllers\Admin\ProfileController;
-
+use App\Http\Controllers\Admin\ExportController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -78,6 +78,7 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/page', [CustomerPurchaseController::class, 'page'])->name('customer_purchase.page');
         Route::get('/list', [CustomerPurchaseController::class, 'list'])->name('customer_purchase.list');
         Route::get('/detail/{id}', [CustomerPurchaseController::class, 'detail'])->name('customer_purchase.detail');
+        Route::get('/export', [ExportController::class, 'exportCustomerPurchases'])->name('export.customer.purchases');
     });
 
     //review Url
@@ -101,6 +102,7 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/list', [SupplierPurchaseController::class, 'list'])->name('supplier_purchase.list');
         Route::get('/detail/{id}', [SupplierPurchaseController::class, 'detail'])->name('supplier_purchase.detail');
         // Route::get('/delete/{id}', [SupplierPurchaseController::class, 'delete'])->name('supplier.delete');
+        Route::get('/export', [ExportController::class, 'exportSupplierPurchases'])->name('export.supplier.purchases');
     });
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -116,9 +118,6 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/delete/{id}', [AdminController::class, 'delete'])->name('Admin.delete');
     });
 });
-
-
-
 
 Auth::routes();
 

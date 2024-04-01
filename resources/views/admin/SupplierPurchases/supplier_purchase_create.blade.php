@@ -129,7 +129,9 @@
                                         <option value="Credit Card">Credit Card</option>
                                         <option value="Mobile Banking">Mobile Banking</option>
                                     </select>
+
                                 </div>
+
                                 @error('payment')
                                     <div class="text-danger">
                                         {{ $message }}
@@ -147,26 +149,35 @@
                                     </div>
                                 @enderror
                                 <br>
-                                <div class="form-group">
-                                    <label for="totalQuantity" class="form-label">Total Quantity</label>
-                                    <input type="text" class="form-control" id="totalQuantity" name="totalQuantity"
-                                        readonly>
-                                </div>
-                                <br>
-                                @error('totalQuantity')
-                                    <div class="text-danger">
-                                        {{ $message }}
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group row">
+                                            <label for="totalQuantity" class="col-sm-6 col-form-label">Total Quantity</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="totalQuantity" name="totalQuantity" readonly>
+                                            </div>
+                                            @error('totalQuantity')
+                                                <div class="col-sm-6 offset-sm-6 text-danger">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
                                     </div>
-                                @enderror
-                                <div class="form-group">
-                                    <label for="totalPrice" class="form-label">Total</label>
-                                    <input type="text" class="form-control" id="totalPrice" name="totalPrice" readonly>
-                                </div>
-                                @error('totalPrice')
-                                    <div class="text-danger">
-                                        {{ $message }}
+                                    <div class="col-sm-6">
+                                        <div class="form-group row">
+                                            <label for="totalPrice" class="col-sm-6 col-form-label">Total</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="totalPrice" name="totalPrice" readonly>
+                                            </div>
+                                            @error('totalPrice')
+                                                <div class="col-sm-6 offset-sm-6 text-danger">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
                                     </div>
-                                @enderror
+                                </div>
+
                                 <br>
                                 <input type="hidden" id="selectedProductsInput" name="selectedProducts">
                                 <div class="form-group">

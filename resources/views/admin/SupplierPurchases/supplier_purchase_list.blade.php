@@ -23,16 +23,29 @@
 
         <h1 class="header-color">Supplier Purchase List</h1>
         <br>
-        <div class="pagetitle ">
-            <h4> Total Supplier Purchases -{{ $supplierPurchases->count() }}</h4>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item ">Home</li>
-                    <li class="breadcrumb-item ">Supplier Purchases</li>
-                    <li class="breadcrumb-item "><b>Supplier Purchase List</b></li>
-                </ol>
-            </nav>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col">
+                    <div class="pagetitle">
+                        <h4> Total Supplier Purchases -{{ $supplierPurchases->count() }}</h4>
+                        <nav>
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">Home</li>
+                                <li class="breadcrumb-item">Supplier Purchases</li>
+                                <li class="breadcrumb-item"><b>Supplier Purchase List</b></li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <form action="{{ route('export.supplier.purchases') }}" method="GET">
+                        @csrf
+                        <button type="submit" class="btn btn-success rounded-5 border-2 px-3 me-3"><i class="ti ti-download"></i> Export</button>
+                    </form>
+                </div>
+            </div>
         </div>
+        <br>
         <div>
             @if (session('success'))
                 <div class="alert alert-success text-center" role="alert">
