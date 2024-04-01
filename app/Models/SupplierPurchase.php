@@ -15,6 +15,8 @@ class SupplierPurchase extends Model
         'total_price',
         'payment_method',
     ];
+
+
     public function supplier()
     {
         return $this->belongsTo(supplier::class);

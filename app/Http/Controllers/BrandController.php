@@ -71,7 +71,8 @@ class BrandController extends Controller
     private function vali($request)
     {
         Validator::make($request->all(), [
-            'brandName' => 'required',
+            'brandName' => 'required|unique:brands,name',
+
         ])->validate();
     }
 }
