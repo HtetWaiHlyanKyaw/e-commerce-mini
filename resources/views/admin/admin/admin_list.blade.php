@@ -44,6 +44,7 @@
                         <th  style="color: #5d9bff; text-align:center;">No</th>
                         <th style="color: #5d9bff; text-align:center;">Name</th>
                         <th style="color: #5d9bff; text-align:center;">Email</th>
+                        <th style="color: #5d9bff; text-align:center;">Position</th>
                         <th style="color: #5d9bff; text-align:center;">Actions</th>
                     </tr>
                 </thead>
@@ -57,6 +58,7 @@
                             <td class="col-lg-1" style="text-align:center;">{{ $counter++}}</td>
                             <td class="col-lg-1" style="text-align:center;">{{ $aList->name }}</td>
                             <td class="col-lg-1" style="text-align:center;">{{ $aList->email }}</td>
+                            <td class="col-lg-1" style="text-align:center;">{{ $aList->usertype }}</td>
                             <td class="col-lg-1" style="text-align:center;">
                                 <a href="{{route('Admin.edit',$aList->id)}}">
                                     <button class="btn btn-outline-success border-0 me-2" title="Edit Admin">

@@ -44,7 +44,7 @@ class AdminController extends Controller
     //Admin List
     public function list()
     {
-        $data = User::where('usertype', 'Admin')->get();
+        $data = User::whereIn('usertype', ['supplier_admin', 'store_admin', 'super_admin'])->get();
         return view('admin.admin.admin_list', compact('data'));
     }
 
