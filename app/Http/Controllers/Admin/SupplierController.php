@@ -44,10 +44,11 @@ class SupplierController extends Controller
 
     private function valiEdit($request)
     {
+        $id = $request->id;
         Validator::make($request->all(), [
             'supplierName' => 'required|string|max:255',
-            'supplierEmail' => 'required|email|max:255',
-            'supplierPhone' => 'required|string|regex:/^09\d{9}$/',
+            'supplierEmail' => 'required|email|max:255|unique:suppliers,email,' . $id,
+            'supplierPhone' => 'required|string|regex:/^09\d{9}$/|unique:suppliers,phone_number,' . $id,
             'supplierAddress' => 'required|string|max:255',
         ])->validate();
     }

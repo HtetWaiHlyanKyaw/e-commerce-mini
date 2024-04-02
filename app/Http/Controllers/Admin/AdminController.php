@@ -91,9 +91,10 @@ class AdminController extends Controller
     //Admin Update validation
     private function updateVali($request)
     {
+        $id = $request->id;
         Validator::make($request->all(), [
             'AdminName' => 'required',
-            'AdminEmail' => 'required',
+            'AdminEmail' => 'required|unique:users,email,' . $id,
         ])->validate();
     }
 }
