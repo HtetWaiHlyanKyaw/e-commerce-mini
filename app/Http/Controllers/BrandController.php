@@ -53,10 +53,13 @@ class BrandController extends Controller
         $this->valiEdit($request);
         $data = $this->dataArrange($request);
         Brand::where('id', $id)->update($data);
+
+
         session()->flash('alert', [
             'type' => 'success',
             'message' => 'Brand  Updated  Successfully!',
         ]);
+
         return redirect()->route('brand.list');
     }
 

@@ -17,7 +17,7 @@
                 <ol class="breadcrumb">
                     <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
                     <a class="breadcrumb-item " href="{{ route('brand.list') }}">Brand</a>
-                     <li class="breadcrumb-item "><b>Edit Brand</b></li>
+                    <li class="breadcrumb-item "><b>Edit Brand</b></li>
                 </ol>
             </nav>
         </div>
@@ -41,7 +41,10 @@
                     document.getElementById('alertMessage').style.display = 'none';
                 }, 5000); // Adjust the duration (in milliseconds) as needed
             </script>
+
         </div>
+
+
 
         {{-- Brand Create Card --}}
         <div class="container-fluid">
@@ -76,6 +79,12 @@
                                 <input type="submit" value="Update" class="btn btn-primary btn-lg px-3">
                             </div>
                         </form>
+
+                        @if ($errors->has('brandName'))
+                            <script>
+                                alert("{{ $errors->first('brandName') }}");
+                            </script>
+                        @endif
                     </div>
                 </div>
             </div>

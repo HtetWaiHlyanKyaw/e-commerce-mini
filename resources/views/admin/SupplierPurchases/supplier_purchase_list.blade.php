@@ -28,19 +28,18 @@
                         <h4> Total Supplier Purchases -{{ $supplierPurchases->count() }}</h4>
                         <nav>
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item">Home</li>
-                                <li class="breadcrumb-item">Supplier Purchases</li>
+                                <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
                                 <li class="breadcrumb-item"><b>Supplier Purchase List</b></li>
                             </ol>
                         </nav>
                     </div>
                 </div>
-                <div class="col-auto">
+                {{-- <div class="col-auto">
                     <form action="{{ route('export.supplier.purchases') }}" method="GET">
                         @csrf
                         <button type="submit" class="btn btn-success rounded-5 border-2 px-3 me-3"><i class="ti ti-download"></i> Export</button>
                     </form>
-                </div>
+                </div> --}}
             </div>
         </div>
         <br>
@@ -52,34 +51,41 @@
             @endif
 
             @if (session('error'))
-            <div class="alert alert-warning text-center" role="alert">
-                {{ session('error') }}
-            </div>
-        @endif
+                <div class="alert alert-warning text-center" role="alert">
+                    {{ session('error') }}
+                </div>
+            @endif
         </div>
         <hr>
         <div class="container">
             <div class="bg-white p-4 border rounded">
                 <form action="{{ route('supplier_purchase.filter') }}" method="GET">
-                    <div class="row pb-3">
-                        <div class="col-md-5 pt-4">
+                    <div class="row pb-6 g-6">
+                        <div class="col-auto" style="margin-right: 45%;">
+                            <form action="{{ route('export.supplier.purchases') }}" method="GET">
+                                @csrf
+                                <button type="submit" class="btn btn-success rounded-5 border-2 px-3 me-3"><i
+                                        class="ti ti-download"></i> Export</button>
+                            </form>
                         </div>
-
-                        <div class="col-md-3">
+                        <div class="col-auto mt-0" style="margin-left: 45px;">
                             <label for="">Start Date: </label>
                             <input type="date" class="form-control" name="start_date"
                                 max="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
                         </div>
 
-                        <div class="col-md-3">
+                        <div class="col-auto mt-0">
                             <label for="">End Date: </label>
                             <input type="date" class="form-control" name="end_date"
                                 max="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
                         </div>
 
-                        <div class="col-md-1 pt-4">
-                            <button type="submit" class="btn btn-primary">Filter</button>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary mb-5  border-2 px-3 me-2"><i
+                                    class="ti ti-adjustments-horizontal"></i> Filter</button>
                         </div>
+
+
                     </div>
                 </form>
 
