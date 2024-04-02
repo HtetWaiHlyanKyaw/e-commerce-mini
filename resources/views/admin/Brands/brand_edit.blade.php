@@ -80,11 +80,11 @@
                             </div>
                         </form>
 
-                        @if ($errors->has('brandName'))
+                        {{-- @if ($errors->has('brandName'))
                             <script>
                                 alert("{{ $errors->first('brandName') }}");
                             </script>
-                        @endif
+                        @endif --}}
                     </div>
                 </div>
             </div>

@@ -96,11 +96,11 @@ class BrandModelController extends Controller
 
     private function valiEdit($request)
     {   $id = $request -> id;
-        $rules = [
-            'modelName' => 'required|unique:product_models,name,'.$id,
+        Validator::make($request->all(), [
+            'modelName' => 'required|unique:product_models,name,' . $id,
             'BrandId' => 'required',
-        ];
-        Validator::make($request->all(), $rules)->validate();
+        ])->validate();
     }
+
 
 }

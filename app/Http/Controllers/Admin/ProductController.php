@@ -112,8 +112,7 @@ class ProductController extends Controller
     private function valiEdit($request)
     {
         $id = $request->id; // Assuming 'id' is present in your request
-
-        $rules = [
+        Validator::make($request->all(), [
             'productName' => 'required|unique:products,name,' . $id,
             'image' => 'image|mimes:jpeg,jpg,png,webp',
             'BrandName' => 'required',
@@ -124,9 +123,7 @@ class ProductController extends Controller
             'quantity' => 'required',
             'low_stock' => 'required',
             'description' => 'required',
-        ];
-
-        Validator::make($request->all(), $rules)->validate();
+        ])->validate();
     }
 
     private function dataArrange($request)

@@ -99,4 +99,6 @@ class BrandController extends Controller
 
         ])->validate();
     }
+
+
 }
