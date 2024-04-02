@@ -52,26 +52,6 @@
                         <form action="{{ route('model.create') }}" method="post">
                             @csrf
 
-
-                            {{-- Model
-                            <div class="form-group mb-3">
-                                <label for="brandName" class="form-label">Brand</label>
-                                <select class="form-select @error('BrandId') is-invalid @enderror" name="BrandId"
-                                    id="brandName">
-                                    <option value="" selected>Choose Brand</option>
-                                    @foreach ($data as $brand)
-                                        <option value="{{ $brand->id }}"
-                                            @if (old('BrandId', $brand->id) == $brand->id) selected @endif>{{ $brand->name }}</option>
-                                    @endforeach
-                                </select>
-
-                                @error('BrandId')
-                                    <div class="text-danger">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div> --}}
-
                             {{-- Brand  --}}
                             <div class="form-group mb-3">
                                 <label for="brandName" class="form-label">Brand</label>
@@ -92,7 +72,7 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group mb-3">
+                            {{-- <div class="form-group mb-3">
                                 <label for="modelName" class="form-label">Brand</label>
                                 <select class="form-select @error('BrandId') is-invalid @enderror BrandId " id="modelName"
                                     name="BrandName" aria-label="Default select example">
@@ -106,7 +86,7 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
-                             </div>
+                             </div> --}}
 
 
                             <div class="form-group mb-3">
