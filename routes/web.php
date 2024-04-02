@@ -131,6 +131,7 @@ Route::prefix('admin/Admin')->group(function () {
 });
 });
 Route::middleware('admin:super_admin,store_admin,supplier_admin')->group(function () {
+
 Route::get('profile', [ProfileController::class, 'index'])->name('admin.profile');
  });
  Route::get('/dashboard', function () {
