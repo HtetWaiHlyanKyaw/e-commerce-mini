@@ -35,11 +35,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // Admin Middleware
  Route::middleware(['admin'])->group(function () {
-
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 //Brand URLs
-
-
 Route::middleware('admin:store_admin, super_admin')->group(function () {
 // Define routes accessible to store_admin
 Route::prefix('admin/brand')->group(function () {
@@ -114,7 +110,7 @@ Route::prefix('admin/customer purchase')->group(function () {
     Route::get('/export', [ExportController::class, 'exportCustomerPurchases'])->name('export.customer.purchases');
 });
 });
-
+Route::middleware('admin: super_admin')->group(function () {
 Route::prefix('admin/Admin')->group(function () {
     Route::get('/page', [AdminController::class, 'page'])->name('Admin.page');
     Route::post('/create', [AdminController::class, 'create'])->name('Admin.create');
@@ -123,27 +119,12 @@ Route::prefix('admin/Admin')->group(function () {
     Route::post('/update/{id}', [AdminController::class, 'update'])->name('Admin.update');
     Route::get('/delete/{id}', [AdminController::class, 'delete'])->name('Admin.delete');
 });
+});
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('profile', [ProfileController::class, 'index'])->name('admin.profile');
 
-});
+ });
 
-
-
-
-
-
-
-
-
-
-
-// Route::middleware('role:super_admin')->group(function () {
-//     // Define routes accessible to super_admin
-// });
 
 Auth::routes();
 
-Route::get('/brands/brands_list', function () {
-    return view('admin.brands.index');
-});

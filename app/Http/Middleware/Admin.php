@@ -25,18 +25,19 @@ class Admin
     {
         if (!Auth::check()) {
             return redirect()->route('login');
-        } else {
-            // Get the authenticated user
-            $user = Auth::user();
+            // } else {
+            //     // Get the authenticated user
+            //     $user = Auth::user();
 
-            // Check if the user's type is not in the provided types
-            if (!in_array($user->usertype, $types)) {
-                // Redirect to the dashboard
-                return redirect('/dashboard');
-            }
+            //     // // Check if the user's type is not in the provided types
+            //     if (!in_array($user->usertype, $types)) {
+
+            //  }
+            // }
+
+            // Allow the request to pass through to the next middleware or controller
+
         }
-
-        // Allow the request to pass through to the next middleware or controller
         return $next($request);
     }
 }
