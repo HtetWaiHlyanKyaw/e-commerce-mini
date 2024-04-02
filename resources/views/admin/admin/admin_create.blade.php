@@ -55,7 +55,7 @@
                             <div class="form-group mb-3">
 
                                 <input type="text" name="AdminName"
-                                    class="form-control @error('AdminName') is-invalid @enderror" placeholder="Admin Name">
+                                    class="form-control @error('AdminName') is-invalid @enderror" placeholder="Admin Name" value="{{ old('AdminName') }}">
 
                                 @error('AdminName')
                                     <div class="text-danger">
@@ -68,7 +68,7 @@
                             <div class="form-group mb-3">
 
                                 <input type="text" name="AdminEmail"
-                                    class="form-control @error('AdminEmail') is-invalid @enderror" placeholder="Admin Email">
+                                    class="form-control @error('AdminEmail') is-invalid @enderror" placeholder="Admin Email" value="{{ old('AdminEmail') }}">
 
                                 @error('AdminEmail')
                                     <div class="text-danger">
@@ -78,15 +78,15 @@
                             </div>
                             <label for="usertype" class="form-label">Position</label>
                             <div class="form-group mb-3">
-                                <select class="form-select @error('usertype') is-invalid @enderror" name="usertype"
-                                    id="usertype">
+                                <select class="form-select @error('usertype') is-invalid @enderror" name="usertype" id="usertype">
                                     <option value="">Choose Position</option>
-                                    <option value="store_admin">Store Admin</option>
-                                    <option value="supplier_admin">Supplier Admin</option>
-                                    <option value="super_admin">Super Admin</option>
+                                    <option value="store_admin" {{ old('usertype') == 'store_admin' ? 'selected' : '' }}>Store Admin</option>
+                                    <option value="supplier_admin" {{ old('usertype') == 'supplier_admin' ? 'selected' : '' }}>Supplier Admin</option>
+                                    <option value="super_admin" {{ old('usertype') == 'super_admin' ? 'selected' : '' }}>Super Admin</option>
                                 </select>
-
                             </div>
+
+
 
                             <label for="AdminPassword" class="form-label">Password</label>
                             <div class="form-group mb-3">
@@ -97,7 +97,7 @@
                                     {{-- <label for="password">Password:</label> --}}
                                     <input type="password" id="AdminPassword" name="AdminPassword" class="form-control @error('AdminPassword') is-invalid @enderror"
                                       placeholder="Enter your password">
-                                    <input type="checkbox" id="showPassword" onclick="togglePasswordVisibility()"> Show Password
+                                    <input type="checkbox" id="showPassword" class="mt-2" onclick="togglePasswordVisibility()"> Show Password
 
                                 @error('AdminPassword')
                                     <div class="text-danger">

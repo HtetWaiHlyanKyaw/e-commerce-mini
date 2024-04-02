@@ -34,7 +34,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 // Admin Middleware
- Route::middleware(['admin'])->group(function () {
+Route::middleware(['admin'])->group(function () {
 //Brand URLs
 Route::middleware('admin:store_admin, super_admin')->group(function () {
 // Define routes accessible to store_admin

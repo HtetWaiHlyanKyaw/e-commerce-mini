@@ -92,7 +92,7 @@
                                 <select class="form-select @error('BrandName') is-invalid @enderror brandname"
                                     name="BrandName" aria-label="Default select example">
                                     <option value="">Choose Brand</option>
-                                    @foreach ($brands as $brand)
+                                    @foreach ($products as $brand)
                                         <option value="{{ $brand->id }}"
                                             @if (old('BrandName') == $brand->id) selected @endif>{{ $brand->name }}</option>
                                     @endforeach
@@ -192,10 +192,7 @@
                             </div>
                             <label for="description" class="form-label">Description</label>
                             <div class="form-group mb-3">
-                                <textarea name="description" cols="20" rows="5"
-                                    class="form-control  @error('description') is-invalid @enderror" placeholder="Description"
-                                    value="{{ old('description') }}"></textarea>
-
+                                <textarea name="description" cols="20" rows="5" class="form-control @error('description') is-invalid @enderror" placeholder="Description">{{ old('description') }}</textarea>
 
                                 @error('description')
                                     <div class="text-danger">
@@ -203,6 +200,7 @@
                                     </div>
                                 @enderror
                             </div>
+
 
                             {{-- submit --}}
                             {{-- <div class="text-center">

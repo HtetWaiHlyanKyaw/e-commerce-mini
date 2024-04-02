@@ -22,11 +22,12 @@ class ProductController extends Controller
     }
 
     public function create()
-    {
-        $brands = Brand::all();
-        $models = ProductModel::all();
-        return view('admin.Products.product_create', compact('brands', 'models'));
-    }
+{
+    $products = Product::with('brand')->get();
+    $models = ProductModel::all();
+    return view('admin.Products.product_create', compact('products', 'models'));
+}
+
 
     public function store(Request $request)
     {
