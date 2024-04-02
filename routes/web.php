@@ -34,21 +34,29 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 // Admin Middleware
-// Route::middleware(['admin'])->group(function () {
+//  Route::middleware(['admin'])->group(function () {
+//Brand URLs
+Route::middleware('admin:store_admin,super_admin')->group(function () {
+// Define routes accessible to store_admin
+    Route::prefix('admin/brand')->group(function () {
+    Route::get('/page', [BrandController::class, 'page'])->name('brand.page');
+    Route::post('/create', [BrandController::class, 'create'])->name('brand.create');
+    Route::get('/list', [BrandController::class, 'list'])->name('brand.list');
+    Route::get('/edit/{id}', [BrandController::class, 'edit'])->name('brand.edit');
+    Route::post('/update/{id}', [BrandController::class, 'update'])->name('brand.update');
+    Route::get('/delete/{id}', [BrandController::class, 'delete'])->name('brand.delete');
+});
 
-
-    //Brand URLs
-
-    Route::middleware('admin:store_admin, super_admin')->group(function () {
+    // Route::middleware('admin:store_admin, super_admin')->group(function () {
         // Define routes accessible to store_admin
-        Route::prefix('admin/brand')->group(function () {
-            Route::get('/page', [BrandController::class, 'page'])->name('brand.page');
-            Route::post('/create', [BrandController::class, 'create'])->name('brand.create');
-            Route::get('/list', [BrandController::class, 'list'])->name('brand.list');
-            Route::get('/edit/{id}', [BrandController::class, 'edit'])->name('brand.edit');
-            Route::post('/update/{id}', [BrandController::class, 'update'])->name('brand.update');
-            Route::get('/delete/{id}', [BrandController::class, 'delete'])->name('brand.delete');
-        });
+        // Route::prefix('admin/brand')->group(function () {
+        //     Route::get('/page', [BrandController::class, 'page'])->name('brand.page');
+        //     Route::post('/create', [BrandController::class, 'create'])->name('brand.create');
+        //     Route::get('/list', [BrandController::class, 'list'])->name('brand.list');
+        //     Route::get('/edit/{id}', [BrandController::class, 'edit'])->name('brand.edit');
+        //     Route::post('/update/{id}', [BrandController::class, 'update'])->name('brand.update');
+        //     Route::get('/delete/{id}', [BrandController::class, 'delete'])->name('brand.delete');
+        // });
 
         //Model URLs
         Route::prefix('admin/model')->group(function () {
@@ -76,7 +84,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
         });
     });
 
-    Route::middleware('admin:supplier_admin, super_admin')->group(function () {
+    Route::middleware('admin:supplier_admin,super_admin')->group(function () {
         Route::prefix('admin/supplier')->group(function () {
             Route::get('/page', [SupplierController::class, 'page'])->name('supplier.page');
             Route::post('/create', [SupplierController::class, 'create'])->name('supplier.create');
@@ -97,52 +105,43 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
             Route::get('/export', [ExportController::class, 'exportSupplierPurchases'])->name('export.supplier.purchases');
         });
     });
-    Route::middleware('admin:store_admin, super_admin')->group(function () {
 
-
+    Route::middleware('admin:super_admin')->group(function () {
         //Customer URL
         Route::prefix('admin/customer')->group(function () {
             Route::get('/list', [CustomerController::class, 'list'])->name('customer.page');
         });
 
-        //Customer Purchase URL
-        Route::prefix('admin/customer purchase')->group(function () {
-            Route::get('/page', [CustomerPurchaseController::class, 'page'])->name('customer_purchase.page');
-            Route::get('/list', [CustomerPurchaseController::class, 'list'])->name('customer_purchase.list');
-            Route::get('/detail/{id}', [CustomerPurchaseController::class, 'detail'])->name('customer_purchase.detail');
-            Route::get('/export', [ExportController::class, 'exportCustomerPurchases'])->name('export.customer.purchases');
-        });
-    });
+//Customer Purchase URL
+    Route::prefix('admin/customer purchase')->group(function () {
+    Route::get('/page', [CustomerPurchaseController::class, 'page'])->name('customer_purchase.page');
+    Route::get('/list', [CustomerPurchaseController::class, 'list'])->name('customer_purchase.list');
+    Route::get('/detail/{id}', [CustomerPurchaseController::class, 'detail'])->name('customer_purchase.detail');
+    Route::get('/export', [ExportController::class, 'exportCustomerPurchases'])->name('export.customer.purchases');
+});
+});
+Route::middleware('admin:super_admin')->group(function () {
+Route::prefix('admin/Admin')->group(function () {
+    Route::get('/page', [AdminController::class, 'page'])->name('Admin.page');
+    Route::post('/create', [AdminController::class, 'create'])->name('Admin.create');
+    Route::get('/list', [AdminController::class, 'list'])->name('Admin.list');
+    Route::get('/edit/{id}', [AdminController::class, 'edit'])->name('Admin.edit');
+    Route::post('/update/{id}', [AdminController::class, 'update'])->name('Admin.update');
+    Route::get('/delete/{id}', [AdminController::class, 'delete'])->name('Admin.delete');
+});
+});
+Route::middleware('admin:super_admin,store_admin,supplier_admin')->group(function () {
 
-    Route::prefix('admin/Admin')->group(function () {
-        Route::get('/page', [AdminController::class, 'page'])->name('Admin.page');
-        Route::post('/create', [AdminController::class, 'create'])->name('Admin.create');
-        Route::get('/list', [AdminController::class, 'list'])->name('Admin.list');
-        Route::get('/edit/{id}', [AdminController::class, 'edit'])->name('Admin.edit');
-        Route::post('/update/{id}', [AdminController::class, 'update'])->name('Admin.update');
-        Route::get('/delete/{id}', [AdminController::class, 'delete'])->name('Admin.delete');
-    });
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-    Route::get('profile', [ProfileController::class, 'index'])->name('admin.profile');
-// });
-
-
-
-
-
-
-
-
-
-
-
-// Route::middleware('role:super_admin')->group(function () {
-//     // Define routes accessible to super_admin
-// });
+Route::get('profile', [ProfileController::class, 'index'])->name('admin.profile');
+ });
+ Route::get('/dashboard', function () {
+    // If user is authenticated, allow access to dashboard
+    if (auth()->check()) {
+        return view('admin.dashboard');
+    }
+    // If user is not authenticated, redirect to login
+    return redirect()->route('login');
+})->name('dashboard');
 
 Auth::routes();
 
-Route::get('/brands/brands_list', function () {
-    return view('admin.brands.index');
-});

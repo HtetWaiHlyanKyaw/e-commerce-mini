@@ -13,7 +13,7 @@ class ExportController extends Controller
     //
     public function exportSupplierPurchases()
     {
-        return Excel::download(new SupplierPurchasesExport, 'MobileSupplierPurchases.xlsx');
+        return Excel::download(new SupplierPurchasesExport(), 'MobileSupplierPurchases.xlsx');
     }
 
     public function exportCustomerPurchases()

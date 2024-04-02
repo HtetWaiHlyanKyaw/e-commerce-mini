@@ -17,8 +17,8 @@
         <div class="pagetitle">
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item">Home</li>
-                    <li class="breadcrumb-item active">Profile</li>
+                    <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
+                    <li class="breadcrumb-item active"><b>Profile</b></li>
                 </ol>
             </nav>
         </div>
@@ -28,13 +28,27 @@
             <hr>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><strong>Email : </strong>{{ $user->email }}</li>
+                @php
+                $role = '';
+                    if($user->usertype === 'super_admin'){
+                        $role = 'Super Admin';
+                    }
+                    else if($user->usertype === 'store_admin'){
+                        $role = 'Store Admin';
+                    }
+                    else{
+                        $role = 'Supplier Admin';
+                    }
+
+                @endphp
+                <li class="list-group-item"><strong>Position : </strong>{{ $role }}</li>
                 <li class="list-group-item"><strong>Since :
                     </strong>{{ \Carbon\Carbon::parse($user->created_at)->format('F j, Y') }}</li>
 
             </ul>
             <hr>
-            <a href="{{ route('Admin.edit', ['id' => $user->id]) }}" class="text-center text-success text-decoration-none"><i
-                    class="ti ti-edit"> </i>Edit your information</a>
+            {{-- <a href="{{ route('Admin.edit', ['id' => $user->id]) }}" class="text-center text-success text-decoration-none"><i
+                    class="ti ti-edit"> </i>Edit your information</a> --}}
 
         </div>
 

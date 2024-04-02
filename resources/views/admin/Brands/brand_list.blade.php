@@ -5,7 +5,8 @@
         .header-color {
             color: #5d9bff;
         }
-       .bg-lighter {
+
+        .bg-lighter {
             background-color: #f6f7ff;
             /* Slightly darker shade */
         }
@@ -21,7 +22,7 @@
         <h1 class="header-color">Brand List</h1>
         <br>
         <div class="pagetitle">
-            <h3>Total Brands - {{ $data->count() }}</h3>
+            <h3>Total Brands - <span style="color: #5d9bff;">{{ $data->count() }}</span></h3>
             <nav>
                 <ol class="breadcrumb">
                     <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
@@ -31,11 +32,24 @@
         </div>
 
         <div>
-            @if (session('success'))
+            {{-- @if (session('success'))
                 <div class="alert alert-success text-center" role="alert">
                     {{ session('success') }}
                 </div>
+            @endif --}}
+
+            @if (session('alert'))
+                <div id="alertMessage" class=" alert alert-{{ session('alert')['type'] }}">
+                    {{ session('alert')['message'] }}
+                </div>
             @endif
+
+            <script>
+                // JavaScript to hide the alert after a specific duration
+                setTimeout(function() {
+                    document.getElementById('alertMessage').style.display = 'none';
+                }, 5000); // Adjust the duration (in milliseconds) as needed
+            </script>
         </div>
 
         <div class="bg-white p-4 border rounded">
@@ -58,7 +72,8 @@
                             {{-- <td class="col-lg-1">{{ $blist->id }}</td> --}}
                             <td class="col-lg-1" style="text-align:center;">{{ $counter++ }}</td>
                             <td class="col-lg-1" style="text-align:center;">{{ $bList->name }}</td>
-                            <td class="col-lg-1" style="text-align:center;"> {{ \Carbon\Carbon::parse($bList->created_at)->format('F j, Y') }}</td>
+                            <td class="col-lg-1" style="text-align:center;">
+                                {{ \Carbon\Carbon::parse($bList->created_at)->format('F j, Y') }}</td>
                             <td class="col-lg-1" style="text-align:center;">
                                 <a href="{{ route('brand.edit', $bList->id) }}">
                                     <button class="btn btn-outline-success border-0 me-2" title="edit brand">
@@ -73,7 +88,6 @@
                                 </a>
                             </td>
                         </tr>
-
                     @endforeach
                 </tbody>
 

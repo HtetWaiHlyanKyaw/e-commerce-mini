@@ -145,9 +145,12 @@ class SupplierPurchaseController extends Controller
                 $detail->save();
                 Product::updateQuantity($product['id'], $product['quantity']);
             }
-
+            session()->flash('alert', [
+                'type' => 'success',
+                'message' => 'Purchase Completed Successfully!',
+            ]);
             // Redirect back with success message
-            return redirect()->route('supplier_purchase.list')->with('success', 'Purchase completed successfully.');
+            return redirect()->route('supplier_purchase.list');
     }
     public function detail($id)
     {//    $supplierPurchase = SupplierPurchase::where('id', $id)->get();

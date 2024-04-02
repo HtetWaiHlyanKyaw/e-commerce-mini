@@ -38,7 +38,7 @@ class AdminController extends Controller
             $data->assignRole('super_admin');
         }
         //  return redirect()->route('Admin.list')->with(['success' => 'Admin  Creation  Success']);
-        return redirect()->route('Admin.list')->with(['success' => 'Admin create Success']);
+        return redirect()->route('Admin.list');
     }
 
     //Admin List
@@ -66,14 +66,22 @@ class AdminController extends Controller
             'email' => $request->AdminEmail,
         ];
         User::where('id', $id)->update($data);
-        return redirect()->route('Admin.list')->with(['success' => 'Admin update success']);
+        session()->flash('alert', [
+            'type' => 'success',
+            'message' => 'Admin Updated  Successfully!',
+        ]);
+        return redirect()->route('Admin.list');
     }
 
     //Admin delete
     public function delete($id)
     {
         User::where('id', $id)->delete();
-        return redirect()->route('Admin.list')->with(['success' => 'Admin delete success']);
+        session()->flash('alert', [
+            'type' => 'success',
+            'message' => 'Admin Deleted  Successfully!',
+        ]);
+        return redirect()->route('Admin.list');
     }
 
     //Data Arrrange

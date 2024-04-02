@@ -17,18 +17,34 @@
                 <ol class="breadcrumb">
                     <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
                     <a class="breadcrumb-item " href="{{ route('brand.list') }}">Brand</a>
-                     <li class="breadcrumb-item "><b>Edit Brand</b></li>
+                    <li class="breadcrumb-item "><b>Edit Brand</b></li>
                 </ol>
             </nav>
         </div>
         {{-- Brand Create Success Message --}}
         <div>
-            @if (session('success'))
+            {{-- @if (session('success'))
                 <div class="alert alert-success text-center" role="alert">
                     {{ session('success') }}
                 </div>
+            @endif --}}
+
+            @if (session('alert'))
+                <div id="alertMessage" class="text-center alert alert-{{ session('alert')['type'] }}">
+                    {{ session('alert')['message'] }}
+                </div>
             @endif
+
+            <script>
+                // JavaScript to hide the alert after a specific duration
+                setTimeout(function() {
+                    document.getElementById('alertMessage').style.display = 'none';
+                }, 5000); // Adjust the duration (in milliseconds) as needed
+            </script>
+
         </div>
+
+
 
         {{-- Brand Create Card --}}
         <div class="container-fluid">
@@ -58,11 +74,17 @@
 
                             {{-- submit --}}
                             <div class="text-center">
-                                <a href="{{ route('brand.list') }}"><input type="button" value="cancel"
+                                <a href="{{ route('brand.list') }}"><input type="button" value="Cancel"
                                         class="btn btn-outline-danger btn-lg border-2 px-3 me-3"></a>
-                                <input type="submit" value="update" class="btn btn-primary btn-lg px-3">
+                                <input type="submit" value="Update" class="btn btn-primary btn-lg px-3">
                             </div>
                         </form>
+
+                        {{-- @if ($errors->has('brandName'))
+                            <script>
+                                alert("{{ $errors->first('brandName') }}");
+                            </script>
+                        @endif --}}
                     </div>
                 </div>
             </div>
