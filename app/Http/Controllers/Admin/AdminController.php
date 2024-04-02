@@ -19,15 +19,24 @@ class AdminController extends Controller
     //Admin create
     public function create(Request $request)
     {
+
         //validation
         $this->createVali($request);
 
         $data =  User::create([
             'name' => $request->AdminName,
             'email' => $request->AdminEmail,
-            'usertype' => "admin",
+            'usertype' => $request->usertype,
             'password' => $request->AdminPassword,
         ]);
+
+        if ($data->usertype === 'store_admin') {
+            $data->assignRole('store_admin');
+        } elseif ($data->usertype === 'supplier_admin') {
+            $data->assignRole('supplier_admin');
+        } elseif ($data->usertype === 'super_admin') {
+            $data->assignRole('super_admin');
+        }
         //  return redirect()->route('Admin.list')->with(['success' => 'Admin  Creation  Success']);
         return redirect()->route('Admin.list')->with(['success' => 'Admin create Success']);
     }
@@ -68,7 +77,7 @@ class AdminController extends Controller
     }
 
     //Data Arrrange
-    private function dataArrange( $request)
+    private function dataArrange($request)
     {
         return [
             'name' => $request->AdminName,
@@ -84,7 +93,7 @@ class AdminController extends Controller
             'AdminName' => 'required',
             'AdminEmail' => 'required|unique:users,email',
             'AdminPassword' => 'required',
-
+            'usertype' => 'required',
         ])->validate();
     }
 

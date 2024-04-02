@@ -69,7 +69,17 @@
                                     </div>
                                 @enderror
                             </div>
+                            <label for="usertype" class="form-label">Position</label>
+                            <div class="form-group mb-3">
+                                <select class="form-select @error('usertype') is-invalid @enderror" name="usertype"
+                                    id="usertype">
+                                    <option value="">Choose Position</option>
+                                    <option value="store_admin">Store Admin</option>
+                                    <option value="supplier_admin">Supplier Admin</option>
+                                    <option value="super_admin">Super Admin</option>
+                                </select>
 
+                            </div>
 
                             <label for="AdminPassword" class="form-label">Password</label>
                             <div class="form-group mb-3">
@@ -88,6 +98,8 @@
                                     </div>
                                 @enderror
                             </div>
+
+
 
                             {{-- submit --}}
                             <div class="text-center">
