@@ -23,7 +23,11 @@ class BrandController extends Controller
         Brand::create([
             'name' => $request->brandName,
         ]);
-        return redirect()->route('brand.list')->with(['success' => 'Brand  Creation  Success']);
+        session()->flash('alert', [
+            'type' => 'success',
+            'message' => 'Brand  Creation  Successfully!',
+        ]);
+        return redirect()->route('brand.list');
     }
 
     //brand List
@@ -49,14 +53,25 @@ class BrandController extends Controller
         $this->valiEdit($request);
         $data = $this->dataArrange($request);
         Brand::where('id', $id)->update($data);
-        return redirect()->route('brand.list')->with(['success' => 'Brand  Edit Success']);
+
+
+        session()->flash('alert', [
+            'type' => 'success',
+            'message' => 'Brand  Updated  Successfully!',
+        ]);
+
+        return redirect()->route('brand.list');
     }
 
     //brand delete
     public function delete($id)
     {
         Brand::where('id', $id)->delete();
-        return redirect()->route('brand.list')->with(['success' => 'brand delete success']);
+        session()->flash('alert', [
+            'type' => 'success',
+            'message' => 'Brand  Deleted  Successfully!',
+        ]);
+        return redirect()->route('brand.list');
     }
 
     //Data Arrrange
@@ -84,4 +99,6 @@ class BrandController extends Controller
 
         ])->validate();
     }
+
+
 }

@@ -24,11 +24,18 @@
         </div>
         {{-- Brand Create Success Message --}}
         <div>
-            @if (session('success'))
-                <div class="alert alert-success text-center" role="alert">
-                    {{ session('success') }}
+            @if (session('alert'))
+                <div id="alertMessage" class="text-center alert alert-{{ session('alert')['type'] }}">
+                    {{ session('alert')['message'] }}
                 </div>
             @endif
+
+            <script>
+                // JavaScript to hide the alert after a specific duration
+                setTimeout(function() {
+                    document.getElementById('alertMessage').style.display = 'none';
+                }, 5000); // Adjust the duration (in milliseconds) as needed
+            </script>
         </div>
 
         {{-- Brand Create Card --}}
@@ -110,9 +117,9 @@
                             </div> --}}
                             {{-- Update --}}
                             <div class="text-center">
-                                <a href="{{ route('supplier.list') }}"><input type="button" value="cancel"
+                                <a href="{{ route('supplier.list') }}"><input type="button" value="Cancel"
                                         class="btn btn-outline-danger btn-lg border-2 px-3 me-3"></a>
-                                <input type="submit" value="update" class="btn btn-primary btn-lg px-3">
+                                <input type="submit" value="Update" class="btn btn-primary btn-lg px-3">
                             </div>
                         </form>
 

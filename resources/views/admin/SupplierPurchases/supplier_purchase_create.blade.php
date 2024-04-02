@@ -50,7 +50,22 @@
                 </ol>
             </nav>
         </div>
+        <div>
+            @if (session('alert'))
+                <div id="alertMessage" class="text-center alert alert-{{ session('alert')['type'] }}">
+                    {{ session('alert')['message'] }}
+                </div>
+            @endif
 
+            <script>
+                // JavaScript to hide the alert after a specific duration
+                setTimeout(function() {
+                    document.getElementById('alertMessage').style.display = 'none';
+                }, 5000); // Adjust the duration (in milliseconds) as needed
+            </script>
+        </div>
+
+        <hr>
         <div class="container">
             <div class="row">
                 <div class="col-md-6">

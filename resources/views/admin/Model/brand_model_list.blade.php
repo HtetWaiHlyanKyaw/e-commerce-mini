@@ -42,7 +42,8 @@
         <h1 class="header-color">Model List</h1>
         <br>
         <div class="pagetitle">
-            <h3>Total Models - {{ $productModels->count() }}</h3>
+
+            <h3>Total Models - <span style="color: #5d9bff;">{{ $productModels->count() }}</span></h3>
             <nav>
                 <ol class="breadcrumb">
                     <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
@@ -51,22 +52,18 @@
             </nav>
         </div>
         <div>
-            @if (session('success'))
-            <div id="alert" class="alert alert-success alert-dismissible fade show text-center" role="alert">
-                {{ session('success') }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+            @if (session('alert'))
+                <div id="alertMessage" class="text-center alert alert-{{ session('alert')['type'] }}">
+                    {{ session('alert')['message'] }}
+                </div>
+            @endif
+
             <script>
-                $(document).ready(function() {
-                    setTimeout(function() {
-                        $("#alert").alert('close');
-                    }, 5000); // 5000 milliseconds = 5 seconds
-                });
+                // JavaScript to hide the alert after a specific duration
+                setTimeout(function() {
+                    document.getElementById('alertMessage').style.display = 'none';
+                }, 5000); // Adjust the duration (in milliseconds) as needed
             </script>
-        @endif
         </div>
         <div class="bg-white p-4 border rounded">
             <table  id="myTable" class="hover">

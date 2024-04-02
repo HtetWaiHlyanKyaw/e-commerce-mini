@@ -29,6 +29,10 @@ class BrandModelController extends Controller
         $this->vali($request);
         $data =  $this->dataArrange($request);
         ProductModel::create($data);
+        session()->flash('alert', [
+            'type' => 'success',
+            'message' => 'Model  Creation  Successfully!',
+        ]);
         return redirect()->route('model.list');
     }
 
@@ -48,7 +52,11 @@ class BrandModelController extends Controller
         $data = $this->dataArrange($request);
 
         ProductModel::where('id', $id)->update($data);
-        return redirect()->route('model.list')->with(['success' => 'Model update sucess']);
+        session()->flash('alert', [
+            'type' => 'success',
+            'message' => 'Model  Updated  Successfully!',
+        ]);
+        return redirect()->route('model.list');
 
    }
 
@@ -57,7 +65,11 @@ class BrandModelController extends Controller
       {
 
         ProductModel::where('id', $id)->delete();
-          return redirect()->route('model.list')->with(['success' => 'brand delete success']);
+        session()->flash('alert', [
+            'type' => 'success',
+            'message' => 'Model  Deleted  Successfully!',
+        ]);
+          return redirect()->route('model.list');
       }
 
 
@@ -84,11 +96,11 @@ class BrandModelController extends Controller
 
     private function valiEdit($request)
     {   $id = $request -> id;
-        $rules = [
-            'modelName' => 'required|unique:product_models,name,'.$id,
+        Validator::make($request->all(), [
+            'modelName' => 'required|unique:product_models,name,' . $id,
             'BrandId' => 'required',
-        ];
-        Validator::make($request->all(), $rules)->validate();
+        ])->validate();
     }
+
 
 }

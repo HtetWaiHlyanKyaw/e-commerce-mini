@@ -30,7 +30,11 @@ class SupplierController extends Controller
             'phone_number' => $request->supplierPhone,
             'address' => $request->supplierAddress,
         ]);
-        return redirect()->route('supplier.list')->with(['success' => 'Supplier created successfully']);
+        session()->flash('alert', [
+            'type' => 'success',
+            'message' => 'Supplier Creation  Successfully!',
+        ]);
+        return redirect()->route('supplier.list');
     }
     private function vali($request)
     {
@@ -64,7 +68,11 @@ class SupplierController extends Controller
         $this->valiEdit($request);
         $suppliers = $this->dataArrange($request);
         Supplier::where('id', $id)->update($suppliers);
-        return redirect()->route('supplier.list')->with(['success' => 'Supplier updated successfully']);
+        session()->flash('alert', [
+            'type' => 'success',
+            'message' => 'Supplier  Updated  Successfully!',
+        ]);
+        return redirect()->route('supplier.list');
     }
     private function dataArrange($request)
     {
@@ -78,6 +86,10 @@ class SupplierController extends Controller
     public function delete($id)
     {
         Supplier::where('id', $id)->delete();
-        return redirect()->route('supplier.list')->with(['success' => 'Supplier deleted successfully']);
+        session()->flash('alert', [
+            'type' => 'success',
+            'message' => 'Supplier Deleted  Successfully!',
+        ]);
+        return redirect()->route('supplier.list');
     }
 }

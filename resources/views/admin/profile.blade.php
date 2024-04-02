@@ -17,8 +17,8 @@
         <div class="pagetitle">
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item">Home</li>
-                    <li class="breadcrumb-item active">Profile</li>
+                    <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
+                    <li class="breadcrumb-item active"><b>Profile</b></li>
                 </ol>
             </nav>
         </div>
