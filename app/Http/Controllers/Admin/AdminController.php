@@ -44,7 +44,8 @@ class AdminController extends Controller
     //Admin List
     public function list()
     {
-        $data = User::whereIn('usertype', ['supplier_admin', 'store_admin', 'super_admin'])->get();
+        // Assuming your 'role' field stores the role of the user
+        $data = User::whereIn('usertype', ['super_admin', 'supplier_admin', 'store_admin'])->get();
         return view('admin.admin.admin_list', compact('data'));
     }
 
@@ -99,7 +100,7 @@ class AdminController extends Controller
     {
         Validator::make($request->all(), [
             'AdminName' => 'required',
-            'AdminEmail' => 'required|unique:users,email',
+            'AdminEmail' => 'required|email|unique:users,email|max:255',
             'AdminPassword' => 'required',
             'usertype' => 'required',
         ])->validate();

@@ -60,6 +60,7 @@
                     $counter = 1; // Initialize counter variable
                 @endphp
                     @foreach ($data as $aList)
+
                         <tr class="tr-shadow">
                             {{-- <td class="col-lg-1">{{ $productModel->id }}</td> --}}
                             <td class="col-lg-1" style="text-align:center;">{{ $counter++}}</td>

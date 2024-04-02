@@ -17,7 +17,7 @@
                 <ol class="breadcrumb">
                     <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
                     <a class="breadcrumb-item " href="{{ route('Admin.list') }}">Admin List</a>
-                    <li class="breadcrumb-item " ><b>Edit Admin</b></li>
+                    <li class="breadcrumb-item "><b>Edit Admin</b></li>
                 </ol>
             </nav>
         </div>
@@ -76,6 +76,26 @@
                                     </div>
                                 @enderror
                             </div>
+
+                            {{-- User Type --}}
+                            <div class="form-group mb-3">
+                                <label for="usertype" class="form-label">Choose Position</label>
+                                <div class="form-group mb-3">
+                                    <select class="form-select @error('usertype') is-invalid @enderror" name="usertype" id="usertype">
+                                        <option value="">Choose Position</option>
+                                        <option value="store_admin" {{ (old('usertype') == 'store_admin' ||  $data->usertype == 'store_admin') ? 'selected' : '' }}>Store Admin</option>
+                                        <option value="supplier_admin" {{ (old('usertype') == 'supplier_admin' ||  $data->usertype == 'supplier_admin') ? 'selected' : '' }}>Supplier Admin</option>
+                                        <option value="super_admin" {{ (old('usertype') == 'super_admin' ||  $data->usertype == 'super_admin') ? 'selected' : '' }}>Super Admin</option>
+                                    </select>
+                                </div>
+
+                                @error('usertype')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
 
                             {{-- submit --}}
                             <div class="text-center">

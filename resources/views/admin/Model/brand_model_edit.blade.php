@@ -56,7 +56,7 @@
 
                             {{-- Brand Call --}}
                             <div class="form-group mb-3">
-                                <label for="modelName" class="form-label">Brand</label>
+                                <label for="BrandId" class="form-label">Brand</label>
                                 <select class="form-select @error('BrandId') is-invalid @enderror" name="BrandId" id="modelName">
                                     <option value="">Choose Brand</option>
                                     @foreach ($brandData as $brand)
