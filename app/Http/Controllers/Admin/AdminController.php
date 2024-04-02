@@ -84,7 +84,6 @@ class AdminController extends Controller
             'AdminName' => 'required',
             'AdminEmail' => 'required|unique:users,email',
             'AdminPassword' => 'required',
-
         ])->validate();
     }
 
