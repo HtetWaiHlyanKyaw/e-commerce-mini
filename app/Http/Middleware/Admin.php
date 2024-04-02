@@ -21,11 +21,22 @@ class Admin
     //     }
     //     return $next($request);
     // }
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, ...$types): Response
     {
         if (!Auth::check()) {
             return redirect()->route('login');
+        } else {
+            // Get the authenticated user
+            $user = Auth::user();
+
+            // Check if the user's type is not in the provided types
+            if (!in_array($user->usertype, $types)) {
+                // Redirect to the dashboard
+                return redirect('/dashboard');
+            }
         }
+
+        // Allow the request to pass through to the next middleware or controller
         return $next($request);
     }
 }

@@ -26,37 +26,44 @@
                     </a>
                 </li>
                 <hr>
-
+                @if (auth()->user()->hasPermissionTo('read brand'))
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Brands</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{ route('brand.list') }}" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-list"></i>
-                        </span>
-                        <span class="hide-menu">List</span>
+
+                        <a class="sidebar-link" href="{{ route('brand.list') }}" aria-expanded="false">
+                            <span>
+                                <i class="ti ti-list"></i>
+                            </span>
+                            <span class="hide-menu">List</span>
+
                     </a>
 
                 </li>
+                @endif
+                @if (auth()->user()->hasPermissionTo('create brand'))
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{ route('brand.page') }}" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-circle-plus"></i>
-                        </span>
-                        <span class="hide-menu">Create</span>
-                    </a>
+
+                        <a class="sidebar-link" href="{{ route('brand.page') }}" aria-expanded="false">
+                            <span>
+                                <i class="ti ti-circle-plus"></i>
+                            </span>
+                            <span class="hide-menu">Create</span>
+                        </a>
+
                 </li>
                 <hr>
-
-
+                @endif
+                @if (auth()->user()->hasPermissionTo('read model'))
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Models</span>
                 </li>
 
                 <li class="sidebar-item">
+
                     <a class="sidebar-link" href="{{ route('model.list') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-list"></i>
@@ -65,23 +72,29 @@
                     </a>
 
                 </li>
+                @endif
+                @if (auth()->user()->hasPermissionTo('create model'))
                 <li class="sidebar-item">
+
                     <a class="sidebar-link" href="{{ route('model.page') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-circle-plus"></i>
                         </span>
                         <span class="hide-menu">Create</span>
+
                     </a>
                 </li>
+
                 <hr>
-
-
+                @endif
+                @if (auth()->user()->hasPermissionTo('read product'))
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Products</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{route('product.index')}}" aria-expanded="false">
+
+                    <a class="sidebar-link" href="{{ route('product.index') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-list"></i>
                         </span>
@@ -89,42 +102,58 @@
                     </a>
 
                 </li>
+                @endif
+                @if (auth()->user()->hasPermissionTo('create product'))
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{route('product.create')}}" aria-expanded="false">
+
+                    <a class="sidebar-link" href="{{ route('product.create') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-circle-plus"></i>
                         </span>
                         <span class="hide-menu">Create</span>
                     </a>
+
                 </li>
+                @endif
+                @if (auth()->user()->hasPermissionTo('view reviews'))
                 <li class="sidebar-item">
+
                     <a class="sidebar-link" href="{{ route('product.reviews') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-message"></i>
                         </span>
                         <span class="hide-menu">Reviews</span>
                     </a>
+
                 </li>
                 <hr>
+                @endif
+                @if (auth()->user()->hasPermissionTo('read supplier'))
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Suppliers</span>
                 </li>
                 <li class="sidebar-item">
+
                     <a class="sidebar-link" href="{{ route('supplier.list') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-list"></i>
                         </span>
                         <span class="hide-menu">List</span>
                     </a>
+
                 </li>
+                @endif
+                @if (auth()->user()->hasPermissionTo('create supplier'))
                 <li class="sidebar-item">
+
                     <a class="sidebar-link" href="{{ route('supplier.page') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-circle-plus"></i>
                         </span>
                         <span class="hide-menu">Create</span>
                     </a>
+
                 </li>
                 {{-- <li class="sidebar-item">
           <a class="sidebar-link" href="#" aria-expanded="false">
@@ -135,70 +164,94 @@
           </a>
         </li> --}}
                 <hr>
+                @endif
+                @if (auth()->user()->hasPermissionTo('read supplier_purchase'))
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Supplier Purchases</span>
                 </li>
+
                 <li class="sidebar-item">
+
                     <a class="sidebar-link" href="{{ route('supplier_purchase.list') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-list"></i>
                         </span>
                         <span class="hide-menu">List</span>
                     </a>
+
                 </li>
+                @endif
+                @if (auth()->user()->hasPermissionTo('create supplier_purchase'))
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{route('supplier_purchase.page')}}" aria-expanded="false">
+
+                    <a class="sidebar-link" href="{{ route('supplier_purchase.page') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-circle-plus"></i>
                         </span>
                         <span class="hide-menu">Create</span>
                     </a>
+
                 </li>
                 <hr>
+                @endif
+                @if (auth()->user()->hasPermissionTo('crud admin'))
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Admins</span>
                 </li>
 
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{(route('Admin.list'))}}" aria-expanded="false">
+
+                    <a class="sidebar-link" href="{{ route('Admin.list') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-list"></i>
                         </span>
                         <span class="hide-menu">List</span>
                     </a>
+
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{route('Admin.page')}}" aria-expanded="false">
+
+                    <a class="sidebar-link" href="{{ route('Admin.page') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-circle-plus"></i>
                         </span>
                         <span class="hide-menu">Create</span>
                     </a>
-                    <hr>
-                    <li class="nav-small-cap">
-                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                        <span class="hide-menu">Customers</span>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{ route('customer.page') }}" aria-expanded="false">
-                            <span>
-                                <i class="ti ti-list"></i>
-                            </span>
-                            <span class="hide-menu">List</span>
-                        </a>
 
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{route('customer_purchase.list')}}" aria-expanded="false">
-                            <span>
-                                <i class="ti ti-receipt-2"></i>
-                            </span>
-                            <span class="hide-menu">Purchases</span>
-                        </a>
-                    </li>
                 </li>
+
+                    <hr>
+                    @endif
+                    @if (auth()->user()->hasPermissionTo('view customer list'))
+                <li class="nav-small-cap">
+                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                    <span class="hide-menu">Customers</span>
+                </li>
+                <li class="sidebar-item">
+
+                    <a class="sidebar-link" href="{{ route('customer.page') }}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-list"></i>
+                        </span>
+                        <span class="hide-menu">List</span>
+                    </a>
+
+                </li>
+                @endif
+                @if (auth()->user()->hasPermissionTo('view purchases'))
+                <li class="sidebar-item">
+
+                    <a class="sidebar-link" href="{{ route('customer_purchase.list') }}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-receipt-2"></i>
+                        </span>
+                        <span class="hide-menu">Purchases</span>
+                    </a>
+
+                </li>
+                @endif
             </ul>
         </nav>
         <!-- End Sidebar navigation -->
