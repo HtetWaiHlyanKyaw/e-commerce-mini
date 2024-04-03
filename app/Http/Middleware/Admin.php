@@ -12,12 +12,16 @@ class Admin
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  mixed  ...$types
-     * @return mixed
+     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, ...$types)
+    // public function handle(Request $request, Closure $next): Response
+    // {
+    //     if(Auth::user()->usertype != 'admin'){
+    //         abort(404);
+    //     }
+    //     return $next($request);
+    // }
+    public function handle(Request $request, Closure $next, ...$types): Response
     {
         if (!Auth::check()) {
             return redirect()->route('login');
@@ -29,13 +33,6 @@ class Admin
             abort('403');
             // You may change this to any other route
         }
-
-        $user = Auth::user();
-
-        if (in_array($user->usertype, $types)) {
-            abort(404);
-        }
-
         return $next($request);
     }
 }

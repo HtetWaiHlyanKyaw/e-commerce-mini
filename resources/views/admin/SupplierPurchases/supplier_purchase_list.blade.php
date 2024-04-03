@@ -21,28 +21,17 @@
 
         <h1 class="header-color">Supplier Purchase List</h1>
         <br>
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col">
-                    <div class="pagetitle">
-                        <h4> Total Supplier Purchases -{{ $supplierPurchases->count() }}</h4>
-                        <nav>
-                            <ol class="breadcrumb">
-                                <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
-                                <li class="breadcrumb-item"><b>Supplier Purchase List</b></li>
-                            </ol>
-                        </nav>
-                    </div>
-                </div>
-                {{-- <div class="col-auto">
-                    <form action="{{ route('export.supplier.purchases') }}" method="GET">
-                        @csrf
-                        <button type="submit" class="btn btn-success rounded-5 border-2 px-3 me-3"><i class="ti ti-download"></i> Export</button>
-                    </form>
-                </div> --}}
-            </div>
+        <div class="pagetitle ">
+            <h3> Total Supplier Purchases - <span style="color: #5d9bff;">{{ $supplierPurchases->count() }}</span></h3>
+            <nav>
+                <ol class="breadcrumb">
+                    <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
+                    <a class="breadcrumb-item " href="{{ route('supplier.list') }}">Supplier List</a>
+                    <li class="breadcrumb-item "><b>Supplier Purchase List</b></li>
+                </ol>
+            </nav>
         </div>
-        <br>
+        {{-- <br> --}}
         <div>
             @if (session('success'))
                 <div class="alert alert-success text-center" role="alert">
@@ -57,35 +46,38 @@
             @endif
         </div>
 
-        <div class="container">
+        {{-- <div class="container"> --}}
             <div class="bg-white p-4 border rounded">
-                <form action="{{ route('export.supplier.purchases') }}" method="GET">
-                    <div class="row pb-6 g-6">
-                        <div class="col-auto" style="margin-right: 45%;">
-                            <form action="{{ route('export.supplier.purchases') }}" method="GET">
-                                @csrf
-                                <button type="submit" class="btn btn-success rounded-5 border-2 px-3 me-3"><i
-                                        class="ti ti-download"></i> Export</button>
-                            </form>
-                        </div>
-                        <div class="col-auto mt-0" style="margin-left: 45px;">
-                            <label for="">Start Date: </label>
-                            <input type="date" class="form-control" name="start_date"
-                                max="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
-                        </div>
-
-                        <div class="col-auto mt-0">
-                            <label for="">End Date: </label>
-                            <input type="date" class="form-control" name="end_date"
-                                max="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
-                        </div>
-
-                        <div class="col-auto">
-                            <button type="submit" class="btn btn-primary mb-5  border-2 px-3 me-2"><i
-                                    class="ti ti-adjustments-horizontal"></i> Filter</button>
-                        </div>
+                {{-- <br> --}}
+                <div class="row">
+                    <div class="col-auto">
+                        <form action="{{ route('export.supplier.purchases') }}" method="GET">
+                            @csrf
+                            <button type="submit" class="btn btn-success rounded-5 border-2 px-3 me-3"><i class="ti ti-download"></i> Export</button>
+                        </form>
+                        <br>
                     </div>
-                </form>
+
+                    {{-- <div class="col-auto" style="margin-left: auto;">
+                        <form action="{{ route('supplier_purchase.filter') }}" method="GET">
+                            <div class="row pb-6 g-6">
+                                <div class="col-auto mt-0">
+                                    <label for="">Start Date: </label>
+                                    <input type="date" class="form-control" name="start_date" max="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
+                                </div>
+
+                                <div class="col-auto mt-0">
+                                    <label for="">End Date: </label>
+                                    <input type="date" class="form-control" name="end_date" max="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
+                                </div>
+
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-primary mb-5  border-2 px-3 me-2"><i class="ti ti-adjustments-horizontal"></i> Filter</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div> --}}
+                </div>
 
                     <table id="myTable" class="hover compact">
                         <thead>
@@ -94,7 +86,7 @@
                                 <th style="text-align:center;color: #5d9bff">Supplier Name</th>
                                 <th style="text-align:center;color: #5d9bff">Total Quantity</th>
                                 <th style="text-align:center;color: #5d9bff">Total Price</th>
-                                <th style="text-align:center;color: #5d9bff">Payment Method</th>
+                                {{-- <th style="text-align:center;color: #5d9bff">Payment Method</th> --}}
                                 <th style="text-align:center;color: #5d9bff">Date</th>
                                 <th style="text-align:center;color: #5d9bff">Action</th>
                             </tr>
@@ -106,7 +98,7 @@
                                     <td style="text-align:center;">{{ $supplierPurchase->supplier->name }}</td>
                                     <td style="text-align:center;">{{ $supplierPurchase->total_quantity }}</td>
                                     <td style="text-align:center;">{{ $supplierPurchase->total_price }}</td>
-                                    <td style="text-align:center;">{{ $supplierPurchase->payment_method }}</td>
+                                    {{-- <td style="text-align:center;">{{ $supplierPurchase->payment_method }}</td> --}}
                                     <td style="text-align:center;">
                                         {{ \Carbon\Carbon::parse($supplierPurchase->created_at)->format('F j, Y') }}</td>
                                     <td style="text-align:center;">
@@ -124,38 +116,9 @@
 
             </div>
         </div>
-    </div>
+    {{-- </div> --}}
 @endsection
 @section('script')
     <!-- Additional scripts if needed -->
 @endsection
-@section('script')
-    {{--   <script>
-        $(document).ready(function() {
-            $('#daterange').daterangepicker({
-                opens: 'left',
-                locale: {
-                    format: 'YYYY-MM-DD'
-                }
-            }, function(start, end, label) {
-                var start_date = start.format('YYYY-MM-DD');
-                var end_date = end.format('YYYY-MM-DD');
-                window.location.href = "{{ route('supplier_purchase.list') }}" + "?start_date=" + start_date + "&end_date=" + end_date;
-            });
-        }); --}}
 
-    <script>
-        // fetch();
-        // //Filter
-        // $(document).on("click", "#filter", function(e) {
-        //     e.preventDefault();
-        //     var start_date = $("#start_date").val();
-        //     var end_date = $("#end_date").val();
-        //     if (start_date == "" || end_date == "") {
-        //         alert("Both date required");
-        //     } else {
-        //         $('#records').DataTable().destory();
-        //         fetch(start_date, end_date);
-        //     }
-        // });
-    </script>

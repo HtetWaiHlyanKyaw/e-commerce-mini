@@ -53,7 +53,7 @@
                         <th style="color: #5d9bff; text-align:center;">Email</th>
                         <th style="color: #5d9bff; text-align:center;">Phone</th>
                         <th style="color: #5d9bff; text-align:center;">Address</th>
-                        <th style="color: #5d9bff; text-align:center;">created_at</th>
+                        <th style="color: #5d9bff; text-align:center;">Date</th>
                         <th style="color: #5d9bff; text-align:center;">Actions</th>
                     </tr>
                 </thead>

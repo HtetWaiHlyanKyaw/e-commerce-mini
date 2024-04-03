@@ -65,8 +65,20 @@ class AdminController extends Controller
         $data = [
             'name' => $request->AdminName,
             'email' => $request->AdminEmail,
+            'usertype' => $request->usertype,
         ];
+
         User::where('id', $id)->update($data);
+        $user = User::findOrFail($id);
+        $user->syncRoles([]);
+        // Assign role based on usertype
+        if ($user->usertype === 'store_admin') {
+            $user->assignRole('store_admin');
+        } elseif ($user->usertype === 'supplier_admin') {
+            $user->assignRole('supplier_admin');
+        } elseif ($user->usertype === 'super_admin') {
+            $user->assignRole('super_admin');
+        }
         session()->flash('alert', [
             'type' => 'success',
             'message' => 'Admin Updated  Successfully!',
@@ -113,6 +125,7 @@ class AdminController extends Controller
         Validator::make($request->all(), [
             'AdminName' => 'required',
             'AdminEmail' => 'required|unique:users,email,' . $id,
+            'usertype' => 'required',
         ])->validate();
     }
 }

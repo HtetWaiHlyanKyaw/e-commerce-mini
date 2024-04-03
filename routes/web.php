@@ -28,7 +28,7 @@ use App\Http\Controllers\Admin\ExportController;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('dashboard');
 });
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -100,7 +100,7 @@ Route::middleware('admin:store_admin,super_admin')->group(function () {
             Route::post('/create', [SupplierPurchaseController::class, 'create'])->name('supplier_purchase.create');
             Route::get('/list', [SupplierPurchaseController::class, 'list'])->name('supplier_purchase.list');
             Route::get('/detail/{id}', [SupplierPurchaseController::class, 'detail'])->name('supplier_purchase.detail');
-            Route::get('/filter', [SupplierPurchaseController::class, 'filter'])->name('supplier_purchase.filter');
+            // Route::get('/filter', [SupplierPurchaseController::class, 'filter'])->name('supplier_purchase.filter');
             // Route::get('/delete/{id}', [SupplierPurchaseController::class, 'delete'])->name('supplier.delete');
             Route::get('/export', [ExportController::class, 'exportSupplierPurchases'])->name('export.supplier.purchases');
         });
@@ -118,6 +118,7 @@ Route::middleware('admin:store_admin,super_admin')->group(function () {
     Route::get('/list', [CustomerPurchaseController::class, 'list'])->name('customer_purchase.list');
     Route::get('/detail/{id}', [CustomerPurchaseController::class, 'detail'])->name('customer_purchase.detail');
     Route::get('/export', [ExportController::class, 'exportCustomerPurchases'])->name('export.customer.purchases');
+    // Route::get('/filter', [CustomerPurchaseController::class, 'filter'])->name('customer_purchase.filter');
 });
 });
 Route::middleware('admin:super_admin')->group(function () {

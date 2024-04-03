@@ -23,9 +23,9 @@ class ProductController extends Controller
 
     public function create()
 {
-    $products = Product::with('brand')->get();
+    $brands = Brand::all();
     $models = ProductModel::all();
-    return view('admin.Products.product_create', compact('products', 'models'));
+    return view('admin.Products.product_create', compact('brands', 'models'));
 }
 
 

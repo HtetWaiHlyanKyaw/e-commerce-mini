@@ -54,8 +54,8 @@
                         <th style="text-align:center; color: #5d9bff;">Name</th>
                         <th style="text-align:center; color: #5d9bff;">Brand</th>
                         <th style="text-align:center; color: #5d9bff;">Price</th>
-                        <th style="text-align:center; color: #5d9bff;">Date</th>
                         <th style="text-align:center; color: #5d9bff;">Quantity</th>
+                        <th style="text-align:center; color: #5d9bff;">Date</th>
                         <th style="text-align:center; color: #5d9bff;">Action</th>
 
                     </tr>
@@ -78,9 +78,10 @@
                         <td class="col-lg-1">{{ $plist->storage_option }}</td>
                         <td class="col-lg-1">{{ $plist->color }}</td> --}}
                             <td class="col-lg-1" style="text-align:center;">{{ $plist->price }}</td>
+                            <td class="col-lg-1" style="text-align:center; color: {{ $plist->quantity <= $plist->low_stock ? 'red' : 'inherit' }}">{{ $plist->quantity }}</td>
                             <td class="col-lg-2" style="text-align:center;"> {{ \Carbon\Carbon::parse($plist->created_at)->format('F j, Y') }}</td>
 
-                            <td class="col-lg-1" style="text-align:center; color: {{ $plist->quantity <= $plist->low_stock ? 'red' : 'inherit' }}">{{ $plist->quantity }}</td>
+
                             {{-- <td class="col-lg-1">{{ $plist->low_stock }}</td> --}}
                             {{-- <td class="col-lg-1">{{ $plist->description }}</td> --}}
                             <td class="col-lg-2" style="text-align:center;">
