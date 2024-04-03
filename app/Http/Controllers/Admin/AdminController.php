@@ -65,6 +65,7 @@ class AdminController extends Controller
         $data = [
             'name' => $request->AdminName,
             'email' => $request->AdminEmail,
+            'usertype' => $request->usertype,
         ];
         User::where('id', $id)->update($data);
         session()->flash('alert', [
