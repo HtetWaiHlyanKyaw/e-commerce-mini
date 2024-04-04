@@ -108,6 +108,8 @@ Route::prefix('admin/customer purchase')->group(function () {
     Route::get('/list', [CustomerPurchaseController::class, 'list'])->name('customer_purchase.list');
     Route::get('/detail/{id}', [CustomerPurchaseController::class, 'detail'])->name('customer_purchase.detail');
     Route::get('/export', [ExportController::class, 'exportCustomerPurchases'])->name('export.customer.purchases');
+    Route::get('/filter', [CustomerPurchaseController::class, 'filter'])->name('customer_purchase.filter');
+
 });
 });
 Route::middleware('admin: super_admin')->group(function () {
