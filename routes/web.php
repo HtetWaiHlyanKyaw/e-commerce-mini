@@ -136,14 +136,16 @@ Route::middleware('admin:super_admin,store_admin,supplier_admin')->group(functio
 
 Route::get('profile', [ProfileController::class, 'index'])->name('admin.profile');
  });
- Route::get('/dashboard', function () {
-    // If user is authenticated, allow access to dashboard
-    if (auth()->check()) {
-        return view('admin.dashboard');
-    }
-    // If user is not authenticated, redirect to login
-    return redirect()->route('login');
-})->name('dashboard');
+//  Route::get('/dashboard', function () {
+//     // If user is authenticated, allow access to dashboard
+//     if (auth()->check()) {
+//         return view('admin.dashboard');
+//     }
+//     // If user is not authenticated, redirect to login
+//     return redirect()->route('login');
+// })->name('dashboard');
+
+Route::middleware(['auth'])->get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Auth::routes();
 
