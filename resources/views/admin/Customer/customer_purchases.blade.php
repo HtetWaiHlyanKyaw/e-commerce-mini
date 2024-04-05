@@ -94,7 +94,7 @@
                                         class="ti ti-download"></i> Export</button>
                             </form>
                         </div>
-                        <div class="col-auto mt-0" style="margin-left: 45px;">
+                        {{-- <div class="col-auto mt-0" style="margin-left: 45px;">
                             <label for="">Start Date: </label>
                             <input type="date" class="form-control" name="start_date"
                                 max="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
@@ -110,7 +110,7 @@
                             <input type="hidden" name="refresh" value="true">
                             <button type="submit" class="btn btn-primary mb-5  border-2 px-3 me-2"><i
                                     class="ti ti-adjustments-horizontal"></i> Filter</button>
-                        </div>
+                        </div> --}}
                     </div>
                 </form>
             </div>

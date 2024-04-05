@@ -71,8 +71,15 @@
 
             <form action="{{ route('supplier_purchase.filter') }}" method="GET">
                 <div class="row pb-3 align-items-end">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-4 mb-3">
+
+                    <div class="col-md-1">
+                        <form action="{{ route('export.customer.purchases') }}" method="GET">
+                            @csrf
+                            <button type="submit" class="btn btn-success"><i
+                                    class="ti ti-download"></i> Export</button>
+                        </form>
+                    </div>
+                    {{-- <div class="col-md-4 mb-3">
                         <label for="start_date" class="form-label">Start Date:</label>
                         <input type="date" class="form-control" id="start_date" name="start_date"
                             max="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
@@ -91,7 +98,7 @@
                                 class="ti ti-reload" id="refreshBtn"></i>Refresh</button>
                         <input type="hidden" name="refresh" value="true">
                     </div>
-                </div>
+                </div> --}}
             </form>
             {{-- <form action="{{ route('supplier_purchase.filter') }}" method="GET">
                 <div class="row pb-3">
