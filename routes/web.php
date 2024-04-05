@@ -1,19 +1,20 @@
 <?php
 
-use App\Http\Controllers\Admin\CustomerController;
-use App\Http\Controllers\Admin\CustomerPurchaseController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\BrandModelController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\admin\ReviewController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\CustomerPurchaseController;
 use App\Http\Controllers\Admin\SupplierPurchaseController;
-use App\Http\Controllers\Admin\ProfileController;
-use App\Http\Controllers\Admin\ExportController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,7 +29,7 @@ use App\Http\Controllers\Admin\ExportController;
 
 
 Route::get('/', function () {
-    return redirect()->route('dashboard');
+    return redirect()->route('user.page');
 });
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -146,3 +147,8 @@ Route::get('profile', [ProfileController::class, 'index'])->name('admin.profile'
 
 Auth::routes();
 
+//user
+// Route::get('/user', function () {
+//     return redirect()->route('page');
+// });
+Route::get('/page', [UserController::class, 'index'])->name('user.page');
