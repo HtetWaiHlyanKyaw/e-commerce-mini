@@ -92,7 +92,7 @@
                                 <select class="form-select @error('BrandName') is-invalid @enderror brandname"
                                     name="BrandName" aria-label="Default select example">
                                     <option value="">Choose Brand</option>
-                                    @foreach ($products as $brand)
+                                    @foreach ($brands as $brand)
                                         <option value="{{ $brand->id }}"
                                             @if (old('BrandName') == $brand->id) selected @endif>{{ $brand->name }}</option>
                                     @endforeach

@@ -21,28 +21,17 @@
 
         <h1 class="header-color">Supplier Purchase List</h1>
         <br>
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col">
-                    <div class="pagetitle">
-                        <h4> Total Supplier Purchases -{{ $supplierPurchases->count() }}</h4>
-                        <nav>
-                            <ol class="breadcrumb">
-                                <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
-                                <li class="breadcrumb-item"><b>Supplier Purchase List</b></li>
-                            </ol>
-                        </nav>
-                    </div>
-                </div>
-                {{-- <div class="col-auto">
-                    <form action="{{ route('export.supplier.purchases') }}" method="GET">
-                        @csrf
-                        <button type="submit" class="btn btn-success rounded-5 border-2 px-3 me-3"><i class="ti ti-download"></i> Export</button>
-                    </form>
-                </div> --}}
-            </div>
+        <div class="pagetitle ">
+            <h3> Total Supplier Purchases - <span style="color: #5d9bff;">{{ $supplierPurchases->count() }}</span></h3>
+            <nav>
+                <ol class="breadcrumb">
+                    <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
+                    <a class="breadcrumb-item " href="{{ route('supplier.list') }}">Supplier List</a>
+                    <li class="breadcrumb-item "><b>Supplier Purchase List</b></li>
+                </ol>
+            </nav>
         </div>
-        <br>
+        {{-- <br> --}}
         <div>
             @if (session('success'))
                 <div class="alert alert-success text-center" role="alert">
@@ -81,25 +70,29 @@
                     </form> --}}
 
             <form action="{{ route('supplier_purchase.filter') }}" method="GET">
-                        <div class="row pb-3 align-items-end">
-                             <div class="col-md-1"></div>
-                            <div class="col-md-4 mb-3">
-                                <label for="start_date" class="form-label">Start Date:</label>
-                                <input type="date" class="form-control" id="start_date" name="start_date" max="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="end_date" class="form-label">End Date:</label>
-                                <input type="date" class="form-control" id="end_date" name="end_date" max="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
-                            </div>
-                            <div class="col-auto mb-3">
-                                <button type="submit" class="btn btn-primary btn-block mt-2"><i class="ti ti-adjustments-horizontal"></i> Filter</button>
-                            </div>
-                            <div class="col-auto mb-3">
-                                <button class="btn btn-outline-secondary btn-block mt-2" ><i class="ti ti-reload"></i>Refresh</button>
-                                <input type="hidden" name="refresh" value="true">
-                            </div>
-                        </div>
-                    </form>
+                <div class="row pb-3 align-items-end">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-4 mb-3">
+                        <label for="start_date" class="form-label">Start Date:</label>
+                        <input type="date" class="form-control" id="start_date" name="start_date"
+                            max="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="end_date" class="form-label">End Date:</label>
+                        <input type="date" class="form-control" id="end_date" name="end_date"
+                            max="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
+                    </div>
+                    <div class="col-auto mb-3">
+                        <button type="submit" class="btn btn-primary btn-block mt-2"><i
+                                class="ti ti-adjustments-horizontal" ></i> Filter</button>
+                    </div>
+                    <div class="col-auto mb-3">
+                        <button class="btn btn-outline-secondary btn-block mt-2"><i
+                                class="ti ti-reload" id="refreshBtn"></i>Refresh</button>
+                        <input type="hidden" name="refresh" value="true">
+                    </div>
+                </div>
+            </form>
             {{-- <form action="{{ route('supplier_purchase.filter') }}" method="GET">
                 <div class="row pb-3">
                     <div class="col-md-6">
@@ -165,34 +158,62 @@
 @endsection
 @section('script')
     <!-- Additional scripts if needed -->
-@endsection
-@section('script')
-    {{--   <script>
-        $(document).ready(function() {
-            $('#daterange').daterangepicker({
-                opens: 'left',
-                locale: {
-                    format: 'YYYY-MM-DD'
-                }
-            }, function(start, end, label) {
-                var start_date = start.format('YYYY-MM-DD');
-                var end_date = end.format('YYYY-MM-DD');
-                window.location.href = "{{ route('supplier_purchase.list') }}" + "?start_date=" + start_date + "&end_date=" + end_date;
-            });
-        }); --}}
 
     <script>
-        // fetch();
-        // //Filter
-        // $(document).on("click", "#filter", function(e) {
-        //     e.preventDefault();
-        //     var start_date = $("#start_date").val();
-        //     var end_date = $("#end_date").val();
-        //     if (start_date == "" || end_date == "") {
-        //         alert("Both date required");
-        //     } else {
-        //         $('#records').DataTable().destory();
-        //         fetch(start_date, end_date);
-        //     }
-        // });
-    </script>
+        < script >
+
+            $(document).ready(function() {
+                // Initialize DataTable
+                var table = $('#myTable').DataTable({
+                    // Your DataTable configurations here
+                    // Example:
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false
+                });
+
+                // Handle filtering event
+                $('#filterForm').on('submit', function(e) {
+                    e.preventDefault();
+                    var formData = $(this).serialize();
+
+                    // Send AJAX request to filter data
+                    $.ajax({
+                        url: '{{ route('supplier_purchase.filter') }}', // Replace with your filter route
+                        type: 'POST',
+                        data: formData,
+                        dataType: 'json',
+                        success: function(response) {
+                            // Clear existing rows
+                            table.clear().draw();
+
+                            // Add filtered rows
+                            $.each(response.data, function(index, row) {
+                                table.row.add([
+                                    row.invoice_id,
+                                    row.supplier_name,
+                                    row.total_quantity,
+                                    row.total_price,
+                                    row.payment_method,
+                                    row.date,
+                                    row.action
+                                ]).draw(false);
+                            });
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(xhr.responseText);
+                        }
+                    });
+                });
+
+                // Handle refresh button click
+                $('#refreshBtn').on('click', function() {
+                    // Clear filters and reload DataTable
+                    $('#filterForm')[0].reset();
+                    table.ajax.reload();
+                });
+            });
+@endsection

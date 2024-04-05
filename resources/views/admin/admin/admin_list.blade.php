@@ -51,7 +51,7 @@
                         <th  style="color: #5d9bff; text-align:center;">No</th>
                         <th style="color: #5d9bff; text-align:center;">Name</th>
                         <th style="color: #5d9bff; text-align:center;">Email</th>
-                        <th style="color: #5d9bff; text-align:center;">User Type</th>
+                        <th style="color: #5d9bff; text-align:center;">Position</th>
                         <th style="color: #5d9bff; text-align:center;">Actions</th>
                     </tr>
                 </thead>

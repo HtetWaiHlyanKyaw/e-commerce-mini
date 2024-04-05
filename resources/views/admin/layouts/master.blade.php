@@ -60,6 +60,7 @@
         // let table = new DataTable('#myTable');
         $(document).ready(function() {
             $('#myTable').DataTable({
+                "order": [[ 0, "desc" ]],
                 "language": {
                     "lengthMenu": "<strong>_MENU_ &nbsp records per page</strong>",
                     "sInfo": "<strong>_START_ to _END_ of _TOTAL_</strong>",
