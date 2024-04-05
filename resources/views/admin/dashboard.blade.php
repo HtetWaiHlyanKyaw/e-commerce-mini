@@ -2,362 +2,384 @@
 @section('title', 'Dashboard')
 
 @section('style')
+    <style>
+        .header-color {
+            color: #5d9bff;
+        }
 
+        .circle-icon {
+            width: 60px;
+            height: 60px;
+
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card-text {
+            font-size: 16px;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+    </style>
 @endsection
 
 @section('content')
-<div class="container-fluid">
-    <!--  Row 1 -->
-    <div class="row">
-      <div class="col-lg-8 d-flex align-items-strech">
-        <div class="card w-100">
-          <div class="card-body">
-            <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
-              <div class="mb-3 mb-sm-0">
-                <h5 class="card-title fw-semibold">Sales Overview</h5>
-              </div>
-              <div>
-                <select class="form-select">
-                  <option value="1">March 2023</option>
-                  <option value="2">April 2023</option>
-                  <option value="3">May 2023</option>
-                  <option value="4">June 2023</option>
-                </select>
-              </div>
-            </div>
-            <div id="chart"></div>
-          </div>
+
+    <div class="container-fluid">
+        <h1 class="header-color">Dashboard</h1><br>
+        <div class="pagetitle">
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active"><b>Home</b></li>
+                </ol>
+            </nav>
         </div>
-      </div>
-      <div class="col-lg-4">
+
+        <h4>Personnel</h4>
+        <div class="row mt-4">
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body d-flex justify-content-between align-items-center">
+                        <div>
+                            <a href="{{ route('supplier.list') }}">
+                                <p class="card-text mb-0" style="font-size: 16px;">Total Suppliers</p>
+                            </a><br>
+                            <h3 class="mb-0"><strong>{{ $suppliers->count() }}</strong></h3>
+                        </div>
+                        <div class="circle-icon" style="background-color: rgba(255, 99, 132, 0.2);">
+                            <i class="ti ti-package" style="font-size: 30px; color: #ff5d5d"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body d-flex justify-content-between align-items-center">
+                        <div>
+                            <a href="{{ route('customer.page') }}">
+                                <p class=" mb-0 card-text" style="font-size: 16px;">Total Customers</p>
+                            </a><br>
+
+                            <h3 class="mb-0"><strong>{{ $customers->count() }}</strong></h3>
+                        </div>
+                        <div class="circle-icon" style="background-color: #e0ebff">
+                            <i class="ti ti-users" style="font-size: 30px; color: #5d9bff"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body d-flex justify-content-between align-items-center">
+                        <div>
+                            <a href="{{ route('Admin.list') }}">
+                                <p class=" mb-0 card-text">Total Admins</p>
+                            </a><br>
+                            <h3 class="mb-0"><strong>{{ $admins->count() }}</strong></h3>
+                        </div>
+                        <div class="circle-icon" style="background-color: #e0ffe0">
+                            <i class="ti ti-shield" style="font-size: 30px; color:#60ff5d;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h4>Store</h4><br>
         <div class="row">
-          <div class="col-lg-12">
-            <!-- Yearly Breakup -->
-            <div class="card overflow-hidden">
-              <div class="card-body p-4">
-                <h5 class="card-title mb-9 fw-semibold">Yearly Breakup</h5>
-                <div class="row align-items-center">
-                  <div class="col-8">
-                    <h4 class="fw-semibold mb-3">$36,358</h4>
-                    <div class="d-flex align-items-center mb-3">
-                      <span
-                        class="me-1 rounded-circle bg-light-success round-20 d-flex align-items-center justify-content-center">
-                        <i class="ti ti-arrow-up-left text-success"></i>
-                      </span>
-                      <p class="text-dark me-1 fs-3 mb-0">+9%</p>
-                      <p class="fs-3 mb-0">last year</p>
+            <div class="col-lg-3 d-flex flex-column">
+                {{-- <div class="card mb-3 flex-grow-1">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Brands</h5>
+                            <!-- Display total brands count -->
+                        </div>
                     </div>
-                    <div class="d-flex align-items-center">
-                      <div class="me-4">
-                        <span class="round-8 bg-primary rounded-circle me-2 d-inline-block"></span>
-                        <span class="fs-2">2023</span>
-                      </div>
-                      <div>
-                        <span class="round-8 bg-light-primary rounded-circle me-2 d-inline-block"></span>
-                        <span class="fs-2">2023</span>
-                      </div>
+                    <div class="card mb-3 flex-grow-1">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Models</h5>
+                            <!-- Display total models count -->
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-4">
-                    <div class="d-flex justify-content-center">
-                      <div id="breakup"></div>
+                    <div class="card mb-3 flex-grow-1">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Products</h5>
+                            <!-- Display total products count -->
+                        </div>
+                    </div> --}}
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <h5 class="card-title">Product</h5>
+                            <div class="col-7">
+                                <br>
+                                <a href="{{ route('brand.list') }}">
+                                    <p class="card-text">Total Brands</p>
+                                </a>
+                                <hr>
+                                <a href="{{ route('model.list') }}">
+                                    <p class="card-text">Total Models</p>
+                                </a>
+                                <hr>
+                                <a href="{{ route('product.index') }}">
+                                    <p class="card-text">Total Products</p>
+                                </a>
+                            </div>
+                            <div class="col-5">
+                                <br>
+                                <p class="card-text text-success" style="text-align: center;">{{ $brands->count() }}</p>
+                                <hr>
+                                <p class="card-text text-success"style="text-align: center;">{{ $models->count() }}</p>
+                                <hr>
+                                <p class="card-text text-success" style="text-align :center;">{{ $products->count() }}</p>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
             </div>
-          </div>
-          <div class="col-lg-12">
-            <!-- Monthly Earnings -->
-            <div class="card">
-              <div class="card-body">
-                <div class="row alig n-items-start">
-                  <div class="col-8">
-                    <h5 class="card-title mb-9 fw-semibold"> Monthly Earnings </h5>
-                    <h4 class="fw-semibold mb-3">$6,820</h4>
-                    <div class="d-flex align-items-center pb-1">
-                      <span
-                        class="me-2 rounded-circle bg-light-danger round-20 d-flex align-items-center justify-content-center">
-                        <i class="ti ti-arrow-down-right text-danger"></i>
-                      </span>
-                      <p class="text-dark me-1 fs-3 mb-0">+9%</p>
-                      <p class="fs-3 mb-0">last year</p>
+            <div class="col-lg-9 d-flex flex-column">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Products Analysis Overview</h5>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <canvas id="quantityDoughnutChart" width="300" height="160"></canvas>
+                            </div>
+                            <div class="col-lg-6">
+                                <canvas id="salesDoughnutChart" width="300" height="160"></canvas>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-4">
-                    <div class="d-flex justify-content-end">
-                      <div
-                        class="text-white bg-secondary rounded-circle p-6 d-flex align-items-center justify-content-center">
-                        <i class="ti ti-currency-dollar fs-6"></i>
-                      </div>
-                    </div>
-                  </div>
                 </div>
-              </div>
-              <div id="earning"></div>
             </div>
-          </div>
         </div>
-      </div>
+        @php
+            use Carbon\Carbon;
+            $currentMonthName = Carbon::now()->format('F');
+        @endphp
+        <h4>Revenues for <span style="color: #5d9bff">{{ $currentMonthName }}</span></h4>
+        <div class="row mt-4">
+            <div class="col-lg-6">
+                <div class="card h-80">
+                    <div class="card-body">
+
+                        <h5 class="card-title"><a href="{{ route('supplier_purchase.list') }}">Supplier Sales</a></h5>
+                        <br>
+                        <canvas id="purchaseChart" width="400" height="200 "></canvas>
+                        <hr>
+                        <div class="row">
+                            <div class="col-4">
+                                <h4 class="card-text">Total : <span
+                                        class="text-success">{{ $supplierPurchaseRevenue }}$</span></h4>
+                            </div>
+                            <div class="col-4">
+                                <h4 class="card-text">Purchases : <span
+                                        class="text-success">{{ $supplierPurchases->count() }}</span></h4>
+                            </div>
+                            <div class="col-4">
+                                <!-- Leave this empty if you don't have content for it -->
+                                <h4></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card h-80">
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="{{ route('customer_purchase.list') }}">Customer Sales</a></h5>
+                        <br>
+                        <canvas id="customerPurchaseChart" width="400" height="200 "></canvas>
+                        <hr>
+                        <div class="row">
+                            <div class="col-4">
+                                <h4 class="card-text">Total : <span
+                                        class="text-success">{{ $customerPurchaseRevenue }}$</span></h4>
+                            </div>
+                            <div class="col-4">
+                                <h4 class="card-text">Purchases : <span
+                                        class="text-success">{{ $customerPurchases->count() }}</span></h4>
+                            </div>
+                            <div class="col-4">
+                                <h4></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="row">
-      <div class="col-lg-4 d-flex align-items-stretch">
-        <div class="card w-100">
-          <div class="card-body p-4">
-            <div class="mb-4">
-              <h5 class="card-title fw-semibold">Recent Transactions</h5>
-            </div>
-            <ul class="timeline-widget mb-0 position-relative mb-n5">
-              <li class="timeline-item d-flex position-relative overflow-hidden">
-                <div class="timeline-time text-dark flex-shrink-0 text-end">09:30</div>
-                <div class="timeline-badge-wrap d-flex flex-column align-items-center">
-                  <span class="timeline-badge border-2 border border-primary flex-shrink-0 my-8"></span>
-                  <span class="timeline-badge-border d-block flex-shrink-0"></span>
-                </div>
-                <div class="timeline-desc fs-3 text-dark mt-n1">Payment received from John Doe of $385.90</div>
-              </li>
-              <li class="timeline-item d-flex position-relative overflow-hidden">
-                <div class="timeline-time text-dark flex-shrink-0 text-end">10:00 am</div>
-                <div class="timeline-badge-wrap d-flex flex-column align-items-center">
-                  <span class="timeline-badge border-2 border border-info flex-shrink-0 my-8"></span>
-                  <span class="timeline-badge-border d-block flex-shrink-0"></span>
-                </div>
-                <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">New sale recorded <a
-                    href="javascript:void(0)" class="text-primary d-block fw-normal">#ML-3467</a>
-                </div>
-              </li>
-              <li class="timeline-item d-flex position-relative overflow-hidden">
-                <div class="timeline-time text-dark flex-shrink-0 text-end">12:00 am</div>
-                <div class="timeline-badge-wrap d-flex flex-column align-items-center">
-                  <span class="timeline-badge border-2 border border-success flex-shrink-0 my-8"></span>
-                  <span class="timeline-badge-border d-block flex-shrink-0"></span>
-                </div>
-                <div class="timeline-desc fs-3 text-dark mt-n1">Payment was made of $64.95 to Michael</div>
-              </li>
-              <li class="timeline-item d-flex position-relative overflow-hidden">
-                <div class="timeline-time text-dark flex-shrink-0 text-end">09:30 am</div>
-                <div class="timeline-badge-wrap d-flex flex-column align-items-center">
-                  <span class="timeline-badge border-2 border border-warning flex-shrink-0 my-8"></span>
-                  <span class="timeline-badge-border d-block flex-shrink-0"></span>
-                </div>
-                <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">New sale recorded <a
-                    href="javascript:void(0)" class="text-primary d-block fw-normal">#ML-3467</a>
-                </div>
-              </li>
-              <li class="timeline-item d-flex position-relative overflow-hidden">
-                <div class="timeline-time text-dark flex-shrink-0 text-end">09:30 am</div>
-                <div class="timeline-badge-wrap d-flex flex-column align-items-center">
-                  <span class="timeline-badge border-2 border border-danger flex-shrink-0 my-8"></span>
-                  <span class="timeline-badge-border d-block flex-shrink-0"></span>
-                </div>
-                <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">New arrival recorded
-                </div>
-              </li>
-              <li class="timeline-item d-flex position-relative overflow-hidden">
-                <div class="timeline-time text-dark flex-shrink-0 text-end">12:00 am</div>
-                <div class="timeline-badge-wrap d-flex flex-column align-items-center">
-                  <span class="timeline-badge border-2 border border-success flex-shrink-0 my-8"></span>
-                </div>
-                <div class="timeline-desc fs-3 text-dark mt-n1">Payment Done</div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-8 d-flex align-items-stretch">
-        <div class="card w-100">
-          <div class="card-body p-4">
-            <h5 class="card-title fw-semibold mb-4">Recent Transactions</h5>
-            <div class="table-responsive">
-              <table class="table text-nowrap mb-0 align-middle">
-                <thead class="text-dark fs-4">
-                  <tr>
-                    <th class="border-bottom-0">
-                      <h6 class="fw-semibold mb-0">Id</h6>
-                    </th>
-                    <th class="border-bottom-0">
-                      <h6 class="fw-semibold mb-0">Assigned</h6>
-                    </th>
-                    <th class="border-bottom-0">
-                      <h6 class="fw-semibold mb-0">Name</h6>
-                    </th>
-                    <th class="border-bottom-0">
-                      <h6 class="fw-semibold mb-0">Priority</h6>
-                    </th>
-                    <th class="border-bottom-0">
-                      <h6 class="fw-semibold mb-0">Budget</h6>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="border-bottom-0"><h6 class="fw-semibold mb-0">1</h6></td>
-                    <td class="border-bottom-0">
-                        <h6 class="fw-semibold mb-1">Sunil Joshi</h6>
-                        <span class="fw-normal">Web Designer</span>
-                    </td>
-                    <td class="border-bottom-0">
-                      <p class="mb-0 fw-normal">Elite Admin</p>
-                    </td>
-                    <td class="border-bottom-0">
-                      <div class="d-flex align-items-center gap-2">
-                        <span class="badge bg-primary rounded-3 fw-semibold">Low</span>
-                      </div>
-                    </td>
-                    <td class="border-bottom-0">
-                      <h6 class="fw-semibold mb-0 fs-4">$3.9</h6>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="border-bottom-0"><h6 class="fw-semibold mb-0">2</h6></td>
-                    <td class="border-bottom-0">
-                        <h6 class="fw-semibold mb-1">Andrew McDownland</h6>
-                        <span class="fw-normal">Project Manager</span>
-                    </td>
-                    <td class="border-bottom-0">
-                      <p class="mb-0 fw-normal">Real Homes WP Theme</p>
-                    </td>
-                    <td class="border-bottom-0">
-                      <div class="d-flex align-items-center gap-2">
-                        <span class="badge bg-secondary rounded-3 fw-semibold">Medium</span>
-                      </div>
-                    </td>
-                    <td class="border-bottom-0">
-                      <h6 class="fw-semibold mb-0 fs-4">$24.5k</h6>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="border-bottom-0"><h6 class="fw-semibold mb-0">3</h6></td>
-                    <td class="border-bottom-0">
-                        <h6 class="fw-semibold mb-1">Christopher Jamil</h6>
-                        <span class="fw-normal">Project Manager</span>
-                    </td>
-                    <td class="border-bottom-0">
-                      <p class="mb-0 fw-normal">MedicalPro WP Theme</p>
-                    </td>
-                    <td class="border-bottom-0">
-                      <div class="d-flex align-items-center gap-2">
-                        <span class="badge bg-danger rounded-3 fw-semibold">High</span>
-                      </div>
-                    </td>
-                    <td class="border-bottom-0">
-                      <h6 class="fw-semibold mb-0 fs-4">$12.8k</h6>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="border-bottom-0"><h6 class="fw-semibold mb-0">4</h6></td>
-                    <td class="border-bottom-0">
-                        <h6 class="fw-semibold mb-1">Nirav Joshi</h6>
-                        <span class="fw-normal">Frontend Engineer</span>
-                    </td>
-                    <td class="border-bottom-0">
-                      <p class="mb-0 fw-normal">Hosting Press HTML</p>
-                    </td>
-                    <td class="border-bottom-0">
-                      <div class="d-flex align-items-center gap-2">
-                        <span class="badge bg-success rounded-3 fw-semibold">Critical</span>
-                      </div>
-                    </td>
-                    <td class="border-bottom-0">
-                      <h6 class="fw-semibold mb-0 fs-4">$2.4k</h6>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-6 col-xl-3">
-        <div class="card overflow-hidden rounded-2">
-          <div class="position-relative">
-            <a href="javascript:void(0)"><img src="{{asset('admin/images/products/s4.jpg')}}" class="card-img-top rounded-0" alt="..."></a>
-            <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>                      </div>
-          <div class="card-body pt-3 p-4">
-            <h6 class="fw-semibold fs-4">Boat Headphone</h6>
-            <div class="d-flex align-items-center justify-content-between">
-              <h6 class="fw-semibold fs-4 mb-0">$50 <span class="ms-2 fw-normal text-muted fs-3"><del>$65</del></span></h6>
-              <ul class="list-unstyled d-flex align-items-center mb-0">
-                <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                <li><a class="" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-xl-3">
-        <div class="card overflow-hidden rounded-2">
-          <div class="position-relative">
-            <a href="javascript:void(0)"><img src="{{asset('admin/images/products/s5.jpg')}}" class="card-img-top rounded-0" alt="..."></a>
-            <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>                      </div>
-          <div class="card-body pt-3 p-4">
-            <h6 class="fw-semibold fs-4">MacBook Air Pro</h6>
-            <div class="d-flex align-items-center justify-content-between">
-              <h6 class="fw-semibold fs-4 mb-0">$650 <span class="ms-2 fw-normal text-muted fs-3"><del>$900</del></span></h6>
-              <ul class="list-unstyled d-flex align-items-center mb-0">
-                <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                <li><a class="" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-xl-3">
-        <div class="card overflow-hidden rounded-2">
-          <div class="position-relative">
-            <a href="javascript:void(0)"><img src="{{asset('admin/images/products/s7.jpg')}}" class="card-img-top rounded-0" alt="..."></a>
-            <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>                      </div>
-          <div class="card-body pt-3 p-4">
-            <h6 class="fw-semibold fs-4">Red Valvet Dress</h6>
-            <div class="d-flex align-items-center justify-content-between">
-              <h6 class="fw-semibold fs-4 mb-0">$150 <span class="ms-2 fw-normal text-muted fs-3"><del>$200</del></span></h6>
-              <ul class="list-unstyled d-flex align-items-center mb-0">
-                <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                <li><a class="" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-xl-3">
-        <div class="card overflow-hidden rounded-2">
-          <div class="position-relative">
-            <a href="javascript:void(0)"><img src="admin/images/products/s11.jpg" class="card-img-top rounded-0" alt="..."></a>
-            <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>                      </div>
-          <div class="card-body pt-3 p-4">
-            <h6 class="fw-semibold fs-4">Cute Soft Teddybear</h6>
-            <div class="d-flex align-items-center justify-content-between">
-              <h6 class="fw-semibold fs-4 mb-0">$285 <span class="ms-2 fw-normal text-muted fs-3"><del>$345</del></span></h6>
-              <ul class="list-unstyled d-flex align-items-center mb-0">
-                <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                <li><a class="" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    {{-- <div class="py-6 px-6 text-center">
-      <p class="mb-0 fs-4">Design and Developed by <a href="https://adminmart.com/" target="_blank" class="pe-1 text-primary text-decoration-underline">AdminMart.com</a> Distributed by <a href="https://themewagon.com">ThemeWagon</a></p>
-    </div> --}}
-  </div>
+
+
+
+
 
 @endsection
 
 @section('script')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var maxAmount = {!! max($supplierPurchaseAmounts) !!};
+
+        var ctx = document.getElementById('purchaseChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: {!! json_encode($days) !!},
+                datasets: [{
+                    label: 'Purchase Amount',
+                    data: {!! json_encode(array_values($supplierPurchaseAmounts)) !!},
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Days',
+                            font: {
+                                weight: 'bold'
+                            }
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        suggestedMax: maxAmount,
+                        title: {
+                            display: true,
+                            text: 'Purchase Amount',
+                            font: {
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+    <script>
+        var maxCustomerAmount = {!! max($customerPurchaseAmounts) !!};
+
+        var ctxCustomer = document.getElementById('customerPurchaseChart').getContext('2d');
+        var myCustomerChart = new Chart(ctxCustomer, {
+            type: 'line',
+            data: {
+                labels: {!! json_encode($customerPurchaseDays) !!},
+                datasets: [{
+                    label: 'Purchase Amount',
+                    data: {!! json_encode(array_values($customerPurchaseAmounts)) !!},
+
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Days',
+                            font: {
+                                weight: 'bold'
+                            }
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        suggestedMax: maxCustomerAmount,
+                        title: {
+                            display: true,
+                            text: 'Purchase Amount',
+                            font: {
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+    <script>
+    var quantityCtx = document.getElementById('quantityDoughnutChart').getContext('2d');
+    var salesCtx = document.getElementById('salesDoughnutChart').getContext('2d');
+    var productData = @json($productData);
+
+    // Extract data for quantity chart
+    var quantityLabels = productData.map(function(item) {
+        return item.product.name; // Assuming product_id is used as labels
+    });
+    var quantityData = productData.map(function(item) {
+        return item.total_quantity;
+    });
+
+    // Extract data for sales chart
+    var salesLabels = productData.map(function(item) {
+        return item.product.name; // Assuming product_id is used as labels
+    });
+    var salesData = productData.map(function(item) {
+        return item.total_sales;
+    });
+
+    var quantityDoughnutChart = new Chart(quantityCtx, {
+        type: 'doughnut',
+        data: {
+            // labels: quantityLabels,
+            datasets: [{
+                label: 'Quantity Sold',
+                data: quantityData,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)',
+                    'rgba(255, 99, 132, 0.5)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: false, // Set to true for responsiveness
+            maintainAspectRatio: false // Set to true for maintaining aspect ratio
+
+        }
+    });
+
+    var salesDoughnutChart = new Chart(salesCtx, {
+        type: 'doughnut',
+        data: {
+            // labels: salesLabels,
+            datasets: [{
+                label: 'Sales Total',
+                data: salesData,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)',
+                    'rgba(255, 99, 132, 0.5)'
+                    // Add more colors as needed
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: false, // Set to true for responsiveness
+            maintainAspectRatio: false // Set to true for maintaining aspect ratio
+
+        }
+    });
+    </script>
+
 
 @endsection
