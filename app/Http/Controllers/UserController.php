@@ -12,7 +12,7 @@ class UserController extends Controller
         return view('user.page');
     }
 
-    public function Regular_page(){
+    public function RegularPage(){
         return view('user.regular_page');
     }
 
@@ -34,6 +34,10 @@ class UserController extends Controller
 
     public function blog(){
         return view('user.blog');
+    }
+
+    public function productDetail(){
+        return view('user.single_product_details');
     }
 
 }

@@ -73,9 +73,9 @@
                             </li>
                             <li><a href="#">Pages</a>
                                 <ul class="dropdown">
-                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="{{route('user.page')}}">Home</a></li>
                                     <li><a href="{{route('user.shop')}}">Shop</a></li>
-                                    <li><a href="{{route('user.Sblog')}}">Product Details</a></li>
+                                    <li><a href="{{route('user.detail')}}">Product Details</a></li>
                                     <li><a href="{{route('user.checkout')}}">Checkout</a></li>
                                     <li><a href="{{route('user.blog')}}">Blog</a></li>
                                     <li><a href="{{route('user.Sblog')}}">Single Blog</a></li>

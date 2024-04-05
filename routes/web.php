@@ -151,9 +151,10 @@ Route::middleware(['auth'])->get('/dashboard', [DashboardController::class, 'ind
 Auth::routes();
 
 Route::get('/page', [UserController::class, 'index'])->name('user.page');
-Route::get('/regular_page', [UserController::class, 'Regular_page'])->name('user.rePage');
+Route::get('/regular_page', [UserController::class, 'RegularPage'])->name('user.rePage');
 Route::get('/contact', [UserController::class, 'contact'])->name('user.contact');
 Route::get('/shop', [UserController::class, 'shop'])->name('user.shop');
 Route::get('/singleBlog', [UserController::class, 'singleBlog'])->name('user.Sblog');
 Route::get('/checkout', [UserController::class, 'checkout'])->name('user.checkout');
 Route::get('/blog', [UserController::class, 'blog'])->name('user.blog');
+Route::get('/productDetail', [UserController::class, 'productDetail'])->name('user.detail');
