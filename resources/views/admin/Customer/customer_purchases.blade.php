@@ -83,17 +83,16 @@
             </script>
         </div>
         <div class="bg-white p-4 border rounded">
-            <div class="col-auto" style="text-align: center">
-                <form action="{{ route('customer_purchase.filter') }}" method="GET">
-                    {{-- @csrf --}}
-                    <div class="row pb-6 g-6">
-                        <div class="col-auto" style="margin-right: 45%;">
-                            <form action="{{ route('export.customer.purchases') }}" method="GET">
-                                @csrf
-                                <button type="submit" class="btn btn-success rounded-5 border-2 px-3 me-3"><i
-                                        class="ti ti-download"></i> Export</button>
-                            </form>
-                        </div>
+            <div class="row">
+                <div class="col-auto">
+                    <form action="{{ route('export.customer.purchases') }}" method="GET">
+                        @csrf
+                        <button type="submit" class="btn btn-success rounded-5 border-2 px-3 me-3"><i
+                                class="ti ti-download"></i> Export</button>
+                    </form>
+                    <br>
+                </div>
+            </div>
                         {{-- <div class="col-auto mt-0" style="margin-left: 45px;">
                             <label for="">Start Date: </label>
                             <input type="date" class="form-control" name="start_date"
@@ -111,9 +110,9 @@
                             <button type="submit" class="btn btn-primary mb-5  border-2 px-3 me-2"><i
                                     class="ti ti-adjustments-horizontal"></i> Filter</button>
                         </div> --}}
-                    </div>
+                    {{-- </div>
                 </form>
-            </div>
+            </div> --}}
             {{-- <br> --}}
             {{-- <div class="row">
                 <div class="col-auto">
