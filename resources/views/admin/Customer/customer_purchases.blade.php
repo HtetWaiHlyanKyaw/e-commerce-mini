@@ -83,22 +83,45 @@
             </script>
         </div>
         <div class="bg-white p-4 border rounded">
-            {{-- <div class="col-auto" style="text-align: center;">
-                <form action="{{ route('export.customer.purchases') }}" method="GET">
-                    {{-- @csrf --}}
-                    {{-- <button type="submit" class="btn btn-success rounded-5 border-2 px-3 me-3"><i
-                            class="ti ti-download"></i> Export</button>
+            <div class="row">
+                <div class="col-auto">
+                    <form action="{{ route('export.customer.purchases') }}" method="GET">
+                        @csrf
+                        <button type="submit" class="btn btn-success rounded-5 border-2 px-3 me-3"><i
+                                class="ti ti-download"></i> Export</button>
+                    </form>
+                    <br>
+                </div>
+            </div>
+                        {{-- <div class="col-auto mt-0" style="margin-left: 45px;">
+                            <label for="">Start Date: </label>
+                            <input type="date" class="form-control" name="start_date"
+                                max="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
+                        </div>
+
+                        <div class="col-auto mt-0">
+                            <label for="">End Date: </label>
+                            <input type="date" class="form-control" name="end_date"
+                                max="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
+                        </div>
+
+                        <div class="col-auto">
+                            <input type="hidden" name="refresh" value="true">
+                            <button type="submit" class="btn btn-primary mb-5  border-2 px-3 me-2"><i
+                                    class="ti ti-adjustments-horizontal"></i> Filter</button>
+                        </div> --}}
+                    {{-- </div>
                 </form>
             </div> --}}
             {{-- <br> --}}
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-auto">
                     <form action="{{ route('export.customer.purchases') }}" method="GET">
                         @csrf
                         <button type="submit" class="btn btn-success rounded-5 border-2 px-3 me-3"><i class="ti ti-download"></i> Export</button>
                     </form>
                     <br>
-                </div>
+                </div> --}}
 
                 {{-- <div class="col-auto" style="margin-left: auto;">
                      {{ route('customer_purchase.filter') }}
@@ -119,8 +142,8 @@
                             </div>
                         </div>
                     </form>
-                </div> --}}
-            </div>
+                </div> </div>
+                 --}}
 
 
             <table style="background-color:white" id="myTable" class="hover compact">

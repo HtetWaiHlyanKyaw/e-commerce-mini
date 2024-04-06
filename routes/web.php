@@ -1,19 +1,21 @@
 <?php
 
-use App\Http\Controllers\Admin\CustomerController;
-use App\Http\Controllers\Admin\CustomerPurchaseController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\BrandModelController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\admin\ReviewController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\CustomerPurchaseController;
 use App\Http\Controllers\Admin\SupplierPurchaseController;
-use App\Http\Controllers\Admin\ProfileController;
-use App\Http\Controllers\Admin\ExportController;
+use App\Http\Controllers\Auth\LoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,7 +30,7 @@ use App\Http\Controllers\Admin\ExportController;
 
 
 Route::get('/', function () {
-    return redirect()->route('dashboard');
+    return redirect()->route('user.page');
 });
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -100,8 +102,8 @@ Route::middleware('admin:store_admin,super_admin')->group(function () {
             Route::post('/create', [SupplierPurchaseController::class, 'create'])->name('supplier_purchase.create');
             Route::get('/list', [SupplierPurchaseController::class, 'list'])->name('supplier_purchase.list');
             Route::get('/detail/{id}', [SupplierPurchaseController::class, 'detail'])->name('supplier_purchase.detail');
-            // Route::get('/filter', [SupplierPurchaseController::class, 'filter'])->name('supplier_purchase.filter');
-            // Route::get('/delete/{id}', [SupplierPurchaseController::class, 'delete'])->name('supplier.delete');
+            Route::get('/filter', [SupplierPurchaseController::class, 'filter'])->name('supplier_purchase.filter');
+            Route::get('/delete/{id}', [SupplierPurchaseController::class, 'delete'])->name('supplier.delete');
             Route::get('/export', [ExportController::class, 'exportSupplierPurchases'])->name('export.supplier.purchases');
         });
     });
@@ -118,7 +120,8 @@ Route::middleware('admin:store_admin,super_admin')->group(function () {
     Route::get('/list', [CustomerPurchaseController::class, 'list'])->name('customer_purchase.list');
     Route::get('/detail/{id}', [CustomerPurchaseController::class, 'detail'])->name('customer_purchase.detail');
     Route::get('/export', [ExportController::class, 'exportCustomerPurchases'])->name('export.customer.purchases');
-    // Route::get('/filter', [CustomerPurchaseController::class, 'filter'])->name('customer_purchase.filter');
+    Route::get('/filter', [CustomerPurchaseController::class, 'filter'])->name('customer_purchase.filter');
+
 });
 });
 Route::middleware('admin:super_admin')->group(function () {
@@ -146,5 +149,25 @@ Route::get('profile', [ProfileController::class, 'index'])->name('admin.profile'
 
 Route::middleware(['auth'])->get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Auth::routes();
 
+
+
+
+
+
+Route::prefix('admin')->group(function () {
+Auth::routes();});
+
+
+
+
+
+
+Route::get('/page', [UserController::class, 'index'])->name('user.page');
+Route::get('/regular_page', [UserController::class, 'RegularPage'])->name('user.rePage');
+Route::get('/contact', [UserController::class, 'contact'])->name('user.contact');
+Route::get('/shop', [UserController::class, 'shop'])->name('user.shop');
+Route::get('/singleBlog', [UserController::class, 'singleBlog'])->name('user.Sblog');
+Route::get('/checkout', [UserController::class, 'checkout'])->name('user.checkout');
+Route::get('/blog', [UserController::class, 'blog'])->name('user.blog');
+Route::get('/productDetail', [UserController::class, 'productDetail'])->name('user.detail');
