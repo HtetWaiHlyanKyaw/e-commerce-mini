@@ -12,10 +12,12 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\SupplierController;
+use App\Http\Controllers\Auth\UserLoginController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CustomerPurchaseController;
 use App\Http\Controllers\Admin\SupplierPurchaseController;
-use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\UserRegisterController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,9 +31,9 @@ use App\Http\Controllers\Auth\LoginController;
 // routes/web.php
 
 
-Route::get('/', function () {
-    return redirect()->route('user.page');
-});
+// Route::get('/', function () {
+//     return redirect()->route('user.page');
+// });
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
@@ -151,7 +153,26 @@ Route::get('profile', [ProfileController::class, 'index'])->name('admin.profile'
 Route::middleware(['auth'])->get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::prefix('admin')->group(function () {
 Auth::routes();});
-Route::get('/page', [UserController::class, 'index'])->name('user.page');
+
+
+
+
+
+
+Route::get('/user/login', [UserLoginController::class,'showLoginForm'])->name('user.login');
+Route::post('/user/login', [UserLoginController::class,'login']);
+Route::post('/user/logout', [UserLoginController::class,'logout'])->name('user.logout');
+
+
+Route::get('/user/Register_Page',[UserRegisterController::class, 'page'])->name('user.RegisterPage');
+Route::post('/user/registration',[UserRegisterController::class, 'register'])->name('user.register');
+
+
+
+
+
+
+Route::get('/', [UserController::class, 'index'])->name('user.page');
 Route::get('/regular_page', [UserController::class, 'RegularPage'])->name('user.rePage');
 Route::get('/contact', [UserController::class, 'contact'])->name('user.contact');
 Route::get('/shop', [UserController::class, 'shop'])->name('user.shop');
