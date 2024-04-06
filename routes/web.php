@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\OAuthController;
 use App\Http\Controllers\BrandModelController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ExportController;
@@ -149,7 +151,7 @@ Route::get('profile', [ProfileController::class, 'index'])->name('admin.profile'
 Route::middleware(['auth'])->get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Auth::routes();
-
+Route::prefix('user')->group(function () {
 Route::get('/page', [UserController::class, 'index'])->name('user.page');
 Route::get('/regular_page', [UserController::class, 'RegularPage'])->name('user.rePage');
 Route::get('/contact', [UserController::class, 'contact'])->name('user.contact');
@@ -158,3 +160,7 @@ Route::get('/singleBlog', [UserController::class, 'singleBlog'])->name('user.Sbl
 Route::get('/checkout', [UserController::class, 'checkout'])->name('user.checkout');
 Route::get('/blog', [UserController::class, 'blog'])->name('user.blog');
 Route::get('/productDetail', [UserController::class, 'productDetail'])->name('user.detail');
+});
+
+// Route::get('/oauth/redirect',[OAuthController::class, 'redirect'])->name('oauth');
+// Route::get('/index', [OAuthController::class, 'index']);
