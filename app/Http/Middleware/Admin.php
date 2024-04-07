@@ -20,9 +20,11 @@ class Admin
             return redirect('/admin/login');
         }
         $user = Auth::user();
+        if ($user->usertype === 'customer') {
+            return redirect('/admin/login');
+        }
         if (!in_array($user->usertype, $types)) {
             abort('403');
-
         }
         return $next($request);
     }

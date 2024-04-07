@@ -17,7 +17,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CustomerPurchaseController;
 use App\Http\Controllers\Admin\SupplierPurchaseController;
 use App\Http\Controllers\UserRegisterController;
-
+use App\Http\Controllers\Auth\AdminLoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -138,40 +138,36 @@ Route::prefix('admin/Admin')->group(function () {
 });
 });
 Route::middleware('admin:super_admin,store_admin,supplier_admin')->group(function () {
-
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('profile', [ProfileController::class, 'index'])->name('admin.profile');
  });
-//  Route::get('/dashboard', function () {
-//     // If user is authenticated, allow access to dashboard
-//     if (auth()->check()) {
-//         return view('admin.dashboard');
+//  Route::middleware('auth')->get('/dashboard', function () {
+//     $user = auth()->user();
+//     if ($user && $user->usertype === 'customer') {
+//         return redirect('/admin/login');
+//     } else {
+//         return redirect()->action([DashboardController::class, 'index']);
 //     }
-//     // If user is not authenticated, redirect to login
-//     return redirect()->route('login');
 // })->name('dashboard');
 
-Route::middleware(['auth'])->get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::prefix('admin')->group(function () {
-Auth::routes();});
-
-
-
-
-
-
+// Route::middleware(['admin'])->get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+// Route::middleware(['auth'])->get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+// Route::prefix('admin')->group(function () {
+// Auth::routes();});
+//user Login and Register Control
 Route::get('/user/login', [UserLoginController::class,'showLoginForm'])->name('user.login');
 Route::post('/user/login', [UserLoginController::class,'login']);
 Route::post('/user/logout', [UserLoginController::class,'logout'])->name('user.logout');
-
-
 Route::get('/user/Register_Page',[UserRegisterController::class, 'page'])->name('user.RegisterPage');
 Route::post('/user/registration',[UserRegisterController::class, 'register'])->name('user.register');
 
+//admin Login Control
 
+Route::get('/admin/login', [AdminLoginController::class,'showLoginForm'])->name('login');
+Route::post('/admin/login', [AdminLoginController::class,'login']);
+Route::post('/admin/logout', [AdminLoginController::class,'logout'])->name('logout');
 
-
-
-
+//all user routes
 Route::get('/', [UserController::class, 'index'])->name('user.page');
 Route::get('/regular_page', [UserController::class, 'RegularPage'])->name('user.rePage');
 Route::get('/contact', [UserController::class, 'contact'])->name('user.contact');

@@ -6,13 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class UserLoginController extends Controller
+class AdminLoginController extends Controller
 {
     //
-
     public function showLoginForm()
     {
-        return view('auth.user_login');
+        return view('auth.login');
     }
 
     public function login(Request $request)
@@ -23,11 +22,17 @@ class UserLoginController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
+            // Check if the user is an admin
+            if (Auth::user()->usertype === 'customer') {
+                Auth::logout();
+                return redirect()->route('login');
+            }
             // Authentication passed...
-            return redirect()->route('user.page');
+            return redirect()->route('dashboard');
         }
-
-        return redirect()->route('user.login')->with('errors');
+        else{
+            return redirect()->route('login');
+        }
     }
 
     public function logout(Request $request)
@@ -38,6 +43,6 @@ class UserLoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/admin/login');
     }
 }
