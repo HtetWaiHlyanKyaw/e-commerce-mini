@@ -60,11 +60,12 @@
                 <tbody>
                     @php
                         $counter = 1; // Initialize counter variable
+                        $totalSuppliers = $suppliers->count();
                     @endphp
                     @foreach ($suppliers as $supplier)
                         <tr class="tr-shadow">
                             {{-- <td class="col-lg-1">{{ $blist->id }}</td> --}}
-                            <td class="col-lg-1" style="text-align:center;">{{ $counter }}</td>
+                            <td class="col-lg-1" style="text-align:center;">{{ $totalSuppliers-- }}</td>
                             <td class="col-lg-1" style="text-align:center;">{{ $supplier->name }}</td>
                             <td class="col-lg-1" style="text-align:center;">{{ $supplier->email }}</td>
                             <td class="col-lg-1" style="text-align:center;">{{ $supplier->phone_number }}</td>

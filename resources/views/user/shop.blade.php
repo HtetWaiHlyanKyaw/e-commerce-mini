@@ -103,9 +103,21 @@
             <div class="row">
                 <div class="col-12 col-md-2 col-lg-2">
                     <div class="shop_sidebar_area">
-
+                        <h6 class="widget-title mb-30">Filter by</h6>
+                        <div class="widget brands mb-50">
+                            <!-- Widget Title 2 -->
+                            <p class="widget-title2 mb-30">Brands</p>
+                            <div class="widget-desc" style="max-height: 200px; overflow-y: auto; scrollbar-width: thin;">
+                                <ul>
+                                    <li><a href="">All Brands</a></li>
+                                    @foreach($brands as $brand)
+                                    <li><a href="#">{{$brand->name}}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
                         <!-- ##### Single Widget ##### -->
-                        <div class="widget catagory mb-50">
+                        {{-- <div class="widget catagory mb-50">
                             <!-- Widget Title -->
                             <h6 class="widget-title mb-30">Catagories</h6>
 
@@ -165,60 +177,51 @@
                                     </li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <!-- ##### Single Widget ##### -->
+
+                        <!-- Colors -->
+                        <div class="widget brands mb-50">
+                            <!-- Widget Title 2 -->
+                            <p class="widget-title2 mb-30">COLOR</p>
+                            <div class="widget-desc" style="max-height: 200px; overflow-y: auto; scrollbar-width: thin;">
+                                <ul>
+                                    @foreach($uniqueColors as $color)
+                                    <li><a href="#">{{$color}}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                        <!--  Storage -->
+                        <div class="widget brands mb-50">
+                            <!-- Widget Title 2 -->
+                            <p class="widget-title2 mb-30">Storge</p>
+                            <div class="widget-desc" style="max-height: 200px; overflow-y: auto; scrollbar-width: thin;">
+                                <ul>
+                                    @foreach($uniqueStorage as $storage)
+                                    <li><a href="#">{{$storage}}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
                         <div class="widget price mb-50">
                             <!-- Widget Title -->
-                            <h6 class="widget-title mb-30">Filter by</h6>
                             <!-- Widget Title 2 -->
                             <p class="widget-title2 mb-30">Price</p>
-
                             <div class="widget-desc">
                                 <div class="slider-range">
-                                    <div data-min="49" data-max="360" data-unit="$" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="49" data-value-max="360" data-label-result="Range:">
+                                    <div data-min="{{ intval($minPrice) }}" data-max="{{ intval($maxPrice) }}" data-unit="$" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="{{ intval($minPrice) }}" data-value-max="{{ intval($maxPrice) }}" data-label-result="Range:">
                                         <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
                                         <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
                                         <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
                                     </div>
-                                    <div class="range-price">Range: $49.00 - $360.00</div>
+                                    <div class="range-price">Range: ${{ intval($minPrice) }} - ${{ intval($maxPrice) }}</div>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- ##### Single Widget ##### -->
-                        <div class="widget color mb-50">
-                            <!-- Widget Title 2 -->
-                            <p class="widget-title2 mb-30">Color</p>
-                            <div class="widget-desc">
-                                <ul class="d-flex">
-                                    <li><a href="#" class="color1"></a></li>
-                                    <li><a href="#" class="color2"></a></li>
-                                    <li><a href="#" class="color3"></a></li>
-                                    <li><a href="#" class="color4"></a></li>
-                                    <li><a href="#" class="color5"></a></li>
-                                    <li><a href="#" class="color6"></a></li>
-                                    <li><a href="#" class="color7"></a></li>
-                                    <li><a href="#" class="color8"></a></li>
-                                    <li><a href="#" class="color9"></a></li>
-                                    <li><a href="#" class="color10"></a></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- ##### Single Widget ##### -->
-                        <div class="widget brands mb-50">
-                            <!-- Widget Title 2 -->
-                            <p class="widget-title2 mb-30">Brands</p>
-                            <div class="widget-desc">
-                                <ul>
-                                    <li><a href="#">Asos</a></li>
-                                    <li><a href="#">Mango</a></li>
-                                    <li><a href="#">River Island</a></li>
-                                    <li><a href="#">Topshop</a></li>
-                                    <li><a href="#">Zara</a></li>
-                                </ul>
-                            </div>
+                        <div class="widget price mb-50">
+                            <div class="widget-desc"><button style="width: 100%">Filter</button></div>
                         </div>
                     </div>
                 </div>
@@ -259,7 +262,20 @@
                                 <div class="single-product-wrapper">
                                     <!-- Product Image -->
                                     <div class="product-img">
-                                      <a href="{{route('user.productDetail', $pDetails->id)}}"><img src="{{asset('user/img/product-img/product-2.jpg')}}" alt=""></a>
+                                      <a href="{{route('user.productDetail', $pDetails->id)}}"> <img src="{{ asset('storage/products/'.$pDetails->image)}}"  width="350" alt="Product Image" style="border-radius: 3px;"></a>
+                                        {{-- <img src="{{asset('user/img/product-img/product-2.jpg')}}" alt=""> --}}
+
+                                        <!-- Hover Thumb -->
+                                        {{-- <img class="hover-img" src="{{asset('user/img/product-img/product-2.jpg')}}" alt=""> --}}
+
+                                        {{-- <!-- Product Badge -->
+                                        <div class="product-badge offer-badge">
+                                            <span>-30%</span>
+                                        </div> --}}
+                                        <!-- Favourite -->
+                                        <div class="product-favourite">
+                                            <a href="#" class="favme fa fa-heart"></a>
+                                        </div>
                                     </div>
 
                                     <!-- Product Description -->
