@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Brand;
-use App\Models\Product;
+use App\Http\Controllers\Controller;
 
 class ShopController extends Controller
 {
@@ -17,8 +17,17 @@ class ShopController extends Controller
         $products = Product::all();
         $uniqueColors = $products->pluck('color')->unique();
         $uniqueStorage = $products->pluck('storage_option')->unique();
-        return view('user.shop',compact('brands','minPrice','maxPrice','uniqueColors','uniqueStorage'));
+        // return view('user.shop',compact('brands','minPrice','maxPrice','uniqueColors','uniqueStorage'));
+         // Eager load brand and model information
+         $datas = Product::with('brand', 'ProductModel')->get();
+         return view('user.shop', compact('datas','brands','minPrice','maxPrice','uniqueColors','uniqueStorage'));
     }
 
+    // public function display()
+    // {
+    //     // Eager load brand and model information
+    //     $datas = Product::with('brand', 'ProductModel')->get();
+    //     return view('user.shop', compact('datas'));
+    // }
 
 }
