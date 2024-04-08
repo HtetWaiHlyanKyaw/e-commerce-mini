@@ -263,7 +263,7 @@
                                     <!-- Product Image -->
                                     <div class="product-img">
                                         {{-- <img src="{{asset('user/img/product-img/product-2.jpg')}}" alt=""> --}}
-                                        <img src="{{ asset('storage/products/'.$pDetails->image)}}"  width="350" alt="Product Image" style="border-radius: 3px;">
+                                        <img src="{{ asset('storage/products/'.$pDetails->image)}}" alt="Product Image" style="border-radius: 3px; width: 100%; height: 200px; object-fit: cover;">
                                         <!-- Hover Thumb -->
                                         {{-- <img class="hover-img" src="{{asset('user/img/product-img/product-2.jpg')}}" alt=""> --}}
 
