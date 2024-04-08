@@ -12,10 +12,4 @@ class ShopController extends Controller
     }
 
 
-    public function list()
-    {
-        $data = Products::all();
-        return view('admin.Brands.brand_list', compact('data'));
-    }
-
 }
