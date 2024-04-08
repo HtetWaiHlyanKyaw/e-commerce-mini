@@ -14,7 +14,7 @@ class ShopController extends Controller
         $brands = Brand::get();
         $minPrice = Product::min('price');
         $maxPrice = Product::max('price');
-        $products = Product::all();
+        $products = Product::with('brand', 'ProductModel')->get();
         $uniqueColors = $products->pluck('color')->unique();
         $uniqueStorage = $products->pluck('storage_option')->unique();
         // return view('user.shop',compact('brands','minPrice','maxPrice','uniqueColors','uniqueStorage'));

@@ -139,7 +139,7 @@ Route::prefix('admin/Admin')->group(function () {
 });
 });
 Route::middleware('admin:super_admin,store_admin,supplier_admin')->group(function () {
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('profile', [ProfileController::class, 'index'])->name('admin.profile');
  });
 //  Route::middleware('auth')->get('/dashboard', function () {
