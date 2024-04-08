@@ -262,21 +262,9 @@
                                 <div class="single-product-wrapper">
                                     <!-- Product Image -->
                                     <div class="product-img">
-                                      <a href="{{route('user.productDetail', $pDetails->id)}}"> <img src="{{ asset('storage/products/'.$pDetails->image)}}"  width="350" alt="Product Image" style="border-radius: 3px;"></a>
-                                        {{-- <img src="{{asset('user/img/product-img/product-2.jpg')}}" alt=""> --}}
-
-                                        <!-- Hover Thumb -->
-                                        {{-- <img class="hover-img" src="{{asset('user/img/product-img/product-2.jpg')}}" alt=""> --}}
-
-                                        {{-- <!-- Product Badge -->
-                                        <div class="product-badge offer-badge">
-                                            <span>-30%</span>
-                                        </div> --}}
-                                        <!-- Favourite -->
-                                        <div class="product-favourite">
-                                            <a href="#" class="favme fa fa-heart"></a>
-                                        </div>
-                                    </div>
+                                        <a href="{{route('user.productDetail',$pDetails->id)}}"> <img src="{{ asset('storage/products/'.$pDetails->image)}}" alt="Product Image" style="border-radius: 3px; width: 100%; height: 200px; object-fit: cover;">
+                                        </a>
+                                       </div>
 
                                     <!-- Product Description -->
                                     <div class="product-description">

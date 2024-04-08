@@ -12,11 +12,16 @@
             <img class="w-100 shadow " src="{{ asset('storage/products/'. $datas->image)}}" alt="">
         </div>
 
-        <div class="col-lg-6">
+        <div class="col-lg-8">
             <h4 class="text-danger">{{$datas->brand->name}}</h4>
             <h3>{{$datas->name}}</h3>
             <h4 class="text-danger">$ {{$datas->price}}</h4>
+
+            <p>{{($datas->color)}}</p>
+            <p>{{($datas->description)}}</p>
         </div>
+
+
     </div>
 </div>
 
