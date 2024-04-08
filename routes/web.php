@@ -180,3 +180,4 @@ Route::get('/productDetail', [UserController::class, 'productDetail'])->name('us
 
 
 Route::get('/shop', [ShopController::class, 'shop'])->name('user.shop');
+Route::get('/product/detail{id}',[ShopController::class, 'detail'])->name('user.productDetail');

@@ -259,18 +259,7 @@
                                 <div class="single-product-wrapper">
                                     <!-- Product Image -->
                                     <div class="product-img">
-                                        <img src="{{asset('user/img/product-img/product-2.jpg')}}" alt="">
-                                        <!-- Hover Thumb -->
-                                        {{-- <img class="hover-img" src="{{asset('user/img/product-img/product-2.jpg')}}" alt=""> --}}
-
-                                        {{-- <!-- Product Badge -->
-                                        <div class="product-badge offer-badge">
-                                            <span>-30%</span>
-                                        </div> --}}
-                                        <!-- Favourite -->
-                                        <div class="product-favourite">
-                                            <a href="#" class="favme fa fa-heart"></a>
-                                        </div>
+                                      <a href="{{route('user.productDetail', $pDetails->id)}}"><img src="{{asset('user/img/product-img/product-2.jpg')}}" alt=""></a>
                                     </div>
 
                                     <!-- Product Description -->
@@ -280,7 +269,7 @@
                                             <h6>{{$pDetails->name}}</h6>
                                         </a>
                                         {{-- <p class="product-price"><span class="old-price">$75.00</span> $55.00</p> --}}
-                                        <p class="product-price">{{$pDetails->price}}</p>
+                                        <p class="product-price">$ {{$pDetails->price}} </p>
                                         <!-- Hover Content -->
                                         <div class="hover-content" style="margin-top: -45px;">
                                             <div class="add-to-cart-btn">
@@ -291,9 +280,7 @@
                                                 <a href="#" class="btn essence-btn">Buy Now</a>
                                             </div>
                                             <!-- Add to Cart -->
-
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
