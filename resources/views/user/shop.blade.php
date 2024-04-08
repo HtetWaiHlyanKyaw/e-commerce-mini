@@ -251,9 +251,9 @@
 
                         <div class="row">
 
-                            @foreach ( as )
+                            {{-- @foreach ( as ) --}}
 
-                            @endforeach
+                            {{-- @endforeach --}}
                             <!-- Single Product -->
                             <div class="col-12 col-sm-6 col-lg-3">
                                 <div class="single-product-wrapper">
