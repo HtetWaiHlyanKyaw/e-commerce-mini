@@ -20,9 +20,7 @@ class UserController extends Controller
         return view('user.contact');
     }
 
-    public function shop(){
-        return view('user.shop');
-    }
+
 
     public function singleBlog(){
         return view('user.single_blog');

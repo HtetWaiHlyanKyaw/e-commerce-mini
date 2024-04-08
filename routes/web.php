@@ -4,20 +4,21 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\User\ShopController;
 use App\Http\Controllers\BrandModelController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\admin\ReviewController;
+use App\Http\Controllers\UserRegisterController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Auth\UserLoginController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Admin\CustomerPurchaseController;
 use App\Http\Controllers\Admin\SupplierPurchaseController;
-use App\Http\Controllers\UserRegisterController;
-use App\Http\Controllers\Auth\AdminLoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -171,8 +172,11 @@ Route::post('/admin/logout', [AdminLoginController::class,'logout'])->name('logo
 Route::get('/', [UserController::class, 'index'])->name('user.page');
 Route::get('/regular_page', [UserController::class, 'RegularPage'])->name('user.rePage');
 Route::get('/contact', [UserController::class, 'contact'])->name('user.contact');
-Route::get('/shop', [UserController::class, 'shop'])->name('user.shop');
+
 Route::get('/singleBlog', [UserController::class, 'singleBlog'])->name('user.Sblog');
 Route::get('/checkout', [UserController::class, 'checkout'])->name('user.checkout');
 Route::get('/blog', [UserController::class, 'blog'])->name('user.blog');
 Route::get('/productDetail', [UserController::class, 'productDetail'])->name('user.detail');
+
+
+Route::get('/shop', [ShopController::class, 'shop'])->name('user.shop');
