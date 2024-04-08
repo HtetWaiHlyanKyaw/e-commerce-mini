@@ -251,22 +251,22 @@
 
                         <div class="row">
 
-                            {{-- @foreach ( as ) --}}
+                             @foreach ( $datas as $pDetails)
 
-                            {{-- @endforeach --}}
+                    {{-- {{dd($pDetails)}} --}}
                             <!-- Single Product -->
                             <div class="col-12 col-sm-6 col-lg-3">
                                 <div class="single-product-wrapper">
                                     <!-- Product Image -->
                                     <div class="product-img">
-                                        <img src="{{asset('user/img/product-img/product-1.jpg')}}" alt="">
+                                        <img src="{{asset('user/img/product-img/product-2.jpg')}}" alt="">
                                         <!-- Hover Thumb -->
                                         {{-- <img class="hover-img" src="{{asset('user/img/product-img/product-2.jpg')}}" alt=""> --}}
 
-                                        <!-- Product Badge -->
+                                        {{-- <!-- Product Badge -->
                                         <div class="product-badge offer-badge">
                                             <span>-30%</span>
-                                        </div>
+                                        </div> --}}
                                         <!-- Favourite -->
                                         <div class="product-favourite">
                                             <a href="#" class="favme fa fa-heart"></a>
@@ -275,23 +275,29 @@
 
                                     <!-- Product Description -->
                                     <div class="product-description">
-                                        <span>topshop</span>
+                                        {{-- <span>{{$pDetails->brand->name}}</span> --}}
                                         <a href="single-product-details.html">
-                                            <h6>Knot Front Mini Dress</h6>
+                                            <h6>{{$pDetails->name}}</h6>
                                         </a>
-                                        <p class="product-price"><span class="old-price">$75.00</span> $55.00</p>
-
+                                        {{-- <p class="product-price"><span class="old-price">$75.00</span> $55.00</p> --}}
+                                        <p class="product-price">{{$pDetails->price}}</p>
                                         <!-- Hover Content -->
-                                        <div class="hover-content">
-                                            <!-- Add to Cart -->
+                                        <div class="hover-content" style="margin-top: -45px;">
                                             <div class="add-to-cart-btn">
                                                 <a href="#" class="btn essence-btn">Add to Cart</a>
                                             </div>
+                                            <!-- Buy Now -->
+                                            <div class="add-to-cart-btn">
+                                                <a href="#" class="btn essence-btn">Buy Now</a>
+                                            </div>
+                                            <!-- Add to Cart -->
+
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
-
+                              @endforeach
                         </div>
                     </div>
                     <!-- Pagination -->
