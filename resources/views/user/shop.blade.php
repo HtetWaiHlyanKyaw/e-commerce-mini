@@ -272,6 +272,7 @@
                                     <div class="single-product-wrapper">
                                         <!-- Product Image -->
                                         <div class="product-img">
+                                            {{-- <a href="{{route('user.productDetail',$pDetails->id)}}"></a> --}}
                                             <img src="{{ asset('storage/products/' . $productGroup->first()->image) }}" alt="Product Image"
                                                 style="border-radius: 3px; width: 100%; height: 200px; object-fit: cover;">
                                             <!-- Favourite -->
