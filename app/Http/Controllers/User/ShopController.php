@@ -19,8 +19,10 @@ class ShopController extends Controller
         $uniqueStorage = $products->pluck('storage_option')->unique();
         // return view('user.shop',compact('brands','minPrice','maxPrice','uniqueColors','uniqueStorage'));
          // Eager load brand and model information
-         $datas = Product::with('brand', 'ProductModel')->get();
+         $datas = Product::with('brand', 'ProductModel')->paginate(8);
+        //  dd($datas);
          return view('user.shop', compact('datas','brands','minPrice','maxPrice','uniqueColors','uniqueStorage'));
+
     }
 
     public function detail($id){  //product details and purchase option

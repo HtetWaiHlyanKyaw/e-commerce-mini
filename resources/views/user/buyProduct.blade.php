@@ -20,8 +20,6 @@
             <p>{{($datas->color)}}</p>
             <p>{{($datas->description)}}</p>
         </div>
-
-
     </div>
 </div>
 
