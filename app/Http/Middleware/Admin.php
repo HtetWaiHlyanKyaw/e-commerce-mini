@@ -31,7 +31,7 @@ class Admin
             // Redirect to the dashboard or any other appropriate route
             // return redirect()->route('dashboard');
             abort('403');
-            // You may change this to any other route
+
         }
         return $next($request);
     }

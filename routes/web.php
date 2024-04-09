@@ -101,8 +101,8 @@ Route::middleware('admin:store_admin,super_admin')->group(function () {
             Route::post('/create', [SupplierPurchaseController::class, 'create'])->name('supplier_purchase.create');
             Route::get('/list', [SupplierPurchaseController::class, 'list'])->name('supplier_purchase.list');
             Route::get('/detail/{id}', [SupplierPurchaseController::class, 'detail'])->name('supplier_purchase.detail');
-            // Route::get('/filter', [SupplierPurchaseController::class, 'filter'])->name('supplier_purchase.filter');
-            // Route::get('/delete/{id}', [SupplierPurchaseController::class, 'delete'])->name('supplier.delete');
+            Route::get('/filter', [SupplierPurchaseController::class, 'filter'])->name('supplier_purchase.filter');
+            Route::get('/delete/{id}', [SupplierPurchaseController::class, 'delete'])->name('supplier.delete');
             Route::get('/export', [ExportController::class, 'exportSupplierPurchases'])->name('export.supplier.purchases');
         });
     });
@@ -119,7 +119,8 @@ Route::middleware('admin:store_admin,super_admin')->group(function () {
     Route::get('/list', [CustomerPurchaseController::class, 'list'])->name('customer_purchase.list');
     Route::get('/detail/{id}', [CustomerPurchaseController::class, 'detail'])->name('customer_purchase.detail');
     Route::get('/export', [ExportController::class, 'exportCustomerPurchases'])->name('export.customer.purchases');
-    // Route::get('/filter', [CustomerPurchaseController::class, 'filter'])->name('customer_purchase.filter');
+    Route::get('/filter', [CustomerPurchaseController::class, 'filter'])->name('customer_purchase.filter');
+
 });
 });
 Route::middleware('admin:super_admin')->group(function () {
@@ -147,8 +148,11 @@ Route::get('profile', [ProfileController::class, 'index'])->name('admin.profile'
 
 Auth::routes();
 
-//user
-// Route::get('/user', function () {
-//     return redirect()->route('page');
-// });
 Route::get('/page', [UserController::class, 'index'])->name('user.page');
+Route::get('/regular_page', [UserController::class, 'RegularPage'])->name('user.rePage');
+Route::get('/contact', [UserController::class, 'contact'])->name('user.contact');
+Route::get('/shop', [UserController::class, 'shop'])->name('user.shop');
+Route::get('/singleBlog', [UserController::class, 'singleBlog'])->name('user.Sblog');
+Route::get('/checkout', [UserController::class, 'checkout'])->name('user.checkout');
+Route::get('/blog', [UserController::class, 'blog'])->name('user.blog');
+Route::get('/productDetail', [UserController::class, 'productDetail'])->name('user.detail');
