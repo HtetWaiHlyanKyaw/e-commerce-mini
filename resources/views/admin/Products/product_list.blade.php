@@ -64,11 +64,12 @@
 
                     @php
                         $counter = 1; // Initialize counter variable
+                        $totalProducts = $datas->count();
                     @endphp
                     @foreach ($datas as $plist)
                         <tr class="tr-shadow">
                             {{-- <td class="col-lg-1">{{ $blist->id }}</td> --}}
-                            <td class="col-lg-1" style="text-align:center;">{{ $counter }}</td>
+                            <td class="col-lg-1" style="text-align:center;">{{ $totalProducts-- }}</td>
                             <td class="col-lg-2" style="text-align:center;">{{ $plist->name }}</td>
                             {{-- <td class="col-lg-1">
                             <img src="{{ asset('images/' . $plist->image) }}" alt="">

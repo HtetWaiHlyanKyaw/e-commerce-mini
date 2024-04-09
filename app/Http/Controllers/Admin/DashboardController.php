@@ -31,8 +31,8 @@ class DashboardController extends Controller
         $models = ProductModel:: all();
         $products = Product::with('brand', 'productModel')->paginate(10);
         $suppliers = Supplier:: all();
-        $supplierPurchases = SupplierPurchase::with('supplier')->paginate(10);
-         $customerPurchases = CustomerPurchase::with('user')->paginate(10);
+        $supplierPurchases = SupplierPurchase::with('supplier');
+         $customerPurchases = CustomerPurchase::with('user');
         $reviews = Review::with('product')->paginate(10);
         $admins = User::where('usertype', 'LIKE', '%admin')->get();
         $customers = User::where('usertype', 'customer')->get();

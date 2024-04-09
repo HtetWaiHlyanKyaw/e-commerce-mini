@@ -545,7 +545,6 @@
     </button>
 </div>
 {{-- Advertise end --}}
-
 {{-- New Arrival start --}}
 
 <section class="new_arrivals_area section-padding-3 mb-8  clearfix">

@@ -14,24 +14,17 @@ class Admin
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    // public function handle(Request $request, Closure $next): Response
-    // {
-    //     if(Auth::user()->usertype != 'admin'){
-    //         abort(404);
-    //     }
-    //     return $next($request);
-    // }
     public function handle(Request $request, Closure $next, ...$types): Response
     {
         if (!Auth::check()) {
-            return redirect()->route('login');
+            return redirect('/admin/login');
         }
         $user = Auth::user();
+        if ($user->usertype === 'customer') {
+            return redirect('/admin/login');
+        }
         if (!in_array($user->usertype, $types)) {
-            // Redirect to the dashboard or any other appropriate route
-            // return redirect()->route('dashboard');
             abort('403');
-
         }
         return $next($request);
     }

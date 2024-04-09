@@ -4,15 +4,20 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\User\ShopController;
+use App\Http\Controllers\User\UserProfileController;
 use App\Http\Controllers\BrandModelController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\admin\ReviewController;
+use App\Http\Controllers\UserRegisterController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\SupplierController;
+use App\Http\Controllers\Auth\UserLoginController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Admin\CustomerPurchaseController;
 use App\Http\Controllers\Admin\SupplierPurchaseController;
 /*
@@ -28,9 +33,9 @@ use App\Http\Controllers\Admin\SupplierPurchaseController;
 // routes/web.php
 
 
-Route::get('/', function () {
-    return redirect()->route('user.page');
-});
+// Route::get('/', function () {
+//     return redirect()->route('user.page');
+// });
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
@@ -69,7 +74,7 @@ Route::middleware('admin:store_admin,super_admin')->group(function () {
             Route::get('/delete/{id}', [BrandModelController::class, 'delete'])->name('model.delete');
         });
 
-        // Product URLs
+// Product URLs
         Route::prefix('admin/product')->group(function () {
             Route::get('/index', [ProductController::class, 'index'])->name('product.index');
             Route::get('/create', [ProductController::class, 'create'])->name('product.create');
@@ -121,6 +126,7 @@ Route::middleware('admin:store_admin,super_admin')->group(function () {
     Route::get('/export', [ExportController::class, 'exportCustomerPurchases'])->name('export.customer.purchases');
     Route::get('/filter', [CustomerPurchaseController::class, 'filter'])->name('customer_purchase.filter');
 
+
 });
 });
 Route::middleware('admin:super_admin')->group(function () {
@@ -134,25 +140,46 @@ Route::prefix('admin/Admin')->group(function () {
 });
 });
 Route::middleware('admin:super_admin,store_admin,supplier_admin')->group(function () {
-
-Route::get('profile', [ProfileController::class, 'index'])->name('admin.profile');
+Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/admin/profile', [ProfileController::class, 'index'])->name('admin.profile');
  });
- Route::get('/dashboard', function () {
-    // If user is authenticated, allow access to dashboard
-    if (auth()->check()) {
-        return view('admin.dashboard');
-    }
-    // If user is not authenticated, redirect to login
-    return redirect()->route('login');
-})->name('dashboard');
+//  Route::middleware('auth')->get('/dashboard', function () {
+//     $user = auth()->user();
+//     if ($user && $user->usertype === 'customer') {
+//         return redirect('/admin/login');
+//     } else {
+//         return redirect()->action([DashboardController::class, 'index']);
+//     }
+// })->name('dashboard');
 
-Auth::routes();
+// Route::middleware(['admin'])->get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+// Route::middleware(['auth'])->get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+// Route::prefix('admin')->group(function () {
+// Auth::routes();});
+//user Login and Register Control
+Route::get('/user/login', [UserLoginController::class,'showLoginForm'])->name('user.login');
+Route::post('/user/login', [UserLoginController::class,'login']);
+Route::post('/user/logout', [UserLoginController::class,'logout'])->name('user.logout');
+Route::get('/user/Register_Page',[UserRegisterController::class, 'page'])->name('user.RegisterPage');
+Route::post('/user/registration',[UserRegisterController::class, 'register'])->name('user.register');
 
-Route::get('/page', [UserController::class, 'index'])->name('user.page');
+//admin Login Control
+
+Route::get('/admin/login', [AdminLoginController::class,'showLoginForm'])->name('login');
+Route::post('/admin/login', [AdminLoginController::class,'login']);
+Route::post('/admin/logout', [AdminLoginController::class,'logout'])->name('logout');
+
+//all user routes
+Route::get('/', [UserController::class, 'index'])->name('user.page');
 Route::get('/regular_page', [UserController::class, 'RegularPage'])->name('user.rePage');
 Route::get('/contact', [UserController::class, 'contact'])->name('user.contact');
-Route::get('/shop', [UserController::class, 'shop'])->name('user.shop');
+
 Route::get('/singleBlog', [UserController::class, 'singleBlog'])->name('user.Sblog');
 Route::get('/checkout', [UserController::class, 'checkout'])->name('user.checkout');
 Route::get('/blog', [UserController::class, 'blog'])->name('user.blog');
 Route::get('/productDetail', [UserController::class, 'productDetail'])->name('user.detail');
+
+
+Route::get('/shop', [ShopController::class, 'shop'])->name('user.shop');
+Route::get('/product/detail{id}',[ShopController::class, 'detail'])->name('user.productDetail');
+Route::get('/profile', [UserProfileController::class, 'index'])->name('user.profile');

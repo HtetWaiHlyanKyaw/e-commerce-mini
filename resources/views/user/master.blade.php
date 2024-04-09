@@ -9,6 +9,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <title>@yield('title')</title>
+    @yield('style')
     <!-- Favicon  -->
     <link rel="icon" href="{{ asset('user/img/Unity Source Logo.png') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -71,19 +72,26 @@
                         <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                     </form>
                 </div>
-                {{-- <!-- Favourite Area -->
-                <div class="favourite-area">
-                    <a href="#"><img src="{{ asset('user/img/core-img/heart.svg') }}" alt=""></a>
-                </div> --}}
-                <!-- User Login Info -->
-                <div class="user-login-info">
-                    <a href="#"><img src="{{ asset('user/img/core-img/user.svg') }}" alt=""></a>
-                </div>
-                <!-- Cart Area -->
                 <div class="cart-area">
                     <a href="#" id="essenceCartBtn"><img src="{{ asset('user/img/core-img/bag.svg') }}"
                             alt=""><span></span></a>
                 </div>
+                <!-- Favourite Area -->
+                {{-- <div class="favourite-area">
+                    <a href="#"><img src="{{ asset('user/img/core-img/heart.svg') }}" alt=""></a>
+                </div> --}}
+                <!-- User Login Info -->
+                @if (Auth::check())
+                <div class="user-login-info">
+                    <a href="{{route('user.profile')}}"><img src="{{ asset('user/img/core-img/user.svg') }}" alt=""></a>
+                </div>
+                @else
+                <div class="user-login-info">
+                    <a href="{{route('user.login')}}">Sign In</a>
+                </div>
+                @endif
+                <!-- Cart Area -->
+
             </div>
 
         </div>
@@ -223,3 +231,4 @@
 </body>
 
 </html>
+@yield('script')

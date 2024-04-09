@@ -79,11 +79,12 @@
                 <tbody>
                     @php
                         $counter = 1; // Initialize counter variable
+                        $totalModels = $productModels->count();
                     @endphp
                     @foreach ($productModels as $productModel)
                         <tr class="tr-shadow">
                             {{-- <td class="col-lg-1">{{ $productModel->id }}</td> --}}
-                            <td class="col-lg-1" style="text-align:center;">{{ $counter }}</td>
+                            <td class="col-lg-1" style="text-align:center;">{{ $totalModels-- }}</td>
                             <td class="col-lg-1" style="text-align:center;">{{ $productModel->name }}</td>
                             <td class="col-lg-1" style="text-align:center;">{{ $productModel->brand->name }}</td>
                             <td class="col-lg-1" style="text-align:center;"> {{ \Carbon\Carbon::parse($productModel->created_at)->format('F j, Y') }}</td>

@@ -66,11 +66,12 @@
                 <tbody>
                     @php
                         $counter = 1; // Initialize counter variable
+                        $totalBrands = $data->count();
                     @endphp
                     @foreach ($data as $bList)
                         <tr>
                             {{-- <td class="col-lg-1">{{ $blist->id }}</td> --}}
-                            <td class="col-lg-1" style="text-align:center;">{{ $counter++ }}</td>
+                            <td class="col-lg-1" style="text-align:center;">{{ $totalBrands-- }}</td>
                             <td class="col-lg-1" style="text-align:center;">{{ $bList->name }}</td>
                             <td class="col-lg-1" style="text-align:center;">
                                 {{ \Carbon\Carbon::parse($bList->created_at)->format('F j, Y') }}</td>

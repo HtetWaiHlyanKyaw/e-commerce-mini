@@ -44,4 +44,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    protected $attributes = [
+        'usertype' => 'customer', // Set default value for 'usertype' field
+    ];
 }

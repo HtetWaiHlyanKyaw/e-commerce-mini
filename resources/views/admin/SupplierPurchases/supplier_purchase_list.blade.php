@@ -45,8 +45,37 @@
                 </div>
             @endif
         </div>
-        <div class="bg-white p-4 border rounded">
+        {{-- <div class="bg-white p-4 border rounded"> --}}
 
+        {{-- <div class="container"> --}}
+        <div class="bg-white p-4 border rounded">
+            {{-- <br> --}}
+            <div class="row">
+                <div class="col-auto">
+                    <form action="{{ route('export.supplier.purchases') }}" method="GET">
+                        @csrf
+                        <button type="submit" class="btn btn-success rounded-5 border-2 px-3 me-3"><i
+                                class="ti ti-download"></i> Export</button>
+                    </form>
+                    <br>
+                </div>
+            </div>
+                {{-- <div class="col-auto" style="margin-left: auto;">
+                        <form action="{{ route('supplier_purchase.filter') }}" method="GET">
+                            <div class="row pb-6 g-6">
+                                <div class="col-auto mt-0">
+                                    <label for="">Start Date: </label>
+                                    <input type="date" class="form-control" name="start_date" max="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
+                                </div>
+
+                                <div class="col-auto mt-0">
+                                    <label for="">End Date: </label>
+                                    <input type="date" class="form-control" name="end_date" max="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
+                                </div>
+
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-primary mb-5  border-2 px-3 me-2"><i class="ti ti-adjustments-horizontal"></i> Filter</button>
+                                </div>
             {{-- <form action="{{ route('supplier_purchase.filter') }}" method="GET">
                         <div class="row pb-3">
                             <div class="col-md-6">
@@ -69,7 +98,7 @@
                         </div>
                     </form> --}}
 
-            <form action="{{ route('supplier_purchase.filter') }}" method="GET">
+            {{-- <form action="{{ route('supplier_purchase.filter') }}" method="GET">
                 <div class="row pb-3 align-items-end">
 
                     <div class="col-md-1">
@@ -78,7 +107,10 @@
                             <button type="submit" class="btn btn-success"><i
                                     class="ti ti-download"></i> Export</button>
                         </form>
-                    </div>
+                    </div> --}}
+
+
+                    {{-- </div> --}}
                     {{-- <div class="col-md-4 mb-3">
                         <label for="start_date" class="form-label">Start Date:</label>
                         <input type="date" class="form-control" id="start_date" name="start_date"
@@ -99,7 +131,7 @@
                         <input type="hidden" name="refresh" value="true">
                     </div>
                 </div> --}}
-            </form>
+            {{-- </form> --}}
             {{-- <form action="{{ route('supplier_purchase.filter') }}" method="GET">
                 <div class="row pb-3">
                     <div class="col-md-6">
@@ -158,11 +190,12 @@
                     @endforeach
                 </tbody>
             </table>
+
         </div>
     </div>
-    </div>
-    </div>
+    {{-- </div> --}}
 @endsection
+
 @section('script')
     <!-- Additional scripts if needed -->
 

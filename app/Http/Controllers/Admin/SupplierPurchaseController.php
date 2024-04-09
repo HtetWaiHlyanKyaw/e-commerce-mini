@@ -282,5 +282,6 @@ class SupplierPurchaseController extends Controller
 
         return view('admin.SupplierPurchases.supplier_purchase_detail', compact('details', 'supplierPurchase'));
     }
+
 }
 
