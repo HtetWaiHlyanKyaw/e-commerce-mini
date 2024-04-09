@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\User\ShopController;
+use App\Http\Controllers\User\UserProfileController;
 use App\Http\Controllers\BrandModelController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ExportController;
@@ -139,8 +140,8 @@ Route::prefix('admin/Admin')->group(function () {
 });
 });
 Route::middleware('admin:super_admin,store_admin,supplier_admin')->group(function () {
-Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('profile', [ProfileController::class, 'index'])->name('admin.profile');
+Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/admin/profile', [ProfileController::class, 'index'])->name('admin.profile');
  });
 //  Route::middleware('auth')->get('/dashboard', function () {
 //     $user = auth()->user();
@@ -181,3 +182,4 @@ Route::get('/productDetail', [UserController::class, 'productDetail'])->name('us
 
 Route::get('/shop', [ShopController::class, 'shop'])->name('user.shop');
 Route::get('/product/detail{id}',[ShopController::class, 'detail'])->name('user.productDetail');
+Route::get('/profile', [UserProfileController::class, 'index'])->name('user.profile');

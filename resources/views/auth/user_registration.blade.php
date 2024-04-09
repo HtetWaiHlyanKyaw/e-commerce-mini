@@ -1,17 +1,31 @@
-<!doctype html>
+@extends('user.master')
+@section('title','Register')
+@section('style')
+<link rel="shortcut icon" type="image/png" href="{{ asset('admin/images/logos/Unity Source Logo.png') }}" />
+<link rel="stylesheet" href="{{ asset('admin/css/styles.min.css') }}" />
+<style>
+    .Login-Btn{
+        /* color: inherit; */
+        text-decoration: none;
+        font-size: 15px;
+    }
+</style>
+@endsection
+{{-- <!doctype html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Registration</title>
-    <link rel="shortcut icon" type="image/png" href="{{ asset('admin/images/logos/Unity Source Logo.png') }}" />
-    <link rel="stylesheet" href="{{ asset('admin/css/styles.min.css') }}" />
+
     <!-- Laravel CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-</head>
+</head> --}}
+@section('content')
 
-<body>
+
+{{-- <body> --}}
     <!--  Body Wrapper -->
     <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed">
@@ -73,7 +87,7 @@
                                     <button type="submit"
                                         class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Register</button>
                                 </form>
-                                <p class="text-center">Already have an account? <a href="{{ route('user.login') }}">Sign in</a></p>
+                                <p class="text-center">Already have an account? <a href="{{ route('user.login') }}" class="Login-Btn">Sign in</a></p>
                             </div>
                         </div>
                     </div>
@@ -81,6 +95,8 @@
             </div>
         </div>
     </div>
+    @endsection
+    @section('script')
     <script src="{{ asset('admin/libs/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('admin/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
     <script>
@@ -102,6 +118,8 @@
             }
         }
     </script>
-</body>
+    @endsection
 
-</html>
+{{-- </body>
+
+</html> --}}

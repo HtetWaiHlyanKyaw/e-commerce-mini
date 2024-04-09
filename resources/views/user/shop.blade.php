@@ -275,10 +275,6 @@
                                             {{-- <a href="{{route('user.productDetail',$pDetails->id)}}"></a> --}}
                                             <img src="{{ asset('storage/products/' . $productGroup->first()->image) }}" alt="Product Image"
                                                 style="border-radius: 3px; width: 100%; height: 200px; object-fit: cover;">
-                                            <!-- Favourite -->
-                                            <div class="product-favourite">
-                                                <a href="#" class="favme fa fa-heart"></a>
-                                            </div>
                                         </div>
                                         <!-- Product Description -->
                                         <div class="product-description">

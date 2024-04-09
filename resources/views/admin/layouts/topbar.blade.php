@@ -30,7 +30,13 @@
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                         <div class="message-body">
                             {{-- <a href="{{ route('profile', ['userId' => $userId]) }}" class="d-flex align-items-center gap-2 dropdown-item"> --}}
-                            <a href="{{ route('admin.profile') }}"
+                                <a href="{{ route('user.page') }}"
+                                class="d-flex align-items-center gap-2 dropdown-item">
+
+                                <i class="ti ti-user fs-6"> </i>
+                                <p class="mb-0 fs-3">To Ecommerce Website</p>
+                            </a>
+                                <a href="{{ route('admin.profile') }}"
                                 class="d-flex align-items-center gap-2 dropdown-item">
 
                                 <i class="ti ti-user fs-6"> </i>
