@@ -265,8 +265,9 @@
 
                             <div class="row">
 
-                                @foreach ($datas->groupBy('model_id') as $modelId => $productGroup)
+                                @foreach ($datas->groupBy('product_model_id') as $modelId => $productGroup)
                                 <!-- Single Product -->
+
                                 <div class="col-12 col-sm-6 col-lg-3">
                                     <div class="single-product-wrapper">
                                         <!-- Product Image -->
@@ -281,7 +282,7 @@
                                         <!-- Product Description -->
                                         <div class="product-description">
                                             <a href="single-product-details.html">
-                                                <h6>{{ $productGroup->first()->model }}</h6> <!-- Display model name -->
+                                                <h6>{{ trim(strstr($productGroup->first()->name, '(', true)) }}</h6> <!-- Display model name -->
                                             </a>
                                             <!-- Hover Content -->
                                             <div class="hover-content">
@@ -305,6 +306,10 @@
                                     </div>
                                 </div>
                             @endforeach
+
+
+
+
 
 
                             </div>
