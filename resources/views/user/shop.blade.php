@@ -266,25 +266,27 @@
                             <div class="row">
 
                                 @foreach ($datas->groupBy('product_model_id') as $modelId => $productGroup)
-                                <!-- Single Product -->
+                                    <!-- Single Product -->
 
-                                <div class="col-12 col-sm-6 col-lg-3">
-                                    <div class="single-product-wrapper">
-                                        <!-- Product Image -->
-                                        <div class="product-img">
-                                            {{-- <a href="{{route('user.productDetail',$pDetails->id)}}"></a> --}}
-                                            <img src="{{ asset('storage/products/' . $productGroup->first()->image) }}" alt="Product Image"
-                                                style="border-radius: 3px; width: 100%; height: 200px; object-fit: cover;">
-                                        </div>
-                                        <!-- Product Description -->
-                                        <div class="product-description">
-                                            <a href="single-product-details.html">
-                                                <h6>{{ trim(strstr($productGroup->first()->name, '(', true)) }}</h6> <!-- Display model name -->
-                                            </a>
-                                            <!-- Hover Content -->
-                                            <div class="hover-content">
-                                                <!-- Dropdowns for color and storage options -->
-                                                {{-- <select name="color">
+                                    <div class="col-12 col-sm-6 col-lg-3">
+                                        <div class="single-product-wrapper">
+                                            <!-- Product Image -->
+                                            <div class="product-img">
+                                                {{-- <a href="{{route('user.productDetail',$pDetails->id)}}"></a> --}}
+                                                <img src="{{ asset('storage/products/' . $productGroup->first()->image) }}"
+                                                    alt="Product Image"
+                                                    style="border-radius: 3px; width: 100%; height: 200px; object-fit: cover;">
+                                            </div>
+                                            <!-- Product Description -->
+                                            <div class="product-description">
+                                                <a href="single-product-details.html">
+                                                    <h6>{{ trim(strstr($productGroup->first()->name, '(', true)) }}</h6>
+                                                    <!-- Display model name -->
+                                                </a>
+                                                <!-- Hover Content -->
+                                                <div class="hover-content">
+                                                    <!-- Dropdowns for color and storage options -->
+                                                    {{-- <select name="color">
                                                     @foreach ($productGroup->pluck('color')->unique() as $color)
                                                         <option value="{{ $color }}">{{ $color }}</option>
                                                     @endforeach
@@ -294,26 +296,27 @@
                                                         <option value="{{ $storageOption }}">{{ $storageOption }}</option>
                                                     @endforeach
                                                 </select> --}}
-                                                <!-- Add to Cart button -->
-                                                <div class="add-to-cart-btn">
-                                                    <a href="#" class="btn essence-btn">Add to Cart</a>
+                                                    <!-- Add to Cart button -->
+                                                    <div class="add-to-cart-btn">
+                                                        <a href="#" class="btn essence-btn">Add to Cart</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach
-
-
-
-
-
-
+                                @endforeach
                             </div>
                         </div>
-                        <!-- Pagination -->
-                        <nav aria-label="navigation">
+
+
+                         <!-- Pagination -->
+                       <div >
+                        {{$datas->links()}}
+                       </div>
+
+                        {{-- <nav aria-label="navigation">
                             <ul class="pagination mt-50 mb-70">
+
                                 <li class="page-item"><a class="page-link" href="#"><i
                                             class="fa fa-angle-left"></i></a></li>
                                 <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -324,7 +327,7 @@
                                 <li class="page-item"><a class="page-link" href="#"><i
                                             class="fa fa-angle-right"></i></a></li>
                             </ul>
-                        </nav>
+                        </nav> --}}
                     </div>
                 </div>
             </div>
