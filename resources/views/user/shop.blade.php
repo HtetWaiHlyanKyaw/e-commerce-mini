@@ -90,7 +90,7 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="page-title text-center">
-                        <h2>dresses</h2>
+                        <h2>Products</h2>
                     </div>
                 </div>
             </div>
@@ -128,7 +128,7 @@
                                 <ul id="menu-content2" class="menu-content collapse show">
                                     <!-- Single Item -->
                                     <li data-toggle="collapse" data-target="#clothing">
-                                        <a href="#">clothing</a>
+                                        <a href="#">Mobile</a>
                                         <ul class="sub-menu collapse show" id="clothing">
                                             <li><a href="#">All</a></li>
                                             <li><a href="#">Bodysuits</a></li>
@@ -266,7 +266,7 @@
                             <div class="row">
 
                                 @foreach ($datas->groupBy('product_model_id') as $modelId => $productGroup)
-                                <!-- Single Product -->
+                                    <!-- Single Product -->
 
                                 <div class="col-12 col-sm-6 col-lg-3">
                                     <div class="single-product-wrapper" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
@@ -294,26 +294,27 @@
                                                         <option value="{{ $storageOption }}">{{ $storageOption }}</option>
                                                     @endforeach
                                                 </select> --}}
-                                                <!-- Add to Cart button -->
-                                                <div class="add-to-cart-btn">
-                                                    <a href="#" class="btn essence-btn">Add to Cart</a>
+                                                    <!-- Add to Cart button -->
+                                                    <div class="add-to-cart-btn">
+                                                        <a href="#" class="btn essence-btn">Add to Cart</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach
-
-
-
-
-
-
+                                @endforeach
                             </div>
                         </div>
-                        <!-- Pagination -->
-                        <nav aria-label="navigation">
+
+
+                         <!-- Pagination -->
+                       <div >
+                        {{$datas->links()}}
+                       </div>
+
+                        {{-- <nav aria-label="navigation">
                             <ul class="pagination mt-50 mb-70">
+
                                 <li class="page-item"><a class="page-link" href="#"><i
                                             class="fa fa-angle-left"></i></a></li>
                                 <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -324,7 +325,7 @@
                                 <li class="page-item"><a class="page-link" href="#"><i
                                             class="fa fa-angle-right"></i></a></li>
                             </ul>
-                        </nav>
+                        </nav> --}}
                     </div>
                 </div>
             </div>

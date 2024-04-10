@@ -271,7 +271,7 @@ img {
 /* ScrollUp */
 
 #scrollUp {
-    background-color: #ff084e;
+    background-color: #D27508;
     border-radius: 0;
     bottom: 60px;
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
@@ -850,6 +850,7 @@ img {
     position: relative;
     z-index: 1;
     margin-bottom: 50px;
+
     overflow: hidden;
     background-color: $white-color;
     .product-img {
@@ -1221,10 +1222,10 @@ img {
 /* :: 11.0 Footer Area CSS */
 
 .footer_area {
-    position: relative;
+  position: relative;
     z-index: 1;
     background-color: #252525;
-    padding: 70px 0 60px;
+    padding: 15px 0 10px;
     .single_widget_area {
         .footer_menu {
             ul {
