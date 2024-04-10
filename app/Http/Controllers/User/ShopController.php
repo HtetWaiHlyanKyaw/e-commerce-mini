@@ -23,16 +23,29 @@ class ShopController extends Controller
          return view('user.shop', compact('datas','brands','minPrice','maxPrice','uniqueColors','uniqueStorage'));
     }
 
-    public function detail($id){  //product details and purchase option
+    public function details(Request $request){  //product details and purchase option
         // dd($id);
-            $datas = Product::with('brand', 'ProductModel')->where('id', $id)->first();
+            // $datas = Product::with('brand', 'ProductModel')->where('id', $id)->first();
 
-            if(!$datas) {
-                // Product with given ID not found, handle the situation accordingly
-                abort(404); // or return a view indicating the product was not found
-            }
+            // if(!$datas) {
+            //     // Product with given ID not found, handle the situation accordingly
+            //     abort(404); // or return a view indicating the product was not found
+            // }
 
-            return view('user.buyProduct', compact('datas'));
+            // return view('user.buyProduct', compact('datas'));
+
+            $modelId = $request->input('model_id');
+            $products = Product::where('product_model_id', $modelId)->get();
+            $storageOptions = $products->pluck('storage_option')->unique();
+            $colors = $products->pluck('color')->unique();
+
+            // Pass products, storage options, and colors to the view
+            return view('user.buyProduct', [
+                'products' => $products,
+                'storageOptions' => $storageOptions,
+                'colors' => $colors,
+                'modelId' => $modelId,
+            ]);
         }
 
     }

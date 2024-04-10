@@ -181,5 +181,6 @@ Route::get('/productDetail', [UserController::class, 'productDetail'])->name('us
 
 
 Route::get('/shop', [ShopController::class, 'shop'])->name('user.shop');
-Route::get('/product/detail{id}',[ShopController::class, 'detail'])->name('user.productDetail');
+// Route::get('/product/detail{id}',[ShopController::class, 'detail'])->name('user.productDetail');
+Route::get('/product/details', [ShopController::class,'details'])->name('user.productDetails');
 Route::get('/profile', [UserProfileController::class, 'index'])->name('user.profile');

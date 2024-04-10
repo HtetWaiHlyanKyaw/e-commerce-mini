@@ -269,7 +269,7 @@
                                 <!-- Single Product -->
 
                                 <div class="col-12 col-sm-6 col-lg-3">
-                                    <div class="single-product-wrapper">
+                                    <div class="single-product-wrapper" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
                                         <!-- Product Image -->
                                         <div class="product-img">
                                             {{-- <a href="{{route('user.productDetail',$pDetails->id)}}"></a> --}}
@@ -278,8 +278,8 @@
                                         </div>
                                         <!-- Product Description -->
                                         <div class="product-description">
-                                            <a href="single-product-details.html">
-                                                <h6>{{ trim(strstr($productGroup->first()->name, '(', true)) }}</h6> <!-- Display model name -->
+                                            <a href="{{ route('user.productDetails', ['model_id' => $modelId]) }}">
+                                                <h6 class="text-center">{{ trim(strstr($productGroup->first()->name, '(', true)) }}</h6> <!-- Display model name -->
                                             </a>
                                             <!-- Hover Content -->
                                             <div class="hover-content">
