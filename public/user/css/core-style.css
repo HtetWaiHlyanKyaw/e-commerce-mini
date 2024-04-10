@@ -205,7 +205,7 @@ img {
 
 /* ScrollUp */
 #scrollUp {
-  background-color: #ff084e;
+  background-color: #D27508;
   border-radius: 0;
   bottom: 60px;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
@@ -1056,7 +1056,7 @@ img {
   position: relative;
   z-index: 1;
   background-color: #252525;
-  padding: 70px 0 60px; }
+  padding: 5px 0 10px; }
   .footer_area .single_widget_area .footer_menu ul {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -1082,12 +1082,16 @@ img {
       -ms-flex: 0 0 50%;
       flex: 0 0 50%;
       width: 50%; }
+      .logo{
+        margin-bottom: 50px;
+      }
       .footer_area .single_widget_area .footer_widget_menu li a {
         display: block;
         font-size: 12px;
         color: rgba(255, 255, 255, 0.6);
         display: block;
         font-weight: 400;
+        margin-top: 10px;
         margin-bottom: 10px; }
         .footer_area .single_widget_area .footer_widget_menu li a:hover, .footer_area .single_widget_area .footer_widget_menu li a:focus {
           color: #ffffff; }
@@ -1128,7 +1132,7 @@ img {
   .footer_area .single_widget_area .footer_social_area a {
     color: #ffffff;
     display: inline-block;
-    padding: 0 10px;
+    padding: 0 20px;
     font-size: 16px; }
 
 /* :: 12.0 Breadcumb Area CSS */
