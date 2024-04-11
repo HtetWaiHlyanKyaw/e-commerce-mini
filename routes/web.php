@@ -143,6 +143,14 @@ Route::middleware('admin:super_admin,store_admin,supplier_admin')->group(functio
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/admin/profile', [ProfileController::class, 'index'])->name('admin.profile');
  });
+
+ //admin Login Control
+
+Route::get('/admin/login', [AdminLoginController::class,'showLoginForm'])->name('login');
+Route::post('/admin/login', [AdminLoginController::class,'login']);
+Route::post('/admin/logout', [AdminLoginController::class,'logout'])->name('logout');
+
+
 //  Route::middleware('auth')->get('/dashboard', function () {
 //     $user = auth()->user();
 //     if ($user && $user->usertype === 'customer') {
@@ -163,11 +171,7 @@ Route::post('/user/logout', [UserLoginController::class,'logout'])->name('user.l
 Route::get('/user/Register_Page',[UserRegisterController::class, 'page'])->name('user.RegisterPage');
 Route::post('/user/registration',[UserRegisterController::class, 'register'])->name('user.register');
 
-//admin Login Control
 
-Route::get('/admin/login', [AdminLoginController::class,'showLoginForm'])->name('login');
-Route::post('/admin/login', [AdminLoginController::class,'login']);
-Route::post('/admin/logout', [AdminLoginController::class,'logout'])->name('logout');
 
 //all user routes
 Route::get('/', [UserController::class, 'index'])->name('user.page');
@@ -183,4 +187,5 @@ Route::get('/productDetail', [UserController::class, 'productDetail'])->name('us
 Route::get('/shop', [ShopController::class, 'shop'])->name('user.shop');
 // Route::get('/product/detail{id}',[ShopController::class, 'detail'])->name('user.productDetail');
 Route::get('/product/details', [ShopController::class,'details'])->name('user.productDetails');
-Route::get('/profile', [UserProfileController::class, 'index'])->name('user.profile');
+Route::get('/profile', [UserProfileController::class, 'profile'])->name('user.profile');
+Route::post('/profile/update', [UserProfileController::class, 'profileUpdate'])->name('user.pUpdate');

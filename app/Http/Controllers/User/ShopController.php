@@ -22,7 +22,6 @@ class ShopController extends Controller
          $datas = Product::with('brand', 'ProductModel')->paginate(8);
         //  dd($datas);
          return view('user.shop', compact('datas','brands','minPrice','maxPrice','uniqueColors','uniqueStorage'));
-
     }
 
     public function details(Request $request){  //product details and purchase option
