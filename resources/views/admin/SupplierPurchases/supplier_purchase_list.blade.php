@@ -33,17 +33,21 @@
         </div>
         {{-- <br> --}}
         <div>
-            @if (session('success'))
+            {{-- @if (session('success'))
                 <div class="alert alert-success text-center" role="alert">
                     {{ session('success') }}
                 </div>
-            @endif
-
-            @if (session('error'))
+            @endif --}}
+            @if (session('alert'))
+            <div id="alertMessage" class="text-center alert alert-{{ session('alert')['type'] }}">
+                {{ session('alert')['message'] }}
+            </div>
+        @endif
+            {{-- @if (session('error'))
                 <div class="alert alert-warning text-center" role="alert">
                     {{ session('error') }}
                 </div>
-            @endif
+            @endif --}}
         </div>
         {{-- <div class="bg-white p-4 border rounded"> --}}
 
