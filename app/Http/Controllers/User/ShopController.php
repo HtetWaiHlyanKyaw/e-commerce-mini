@@ -6,10 +6,12 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Brand;
 use App\Http\Controllers\Controller;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ShopController extends Controller
 {
-    public function shop(){
+    public function shop()
+    {
 
         $brands = Brand::get();
         $minPrice = Product::min('price');
@@ -18,38 +20,41 @@ class ShopController extends Controller
         $uniqueColors = $products->pluck('color')->unique();
         $uniqueStorage = $products->pluck('storage_option')->unique();
         // return view('user.shop',compact('brands','minPrice','maxPrice','uniqueColors','uniqueStorage'));
-         // Eager load brand and model information
-         $datas = Product::with('brand', 'ProductModel')->paginate(8);
+        // Eager load brand and model information
+        $datas = Product::with('brand', 'ProductModel')->get();
+        $groupedData = $datas->groupBy('product_model_id');
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $perPage = 8;
+        $currentPageItems = $groupedData->slice(($currentPage - 1) * $perPage, $perPage)->all();
+        $paginatedGroupedData = new LengthAwarePaginator($currentPageItems, count($groupedData), $perPage);
         //  dd($datas);
-         return view('user.shop', compact('datas','brands','minPrice','maxPrice','uniqueColors','uniqueStorage'));
-
+        return view('user.shop', compact('paginatedGroupedData', 'brands', 'minPrice', 'maxPrice', 'uniqueColors', 'uniqueStorage'));
     }
 
-    public function details(Request $request){  //product details and purchase option
-        // dd($id);
-            // $datas = Product::with('brand', 'ProductModel')->where('id', $id)->first();
+    public function details(Request $request)
+{
+    $modelId = $request->input('model_id');
+    $products = Product::where('product_model_id', $modelId)->get();
 
-            // if(!$datas) {
-            //     // Product with given ID not found, handle the situation accordingly
-            //     abort(404); // or return a view indicating the product was not found
-            // }
+    // Extract unique combinations of color and storage option
+    $productVariants = $products->map(function ($product) {
+        return [
+            'color' => $product->color,
+            'storage_option' => $product->storage_option,
+            'image' => asset('storage/products/' . $product->image),
+            'name' => trim(strstr($product->name, '(', true)),
+            'description' => $product->description,
+            'price' => $product->price,
+            'id' => $product->id,
+        ];
+    })->unique(function ($variant) {
+        return $variant['color'] . '_' . $variant['storage_option'];
+    });
 
-            // return view('user.buyProduct', compact('datas'));
+    // Pass product variants to the view
+    return view('user.buyProduct', [
+        'productVariants' => $productVariants,
+    ]);
+}
 
-            $modelId = $request->input('model_id');
-            $products = Product::where('product_model_id', $modelId)->get();
-            $storageOptions = $products->pluck('storage_option')->unique();
-            $colors = $products->pluck('color')->unique();
-
-            // Pass products, storage options, and colors to the view
-            return view('user.buyProduct', [
-                'products' => $products,
-                'storageOptions' => $storageOptions,
-                'colors' => $colors,
-                'modelId' => $modelId,
-            ]);
-        }
-
-    }
-
-
+}

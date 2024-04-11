@@ -265,7 +265,7 @@
 
                             <div class="row">
 
-                                @foreach ($datas->groupBy('product_model_id') as $modelId => $productGroup)
+                                @foreach ($paginatedGroupedData as $modelId => $productGroup)
                                     <!-- Single Product -->
 
                                 <div class="col-12 col-sm-6 col-lg-3">
@@ -309,7 +309,7 @@
 
                          <!-- Pagination -->
                        <div >
-                        {{$datas->links()}}
+                        {{$paginatedGroupedData->links()}}
                        </div>
 
                         {{-- <nav aria-label="navigation">

@@ -1,77 +1,85 @@
 @extends('user.master')
-@section('title', 'Product Details & Payment Options')
+@section('title', 'Product Details & Purchase Options')
 @section('content')
-
-
-{{-- {{dd($datas->toArray())}} --}}
-
-<div class="container" style="margin-top:200px">
-    <div class="row">
-        {{-- Image --}}
-        <div class="col-lg-4 " style="margin-bottom: 200px">
-            {{-- <img class="w-100 shadow " src="{{ asset('storage/products/'. $products->first()->image)}}" alt=""> --}}
-            <div class="product-img">
-                <!-- Initially, show the image of the first product -->
-                <img id="product_image" class="w-100 shadow" src="{{ asset('storage/products/' . $products->first()->image) }}" alt="Product Image">
+    <div class="container" style="margin-top: 50px">
+        <div class="row">
+            <div class="col-lg-5" style="margin-bottom: 200px">
+                <div class="product-img">
+                    <img id="product_image" class="w-100 shadow" src="" style="height:500px;object-fit: cover;"
+                        alt="Product Image">
+                </div>
             </div>
+
+            <div class="col-lg-7" style="margin-bottom: 200px">
+                <h3 id="product_name"></h3>
+
+                <div id="product_description_container" style="overflow-y: auto; max-height: 300px;">
+                    <p id="product_description" style="text-align: justify;"></p>
+                </div>
+
+
+                <div class="form-group row">
+                    {{-- <label for="product_price" class="col-sm-2 col-form-label">Price:</label> --}}
+                    <div class="col-sm-4">
+                        <h1 id="product_price" class="text-danger"></h1>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="product_variant" class="col-sm-3 col-form-label">Color and Storage:</label>
+                    <div class="col-sm-4">
+                        <select name="product_variant" id="product_variant" class="form-control"
+                            onchange="updateProductDetails()">
+                            @foreach ($productVariants as $variant)
+                                <option value="{{ $variant['color'] }}_{{ $variant['storage_option'] }}">
+                                    {{ $variant['color'] }} - {{ $variant['storage_option'] }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-8 d-flex align-items-center">
+                        <input type="number" id="quantity" name="quantity" class="form-control mr-2" min="1"
+                            value="1" style="width: 100px; height: 40px;" autocomplete="off">
+                        <button type="button" class="btn btn-primary mr-2">Buy Now</button>
+                        <button type="button" class="btn btn-primary">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" name="product_id" id="product_id">
         </div>
-
-        <select name="color" id="color" onchange="updateProductImage()">
-            @foreach ($colors as $color)
-                <option value="{{ $color }}">{{ $color }}</option>
-            @endforeach
-        </select>
-
-        <!-- Display storage options dropdown -->
-        <select name="storage_option" id="storage_option" onchange="updateProductImage()">
-            @foreach ($storageOptions as $option)
-                <option value="{{ $option }}">{{ $option }}</option>
-            @endforeach
-        </select>
-        <input type="hidden" name="product_id" id="product_id">
-
-        <!-- Product Image -->
-
-
-        <!-- Product Image -->
-
     </div>
-</div>
-
 @endsection
+
 @section('script')
+    <script>
 
-<script>
-    // Create a JavaScript object to store the image URLs and product IDs
-    var productImages = {};
+        var productVariants = @json($productVariants);
 
-    // Populate the productImages object with image URLs and product IDs
-    @foreach ($products as $product)
-        productImages["{{ $product->color }}_{{ $product->storage_option }}"] = {
-            imageUrl: "{{ asset('storage/products/' . $product->image) }}",
-            productId: "{{ $product->id }}"
-        };
-    @endforeach
+        function updateProductDetails() {
+            var selectedVariant = document.getElementById("product_variant").value;
+            var selectedProduct = getProductByVariant(selectedVariant);
 
-    // Function to update the product image based on selected color and storage option
-    function updateProductImage() {
-        // Get the selected color and storage option
-        var selectedColor = document.getElementById("color").value;
-        var selectedStorageOption = document.getElementById("storage_option").value;
+            if (selectedProduct) {
+                document.getElementById("product_image").src = selectedProduct.image;
+                document.getElementById("product_name").innerText = selectedProduct.name;
+                document.getElementById("product_description").innerText = selectedProduct.description;
+                document.getElementById("product_price").innerText = "$ " + selectedProduct.price;
+                document.getElementById("product_id").value = selectedProduct.id;
 
-        // Construct the key for the productImages object
-        var key = selectedColor + "_" + selectedStorageOption;
+                console.log("Selected Product ID:", selectedProduct.id);
+            }
+        }
 
-        // Get the image URL and product ID corresponding to the selected color and storage option
-        var imageData = productImages[key];
+        function getProductByVariant(variant) {
+            return productVariants.find(function(product) {
+                return product.color + "_" + product.storage_option === variant;
+            });
+        }
 
-        // Set the image source to the retrieved URL
-        document.getElementById("product_image").src = imageData.imageUrl;
-
-        // Get the product ID and output it to the browser console
-        var productId = imageData.productId;
-        console.log("Product ID:", productId);
-    }
-</script>
-
+        // Call updateProductDetails initially to display details of the default variant
+        updateProductDetails();
+    </script>
 @endsection

@@ -89,8 +89,7 @@
         <div class="col-1"></div>
         <!-- Start Google Maps -->
     <div class="col-6">
-
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3819.882419018706!2d96.14371849999999!3d16.7825245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c1ebd045bbd051%3A0x49773a8520be930d!2sUnity%20Source%20IT%20Solution!5e0!3m2!1sen!2smm!4v1712646397509!5m2!1sen!2smm" width="700" height="450" style="border:0; border-radius: 10px" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2559.969678045116!2d96.13854013548465!3d16.872141471202216!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c19593972dc929%3A0x3a0affceedf80ff4!2sMawrawaddy%20Condo!5e0!3m2!1sen!2smm!4v1712724137449!5m2!1sen!2smm" width="700" height="450" style="border:0;border-radius: 10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
         {{-- <div class="google-map">
             <div id="googleMap"></div>
@@ -104,10 +103,10 @@
                <p><span>address:</span></p>
                     <p>Room No.(7-A),(7) Floor,Mawyawaddy Condo,Pyay Road,(8) Mile,Mayangone Township,Yangon.</p>
 
-                <p class="mt-30"><span>telephone:</span>+959 449 992 916</p>
+                <p class="mt-30" style="color: black;"><span>telephone</span>+959 449 992 916</p>
 
 
-                <p ><span>Email :</span><a href="mailto:unitysource123@gmail.com" class=" text-dark" style="text-decoration: none; text-color:black">unitysource123@gmail.com</a><p>
+                <p ><span>Email</span><a href="mailto:unitysource123@gmail.com" class="text-dark" style=" text-decoration: underline;text-color:black">unitysource123@gmail.com</a><p>
                 {{-- <p><a href="mailto:contact@essence.com">contact@essence.com</a></p> --}}
 
             </div>
