@@ -85,7 +85,7 @@
     <!-- ##### Right Side Cart End ##### -->
 
     <!-- ##### Breadcumb Area Start ##### -->
-    <div class="breadcumb_area bg-img" style="background-image: url({{ asset('user/img/bg-img/breadcumb.jpg') }});">
+    {{-- <div class="breadcumb_area bg-img" style="background-image: url({{ asset('user/img/bg-img/breadcumb.jpg') }});">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
@@ -95,11 +95,11 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- ##### Breadcumb Area End ##### -->
 
-    < <!-- ##### Shop Grid Area Start ##### -->
-        <section class="shop_grid_area section-padding-80">
+    <!-- ##### Shop Grid Area Start ##### -->
+        <section class=" section-padding-80 bg-light" style="margin-top: -50px">
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-md-2 col-lg-2">
@@ -244,7 +244,7 @@
                                     <div class="product-topbar d-flex align-items-center justify-content-between">
                                         <!-- Total Products -->
                                         <div class="total-products">
-                                            <p><span>186</span> products found</p>
+                                            <p><span>{{$paginatedGroupedData ->count()}}</span> products found</p>
                                         </div>
                                         <!-- Sorting -->
                                         <div class="product-sorting d-flex">
@@ -264,12 +264,13 @@
                             </div>
 
                             <div class="row">
-
+                                <h4 style="margin-bottom: 20px;">All Products</h4>
                                 @foreach ($paginatedGroupedData as $modelId => $productGroup)
                                     <!-- Single Product -->
 
                                 <div class="col-12 col-sm-6 col-lg-3">
-                                    <div class="single-product-wrapper" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+                                    {{-- style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);" --}}
+                                    <div class="single-product-wrapper" style="border: solid 1px #dddddd">
                                         <!-- Product Image -->
                                         <div class="product-img">
                                             {{-- <a href="{{route('user.productDetail',$pDetails->id)}}"></a> --}}
@@ -277,9 +278,9 @@
                                                 style="border-radius: 3px; width: 100%; height: 200px; object-fit: cover;">
                                         </div>
                                         <!-- Product Description -->
-                                        <div class="product-description">
+                                        <div class="product-description" style="margin-bottom: 20px;">
                                             <a href="{{ route('user.productDetails', ['model_id' => $modelId]) }}">
-                                                <h6 class="text-center">{{ trim(strstr($productGroup->first()->name, '(', true)) }}</h6> <!-- Display model name -->
+                                                <h6 class="text-center" >{{ trim(strstr($productGroup->first()->name, '(', true)) }}</h6> <!-- Display model name -->
                                             </a>
                                             <!-- Hover Content -->
                                             <div class="hover-content">

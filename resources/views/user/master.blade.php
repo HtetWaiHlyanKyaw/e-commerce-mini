@@ -81,10 +81,7 @@
                         <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                     </form>
                 </div>
-                <div class="cart-area">
-                    <a href="#" id="essenceCartBtn"><img src="{{ asset('user/img/core-img/bag.svg') }}"
-                            alt=""><span></span></a>
-                </div>
+
                 <!-- Favourite Area -->
                 {{-- <div class="favourite-area">
                     <a href="#"><img src="{{ asset('user/img/core-img/heart.svg') }}" alt=""></a>
@@ -93,7 +90,10 @@
 
                 <!-- User Login Info -->
                 @if (Auth::check() && Auth::user()->usertype === 'customer')
-
+                <div class="cart-area">
+                    <a href="#" id="essenceCartBtn"><img src="{{ asset('user/img/core-img/bag.svg') }}"
+                            alt=""><span></span></a>
+                </div>
                 <div class="dropdown user-login-info">
                     <div class="dropdown-toggle dropdown-no-arrow" id="userDropdown" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
@@ -113,7 +113,7 @@
 
             @elseif (Auth::check() && (Auth::user()->usertype === 'super_admin' || Auth::user()->usertype === 'supplier_admin' || Auth::user()->usertype === 'store_admin'))
                 <div class="user-login-info">
-                    <a href="{{route('dashboard')}}">
+                    <a href="{{route('dashboard')}}" style="vertical-align: center">
                         Dashboard
                     </a>
                 </div>

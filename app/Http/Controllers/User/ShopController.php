@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\User;
-
+use Illuminate\Support\Facades\URL;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Brand;
@@ -11,25 +11,36 @@ use Illuminate\Pagination\LengthAwarePaginator;
 class ShopController extends Controller
 {
     public function shop()
-    {
+{
+    $brands = Brand::get();
+    $minPrice = Product::min('price');
+    $maxPrice = Product::max('price');
+    $products = Product::with('brand', 'ProductModel')->get();
+    $uniqueColors = $products->pluck('color')->unique();
+    $uniqueStorage = $products->pluck('storage_option')->unique();
 
-        $brands = Brand::get();
-        $minPrice = Product::min('price');
-        $maxPrice = Product::max('price');
-        $products = Product::with('brand', 'ProductModel')->get();
-        $uniqueColors = $products->pluck('color')->unique();
-        $uniqueStorage = $products->pluck('storage_option')->unique();
-        // return view('user.shop',compact('brands','minPrice','maxPrice','uniqueColors','uniqueStorage'));
-        // Eager load brand and model information
-        $datas = Product::with('brand', 'ProductModel')->get();
-        $groupedData = $datas->groupBy('product_model_id');
-        $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $perPage = 8;
-        $currentPageItems = $groupedData->slice(($currentPage - 1) * $perPage, $perPage)->all();
-        $paginatedGroupedData = new LengthAwarePaginator($currentPageItems, count($groupedData), $perPage);
-        //  dd($datas);
-        return view('user.shop', compact('paginatedGroupedData', 'brands', 'minPrice', 'maxPrice', 'uniqueColors', 'uniqueStorage'));
-    }
+    // Eager load brand and model information
+    $datas = Product::with('brand', 'ProductModel')->get();
+    $groupedData = $datas->groupBy('product_model_id');
+
+    $perPage = 12;
+    $currentPage = LengthAwarePaginator::resolveCurrentPage();
+    $currentPageItems = $groupedData->slice(($currentPage - 1) * $perPage, $perPage)->all();
+
+    // Create a paginator instance
+    $paginatedGroupedData = new LengthAwarePaginator(
+        $currentPageItems,
+        count($groupedData),
+        $perPage,
+        $currentPage
+    );
+
+    // Set the path for the paginator
+    $paginatedGroupedData->setPath(URL::current());
+
+    // Pass the paginator and other data to the view
+    return view('user.shop', compact('paginatedGroupedData', 'brands', 'minPrice', 'maxPrice', 'uniqueColors', 'uniqueStorage'));
+}
 
     public function details(Request $request)
 {

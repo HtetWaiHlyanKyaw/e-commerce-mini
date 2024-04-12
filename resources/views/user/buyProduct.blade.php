@@ -20,7 +20,7 @@
 
                 <div class="form-group row">
                     {{-- <label for="product_price" class="col-sm-2 col-form-label">Price:</label> --}}
-                    <div class="col-sm-4">
+                    <div class="col-sm-8">
                         <h1 id="product_price" class="text-danger"></h1>
                     </div>
                 </div>

@@ -226,7 +226,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="section-heading text-center">
-                    <h2>Best Seller</h2>
+                    <h2 style="margin-top:50px;">New Arrival</h2>
                 </div>
             </div>
         </div>
@@ -413,116 +413,116 @@
     <div class="carousel-inner">
         <div class="carousel-item active">
             <div class="cards-wrapper">
-                <div class="card">
+                {{-- <div class="card"> --}}
                     <div class="image-wrapper">
                         <img src="{{ asset('user/img/product-img/product-5.jpg') }}" alt="...">
 
                     </div>
-                    <div class="card-body">
+                    {{-- <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of
                             the card's content.</p>
                         <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-                <div class="card">
+                    </div> --}}
+                {{-- </div> --}}
+                {{-- <div class="card"> --}}
                     <div class="image-wrapper">
                         <img src="{{ asset('user/img/product-img/product-1.jpg') }}" alt="...">
                     </div>
-                    <div class="card-body">
+                    {{-- <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of
                             the card's content.</p>
                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
-                </div>
-                <div class="card">
+                </div> --}}
+                {{-- <div class="card"> --}}
                     <div class="image-wrapper">
                         <img src="{{ asset('user/img/product-img/product-2.jpg') }}" alt="...">
                     </div>
-                    <div class="card-body">
+                    {{-- <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of
                             the card's content.</p>
                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
         <div class="carousel-item">
             <div class="cards-wrapper">
-                <div class="card">
+                {{-- <div class="card"> --}}
                     <div class="image-wrapper">
                         <img src="{{ asset('user/img/product-img/product-3.jpg') }}" alt="...">
                     </div>
-                    <div class="card-body">
+                    {{-- <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of
                             the card's content.</p>
                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
-                </div>
-                <div class="card">
+                </div> --}}
+                {{-- <div class="card"> --}}
                     <div class="image-wrapper">
                         <img src="{{ asset('user/img/product-img/product-4.jpg') }}" alt="...">
                     </div>
-                    <div class="card-body">
+                    {{-- <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">Ssome quick example text to build on the card title and make up the bulk
                             of
                             the card's content.</p>
                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
-                </div>
-                <div class="card">
+                </div> --}}
+                {{-- <div class="card"> --}}
                     <div class="image-wrapper">
                         <img src="{{ asset('user/img/product-img/product-6.jpg') }}" alt="...">
                     </div>
 
-                    <div class="card-body">
+                    {{-- <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of
                             the card's content.</p>
                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
         <div class="carousel-item">
             <div class="cards-wrapper">
-                <div class="card">
+                {{-- <div class="card"> --}}
                     <div class="image-wrapper">
                         <img src="{{ asset('user/img/product-img/product-1.jpg') }}" alt="...">
                     </div>
-                    <div class="card-body">
+                    {{-- <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of
                             the card's content.</p>
                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
-                </div>
-                <div class="card">
+                </div> --}}
+                {{-- <div class="card"> --}}
                     <div class="image-wrapper">
                         <img src="{{ asset('user/img/product-img/product-2.jpg') }}" alt="...">
                     </div>
-                    <div class="card-body">
+                    {{-- <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of
                             the card's content.</p>
                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
-                </div>
-                <div class="card">
+                </div> --}}
+                {{-- <div class="card"> --}}
                     <div class="image-wrapper">
                     </div>
                     <img src="{{ asset('user/img/product-img/product-3.jpg') }}" alt="...">
-                    <div class="card-body">
+                    {{-- <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of
                             the card's content.</p>
                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
@@ -545,7 +545,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="section-heading text-center">
-                    <h2>Best Seller</h2>
+                    <h2 style="margin-top:50px;">Best Seller</h2>
                 </div>
             </div>
         </div>
@@ -705,116 +705,110 @@
     <div class="carousel-inner">
         <div class="carousel-item active">
             <div class="cards-wrapper">
-                <div class="card">
+                {{-- <div class="card"> --}}
                     <div class="image-wrapper">
                         <img src="{{ asset('user/img/product-img/product-5.jpg') }}" alt="...">
 
                     </div>
-                    <div class="card-body">
+                    {{-- <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of
                             the card's content.</p>
                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
-                </div>
-                <div class="card">
+                </div> --}}
+                {{-- <div class="card"> --}}
                     <div class="image-wrapper">
                         <img src="{{ asset('user/img/product-img/product-1.jpg') }}" alt="...">
                     </div>
-                    <div class="card-body">
+                    {{-- <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of
                             the card's content.</p>
                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
-                </div>
-                <div class="card">
+                </div> --}}
+                {{-- <div class="card"> --}}
                     <div class="image-wrapper">
                         <img src="{{ asset('user/img/product-img/product-2.jpg') }}" alt="...">
                     </div>
-                    <div class="card-body">
+                    {{-- <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of
                             the card's content.</p>
                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
         <div class="carousel-item">
             <div class="cards-wrapper">
-                <div class="card">
+                {{-- <div class="card"> --}}
                     <div class="image-wrapper">
                         <img src="{{ asset('user/img/product-img/product-3.jpg') }}" alt="...">
                     </div>
-                    <div class="card-body">
+                    {{-- <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of
                             the card's content.</p>
                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
-                </div>
-                <div class="card">
+                </div> --}}
+                {{-- <div class="card"> --}}
                     <div class="image-wrapper">
                         <img src="{{ asset('user/img/product-img/product-4.jpg') }}" alt="...">
                     </div>
-                    <div class="card-body">
+                    {{-- <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">Ssome quick example text to build on the card title and make up the bulk
                             of
                             the card's content.</p>
                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
-                </div>
-                <div class="card">
+                </div> --}}
+                {{-- <div class="card"> --}}
                     <div class="image-wrapper">
                         <img src="{{ asset('user/img/product-img/product-6.jpg') }}" alt="...">
                     </div>
 
-                    <div class="card-body">
+                    {{-- <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of
                             the card's content.</p>
                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
         <div class="carousel-item">
             <div class="cards-wrapper">
-                <div class="card">
+                {{-- <div class="card"> --}}
                     <div class="image-wrapper">
                         <img src="{{ asset('user/img/product-img/product-1.jpg') }}" alt="...">
                     </div>
-                    <div class="card-body">
+                    {{-- <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of
                             the card's content.</p>
                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
-                </div>
-                <div class="card">
+                </div> --}}
+                {{-- <div class="card"> --}}
                     <div class="image-wrapper">
                         <img src="{{ asset('user/img/product-img/product-2.jpg') }}" alt="...">
                     </div>
-                    <div class="card-body">
+                    {{-- <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of
                             the card's content.</p>
                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
-                </div>
-                <div class="card">
+                </div> --}}
+                {{-- <div class="card"> --}}
                     <div class="image-wrapper">
                     </div>
                     <img src="{{ asset('user/img/product-img/product-3.jpg') }}" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
