@@ -121,12 +121,27 @@
             });
         });
 
+
+        //add to cart
         $('#cartBtn').click(function() {
             let userId = $('#userId').val();
             let productId = $('#product_id').val();
 
-            console.log(userId);
-            console.log(product_id);
+          $.ajax({
+            type: 'post',
+            url: '',
+            data: {
+                'userId' : userId,
+                'productId' : productId,
+                'qty' :qty
+
+            }
+            datatype: 'json',
+            success: function(response){
+                window.location.href = 'http://localhost:8000/';
+
+            }
+          })
         })
     </script>
 @endsection
