@@ -1,3 +1,4 @@
+
 @extends('user.master')
 @section('title', 'Shop')
 @section('content')
@@ -83,7 +84,9 @@
         </div>
     </div>
     <!-- ##### Right Side Cart End ##### -->
-    <!-- ##### Breadcumb Area Start ##### -->
+
+
+<!-- ##### Breadcumb Area Start ##### -->
     {{-- <div class="breadcumb_area bg-img" style="background-image: url({{ asset('user/img/bg-img/breadcumb.jpg') }});">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
@@ -98,58 +101,60 @@
     <!-- ##### Breadcumb Area End ##### -->
 
     <!-- ##### Shop Grid Area Start ##### -->
-    <section class=" section-padding-80 bg-light" style="margin-top: -50px">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-2 col-lg-2">
-                    <div class="shop_sidebar_area">
-                        <h6 class="widget-title mb-30">Filter by</h6>
-                        <div class="widget brands mb-50">
-                            <!-- Widget Title 2 -->
-                            <p class="widget-title2 mb-30">Brands</p>
-                            <div class="widget-desc" style="max-height: 200px; overflow-y: auto; scrollbar-width: thin;">
-                                <ul>
-                                    <li><a href="#" class="brand-filter" data-brands="all">All Brands</a></li>
-                                    @foreach ($brands as $brand)
-                                        <li><a href="#" class="brand-filter" data-brands="{{ $brand->name }}">{{ $brand->name }}</a></li>
-                                    @endforeach
-                                </ul>
-                            </div>
-
-                        </div>
-                        <!-- ##### Single Widget ##### -->
-                        {{-- <div class="widget catagory mb-50">
-                        <!-- Widget Title -->
-                        <h6 class="widget-title mb-30">Catagories</h6>
-
-                        <!--  Catagories  -->
-                        <div class="catagories-menu">
-                            <ul id="menu-content2" class="menu-content collapse show">
-                                <!-- Single Item -->
-                                <li data-toggle="collapse" data-target="#clothing">
-                                    <a href="#">Mobile</a>
-                                    <ul class="sub-menu collapse show" id="clothing">
-                                        <li><a href="#">All</a></li>
-                                        <li><a href="#">Bodysuits</a></li>
-                                        <li><a href="#">Dresses</a></li>
-                                        <li><a href="#">Hoodies &amp; Sweats</a></li>
-                                        <li><a href="#">Jackets &amp; Coats</a></li>
-                                        <li><a href="#">Jeans</a></li>
-                                        <li><a href="#">Pants &amp; Leggings</a></li>
-                                        <li><a href="#">Rompers &amp; Jumpsuits</a></li>
-                                        <li><a href="#">Shirts &amp; Blouses</a></li>
-                                        <li><a href="#">Shirts</a></li>
-                                        <li><a href="#">Sweaters &amp; Knits</a></li>
+        <section class=" section-padding-80 bg-light" style="margin-top: -50px">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-2 col-lg-2">
+                        <div class="shop_sidebar_area">
+                            <h6 class="widget-title mb-30">Filter by</h6>
+                            <div class="widget brands mb-50">
+                                <!-- Widget Title 2 -->
+                                <p class="widget-title2 mb-30">Brands</p>
+                                <div class="widget-desc"
+                                    style="max-height: 200px; overflow-y: auto; scrollbar-width: thin;">
+                                    <ul>
+                                        <li><a href="">All Brands</a></li>
+                                        @foreach ($brands as $brand)
+                                            <li><a href="#">{{ $brand->name }}</a></li>
+                                        @endforeach
                                     </ul>
-                                </li>
-                                <!-- Single Item -->
-                                <li data-toggle="collapse" data-target="#shoes" class="collapsed">
-                                    <a href="#">shoes</a>
-                                    <ul class="sub-menu collapse" id="shoes">
-                                        <li><a href="#">All</a></li>
-                                        <li><a href="#">Bodysuits</a></li>
-                                        <li><a href="#">Dresses</a></li>
+                                </div>
+                            </div>
+                            <!-- ##### Single Widget ##### -->
+                            {{-- <div class="widget catagory mb-50">
+                            <!-- Widget Title -->
+                            <h6 class="widget-title mb-30">Catagories</h6>
+
+                            <!--  Catagories  -->
+                            <div class="catagories-menu">
+                                <ul id="menu-content2" class="menu-content collapse show">
+                                    <!-- Single Item -->
+                                    <li data-toggle="collapse" data-target="#clothing">
+                                        <a href="#">Mobile</a>
+                                        <ul class="sub-menu collapse show" id="clothing">
+                                            <li><a href="#">All</a></li>
+                                            <li><a href="#">Bodysuits</a></li>
+                                            <li><a href="#">Dresses</a></li>
                                             <li><a href="#">Hoodies &amp; Sweats</a></li>
+                                            <li><a href="#">Jackets &amp; Coats</a></li>
+                                            <li><a href="#">Jeans</a></li>
+                                            <li><a href="#">Pants &amp; Leggings</a></li>
+                                            <li><a href="#">Rompers &amp; Jumpsuits</a></li>
+                                            <li><a href="#">Shirts &amp; Blouses</a></li>
+                                            <li><a href="#">Shirts</a></li>
+                                            <li><a href="#">Sweaters &amp; Knits</a></li>
+                                        </ul>
+                                    </li>
+                                    <!-- Single Item -->
+                                    <li data-toggle="collapse" data-target="#shoes" class="collapsed">
+                                        <a href="#">shoes</a>
+                                        <ul class="sub-menu collapse" id="shoes">
+                                            <li><a href="#">All</a></li>
+                                            <li><a href="#">Bodysuits</a></li>
+                                            <li><a href="#">Dresses</a></li>
+
+
+<li><a href="#">Hoodies &amp; Sweats</a></li>
                                             <li><a href="#">Jackets &amp; Coats</a></li>
                                             <li><a href="#">Jeans</a></li>
                                             <li><a href="#">Pants &amp; Leggings</a></li>
@@ -180,87 +185,92 @@
                             </div>
                         </div> --}}
 
-                        <!-- ##### Single Widget ##### -->
-                        <!-- Colors -->
-                        <div class="widget brands mb-50">
-                            <!-- Widget Title 2 -->
-                            <p class="widget-title2 mb-30">COLOR</p>
-                            <div class="widget-desc" style="max-height: 200px; overflow-y: auto; scrollbar-width: thin;">
-                                <ul>
-                                    @foreach ($uniqueColors as $color)
-                                        <li><a href="#">{{ $color }}</a></li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
-                        <!--  Storage -->
-                        <div class="widget brands mb-50">
-                            <!-- Widget Title 2 -->
-                            <p class="widget-title2 mb-30">Storge</p>
-                            <div class="widget-desc" style="max-height: 200px; overflow-y: auto; scrollbar-width: thin;">
-                                <ul>
-                                    @foreach ($uniqueStorage as $storage)
-                                        <li><a href="#">{{ $storage }}</a></li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="widget price mb-50">
-                            <!-- Widget Title -->
-                            <!-- Widget Title 2 -->
-                            <p class="widget-title2 mb-30">Price</p>
-                            <div class="widget-desc">
-                                <div class="slider-range">
-                                    <div data-min="{{ intval($minPrice) }}" data-max="{{ intval($maxPrice) }}"
-                                        data-unit="$"
-                                        class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
-                                        data-value-min="{{ intval($minPrice) }}" data-value-max="{{ intval($maxPrice) }}"
-                                        data-label-result="Range:">
-                                        <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
-                                        <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                                        <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                                    </div>
-                                    <div class="range-price">Range: ${{ intval($minPrice) }} -
-                                        ${{ intval($maxPrice) }}</div>
+                            <!-- ##### Single Widget ##### -->
+
+
+<!-- Colors -->
+                            <div class="widget brands mb-50">
+                                <!-- Widget Title 2 -->
+                                <p class="widget-title2 mb-30">COLOR</p>
+                                <div class="widget-desc"
+                                    style="max-height: 200px; overflow-y: auto; scrollbar-width: thin;">
+                                    <ul>
+                                        @foreach ($uniqueColors as $color)
+                                            <li><a href="#">{{ $color }}</a></li>
+                                        @endforeach
+                                    </ul>
                                 </div>
                             </div>
-                        </div>
-                        <div class="widget price mb-50">
-                            <div class="widget-desc"><button style="width: 100%">Filter</button></div>
+                            <!--  Storage -->
+                            <div class="widget brands mb-50">
+                                <!-- Widget Title 2 -->
+                                <p class="widget-title2 mb-30">Storge</p>
+                                <div class="widget-desc"
+                                    style="max-height: 200px; overflow-y: auto; scrollbar-width: thin;">
+                                    <ul>
+                                        @foreach ($uniqueStorage as $storage)
+                                            <li><a href="#">{{ $storage }}</a></li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="widget price mb-50">
+                                <!-- Widget Title -->
+                                <!-- Widget Title 2 -->
+                                <p class="widget-title2 mb-30">Price</p>
+                                <div class="widget-desc">
+                                    <div class="slider-range">
+                                        <div data-min="{{ intval($minPrice) }}" data-max="{{ intval($maxPrice) }}"
+                                            data-unit="$"
+                                            class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
+                                            data-value-min="{{ intval($minPrice) }}"
+                                            data-value-max="{{ intval($maxPrice) }}" data-label-result="Range:">
+                                            <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
+                                            <span class="ui-slider-handle ui-state-default ui-corner-all"
+                                                tabindex="0"></span>
+                                            <span class="ui-slider-handle ui-state-default ui-corner-all"
+                                                tabindex="0"></span>
+                                        </div>
+                                        <div class="range-price">Range: ${{ intval($minPrice) }} -
+                                            ${{ intval($maxPrice) }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="widget price mb-50">
+                                <div class="widget-desc"><button style="width: 100%">Filter</button></div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-12 col-md-10 col-lg-10">
-                    <div class="shop_grid_product_area">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="product-topbar d-flex align-items-center justify-content-between">
-                                    <!-- Total Products -->
-                                    <div class="total-products">
-                                        <p><span>186</span> products found</p>
-                                    </div>
-                                    <!-- Sorting -->
-                                    <div class="product-sorting d-flex">
-                                        <p>Sort by:</p>
-                                        <form action="#" method="get">
-                                            <select name="select" id="sortByselect">
-                                                <option value="value">Highest Rated</option>
-                                                <option value="value">Newest</option>
-                                                <option value="value">Price: $$ - $</option>
-                                                <option value="value">Price: $ - $$</option>
-                                            </select>
-                                            <input type="submit" class="d-none" value="">
-                                        </form>
+<div class="col-12 col-md-10 col-lg-10">
+                        <div class="shop_grid_product_area">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="product-topbar d-flex align-items-center justify-content-between">
+                                        <!-- Total Products -->
+                                        <div class="total-products">
+                                            <p><span>186</span> products found</p>
+                                        </div>
+                                        <!-- Sorting -->
+                                        <div class="product-sorting d-flex">
+                                            <p>Sort by:</p>
+                                            <form action="#" method="get">
+                                                <select name="select" id="sortByselect">
+                                                    <option value="value">Highest Rated</option>
+                                                    <option value="value">Newest</option>
+                                                    <option value="value">Price: $$ - $</option>
+                                                    <option value="value">Price: $ - $$</option>
+                                                </select>
+                                                <input type="submit" class="d-none" value="">
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row">
-                            <h4 style="margin-bottom: 20px;">All Products</h4>
-                            @foreach ($paginatedGroupedData as $modelId => $productGroup)
-                                <!-- Single Product -->
+                            <div class="row">
+                                <h4 style="margin-bottom: 20px;">All Products</h4>
+                                @foreach ($paginatedGroupedData as $modelId => $productGroup)
+                                    <!-- Single Product -->
 
                                 <div class="col-12 col-sm-6 col-lg-3">
                                     {{-- style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);" --}}
@@ -268,50 +278,49 @@
                                         <!-- Product Image -->
                                         <div class="product-img">
                                             {{-- <a href="{{route('user.productDetail',$pDetails->id)}}"></a> --}}
-                                            <img src="{{ asset('storage/products/' . $productGroup->first()->image) }}"
-                                                alt="Product Image"
+                                            <img src="{{ asset('storage/products/' . $productGroup->first()->image) }}" alt="Product Image"
                                                 style="border-radius: 3px; width: 100%; height: 200px; object-fit: cover;">
                                         </div>
                                         <!-- Product Description -->
                                         <div class="product-description" style="margin-bottom: 20px;">
                                             <a href="{{ route('user.productDetails', ['model_id' => $modelId]) }}">
-                                                <h6 class="text-center">
-                                                    {{ trim(strstr($productGroup->first()->name, '(', true)) }}</h6>
-                                                <!-- Display model name -->
+                                                <h6 class="text-center" >{{ trim(strstr($productGroup->first()->name, '(', true)) }}</h6> <!-- Display model name -->
                                             </a>
                                             <!-- Hover Content -->
                                             <div class="hover-content">
                                                 <!-- Dropdowns for color and storage options -->
                                                 {{-- <select name="color">
-                                                @foreach ($productGroup->pluck('color')->unique() as $color)
-                                                    <option value="{{ $color }}">{{ $color }}</option>
-                                                @endforeach
-                                            </select>
-                                            <select name="storage_option">
+                                                    @foreach ($productGroup->pluck('color')->unique() as $color)
+                                                        <option value="{{ $color }}">{{ $color }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <select name="storage_option">
+
+
 @foreach ($productGroup->pluck('storage_option')->unique() as $storageOption)
                                                         <option value="{{ $storageOption }}">{{ $storageOption }}</option>
                                                     @endforeach
                                                 </select> --}}
-                                                <!-- Add to Cart button -->
-                                                <div class="add-to-cart-btn">
-                                                    <a href="#" class="btn essence-btn">Add to Cart</a>
+                                                    <!-- Add to Cart button -->
+                                                    <div class="add-to-cart-btn">
+                                                        <a href="#" class="btn essence-btn">Add to Cart</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
 
 
-                    <!-- Pagination -->
-                    <div>
-                        {{ $paginatedGroupedData->links() }}
+                         <!-- Pagination -->
+                       <div >
+                        {{$paginatedGroupedData->links()}}
+                       </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <!-- ##### Shop Grid Area End ##### -->
-@endsection
+        </section>
+        <!-- ##### Shop Grid Area End ##### -->
+    @endsection

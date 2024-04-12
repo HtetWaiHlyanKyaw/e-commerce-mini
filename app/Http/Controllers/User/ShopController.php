@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use Illuminate\Support\Facades\URL;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Brand;
@@ -19,13 +20,26 @@ class ShopController extends Controller
         $uniqueColors = $products->pluck('color')->unique();
         $uniqueStorage = $products->pluck('storage_option')->unique();
 
+        // Eager load brand and model information
         $datas = Product::with('brand', 'ProductModel')->get();
         $groupedData = $datas->groupBy('product_model_id');
-        $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $perPage = 8;
-        $currentPageItems = $groupedData->slice(($currentPage - 1) * $perPage, $perPage)->all();
-        $paginatedGroupedData = new LengthAwarePaginator($currentPageItems, count($groupedData), $perPage);
 
+        $perPage = 8;
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $currentPageItems = $groupedData->slice(($currentPage - 1) * $perPage, $perPage)->all();
+
+        // Create a paginator instance
+        $paginatedGroupedData = new LengthAwarePaginator(
+            $currentPageItems,
+            count($groupedData),
+            $perPage,
+            $currentPage
+        );
+
+        // Set the path for the paginator
+        $paginatedGroupedData->setPath(URL::current());
+
+        // Pass the paginator and other data to the view
         return view('user.shop', compact('paginatedGroupedData', 'brands', 'minPrice', 'maxPrice', 'uniqueColors', 'uniqueStorage'));
     }
 
@@ -52,5 +66,4 @@ class ShopController extends Controller
             'productVariants' => $productVariants,
         ]);
     }
-
 }

@@ -104,7 +104,7 @@
                     </div>
 
                     <div class="col-12 mt-5">
-                        <button type="submit" class="btn btn-danger">Save Changes</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
                     </div>
                 </form>
 

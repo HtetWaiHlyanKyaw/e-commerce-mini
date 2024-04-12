@@ -19,6 +19,7 @@
     <!-- Core Style CSS -->
     <link rel="stylesheet" href="{{ asset('user/css/core-style.css') }}">
     <link rel="stylesheet" href="{{ asset('user/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     @yield('style');
     <style>
         .dropdown-no-arrow::after {
@@ -81,10 +82,7 @@
                         <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                     </form>
                 </div>
-                <div class="cart-area">
-                    <a href="#" id="essenceCartBtn"><img src="{{ asset('user/img/core-img/bag.svg') }}"
-                            alt=""><span></span></a>
-                </div>
+
                 <!-- Favourite Area -->
                 {{-- <div class="favourite-area">
                     <a href="#"><img src="{{ asset('user/img/core-img/heart.svg') }}" alt=""></a>
@@ -93,7 +91,10 @@
 
                 <!-- User Login Info -->
                 @if (Auth::check() && Auth::user()->usertype === 'customer')
-
+                <div class="cart-area">
+                    <a href="#" id="essenceCartBtn"><img src="{{ asset('user/img/core-img/bag.svg') }}"
+                            alt=""><span></span></a>
+                </div>
                 <div class="dropdown user-login-info">
                     <div class="dropdown-toggle dropdown-no-arrow" id="userDropdown" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
@@ -113,7 +114,7 @@
 
             @elseif (Auth::check() && (Auth::user()->usertype === 'super_admin' || Auth::user()->usertype === 'supplier_admin' || Auth::user()->usertype === 'store_admin'))
                 <div class="user-login-info">
-                    <a href="{{route('dashboard')}}">
+                    <a href="{{route('dashboard')}}" style="vertical-align: center">
                         Dashboard
                     </a>
                 </div>
