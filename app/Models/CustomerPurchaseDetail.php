@@ -9,7 +9,10 @@ class CustomerPurchaseDetail extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'customer_purchase_id', 'product_id', 'price', 'quantity', 'sub_total'
+        'product_id',
+         'price',
+          'quantity',
+           'sub_total',
     ];
     public function CustomerPurchase()
     {
