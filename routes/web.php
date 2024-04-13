@@ -2,10 +2,10 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\User\ShopController;
+use App\Http\Controllers\User\UserProfileController;
 use App\Http\Controllers\BrandModelController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ExportController;
@@ -18,7 +18,6 @@ use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Auth\UserLoginController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\AdminLoginController;
-use App\Http\Controllers\User\UserProfileController;
 use App\Http\Controllers\Admin\CustomerPurchaseController;
 use App\Http\Controllers\Admin\SupplierPurchaseController;
 
@@ -191,4 +190,4 @@ Route::get('/shop', [ShopController::class, 'shop'])->name('user.shop');
 Route::get('/product/details', [ShopController::class,'details'])->name('user.productDetails');
 Route::get('/profile', [UserProfileController::class, 'profile'])->name('user.profile');
 Route::post('/profile/update', [UserProfileController::class, 'profileUpdate'])->name('user.pUpdate');
- Route::post('/cart/add',[CartController::class, 'add'])->name('cart.add');
+// Route::post('/cart/add',[Cartcontroller::class, 'add']->name('cart.add'));

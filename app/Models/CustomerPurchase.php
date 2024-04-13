@@ -8,23 +8,25 @@ use Illuminate\Database\Eloquent\Model;
 class CustomerPurchase extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'invoice_id',
-        'customer_purchase_detail_id',
         'user_id',
-        'payment_method',
+        'quantity',
+        'unit_price',
         'total_price',
-        'total_quantity',
     ];
-
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function detail()
+    public function details()
     {
-        return $this->belongsTo(CustomerPurchaseDetail::class, 'customer_purchase_detail_id');
+        return $this->hasMany(CustomerPurchaseDetail::class);
     }
+
+    // public function product()
+    // {
+    //     return $this->hasMany(Product::class);
+    // }
 }
