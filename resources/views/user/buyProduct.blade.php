@@ -76,72 +76,75 @@
 @endsection
 
 @section('script')
-    <script>
-        var productVariants = @json($productVariants);
+<script>
+    var productVariants = @json($productVariants);
 
-        function updateProductDetails() {
-            var selectedVariant = document.getElementById("product_variant").value;
-            var selectedProduct = getProductByVariant(selectedVariant);
+    function updateProductDetails() {
+        var selectedVariant = document.getElementById("product_variant").value;
+        var selectedProduct = getProductByVariant(selectedVariant);
 
-            if (selectedProduct) {
-                document.getElementById("product_image").src = selectedProduct.image;
-                document.getElementById("product_name").innerText = selectedProduct.name;
-                document.getElementById("product_description").innerText = selectedProduct.description;
-                document.getElementById("product_price").innerText = "$ " + selectedProduct.price;
-                document.getElementById("product_id").value = selectedProduct.id;
-                // console.log("Selected Product ID:", selectedProduct.id);
+        if (selectedProduct) {
+            document.getElementById("product_image").src = selectedProduct.image;
+            document.getElementById("product_name").innerText = selectedProduct.name;
+            document.getElementById("product_description").innerText = selectedProduct.description;
+            document.getElementById("product_price").innerText = "$ " + selectedProduct.price;
+            document.getElementById("product_id").value = selectedProduct.id;
+            // console.log("Selected Product ID:", selectedProduct.id);
+        }
+    }
+
+    function getProductByVariant(variant) {
+        return productVariants.find(function(product) {
+            return product.color + "_" + product.storage_option === variant;
+        });
+    }
+
+    // Call updateProductDetails initially to display details of the default variant
+    updateProductDetails();
+
+    $(document).ready(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
-        }
+        });
+        // Get the initial quantity value
+        let qty = parseInt($('#qty').val());
 
-        function getProductByVariant(variant) {
-            return productVariants.find(function(product) {
-                return product.color + "_" + product.storage_option === variant;
-            });
-        }
-
-        // Call updateProductDetails initially to display details of the default variant
-        updateProductDetails();
-
-        $(document).ready(function() {
-            // Get the initial quantity value
-            let qty = parseInt($('#qty').val());
-
-            // Increment quantity when plus button is clicked
-            $('#plusBtn').on('click', function() {
-                qty = qty + 1;
-                $('#qty').val(qty);
-            });
-
-            // Decrement quantity when minus button is clicked
-            $('#minusBtn').on('click', function() {
-                if (qty > 1) { // Ensure quantity doesn't go below 1
-                    qty = qty - 1;
-                    $('#qty').val(qty);
-                }
-            });
+        // Increment quantity when plus button is clicked
+        $('#plusBtn').on('click', function() {
+            qty = qty + 1;
+            $('#qty').val(qty);
         });
 
+        // Decrement quantity when minus button is clicked
+        $('#minusBtn').on('click', function() {
+            if (qty > 1) { // Ensure quantity doesn't go below 1
+                qty = qty - 1;
+                $('#qty').val(qty);
+            }
+        });
 
-        //add to cart
+        //  add to cart
         $('#cartBtn').click(function() {
             let userId = $('#userId').val();
             let productId = $('#product_id').val();
 
-          $.ajax({
-            type: 'post',
-            url: '',
-            data: {
-                'userId' : userId,
-                'productId' : productId,
-                'qty' :qty
+            $.ajax({
+                type: 'post',
+                url: '/cart/add',
+                data: {
+                    'userId': userId,
+                    'productId': productId,
+                    'qty': qty
+                },
+                dataType: 'json', // corrected 'datatype' to 'dataType'
+                success: function(response) {
+                    window.location.href = 'http://localhost:8000/';
+                }
+            });
+        });
+    });
+</script>
 
-            }
-            datatype: 'json',
-            success: function(response){
-                window.location.href = 'http://localhost:8000/';
-
-            }
-          })
-        })
-    </script>
 @endsection
