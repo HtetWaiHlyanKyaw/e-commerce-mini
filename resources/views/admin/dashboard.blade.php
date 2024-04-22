@@ -212,13 +212,7 @@
             </div>
         </div>
     </div>
-
-
-
-
-
 @endsection
-
 @section('script')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
@@ -306,6 +300,7 @@
             }
         });
     </script>
+
     <script>
     var quantityCtx = document.getElementById('quantityDoughnutChart').getContext('2d');
     var salesCtx = document.getElementById('salesDoughnutChart').getContext('2d');
@@ -330,7 +325,7 @@
     var quantityDoughnutChart = new Chart(quantityCtx, {
         type: 'doughnut',
         data: {
-            // labels: quantityLabels,
+             labels: quantityLabels,
             datasets: [{
                 label: 'Quantity Sold',
                 data: quantityData,
@@ -356,7 +351,7 @@
     var salesDoughnutChart = new Chart(salesCtx, {
         type: 'doughnut',
         data: {
-            // labels: salesLabels,
+             labels: salesLabels,
             datasets: [{
                 label: 'Sales Total',
                 data: salesData,

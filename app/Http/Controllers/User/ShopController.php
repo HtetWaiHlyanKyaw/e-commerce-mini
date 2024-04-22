@@ -12,17 +12,16 @@ class ShopController extends Controller
 {
     public function shop()
 {
-    $brands = Brand::get();
+    $brands = Brand::all();
     $minPrice = Product::min('price');
     $maxPrice = Product::max('price');
-    $products = Product::with('brand', 'ProductModel')->get();
+    $products = Product::with('brand', 'ProductModel')->orderByDesc('created_at')->get();
     $uniqueColors = $products->pluck('color')->unique();
     $uniqueStorage = $products->pluck('storage_option')->unique();
 
     // Eager load brand and model information
     $datas = Product::with('brand', 'ProductModel')->get();
     $groupedData = $datas->groupBy('product_model_id');
-
     $perPage = 12;
     $currentPage = LengthAwarePaginator::resolveCurrentPage();
     $currentPageItems = $groupedData->slice(($currentPage - 1) * $perPage, $perPage)->all();

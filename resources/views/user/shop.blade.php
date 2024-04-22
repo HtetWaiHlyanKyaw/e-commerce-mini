@@ -266,36 +266,23 @@
                             <div class="row">
                                 <h4 style="margin-bottom: 20px;">All Products</h4>
                                 @foreach ($paginatedGroupedData as $modelId => $productGroup)
-                                    <!-- Single Product -->
 
                                 <div class="col-12 col-sm-6 col-lg-3">
-                                    {{-- style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);" --}}
+
                                     <div class="single-product-wrapper" style="border: solid 1px #dddddd">
-                                        <!-- Product Image -->
+
                                         <div class="product-img">
-                                            {{-- <a href="{{route('user.productDetail',$pDetails->id)}}"></a> --}}
+
                                             <img src="{{ asset('storage/products/' . $productGroup->first()->image) }}" alt="Product Image"
                                                 style="border-radius: 3px; width: 100%; height: 200px; object-fit: cover;">
                                         </div>
-                                        <!-- Product Description -->
+
                                         <div class="product-description" style="margin-bottom: 20px;">
                                             <a href="{{ route('user.productDetails', ['model_id' => $modelId]) }}">
                                                 <h6 class="text-center" >{{ trim(strstr($productGroup->first()->name, '(', true)) }}</h6> <!-- Display model name -->
                                             </a>
-                                            <!-- Hover Content -->
+
                                             <div class="hover-content">
-                                                <!-- Dropdowns for color and storage options -->
-                                                {{-- <select name="color">
-                                                    @foreach ($productGroup->pluck('color')->unique() as $color)
-                                                        <option value="{{ $color }}">{{ $color }}</option>
-                                                    @endforeach
-                                                </select>
-                                                <select name="storage_option">
-                                                    @foreach ($productGroup->pluck('storage_option')->unique() as $storageOption)
-                                                        <option value="{{ $storageOption }}">{{ $storageOption }}</option>
-                                                    @endforeach
-                                                </select> --}}
-                                                    <!-- Add to Cart button -->
                                                     <div class="add-to-cart-btn">
                                                         <a href="#" class="btn essence-btn">Add to Cart</a>
                                                     </div>

@@ -52,10 +52,6 @@ class DashboardController extends Controller
             return ltrim($day, '0');
         }, array_keys($supplierPurchaseAmounts));
 
-
-
-
-
         $CustomerPurchases = CustomerPurchase::whereMonth('created_at', Carbon::now()->month)->get();
         $customerPurchasesByDay = $CustomerPurchases->groupBy(function ($purchase) {
             return $purchase->created_at->format('d'); // Grouping by day
@@ -69,15 +65,17 @@ class DashboardController extends Controller
             return ltrim($day, '0');
         }, array_keys($customerPurchaseAmounts));
 
+        $productQuantities = SupplierPurchaseDetail::with('product')
+                                                    ->select('product_id', DB::raw('SUM(quantity) as total_quantity'))
+                                                    ->groupBy('product_id')
+                                                    ->limit(5)
+                                                    ->get();
 
-
-        $productQuantities = SupplierPurchaseDetail::with('product')->select('product_id', DB::raw('SUM(quantity) as total_quantity'))
-        ->groupBy('product_id')
-        ->get();
-
-        $productData = SupplierPurchaseDetail::with('product')->select('product_id', DB::raw('SUM(quantity) as total_quantity'), DB::raw('SUM(quantity * price) as total_sales'))
-        ->groupBy('product_id')
-        ->get();
+        $productData = SupplierPurchaseDetail::with('product')
+                                                    ->select('product_id', DB::raw('SUM(quantity) as total_quantity'), DB::raw('SUM(quantity * price) as total_sales'))
+                                                    ->groupBy('product_id')
+                                                    ->limit(5)
+                                                    ->get();
 
         return view('admin.dashboard', compact(
             'customerPurchases',

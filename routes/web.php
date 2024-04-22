@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\User\ShopController;
 use App\Http\Controllers\User\UserProfileController;
+use App\Http\Controllers\User\PageController;
 use App\Http\Controllers\BrandModelController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ExportController;
@@ -174,7 +175,7 @@ Route::post('/user/registration',[UserRegisterController::class, 'register'])->n
 
 
 //all user routes
-Route::get('/', [UserController::class, 'index'])->name('user.page');
+Route::get('/', [PageController::class, 'index'])->name('user.page');
 Route::get('/regular_page', [UserController::class, 'RegularPage'])->name('user.rePage');
 Route::get('/contact', [UserController::class, 'contact'])->name('user.contact');
 
