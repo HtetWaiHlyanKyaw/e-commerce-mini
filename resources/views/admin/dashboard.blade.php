@@ -212,13 +212,7 @@
             </div>
         </div>
     </div>
-
-
-
-
-
 @endsection
-
 @section('script')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     @if (!empty($supplierPurchaseAmounts))

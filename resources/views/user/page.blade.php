@@ -1,6 +1,6 @@
 @extends('user.master')
 @section('title', 'E_commerce Home Page')
-@section('content')
+
 @section('style')
     <style>
         @media screen and (min-width: 568px) {
@@ -13,7 +13,6 @@
                 margin: 0 .5rem;
                 width: calc(100/3);
             }
-
 
             .img-wrapper {
                 height: 22vw;
@@ -35,9 +34,8 @@
             max-height: 100%;
         }
     </style>
-
-
 @endsection
+@section('content')
 <!-- ##### Right Side Cart Area ##### -->
 <div class="cart-bg-overlay"></div>
 
@@ -75,7 +73,6 @@
                         <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
                         <span class="badge">Mango</span>
                         <h6>Button Through Strap Mini Dress</h6>
-
                     </div>
                 </a>
             </div>
@@ -111,23 +108,6 @@
         </div>
     </div>
 </div>
-<!-- ##### Right Side Cart End ##### -->
-
-<!-- ##### Welcome Area Start ##### -->
-{{-- <section class="welcome_area bg-img background-overlay" style="background-image: url(user/img/bg-img/bg-1.jpg);">
-        <div class="container h-100">
-            <div class="row h-100 align-items-center">
-                <div class="col-12">
-                    <div class="hero-content">
-                        <h6>asoss</h6>
-                        <h2>New Collection</h2>
-                        <a href="#" class="btn essence-btn">view collection</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> --}}
-
 <div id="carouselExampleIndicators" class="carousel carousel-dark slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
@@ -137,15 +117,15 @@
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
             aria-label="Slide 3"></button>
     </div>
-    <div class="carousel-inner">
+    <div class="carousel-inner" style="margin-top: -25px;">
         <div class="carousel-item active">
-            <img src="user/img/bg-img/bg-1.jpg" class="d-block w-100" alt="...">
+            <img src="{{ asset('images/googleEcoSystem.webp') }}" alt="..."  class="d-block w-100" style="height: 100vh; object-fit: cover; object-position: top;">
         </div>
         <div class="carousel-item">
-            <img src="user/img/bg-img/bg-1.jpg" class="d-block w-100" alt="...">
+            <img src="{{ asset('images/s24Advertisement.jpg') }}" alt="..." class="d-block w-100 " style="height: 100vh; object-fit: cover; object-position: top;">
         </div>
         <div class="carousel-item">
-            <img src="user/img/bg-img/bg-1.jpg" class="d-block w-100" alt="...">
+            <img src="{{ asset('images/Iphone15Advertisement.webp') }}" alt="..." class="d-block w-100 " style="height: 100vh; object-fit: cover; object-position: center;">
         </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
@@ -159,74 +139,12 @@
         <span class="visually-hidden">Next</span>
     </button>
 </div>
-
-<!-- ##### Welcome Area End ##### -->
-
-<!-- ##### Top Catagory Area Start ##### -->
-{{-- <div class="container">
-        <div class="row justify-content-center">
-            <!-- Single Catagory -->
-            <div class="col-12 col-sm-4 col-md-4">
-                <div class="single_catagory_area d-flex align-items-start  bg-img">
-                    <div class="catagory-content">
-                        <a href="#">Apple</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Single Catagory -->
-            <div class="col-12 col-sm-4 col-md-4">
-                <div class="single_catagory_area d-flex g-img">
-                    <div class="catagory-content">
-                        <a href="#">Samsung</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Single Catagory -->
-            <div class="col-12 col-sm-4 col-md-4">
-                <div class="single_catagory_area d-flex bg-img">
-                    <div class="catagory-content">
-                        <a href="#">Oppo</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
-
-
-
-
-
-<!-- ##### Top Catagory Area End ##### -->
-
-<!-- ##### CTA Area Start ##### -->
-{{-- <div class="cta-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="cta-content bg-img background-overlay"
-                        style="background-image: url(user/img/bg-img/bg-5.jpg);">
-                        <div class="h-100 d-flex align-items-center justify-content-end">
-                            <div class="cta--text">
-                                <h6>-60%</h6>
-                                <h2>Global Sale</h2>
-                                <a href="#" class="btn essence-btn">Buy Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-<!-- ##### CTA Area End ##### -->
-
-<!-- ##### New Arrivals Area Start ##### -->
 <section class="new_arrivals_area section-padding-3 mb-8  clearfix">
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <div class="section-heading text-center">
-                    <h2 style="margin-top:50px;">New Arrival</h2>
+                    <h2 style="margin-top:50px;">Best Sellers</h2>
                 </div>
             </div>
         </div>
@@ -238,26 +156,21 @@
                 <div class="popular-products-slides owl-carousel">
 
                     <!-- Single Product -->
+                    @foreach($topProducts as $modelId => $topProduct)
                     <div class="single-product-wrapper">
                         <!-- Product Image -->
                         <div class="product-img">
-                            <img src="{{ asset('user/img/product-img/product-1.jpg') }}" alt="">
+                            {{-- <img src="{{ asset('user/img/product-img/product-1.jpg') }}" alt=""> --}}
                             <!-- Hover Thumb -->
-                            <img class="hover-img" src="{{ asset('user/img/product-img/product-2.jpg') }}"
-                                alt="">
-                            <!-- Favourite -->
-                            <div class="product-favourite">
-                                <a href="#" class="favme fa fa-heart"></a>
-                            </div>
-                        </div>
-                        <!-- Product Description -->
-                        <div class="product-description">
-                            <span>topshop</span>
-                            <a href="single-product-details.html">
-                                <h6>Knot Front Mini Dress</h6>
-                            </a>
-                            <p class="product-price">$80.00</p>
+                            {{-- <img class="hover-img" src="{{ asset('user/img/product-img/product-2.jpg') }}"
+                                alt=""> --}}
+                                <img src="{{ asset('storage/products/' . $topProduct->first()->image) }}" alt="Product Image">
 
+                        </div>
+                        <div class="product-description">
+                            <a href="{{ route('user.productDetails', ['model_id' => $modelId]) }}">
+                                <h6>{{$topProduct->first()->name}}</h6>
+                            </a>
                             <!-- Hover Content -->
                             <div class="hover-content">
                                 <!-- Add to Cart -->
@@ -267,9 +180,9 @@
                             </div>
                         </div>
                     </div>
-
+                    @endforeach
                     <!-- Single Product -->
-                    <div class="single-product-wrapper">
+                    {{-- <div class="single-product-wrapper">
                         <!-- Product Image -->
                         <div class="product-img">
                             <img src="{{ asset('user/img/product-img/product-2.jpg') }}" alt="">
@@ -371,160 +284,65 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- ##### New Arrivals Area End ##### -->
-
-<!-- ##### Brands Area Start ##### -->
-{{-- <div class="brands-area d-flex align-items-center justify-content-between">
-        <!-- Brand Logo -->
-        <div class="single-brands-logo">
-            <img src="{{ asset('user/img/core-img/brand1.png') }}" alt="">
-        </div>
-        <!-- Brand Logo -->
-        <div class="single-brands-logo">
-            <img src="{{ asset('user/img/core-img/brand2.png') }}" alt="">
-        </div>
-        <!-- Brand Logo -->
-        <div class="single-brands-logo">
-            <img src="{{ asset('user/img/core-img/brand3.png') }}" alt="">
-        </div>
-        <!-- Brand Logo -->
-        <div class="single-brands-logo">
-            <img src="{{ asset('user/img/core-img/brand4.png') }}" alt="">
-        </div>
-        <!-- Brand Logo -->
-        <div class="single-brands-logo">
-            <img src="{{ asset('user/img/core-img/brand5.png') }}" alt="">
-        </div>
-        <!-- Brand Logo -->
-        <div class="single-brands-logo">
-            <img src="{{ asset('user/img/core-img/brand6.png') }}" alt="">
-        </div>
-    </div> --}}
-<!-- ##### Brands Area End ##### -->
-
-{{-- Advertise start --}}
 <div id="carouselExampleControls" class="carousel carousel-dark slide d-none d-sm-block " data-bs-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
             <div class="cards-wrapper">
                 {{-- <div class="card"> --}}
-                    <div class="image-wrapper">
-                        <img src="{{ asset('user/img/product-img/product-5.jpg') }}" alt="...">
+                    <div class="image-wrapper" style="width: 33.33%;">
+                        <img src="{{ asset('images/GooglePixelAdvertisement.webp') }}" alt="..." style="height: 300px; width: 100%; object-fit:cover; object-position:center;">
 
                     </div>
-                    {{-- <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div> --}}
-                {{-- </div> --}}
-                {{-- <div class="card"> --}}
-                    <div class="image-wrapper">
-                        <img src="{{ asset('user/img/product-img/product-1.jpg') }}" alt="...">
+
+                    <div class="image-wrapper" style="width: 33.33%;">
+                        <img src="{{ asset('images/OppoAdvertisement.png') }}" alt="..." style="height: 300px; width: 100%;  object-fit:cover; object-position:center;">
                     </div>
-                    {{-- <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+
+                    <div class="image-wrapper" style="width: 33.33%;">
+                        <img src="{{ asset('images/VivoAdvertisement.webp') }}" alt="..." style="height: 300px; width: 100%;  object-fit:cover; object-position:center;">
                     </div>
-                </div> --}}
-                {{-- <div class="card"> --}}
-                    <div class="image-wrapper">
-                        <img src="{{ asset('user/img/product-img/product-2.jpg') }}" alt="...">
-                    </div>
-                    {{-- <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div> --}}
+
             </div>
         </div>
-        <div class="carousel-item">
+        {{-- <div class="carousel-item">
             <div class="cards-wrapper">
-                {{-- <div class="card"> --}}
+
                     <div class="image-wrapper">
                         <img src="{{ asset('user/img/product-img/product-3.jpg') }}" alt="...">
                     </div>
-                    {{-- <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div> --}}
-                {{-- <div class="card"> --}}
+
                     <div class="image-wrapper">
                         <img src="{{ asset('user/img/product-img/product-4.jpg') }}" alt="...">
                     </div>
-                    {{-- <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Ssome quick example text to build on the card title and make up the bulk
-                            of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div> --}}
-                {{-- <div class="card"> --}}
+
                     <div class="image-wrapper">
                         <img src="{{ asset('user/img/product-img/product-6.jpg') }}" alt="...">
                     </div>
-
-                    {{-- <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div> --}}
             </div>
         </div>
         <div class="carousel-item">
             <div class="cards-wrapper">
-                {{-- <div class="card"> --}}
+
                     <div class="image-wrapper">
                         <img src="{{ asset('user/img/product-img/product-1.jpg') }}" alt="...">
                     </div>
-                    {{-- <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div> --}}
-                {{-- <div class="card"> --}}
+
                     <div class="image-wrapper">
                         <img src="{{ asset('user/img/product-img/product-2.jpg') }}" alt="...">
                     </div>
-                    {{-- <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div> --}}
-                {{-- <div class="card"> --}}
+
                     <div class="image-wrapper">
-                    </div>
+
                     <img src="{{ asset('user/img/product-img/product-3.jpg') }}" alt="...">
-                    {{-- <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div> --}}
+                </div>
             </div>
-        </div>
+        </div> --}}
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
         data-bs-slide="prev">
@@ -545,7 +363,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="section-heading text-center">
-                    <h2 style="margin-top:50px;">Best Seller</h2>
+                    <h2 style="margin-top:50px;">New Arrivals</h2>
                 </div>
             </div>
         </div>
@@ -557,26 +375,21 @@
                 <div class="popular-products-slides owl-carousel">
 
                     <!-- Single Product -->
+                    @foreach($newestProducts as $modelId => $newProduct)
                     <div class="single-product-wrapper">
                         <!-- Product Image -->
                         <div class="product-img">
-                            <img src="{{ asset('user/img/product-img/product-1.jpg') }}" alt="">
+                            {{-- <img src="{{ asset('user/img/product-img/product-1.jpg') }}" alt=""> --}}
                             <!-- Hover Thumb -->
-                            <img class="hover-img" src="{{ asset('user/img/product-img/product-2.jpg') }}"
-                                alt="">
-                            <!-- Favourite -->
-                            <div class="product-favourite">
-                                <a href="#" class="favme fa fa-heart"></a>
-                            </div>
-                        </div>
-                        <!-- Product Description -->
-                        <div class="product-description">
-                            <span>topshop</span>
-                            <a href="single-product-details.html">
-                                <h6>Knot Front Mini Dress</h6>
-                            </a>
-                            <p class="product-price">$80.00</p>
+                            {{-- <img class="hover-img" src="{{ asset('user/img/product-img/product-2.jpg') }}"
+                                alt=""> --}}
+                                <img src="{{ asset('storage/products/' . $newProduct->first()->image) }}" alt="Product Image">
 
+                        </div>
+                        <div class="product-description">
+                            <a href="{{ route('user.productDetails', ['model_id' => $modelId]) }}">
+                                <h6>{{$newProduct->first()->name}}</h6>
+                            </a>
                             <!-- Hover Content -->
                             <div class="hover-content">
                                 <!-- Add to Cart -->
@@ -586,9 +399,9 @@
                             </div>
                         </div>
                     </div>
-
+                    @endforeach
                     <!-- Single Product -->
-                    <div class="single-product-wrapper">
+                    {{-- <div class="single-product-wrapper">
                         <!-- Product Image -->
                         <div class="product-img">
                             <img src="{{ asset('user/img/product-img/product-2.jpg') }}" alt="">
@@ -690,7 +503,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -706,111 +519,55 @@
         <div class="carousel-item active">
             <div class="cards-wrapper">
                 {{-- <div class="card"> --}}
-                    <div class="image-wrapper">
-                        <img src="{{ asset('user/img/product-img/product-5.jpg') }}" alt="...">
+                    <div class="image-wrapper" style="width: 33.33%;">
+                        <img src="{{ asset('images/OppoAdvertisement.png') }}" alt="..." style="height: 300px; width: 100%; object-fit:cover; object-position:center;">
 
                     </div>
-                    {{-- <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+
+                    <div class="image-wrapper" style="width: 33.33%;">
+                        <img src="{{ asset('images/GooglePixelAdvertisement.webp') }}" alt="..." style="height: 300px; width: 100%;  object-fit:cover; object-position:center;">
                     </div>
-                </div> --}}
-                {{-- <div class="card"> --}}
-                    <div class="image-wrapper">
-                        <img src="{{ asset('user/img/product-img/product-1.jpg') }}" alt="...">
+
+                    <div class="image-wrapper" style="width: 33.33%;">
+                        <img src="{{ asset('images/VivoAdvertisement.webp') }}" alt="..." style="height: 300px; width: 100%;  object-fit:cover; object-position:center;">
                     </div>
-                    {{-- <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div> --}}
-                {{-- <div class="card"> --}}
-                    <div class="image-wrapper">
-                        <img src="{{ asset('user/img/product-img/product-2.jpg') }}" alt="...">
-                    </div>
-                    {{-- <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div> --}}
+
             </div>
         </div>
-        <div class="carousel-item">
+        {{-- <div class="carousel-item">
             <div class="cards-wrapper">
-                {{-- <div class="card"> --}}
+
                     <div class="image-wrapper">
                         <img src="{{ asset('user/img/product-img/product-3.jpg') }}" alt="...">
                     </div>
-                    {{-- <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div> --}}
-                {{-- <div class="card"> --}}
+
                     <div class="image-wrapper">
                         <img src="{{ asset('user/img/product-img/product-4.jpg') }}" alt="...">
                     </div>
-                    {{-- <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Ssome quick example text to build on the card title and make up the bulk
-                            of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div> --}}
-                {{-- <div class="card"> --}}
+
                     <div class="image-wrapper">
                         <img src="{{ asset('user/img/product-img/product-6.jpg') }}" alt="...">
                     </div>
 
-                    {{-- <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div> --}}
             </div>
         </div>
         <div class="carousel-item">
             <div class="cards-wrapper">
-                {{-- <div class="card"> --}}
+
                     <div class="image-wrapper">
                         <img src="{{ asset('user/img/product-img/product-1.jpg') }}" alt="...">
                     </div>
-                    {{-- <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div> --}}
-                {{-- <div class="card"> --}}
+
                     <div class="image-wrapper">
                         <img src="{{ asset('user/img/product-img/product-2.jpg') }}" alt="...">
                     </div>
-                    {{-- <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div> --}}
-                {{-- <div class="card"> --}}
-                    <div class="image-wrapper">
-                    </div>
-                    <img src="{{ asset('user/img/product-img/product-3.jpg') }}" alt="...">
 
+                    <div class="image-wrapper">
+
+                    <img src="{{ asset('user/img/product-img/product-3.jpg') }}" alt="...">
+                </div>
             </div>
-        </div>
+        </div> --}}
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
         data-bs-slide="prev">

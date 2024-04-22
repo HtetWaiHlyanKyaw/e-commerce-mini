@@ -12,6 +12,22 @@ use Illuminate\Pagination\LengthAwarePaginator;
 class ShopController extends Controller
 {
     public function shop()
+<<<<<<< HEAD
+{
+    $brands = Brand::all();
+    $minPrice = Product::min('price');
+    $maxPrice = Product::max('price');
+    $products = Product::with('brand', 'ProductModel')->orderByDesc('created_at')->get();
+    $uniqueColors = $products->pluck('color')->unique();
+    $uniqueStorage = $products->pluck('storage_option')->unique();
+
+    // Eager load brand and model information
+    $datas = Product::with('brand', 'ProductModel')->get();
+    $groupedData = $datas->groupBy('product_model_id');
+    $perPage = 12;
+    $currentPage = LengthAwarePaginator::resolveCurrentPage();
+    $currentPageItems = $groupedData->slice(($currentPage - 1) * $perPage, $perPage)->all();
+=======
     {
         $brands = Brand::get();
         $minPrice = Product::min('price');
@@ -27,6 +43,7 @@ class ShopController extends Controller
         $perPage = 8;
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
         $currentPageItems = $groupedData->slice(($currentPage - 1) * $perPage, $perPage)->all();
+>>>>>>> e1b3c1af80eeb26b687a53def31ad381faba9395
 
         // Create a paginator instance
         $paginatedGroupedData = new LengthAwarePaginator(
