@@ -40,22 +40,43 @@
                 </div>
 
                 <div class="form-group row">
-                    <div class="col-sm-8 d-flex align-items-center">
-                        <input type="number" id="quantity" name="quantity" class="form-control mr-2" min="1"
-                            value="1" style="width: 100px; height: 40px;" autocomplete="off">
-                        <button type="button" class="btn btn-primary mr-2">Buy Now</button>
-                        <button type="button" class="btn btn-primary">Add to Cart</button>
+                    <div class="col-sm-8 d-flex align-items-center mt-3">
+                        @if (Auth::check() && Auth::user()->usertype == 'customer')
+                            <button id="minusBtn" class="btn btn-sm btn-success"><i class="fa-solid fa-minus"></i></button>
+
+                            <input type="text" value="1" style="width:50px" id="qty"
+                                class="form-control text-center mx-1">
+
+                            <button id="plusBtn" class="btn btn-sm btn-success me-2"><i
+                                    class="fa-solid fa-plus"></i></button>
+
+
+
+                            {{-- Show the "Add to Cart" section for customers --}}
+                            <button type="button" class="btn btn-primary me-2">Buy Now</button>
+                            <button type="button" id="cartBtn" class="btn btn-primary"> <i class="fa-solid fa-cart-shopping"></i> Add to
+                                Cart</button>
+                                <input type="hidden" id="userId" value="{{Auth::user()->id}}">
+                                <input type="hidden" name="product_id" id="product_id">
+
+                        @elseif(!Auth::check())
+                            {{-- Show a message or redirect to login for non-authenticated users --}}
+                            <div class="alert alert-warning mt-3" role="alert">
+                                If you want to buy this product , you need to <a href="{{ route('user.login') }}"
+                                    class="alert-link">login</a> at frist.
+                            </div>
+                        @endif
                     </div>
                 </div>
+
             </div>
-            <input type="hidden" name="product_id" id="product_id">
+
         </div>
     </div>
 @endsection
 
 @section('script')
     <script>
-
         var productVariants = @json($productVariants);
 
         function updateProductDetails() {
@@ -68,8 +89,7 @@
                 document.getElementById("product_description").innerText = selectedProduct.description;
                 document.getElementById("product_price").innerText = "$ " + selectedProduct.price;
                 document.getElementById("product_id").value = selectedProduct.id;
-
-                console.log("Selected Product ID:", selectedProduct.id);
+                // console.log("Selected Product ID:", selectedProduct.id);
             }
         }
 
@@ -81,5 +101,47 @@
 
         // Call updateProductDetails initially to display details of the default variant
         updateProductDetails();
+
+        $(document).ready(function() {
+            // Get the initial quantity value
+            let qty = parseInt($('#qty').val());
+
+            // Increment quantity when plus button is clicked
+            $('#plusBtn').on('click', function() {
+                qty = qty + 1;
+                $('#qty').val(qty);
+            });
+
+            // Decrement quantity when minus button is clicked
+            $('#minusBtn').on('click', function() {
+                if (qty > 1) { // Ensure quantity doesn't go below 1
+                    qty = qty - 1;
+                    $('#qty').val(qty);
+                }
+            });
+        });
+
+
+        //add to cart
+        $('#cartBtn').click(function() {
+            let userId = $('#userId').val();
+            let productId = $('#product_id').val();
+
+          $.ajax({
+            type: 'post',
+            url: '',
+            data: {
+                'userId' : userId,
+                'productId' : productId,
+                'qty' :qty
+
+            }
+            datatype: 'json',
+            success: function(response){
+                window.location.href = 'http://localhost:8000/';
+
+            }
+          })
+        })
     </script>
 @endsection

@@ -1,3 +1,4 @@
+
 @extends('user.master')
 @section('title', 'Shop')
 @section('content')
@@ -84,7 +85,8 @@
     </div>
     <!-- ##### Right Side Cart End ##### -->
 
-    <!-- ##### Breadcumb Area Start ##### -->
+
+<!-- ##### Breadcumb Area Start ##### -->
     {{-- <div class="breadcumb_area bg-img" style="background-image: url({{ asset('user/img/bg-img/breadcumb.jpg') }});">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
@@ -150,7 +152,9 @@
                                             <li><a href="#">All</a></li>
                                             <li><a href="#">Bodysuits</a></li>
                                             <li><a href="#">Dresses</a></li>
-                                            <li><a href="#">Hoodies &amp; Sweats</a></li>
+
+
+<li><a href="#">Hoodies &amp; Sweats</a></li>
                                             <li><a href="#">Jackets &amp; Coats</a></li>
                                             <li><a href="#">Jeans</a></li>
                                             <li><a href="#">Pants &amp; Leggings</a></li>
@@ -183,7 +187,8 @@
 
                             <!-- ##### Single Widget ##### -->
 
-                            <!-- Colors -->
+
+<!-- Colors -->
                             <div class="widget brands mb-50">
                                 <!-- Widget Title 2 -->
                                 <p class="widget-title2 mb-30">COLOR</p>
@@ -237,14 +242,14 @@
                         </div>
                     </div>
 
-                    <div class="col-12 col-md-10 col-lg-10">
+<div class="col-12 col-md-10 col-lg-10">
                         <div class="shop_grid_product_area">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="product-topbar d-flex align-items-center justify-content-between">
                                         <!-- Total Products -->
                                         <div class="total-products">
-                                            <p><span>{{$paginatedGroupedData ->count()}}</span> products found</p>
+                                            <p><span>186</span> products found</p>
                                         </div>
                                         <!-- Sorting -->
                                         <div class="product-sorting d-flex">
@@ -262,7 +267,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <h4 style="margin-bottom: 20px;">All Products</h4>
                                 @foreach ($paginatedGroupedData as $modelId => $productGroup)
@@ -283,6 +287,23 @@
                                             </a>
 
                                             <div class="hover-content">
+<<<<<<< HEAD
+=======
+                                                <!-- Dropdowns for color and storage options -->
+                                                {{-- <select name="color">
+                                                    @foreach ($productGroup->pluck('color')->unique() as $color)
+                                                        <option value="{{ $color }}">{{ $color }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <select name="storage_option">
+
+
+@foreach ($productGroup->pluck('storage_option')->unique() as $storageOption)
+                                                        <option value="{{ $storageOption }}">{{ $storageOption }}</option>
+                                                    @endforeach
+                                                </select> --}}
+                                                    <!-- Add to Cart button -->
+>>>>>>> e1b3c1af80eeb26b687a53def31ad381faba9395
                                                     <div class="add-to-cart-btn">
                                                         <a href="#" class="btn essence-btn">Add to Cart</a>
                                                     </div>
