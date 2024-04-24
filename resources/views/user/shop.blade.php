@@ -1,4 +1,3 @@
-
 @extends('user.master')
 @section('title', 'Shop')
 @section('content')
@@ -287,8 +286,6 @@
                                             </a>
 
                                             <div class="hover-content">
-<<<<<<< HEAD
-=======
                                                 <!-- Dropdowns for color and storage options -->
                                                 {{-- <select name="color">
                                                     @foreach ($productGroup->pluck('color')->unique() as $color)
@@ -303,7 +300,6 @@
                                                     @endforeach
                                                 </select> --}}
                                                     <!-- Add to Cart button -->
->>>>>>> e1b3c1af80eeb26b687a53def31ad381faba9395
                                                     <div class="add-to-cart-btn">
                                                         <a href="#" class="btn essence-btn">Add to Cart</a>
                                                     </div>

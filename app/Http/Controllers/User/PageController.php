@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\User;
 use App\Models\Product;
-use App\Http\Controllers\Controller;
-use App\Models\CustomerPurchaseDetail;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Models\CustomerPurchaseDetail;
 
 class PageController extends Controller
 {
@@ -26,5 +27,20 @@ class PageController extends Controller
         $newestProducts = $newestProducts->groupBy('product_model_id')->take(4);
 
         return view('user.page', compact('topProducts','newestProducts'));
+    }
+
+    public function data()
+    {
+         // Retrieve the authenticated user
+     // Retrieve the authenticated user
+     $user = Auth::user();
+
+     // Retrieve the cart items for the authenticated user
+     $cart = $user->cart ?? [];
+
+     // Retrieve all products
+     $products = Product::all();
+
+     return view('user.master', compact('user', 'cart', 'products'));
     }
 }

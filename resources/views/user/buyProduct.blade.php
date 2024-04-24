@@ -1,5 +1,8 @@
 @extends('user.master')
 @section('title', 'Product Details & Purchase Options')
+@section('csrf')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
 @section('content')
     <div class="container" style="margin-top: 50px">
         <div class="row">
@@ -12,7 +15,6 @@
 
             <div class="col-lg-7" style="margin-bottom: 200px">
                 <h3 id="product_name"></h3>
-
                 <div id="product_description_container" style="overflow-y: auto; max-height: 300px;">
                     <p id="product_description" style="text-align: justify;"></p>
                 </div>
@@ -54,11 +56,11 @@
 
                             {{-- Show the "Add to Cart" section for customers --}}
                             <button type="button" class="btn btn-primary me-2">Buy Now</button>
-                            <button type="button" id="cartBtn" class="btn btn-primary"> <i class="fa-solid fa-cart-shopping"></i> Add to
+                            <button type="button" id="cartBtn" class="btn btn-primary"> <i
+                                    class="fa-solid fa-cart-shopping"></i> Add to
                                 Cart</button>
-                                <input type="hidden" id="userId" value="{{Auth::user()->id}}">
-                                <input type="hidden" name="product_id" id="product_id">
-
+                            <input type="hidden" id="userId" value="{{ Auth::user()->id }}">
+                            <input type="hidden" name="product_id" id="product_id">
                         @elseif(!Auth::check())
                             {{-- Show a message or redirect to login for non-authenticated users --}}
                             <div class="alert alert-warning mt-3" role="alert">
@@ -76,75 +78,79 @@
 @endsection
 
 @section('script')
-<script>
-    var productVariants = @json($productVariants);
+    <script>
+        var productVariants = @json($productVariants);
 
-    function updateProductDetails() {
-        var selectedVariant = document.getElementById("product_variant").value;
-        var selectedProduct = getProductByVariant(selectedVariant);
+        function updateProductDetails() {
+            var selectedVariant = document.getElementById("product_variant").value;
+            var selectedProduct = getProductByVariant(selectedVariant);
 
-        if (selectedProduct) {
-            document.getElementById("product_image").src = selectedProduct.image;
-            document.getElementById("product_name").innerText = selectedProduct.name;
-            document.getElementById("product_description").innerText = selectedProduct.description;
-            document.getElementById("product_price").innerText = "$ " + selectedProduct.price;
-            document.getElementById("product_id").value = selectedProduct.id;
-            // console.log("Selected Product ID:", selectedProduct.id);
+            if (selectedProduct) {
+                document.getElementById("product_image").src = selectedProduct.image;
+                document.getElementById("product_name").innerText = selectedProduct.name;
+                document.getElementById("product_description").innerText = selectedProduct.description;
+                document.getElementById("product_price").innerText = "$ " + selectedProduct.price;
+                document.getElementById("product_id").value = selectedProduct.id;
+            }
         }
-    }
 
-    function getProductByVariant(variant) {
-        return productVariants.find(function(product) {
-            return product.color + "_" + product.storage_option === variant;
-        });
-    }
+        function getProductByVariant(variant) {
+            return productVariants.find(function(product) {
+                return product.color + "_" + product.storage_option === variant;
+            });
+        }
 
-    // Call updateProductDetails initially to display details of the default variant
-    updateProductDetails();
+        // Call updateProductDetails initially to display details of the default variant
+        updateProductDetails();
 
-    $(document).ready(function() {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        // Get the initial quantity value
-        let qty = parseInt($('#qty').val());
-
-        // Increment quantity when plus button is clicked
-        $('#plusBtn').on('click', function() {
-            qty = qty + 1;
-            $('#qty').val(qty);
-        });
-
-        // Decrement quantity when minus button is clicked
-        $('#minusBtn').on('click', function() {
-            if (qty > 1) { // Ensure quantity doesn't go below 1
-                qty = qty - 1;
-                $('#qty').val(qty);
-            }
-        });
-
-        //  add to cart
-        $('#cartBtn').click(function() {
-            let userId = $('#userId').val();
-            let productId = $('#product_id').val();
-
-            $.ajax({
-                type: 'post',
-                url: '/cart/add',
-                data: {
-                    'userId': userId,
-                    'productId': productId,
-                    'qty': qty
-                },
-                dataType: 'json', // corrected 'datatype' to 'dataType'
-                success: function(response) {
-                    window.location.href = 'http://localhost:8000/';
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-        });
-    });
-</script>
 
+            // Get the initial quantity value
+            let qty = parseInt($('#qty').val());
+
+            // Increment quantity when plus button is clicked
+            $('#plusBtn').on('click', function() {
+                qty = qty + 1;
+                $('#qty').val(qty);
+            });
+
+            // Decrement quantity when minus button is clicked
+            $('#minusBtn').on('click', function() {
+                if (qty > 1) { // Ensure quantity doesn't go below 1
+                    qty = qty - 1;
+                    $('#qty').val(qty);
+                }
+            });
+
+            // Add to cart
+            $('#cartBtn').click(function() {
+                let userId = $('#userId').val();
+                let productId = $('#product_id').val();
+
+                $.ajax({
+                    type: 'post',
+                    url: '{{ route('user.cardAdd') }}',
+                    data: {
+                        'userId': userId,
+                        'productId': productId,
+                        'qty': qty
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        // Handle success response
+                        window.location.href = 'http://localhost:8000/';
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error response
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
 @endsection
