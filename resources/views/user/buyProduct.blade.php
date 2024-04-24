@@ -165,7 +165,7 @@
             </div> --}}
             @if (Auth::check() && Auth::user()->usertype === 'customer' && $hasBoughtProductModel === true)
                 <div class="form-group row align-items-center">
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                         <form id="comment-form" action="{{ route('user.comment.store') }}" method="POST">
                             @csrf
                             <input type="hidden" name="product_id" id="product_id">
@@ -193,7 +193,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <button id="show-more-comments" class="btn btn-outline-primary btn-block"
                             style="height: 60px;">Show more reviews</button>
                     </div>
