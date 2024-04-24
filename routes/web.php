@@ -186,7 +186,8 @@ Route::get('/singleBlog', [UserController::class, 'singleBlog'])->name('user.Sbl
 Route::get('/checkout', [UserController::class, 'checkout'])->name('user.checkout');
 Route::get('/blog', [UserController::class, 'blog'])->name('user.blog');
 Route::get('/productDetail', [UserController::class, 'productDetail'])->name('user.detail');
-
+Route::get('/comments/{product_id}/{limit}', [ShopController::class, 'fetchComments']);
+Route::post('/comments/store', [ShopController::class, 'storeComment'])->name('user.comment.store');
 
 Route::get('/shop', [ShopController::class, 'shop'])->name('user.shop');
 // Route::get('/product/detail{id}',[ShopController::class, 'detail'])->name('user.productDetail');
