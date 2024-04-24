@@ -192,4 +192,4 @@ Route::get('/shop', [ShopController::class, 'shop'])->name('user.shop');
 Route::get('/product/details', [ShopController::class,'details'])->name('user.productDetails');
 Route::get('/profile', [UserProfileController::class, 'profile'])->name('user.profile');
 Route::post('/profile/update', [UserProfileController::class, 'profileUpdate'])->name('user.pUpdate');
-// Route::post('/cart/add',[Cartcontroller::class, 'add']->name('cart.add'));
+// Route::post('/cart/add', [::class, 'profileUpdate'])->name('user.pUpdate');
