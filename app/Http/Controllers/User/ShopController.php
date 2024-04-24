@@ -6,26 +6,30 @@ use Illuminate\Support\Facades\URL;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Brand;
+use App\Models\review;
+use App\Models\User;
+use App\Models\CustomerPurchase;
 use App\Http\Controllers\Controller;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Carbon\Carbon;
 
 class ShopController extends Controller
 {
     public function shop()
-{
-    $brands = Brand::all();
-    $minPrice = Product::min('price');
-    $maxPrice = Product::max('price');
-    $products = Product::with('brand', 'ProductModel')->orderByDesc('created_at')->get();
-    $uniqueColors = $products->pluck('color')->unique();
-    $uniqueStorage = $products->pluck('storage_option')->unique();
+    {
+        $brands = Brand::all();
+        $minPrice = Product::min('price');
+        $maxPrice = Product::max('price');
+        $products = Product::with('brand', 'ProductModel')->orderByDesc('created_at')->get();
+        $uniqueColors = $products->pluck('color')->unique();
+        $uniqueStorage = $products->pluck('storage_option')->unique();
 
-    // Eager load brand and model information
-    $datas = Product::with('brand', 'ProductModel')->get();
-    $groupedData = $datas->groupBy('product_model_id');
-    $perPage = 12;
-    $currentPage = LengthAwarePaginator::resolveCurrentPage();
-    $currentPageItems = $groupedData->slice(($currentPage - 1) * $perPage, $perPage)->all();
+        // Eager load brand and model information
+        $datas = Product::with('brand', 'ProductModel')->get();
+        $groupedData = $datas->groupBy('product_model_id');
+        $perPage = 12;
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $currentPageItems = $groupedData->slice(($currentPage - 1) * $perPage, $perPage)->all();
 
         // Create a paginator instance
         $paginatedGroupedData = new LengthAwarePaginator(
@@ -46,7 +50,7 @@ class ShopController extends Controller
     {
         $modelId = $request->input('model_id');
         $products = Product::where('product_model_id', $modelId)->get();
-
+        // $reviews = Review::with('user')->latest()->take(2)->get();
         $productVariants = $products->map(function ($product) {
             return [
                 'color' => $product->color,
@@ -60,9 +64,74 @@ class ShopController extends Controller
         })->unique(function ($variant) {
             return $variant['color'] . '_' . $variant['storage_option'];
         });
+        $averageRating = Review::where('product_model_id', $modelId)
+            ->avg('rating');
+        $averageRating = round($averageRating);
+        $totalRating = Review::where('product_model_id', $modelId)
+            ->count('rating');
+        $totalComments = Review::where('product_model_id', $modelId)
+            ->count('comments');
+
+            $user = auth()->user();
+
+            if($user=== null){
+                $hasBoughtProductModel = false;
+            }
+            else{
+            $hasBoughtProductModel = CustomerPurchase::whereHas('details', function ($query) use ($modelId) {
+                $query->whereHas('product', function ($query) use ($modelId) {
+                    $query->where('product_model_id', $modelId);
+                });
+            })->where('user_id', $user->id)->exists();}
 
         return view('user.buyProduct', [
             'productVariants' => $productVariants,
+            // 'reviews' => $reviews,
+            'averageRating' => $averageRating,
+            'totalRating' => $totalRating,
+            'totalComments' => $totalComments,
+            'hasBoughtProductModel' => $hasBoughtProductModel,
         ]);
+    }
+
+    public function fetchComments($product_id, $limit)
+    {
+        $product = Product::find($product_id);
+        $model_id = $product->product_model_id;
+        $comments = Review::with('user')
+            ->where('product_model_id', $model_id) // Filter comments by product_id
+            ->latest()
+            ->take($limit)
+            ->get();
+
+        $formattedComments = $comments->map(function ($comment) {
+            $comment->formatted_created_at = Carbon::parse($comment->created_at)->format('F j, Y');
+            return $comment;
+        });
+
+        return response()->json($formattedComments);
+    }
+
+    public function storeComment(Request $request)
+    {
+        // Validate the request data
+        $validatedData = $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'comments' => 'required|string|max:255',
+            // 'rating' => 'integer|between:1,5',
+        ]);
+
+
+        $productModelId = Product::where('id', $validatedData['product_id'])->value('product_model_id');
+        // Create a new review instance
+        $review = new Review();
+        $review->user_id = auth()->id(); // Assuming the user is authenticated
+        $review->product_model_id = $productModelId;
+        $review->comments = $validatedData['comments'];
+        $review->rating = $request->rating;
+        $review->save();
+
+        // Redirect back with a success message
+        return back()->with('success', 'Comment posted successfully');
     }
 }

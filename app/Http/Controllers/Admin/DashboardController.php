@@ -19,10 +19,7 @@ class DashboardController extends Controller
 {
     public function index(){
         $supplierPurchaseRevenue = SupplierPurchase::sum('total_price');
-
-        // Fetch total revenue from customer purchases
         $customerPurchaseRevenue = CustomerPurchase::sum('total_price');
-
         $storeAdminCount = User::where('usertype', 'store_admin')->count();
         $supplierAdminCount = User::where('usertype', 'supplier_admin')->count();
         $adminCount = User::where('usertype', 'super_admin')->count();
@@ -33,11 +30,10 @@ class DashboardController extends Controller
         $suppliers = Supplier:: all();
         $supplierPurchases = SupplierPurchase::with('supplier');
          $customerPurchases = CustomerPurchase::with('user');
-        $reviews = Review::with('product')->paginate(10);
+        // $reviews = Review::with('product')->paginate(10);
         $admins = User::where('usertype', 'LIKE', '%admin')->get();
         $customers = User::where('usertype', 'customer')->get();
         $user = Auth::user();
-
 
         $purchases = SupplierPurchase::whereMonth('created_at', Carbon::now()->month)->get();
         $purchasesByDay = $purchases->groupBy(function ($purchase) {
