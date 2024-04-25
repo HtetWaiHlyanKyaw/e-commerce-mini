@@ -216,14 +216,9 @@
 @section('script')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     @if (!empty($supplierPurchaseAmounts))
-<<<<<<< HEAD
     <script>
 
         var maxAmount = {!! max($supplierPurchaseAmounts) !!};
-=======
-        <script>
-            var maxAmount = {!! max($supplierPurchaseAmounts) !!};
->>>>>>> 67d398eb298e3c99a63e3e727ce4349ae5193b9b
 
             var ctx = document.getElementById('purchaseChart').getContext('2d');
             var myChart = new Chart(ctx, {
@@ -262,7 +257,6 @@
                         }
                     }
                 }
-<<<<<<< HEAD
             }
         });
     </script>
@@ -270,14 +264,6 @@
     @if (!empty($customerPurchaseAmounts))
     <script>
         var maxCustomerAmount = {!! max($customerPurchaseAmounts) !!};
-=======
-            });
-        </script>
-@endif
-        @if (!empty($customerPurchaseAmounts))
-            <script>
-                var maxCustomerAmount = {!! max($customerPurchaseAmounts) !!};
->>>>>>> 67d398eb298e3c99a63e3e727ce4349ae5193b9b
 
                 var ctxCustomer = document.getElementById('customerPurchaseChart').getContext('2d');
                 var myCustomerChart = new Chart(ctxCustomer, {
@@ -365,14 +351,10 @@
                     maintainAspectRatio: false // Set to true for maintaining aspect ratio
 
                 }
-<<<<<<< HEAD
             }
         });
     </script>
     @endif
-=======
-            });
->>>>>>> 67d398eb298e3c99a63e3e727ce4349ae5193b9b
 
             var salesDoughnutChart = new Chart(salesCtx, {
                 type: 'doughnut',
@@ -398,7 +380,6 @@
                     responsive: false, // Set to true for responsiveness
                     maintainAspectRatio: false // Set to true for maintaining aspect ratio
 
-<<<<<<< HEAD
     // Extract data for quantity chart
     var quantityLabels = productData.map(function(item) {
         return item.product.name; // Assuming product_id is used as labels
@@ -469,11 +450,3 @@
     });
     </script>
 @endsection
-=======
-                }
-            });
-        </script>
-
-
-    @endsection
->>>>>>> 67d398eb298e3c99a63e3e727ce4349ae5193b9b
