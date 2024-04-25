@@ -80,61 +80,33 @@
                 <!-- User Login Info -->
                 @if (Auth::check() && Auth::user()->usertype === 'customer')
                 <div class="cart-area">
-                    <a href="#" class="btn position-relative">
-                        @if ($cart && count($cart) > 0)
-                            <img src="{{ asset('user/img/core-img/bag.svg') }}" alt="">
-                            <span style="margin-top:32px; margin-left:10px" class="position-absolute start-80 me-5 translate-middle badge rounded-pill bg-light">
-                                {{ count($cart) }}
-                                <span class="visually-hidden">unread messages</span>
-                            </span>
-                        @else
-                            <img src="{{ asset('user/img/core-img/bag.svg') }}" alt="">
-                            <span style="margin-top:32px; margin-left:10px" class="position-absolute start-80 me-5 translate-middle badge rounded-pill bg-light">
-                                0
-                                <span class="visually-hidden">unread messages</span>
-                            </span>
-                        @endif
-                    </a>
-                </div>
-
-
-                    {{-- <div class="cart-area">
-                    <a href="#" id="essenceCartBtn"><img src="{{ asset('user/img/core-img/bag.svg') }}"
-                            alt=""><span></span></a>
-                </div> --}}
-                    <div class="dropdown user-login-info">
-                        <div class="dropdown-toggle dropdown-no-arrow" id="userDropdown" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            <img src="{{ asset('user/img/core-img/user.svg') }}" alt="" class=""
-                                style="width: 20px; height:20px; margin-top:35px; margin-right:30px; margin-left:30px;">
-                        </div>
-                        <div class="dropdown-menu dropdown-partial" aria-labelledby="userDropdown">
-                            <a class="dropdown-item" style="width:160px;"
-                                href="{{ route('user.profile') }}">Profile</a>
-                            <a class="dropdown-item" style="width:160px;" href="{{ route('logout') }}"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-                            <form id="logout-form" action="{{ route('user.logout') }}" method="POST"
-                                style="display: none;">
-                                @csrf
-                            </form>
-                        </div>
-                    </div>
-                @elseif (Auth::check() &&
-                        (Auth::user()->usertype === 'super_admin' ||
-                            Auth::user()->usertype === 'supplier_admin' ||
-                            Auth::user()->usertype === 'store_admin'))
-                    <div class="user-login-info">
-                        <a href="{{ route('dashboard') }}" style="vertical-align: center">
-                            Dashboard
-                        </a>
-                    </div>
-                @else
-                    <div class="user-login-info">
-                        <a href="{{ route('user.login') }}">Sign In</a>
-                    </div>
-                @endif
+               @yield('cart')
             </div>
-        </div>
+
+              <div class="dropdown user-login-info">
+                  <div class="dropdown-toggle dropdown-no-arrow" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <img src="{{ asset('user/img/core-img/user.svg') }}" alt="" class="" style="width: 20px; height:20px; margin-top:35px; margin-right:30px; margin-left:30px;">
+                  </div>
+                  <div class="dropdown-menu dropdown-partial" aria-labelledby="userDropdown">
+                      <a class="dropdown-item" style="width:160px;" href="{{ route('user.profile') }}">Profile</a>
+                      <a class="dropdown-item" style="width:160px;" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                      <form id="logout-form" action="{{ route('user.logout') }}" method="POST" style="display: none;">
+                          @csrf
+                      </form>
+                  </div>
+              </div>
+          @elseif (Auth::check() && (Auth::user()->usertype === 'super_admin' || Auth::user()->usertype === 'supplier_admin' || Auth::user()->usertype === 'store_admin'))
+              <div class="user-login-info">
+                  <a href="{{ route('dashboard') }}" style="vertical-align: center">Dashboard</a>
+              </div>
+          @else
+              <div class="user-login-info">
+                  <a href="{{ route('user.login') }}">Sign In</a>
+              </div>
+          @endif
+          </div>
+          </div>
+
     </header>
     <!-- ##### Header Area End ##### -->
 

@@ -1,77 +1,90 @@
 @extends('user.master')
 @section('title', 'Product Details & Purchase Options')
-<<<<<<< HEAD @section('csrf') <meta name="csrf-token" content="{{ csrf_token() }}">
-        =======
-    @section('style')
-        <style>
-            .rating {
-                display: inline-block;
-                direction: rtl;
-                /* Right-to-left direction */
-                unicode-bidi: bidi-override;
-                /* Override the default direction */
-            }
+@section('cart')
+ <a href="#" class="btn position-relative">
+    @if ($cart && count($cart) > 0)
+        <img src="{{ asset('user/img/core-img/bag.svg') }}" alt="">
+        <span style="margin-top:32px; margin-left:10px" class="position-absolute start-80 me-5 translate-middle badge rounded-pill bg-light">
+            {{ count($cart) }}
+            <span class="visually-hidden">unread messages</span>
+        </span>
+    @else
+        <img src="{{ asset('user/img/core-img/bag.svg') }}" alt="">
+        <span style="margin-top:32px; margin-left:10px" class="position-absolute start-80 me-5 translate-middle badge rounded-pill bg-light">
+            0
+            <span class="visually-hidden">unread messages</span>
+        </span>
+    @endif
+</a>
+@endsection
+@section('style')
+    <style>
+        .rating {
+            display: inline-block;
+            direction: rtl;
+            /* Right-to-left direction */
+            unicode-bidi: bidi-override;
+            /* Override the default direction */
+        }
 
-            .rating input {
-                display: none;
-                /* Hide the radio buttons */
-            }
+        .rating input {
+            display: none;
+            /* Hide the radio buttons */
+        }
 
-            .rating label {
-                font-size: 24px;
-                /* Adjust the size of the stars */
-                color: #aaa;
-                /* Default color of the stars */
-                cursor: pointer;
-                /* Change cursor to pointer on hover */
-            }
+        .rating label {
+            font-size: 24px;
+            /* Adjust the size of the stars */
+            color: #aaa;
+            /* Default color of the stars */
+            cursor: pointer;
+            /* Change cursor to pointer on hover */
+        }
 
-            .rating input:checked~label {
-                color: #ffcc00;
-                /* Change color of selected stars */
-            }
+        .rating input:checked~label {
+            color: #ffcc00;
+            /* Change color of selected stars */
+        }
 
-            .rating label:hover,
-            .rating label:hover~label {
-                color: #ffcc00;
-                /* Change color of hovered stars and those before it */
-            }
-        </style>
+        .rating label:hover,
+        .rating label:hover~label {
+            color: #ffcc00;
+            /* Change color of hovered stars and those before it */
+        }
+    </style>
 
-        >>>>>>> 3c4bb3883a7c122a566da76b0c34ede515c75520
-    @endsection
-    @section('content')
-        <div class="container" style="margin-top: 50px">
-            <div class="row">
-                <div class="col-lg-5">
-                    <div class="product-img">
-                        <img id="product_image" class="w-100 shadow" src="" style="height:500px;object-fit: cover;"
-                            alt="Product Image">
+@endsection
+@section('content')
+    <div class="container" style="margin-top: 50px">
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="product-img">
+                    <img id="product_image" class="w-100 shadow" src="" style="height:500px;object-fit: cover;"
+                        alt="Product Image">
+                </div>
+            </div>
+
+            <div class="col-lg-7">
+                <h3 id="product_name"></h3>
+                <div class="row align-items-center">
+                    <div class="col-auto average-stars">
+                        @for ($i = 0; $i < $averageRating; $i++)
+                            <label style="color: #ffcc00; font-size: 24px;">&#9733;</label>
+                        @endfor
+                    </div>
+                    <div class="col">
+                        <h6>
+                            @if ($totalRating === 0 || $totalRating === null)
+                                No Ratings
+                            @elseif ($totalRating === 1)
+                                {{ $totalRating }} Rating
+                            @else
+                                {{ $totalRating }} Ratings
+                            @endif
+                        </h6>
                     </div>
                 </div>
 
-                <div class="col-lg-7">
-                    <h3 id="product_name"></h3>
-                    <<<<<<< HEAD=======<div class="row align-items-center">
-                        <div class="col-auto average-stars">
-                            @for ($i = 0; $i < $averageRating; $i++)
-                                <label style="color: #ffcc00; font-size: 24px;">&#9733;</label>
-                            @endfor
-                        </div>
-                        <div class="col">
-                            <h6>
-                                @if ($totalRating === 0 || $totalRating === null)
-                                    No Ratings
-                                @elseif ($totalRating === 1)
-                                    {{ $totalRating }} Rating
-                                @else
-                                    {{ $totalRating }} Ratings
-                                @endif
-                            </h6>
-                        </div>
-                </div>
-
-                >>>>>>> 3c4bb3883a7c122a566da76b0c34ede515c75520
                 <div id="product_description_container" style="overflow-y: auto; max-height: 300px;">
                     <p id="product_description" style="text-align: justify;"></p>
                 </div>
@@ -97,38 +110,32 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <div class="col-sm-8 d-flex align-items-center">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <button id="minusBtn" class="btn btn-sm btn-primary"><i class="fa fa-minus"></i></button>
+
+                <div class="container">
+                    <div class="form-group row">
+                        <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                            @if (Auth::check() && Auth::user()->usertype == 'customer')
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <button id="minusBtn" class="btn btn-sm btn-primary"><i class="fa fa-minus"></i></button>
+                                </div>
+                                <input type="text" value="1" style="width:50px" id="qty" class="form-control text-center mx-1">
+                                <div class="input-group-append">
+                                    <button id="plusBtn" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button>
+                                </div>
                             </div>
-                            <input type="text" value="1" style="width:50px" id="qty"
-                                class="form-control text-center mx-1">
-
-                            <button id="plusBtn" class="btn btn-sm btn-success me-2"><i
-                                    class="fa-solid fa-plus"></i></button>
-
-                            {{-- Show the "Add to Cart" section for customers --}}
-                            <button type="button" class="btn btn-primary me-2">Buy Now</button>
-                            <button type="button" id="cartBtn" class="btn btn-primary"> <i
-                                    class="fa-solid fa-cart-shopping"></i> Add to
-                                Cart</button>
-                            <input type="hidden" id="userId" value="{{ Auth::user()->id }}">
-                            <input type="hidden" name="product_id" id="product_id">
-                        @elseif(!Auth::check())
+                            <button type="button" class="btn btn-primary ml-md-2 mt-2 mt-md-0">Buy Now</button>
+                            <button type="button" class="btn btn-primary ml-md-2 mt-2 mt-md-0"><i class="fa-solid fa-cart-shopping"></i> Add to Cart</button>
+                            @elseif (!Auth::check())
                             {{-- Show a message or redirect to login for non-authenticated users --}}
                             <div class="alert alert-warning mt-3" role="alert">
-                                If you want to buy this product , you need to <a href="{{ route('user.login') }}"
-                                    class="alert-link">login</a> at frist.
+                                If you want to buy this product, you need to <a href="{{ route('user.login') }}" class="alert-link">login</a> first.
                             </div>
+                            @endif
                         </div>
-                        <button type="button" class="btn btn-primary mr-2">Buy Now</button>
-                        <button type="button" class="btn btn-primary">Add to Cart</button>
                     </div>
                 </div>
             </div>
-
 
             {{-- <div class="bg-light " id="reviews" style="margin-top: 50px;">
                 <h5>Reviews</h5>
@@ -217,199 +224,136 @@
                 </div>
             @endif
         </div>
-        </div>
-    @endsection
+    </div>
+@endsection
 
-    @section('script')
-        <<<<<<< HEAD <script>
-            var productVariants = @json($productVariants);
+@section('script')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var limit = 2; // Initialize the limit
 
-            function updateProductDetails() {
-                var selectedVariant = document.getElementById("product_variant").value;
-                var selectedProduct = getProductByVariant(selectedVariant);
-
-                ===
-                === = <
-                script src = "https://code.jquery.com/jquery-3.6.0.min.js" >
-        </script>
-        <script>
-            $(document).ready(function() {
-                var limit = 2; // Initialize the limit
-
-                // Function to fetch comments and append them
-                function fetchAndAppendComments() {
-                    var productId = $('#product_id').val(); // Get the product_id from the hidden field
-                    $.ajax({
-                        url: '/comments/' + productId + '/' + limit,
-                        type: 'GET',
-                        success: function(data) {
-                            appendComments(data);
-                            limit += 2; // Increase the limit by 2 for the next request
-                        },
-                        error: function(xhr, status, error) {
-                            console.error('Error fetching comments:', status, error);
-                            // Optionally, provide feedback to the user about the error
-                        }
-                    });
-                }
-
-                // Append comments function
-                function appendComments(comments) {
-                    var commentsContainer = $('#comments');
-                    commentsContainer.empty(); // Clear existing comments
-
-                    $.each(comments, function(index, comment) {
-                        commentsContainer.append('<br><h6>' + comment.user.name + '</h6>');
-                        commentsContainer.append('<div class="rating">' + getStarRating(comment.rating) +
-                            '</div>');
-                        commentsContainer.append('<div class="comment">' + comment.comments + '</div>');
-                        commentsContainer.append('<div class="comment-date" style="color: grey;">' + comment
-                            .formatted_created_at + '</div><br>');
-                    });
-                }
-
-                // Get star rating function
-                function getStarRating(rating) {
-                    var stars = '';
-                    for (var i = 0; i < rating; i++) {
-                        stars += '<span class="star" style="color: #ffd700;">&#9733;</span>';
+            // Function to fetch comments and append them
+            function fetchAndAppendComments() {
+                var productId = $('#product_id').val(); // Get the product_id from the hidden field
+                $.ajax({
+                    url: '/comments/' + productId + '/' + limit,
+                    type: 'GET',
+                    success: function(data) {
+                        appendComments(data);
+                        limit += 2; // Increase the limit by 2 for the next request
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error fetching comments:', status, error);
+                        // Optionally, provide feedback to the user about the error
                     }
-                    return stars;
-                }
+                });
+            }
 
-                // Initially fetch and append comments when the page is loaded
+            // Append comments function
+            function appendComments(comments) {
+                var commentsContainer = $('#comments');
+                commentsContainer.empty(); // Clear existing comments
+
+                $.each(comments, function(index, comment) {
+                    commentsContainer.append('<br><h6>' + comment.user.name + '</h6>');
+                    commentsContainer.append('<div class="rating">' + getStarRating(comment.rating) +
+                        '</div>');
+                    commentsContainer.append('<div class="comment">' + comment.comments + '</div>');
+                    commentsContainer.append('<div class="comment-date" style="color: grey;">' + comment
+                        .formatted_created_at + '</div><br>');
+                });
+            }
+
+            // Get star rating function
+            function getStarRating(rating) {
+                var stars = '';
+                for (var i = 0; i < rating; i++) {
+                    stars += '<span class="star" style="color: #ffd700;">&#9733;</span>';
+                }
+                return stars;
+            }
+
+            // Initially fetch and append comments when the page is loaded
+            fetchAndAppendComments();
+
+
+            // Event listener for 'Show more comments' button
+            $('#show-more-comments').on('click', function() {
                 fetchAndAppendComments();
-
-                // Event listener for 'Show more comments' button
-                $('#show-more-comments').on('click', function() {
-                    fetchAndAppendComments();
-                });
-
             });
-        </script>
-        <script>
-            var productVariants = @json($productVariants);
 
-            function updateProductDetails() {
-                var selectedVariant = document.getElementById("product_variant").value;
-                var selectedProduct = getProductByVariant(selectedVariant);
+        });
+    </script>
+    <script>
+        var productVariants = @json($productVariants);
 
-                >>>
-                >>> > 3 c4bb3883a7c122a566da76b0c34ede515c75520
-                if (selectedProduct) {
-                    document.getElementById("product_image").src = selectedProduct.image;
-                    document.getElementById("product_name").innerText = selectedProduct.name;
-                    document.getElementById("product_description").innerText = selectedProduct.description;
-                    document.getElementById("product_price").innerText = "$ " + selectedProduct.price;
-                    document.getElementById("product_id").value = selectedProduct.id; <<
-                    << << < HEAD
-                        ===
-                        === =
-                        // console.log("Selected Product ID:", selectedProduct.id);
-                        >>>
-                        >>> > 3 c4bb3883a7c122a566da76b0c34ede515c75520
+        function updateProductDetails() {
+            var selectedVariant = document.getElementById("product_variant").value;
+            var selectedProduct = getProductByVariant(selectedVariant);
+
+            if (selectedProduct) {
+                document.getElementById("product_image").src = selectedProduct.image;
+                document.getElementById("product_name").innerText = selectedProduct.name;
+                document.getElementById("product_description").innerText = selectedProduct.description;
+                document.getElementById("product_price").innerText = "$ " + selectedProduct.price;
+                document.getElementById("product_id").value = selectedProduct.id;
+                // console.log("Selected Product ID:", selectedProduct.id);
+            }
+        }
+
+        function getProductByVariant(variant) {
+            return productVariants.find(function(product) {
+                return product.color + "_" + product.storage_option === variant;
+            });
+        }
+
+        // Call updateProductDetails initially to display details of the default variant
+        updateProductDetails();
+
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
-            }
+            });
+            // Get the initial quantity value
+            let qty = parseInt($('#qty').val());
 
-            function getProductByVariant(variant) {
-                return productVariants.find(function(product) {
-                    return product.color + "_" + product.storage_option === variant;
-                });
-            }
+            // Increment quantity when plus button is clicked
+            $('#plusBtn').on('click', function() {
+                qty = qty + 1;
+                $('#qty').val(qty);
+            });
 
-            // Call updateProductDetails initially to display details of the default variant
-            updateProductDetails();
-
-            $(document).ready(function() {
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                }); <<
-                << << < HEAD
-                    ===
-                    === =
-                    // Get the initial quantity value
-                    let qty = parseInt($('#qty').val());
-
-                // Increment quantity when plus button is clicked
-                $('#plusBtn').on('click', function() {
-                    qty = qty + 1;
+            // Decrement quantity when minus button is clicked
+            $('#minusBtn').on('click', function() {
+                if (qty > 1) { // Ensure quantity doesn't go below 1
+                    qty = qty - 1;
                     $('#qty').val(qty);
-                });
+                }
+            });
 
-                // Decrement quantity when minus button is clicked
-                $('#minusBtn').on('click', function() {
-                    if (qty > 1) { // Ensure quantity doesn't go below 1
-                        qty = qty - 1;
-                        $('#qty').val(qty);
+            //  add to cart
+            $('#cartBtn').click(function() {
+                let userId = $('#userId').val();
+                let productId = $('#product_id').val();
+
+                $.ajax({
+                    type: 'post',
+                    url: '/cart/add',
+                    data: {
+                        'userId': userId,
+                        'productId': productId,
+                        'qty': qty
+                    },
+                    dataType: 'json', // corrected 'datatype' to 'dataType'
+                    success: function(response) {
+                        window.location.href = 'http://localhost:8000/';
                     }
-                });
-
-                //  add to cart
-                $('#cartBtn').click(function() {
-                    let userId = $('#userId').val();
-                    let productId = $('#product_id').val();
-
-                    $.ajax({
-                        type: 'post',
-                        url: '/cart/add',
-                        data: {
-                            'userId': userId,
-                            'productId': productId,
-                            'qty': qty
-                        },
-                        dataType: 'json', // corrected 'datatype' to 'dataType'
-                        success: function(response) {
-                            window.location.href = 'http://localhost:8000/';
-                        }
-                    });
                 });
             });
-        </script>
-        >>>>>>> 3c4bb3883a7c122a566da76b0c34ede515c75520
-
-        // Get the initial quantity value
-        let qty = parseInt($('#qty').val());
-
-        // Increment quantity when plus button is clicked
-        $('#plusBtn').on('click', function() {
-        qty = qty + 1;
-        $('#qty').val(qty);
         });
+    </script>
 
-        // Decrement quantity when minus button is clicked
-        $('#minusBtn').on('click', function() {
-        if (qty > 1) { // Ensure quantity doesn't go below 1
-        qty = qty - 1;
-        $('#qty').val(qty);
-        }
-        });
-
-        // Add to cart
-        $('#cartBtn').click(function() {
-        let userId = $('#userId').val();
-        let productId = $('#product_id').val();
-
-        $.ajax({
-        type: 'post',
-        url: '{{ route('user.cardAdd') }}',
-        data: {
-        'userId': userId,
-        'productId': productId,
-        'qty': qty
-        },
-        dataType: 'json',
-        success: function(response) {
-        // Handle success response
-        window.location.href = 'http://localhost:8000/';
-        },
-        error: function(xhr, status, error) {
-        // Handle error response
-        console.error(xhr.responseText);
-        }
-        });
-        });
-        });
-        </script>
-    @endsection
+@endsection

@@ -216,14 +216,8 @@
 @section('script')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     @if (!empty($supplierPurchaseAmounts))
-<<<<<<< HEAD
-    <script>
-
-        var maxAmount = {!! max($supplierPurchaseAmounts) !!};
-=======
         <script>
             var maxAmount = {!! max($supplierPurchaseAmounts) !!};
->>>>>>> 67d398eb298e3c99a63e3e727ce4349ae5193b9b
 
             var ctx = document.getElementById('purchaseChart').getContext('2d');
             var myChart = new Chart(ctx, {
@@ -262,22 +256,12 @@
                         }
                     }
                 }
-<<<<<<< HEAD
-            }
-        });
-    </script>
-    @endif
-    @if (!empty($customerPurchaseAmounts))
-    <script>
-        var maxCustomerAmount = {!! max($customerPurchaseAmounts) !!};
-=======
             });
         </script>
 @endif
         @if (!empty($customerPurchaseAmounts))
             <script>
                 var maxCustomerAmount = {!! max($customerPurchaseAmounts) !!};
->>>>>>> 67d398eb298e3c99a63e3e727ce4349ae5193b9b
 
                 var ctxCustomer = document.getElementById('customerPurchaseChart').getContext('2d');
                 var myCustomerChart = new Chart(ctxCustomer, {
@@ -365,14 +349,7 @@
                     maintainAspectRatio: false // Set to true for maintaining aspect ratio
 
                 }
-<<<<<<< HEAD
-            }
-        });
-    </script>
-    @endif
-=======
             });
->>>>>>> 67d398eb298e3c99a63e3e727ce4349ae5193b9b
 
             var salesDoughnutChart = new Chart(salesCtx, {
                 type: 'doughnut',
@@ -398,82 +375,9 @@
                     responsive: false, // Set to true for responsiveness
                     maintainAspectRatio: false // Set to true for maintaining aspect ratio
 
-<<<<<<< HEAD
-    // Extract data for quantity chart
-    var quantityLabels = productData.map(function(item) {
-        return item.product.name; // Assuming product_id is used as labels
-    });
-    var quantityData = productData.map(function(item) {
-        return item.total_quantity;
-    });
-
-    // Extract data for sales chart
-    var salesLabels = productData.map(function(item) {
-        return item.product.name; // Assuming product_id is used as labels
-    });
-    var salesData = productData.map(function(item) {
-        return item.total_sales;
-    });
-
-    var quantityDoughnutChart = new Chart(quantityCtx, {
-        type: 'doughnut',
-        data: {
-             labels: quantityLabels,
-            datasets: [{
-                label: 'Quantity Sold',
-                data: quantityData,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.5)',
-                    'rgba(54, 162, 235, 0.5)',
-                    'rgba(255, 206, 86, 0.5)',
-                    'rgba(75, 192, 192, 0.5)',
-                    'rgba(153, 102, 255, 0.5)',
-                    'rgba(255, 159, 64, 0.5)',
-                    'rgba(255, 99, 132, 0.5)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: false, // Set to true for responsiveness
-            maintainAspectRatio: false // Set to true for maintaining aspect ratio
-
-        }
-    });
-
-    var salesDoughnutChart = new Chart(salesCtx, {
-        type: 'doughnut',
-        data: {
-             labels: salesLabels,
-            datasets: [{
-                label: 'Sales Total',
-                data: salesData,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.5)',
-                    'rgba(54, 162, 235, 0.5)',
-                    'rgba(255, 206, 86, 0.5)',
-                    'rgba(75, 192, 192, 0.5)',
-                    'rgba(153, 102, 255, 0.5)',
-                    'rgba(255, 159, 64, 0.5)',
-                    'rgba(255, 99, 132, 0.5)'
-                    // Add more colors as needed
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: false, // Set to true for responsiveness
-            maintainAspectRatio: false // Set to true for maintaining aspect ratio
-
-        }
-    });
-    </script>
-@endsection
-=======
                 }
             });
         </script>
 
 
     @endsection
->>>>>>> 67d398eb298e3c99a63e3e727ce4349ae5193b9b

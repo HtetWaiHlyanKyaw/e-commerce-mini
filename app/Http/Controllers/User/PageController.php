@@ -26,13 +26,7 @@ class PageController extends Controller
                                 ->get();
         $newestProducts = $newestProducts->groupBy('product_model_id')->take(4);
 
-        return view('user.page', compact('topProducts','newestProducts'));
-    }
-
-    public function data()
-    {
-         // Retrieve the authenticated user
-     // Retrieve the authenticated user
+          // Retrieve the authenticated user
      $user = Auth::user();
 
      // Retrieve the cart items for the authenticated user
@@ -40,7 +34,7 @@ class PageController extends Controller
 
      // Retrieve all products
      $products = Product::all();
-
-     return view('user.master', compact('user', 'cart', 'products'));
+        return view('user.page', compact('topProducts','newestProducts', 'user', 'cart', 'products'));
     }
+
 }
