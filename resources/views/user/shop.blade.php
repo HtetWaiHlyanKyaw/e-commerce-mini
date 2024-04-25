@@ -1,7 +1,7 @@
 @extends('user.master')
 @section('title', 'Shop')
 @section('cart')
- <a href="#" class="btn position-relative">
+ <a href="{{route('cartList')}}" class="btn position-relative">
     @if ($cart && count($cart) > 0)
         <img src="{{ asset('user/img/core-img/bag.svg') }}" alt="">
         <span style="margin-top:32px; margin-left:10px" class="position-absolute start-80 me-5 translate-middle badge rounded-pill bg-light">

@@ -149,7 +149,7 @@ class ShopController extends Controller
         $uniqueColors = $products->pluck('color')->unique();
         $uniqueStorage = $products->pluck('storage_option')->unique();
         $cart = $user->cart ?? [];
-        $allProducts = Product::all();
+        $products = Product::all();
 
         return view('user.buyProduct', compact(
             'productVariants',
@@ -164,7 +164,7 @@ class ShopController extends Controller
             'uniqueStorage',
             'user',
             'cart',
-            'allProducts'
+            'products'
         ));
     }
 

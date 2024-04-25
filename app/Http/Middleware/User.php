@@ -16,7 +16,7 @@ class User
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user()->usertype === 'customer'){
+        if (Auth::check() && Auth::user()->usertype !== 'customer') {
             return redirect()->route('user.login');
         }
         return $next($request);

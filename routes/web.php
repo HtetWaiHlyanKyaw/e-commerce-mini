@@ -181,7 +181,6 @@ Route::post('/user/registration',[UserRegisterController::class, 'register'])->n
 Route::get('/', [PageController::class, 'index'])->name('user.page');
 Route::get('/regular_page', [UserController::class, 'RegularPage'])->name('user.rePage');
 Route::get('/contact', [UserController::class, 'contact'])->name('user.contact');
-
 Route::get('/singleBlog', [UserController::class, 'singleBlog'])->name('user.Sblog');
 Route::get('/checkout', [UserController::class, 'checkout'])->name('user.checkout');
 Route::get('/blog', [UserController::class, 'blog'])->name('user.blog');
@@ -194,5 +193,8 @@ Route::get('/shop', [ShopController::class, 'shop'])->name('user.shop');
 Route::get('/product/details', [ShopController::class,'details'])->name('user.productDetails');
 Route::get('/profile', [UserProfileController::class, 'profile'])->name('user.profile');
 Route::post('/profile/update', [UserProfileController::class, 'profileUpdate'])->name('user.pUpdate');
+
+Route::middleware('user')->group(function () {
 Route::post('/cart/add', [CartController::class, 'add'])->name('user.cardAdd');
-Route::get('/cart/data', [PageController::class, 'data'])->name('user.cardData');
+Route::get('/cart', [CartController::class, 'cart'])->name('cartList');
+});
