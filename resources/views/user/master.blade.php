@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
+    @yield('csrf')
     <title>@yield('title')</title>
     @yield('style')
     <!-- Favicon  -->
@@ -19,13 +19,14 @@
     <!-- Core Style CSS -->
     <link rel="stylesheet" href="{{ asset('user/css/core-style.css') }}">
     <link rel="stylesheet" href="{{ asset('user/style.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     @yield('style');
     <style>
         .dropdown-no-arrow::after {
             display: none !important;
         }
-
     </style>
 </head>
 
@@ -53,18 +54,6 @@
                         <ul>
                             <li><a href="{{ route('user.page') }}">Home</a></li>
                             <li><a href="{{ route('user.shop') }}">Products</a></li>
-                            {{-- <li><a href="#">Products</a>
-                                <ul class="dropdown">
-                                    <li><a href="{{ route('user.page') }}">Home</a></li>
-                                    <li><a href="{{ route('user.shop') }}">Shop</a></li>
-                                    <li><a href="{{ route('user.detail') }}">Product Details</a></li>
-                                    <li><a href="{{ route('user.checkout') }}">Checkout</a></li>
-                                    <li><a href="{{ route('user.blog') }}">Blog</a></li>
-                                    <li><a href="{{ route('user.Sblog') }}">Single Blog</a></li>
-                                    <li><a href="{{ route('user.rePage') }}">Regular Page</a></li>
-                                    <li><a href="{{ route('user.contact') }}">Contact</a></li>
-                                </ul>
-                            </li> --}}
                             <li><a href="{{ route('user.blog') }}">About us</a></li>
                             <li><a href="{{ route('user.contact') }}">Contact us</a></li>
                         </ul>
@@ -88,102 +77,40 @@
                     <a href="#"><img src="{{ asset('user/img/core-img/heart.svg') }}" alt=""></a>
                 </div> --}}
 
-
                 <!-- User Login Info -->
                 @if (Auth::check() && Auth::user()->usertype === 'customer')
                 <div class="cart-area">
-                    <a href="#" id="essenceCartBtn"><img src="{{ asset('user/img/core-img/bag.svg') }}"
-                            alt=""><span></span></a>
-                </div>
-                <div class="dropdown user-login-info">
-                    <div class="dropdown-toggle dropdown-no-arrow" id="userDropdown" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        <img src="{{ asset('user/img/core-img/user.svg') }}" alt=""
-                            style="width: 20px; height:20px; margin-top:30px; margin-right:25px">
-                    </div>
-                    <div class="dropdown-menu dropdown-partial" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" style="width:160px;" href="{{ route('user.profile') }}">Profile</a>
-                        <a class="dropdown-item" style="width:160px;" href="{{ route('logout') }}"
-                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-                        <form id="logout-form" action="{{ route('user.logout') }}" method="POST"
-                            style="display: none;">
-                            @csrf
-                        </form>
-                    </div>
-                </div>
-
-            @elseif (Auth::check() && (Auth::user()->usertype === 'super_admin' || Auth::user()->usertype === 'supplier_admin' || Auth::user()->usertype === 'store_admin'))
-                <div class="user-login-info">
-                    <a href="{{route('dashboard')}}" style="vertical-align: center">
-                        Dashboard
-                    </a>
-                </div>
-
-            @else
-                <div class="user-login-info">
-                    <a href="{{ route('user.login') }}">Sign In</a>
-                </div>
-            @endif
-
-
-
-
-
-                {{-- <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
-                    <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
-                        {{-- <a href="https://adminmart.com/product/modernize-free-bootstrap-admin-dashboard/" target="_blank" class="btn btn-primary">Download Free</a> --}}
-                {{-- <li class="nav-item dropdown">
-                            @php
-                                $name = auth()->user()->name;
-                                $firstLetter = substr($name, 0, 1);
-                            @endphp
-                            <a href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown" aria-expanded="false"
-                                style="font-size: 16px; color: #5d9bff; text-decoration: none; ">
-                                <input type="submit" value="{{ $firstLetter }}"
-                                    class="btn btn-primary btn-lg  rounded-circle">
-                                {{-- <p>{{auth()->user()->name}}</p> --}}
-                {{-- </a>
-                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
-                                <div class="message-body">
-                                        <a href="{{ route('user.page') }}"
-                                        class="d-flex align-items-center gap-2 dropdown-item">
-
-                                        <i class="ti ti-user fs-6"> </i>
-                                        <p class="mb-0 fs-3">To Ecommerce Website</p>
-                                    </a>
-                                        <a href="{{ route('admin.profile') }}"
-                                        class="d-flex align-items-center gap-2 dropdown-item">
-
-                                        <i class="ti ti-user fs-6"> </i>
-                                        <p class="mb-0 fs-3">My Profile</p>
-                                    </a>
-                                    <a href="{{ route('logout') }}" class="btn btn-outline-primary mx-3 mt-2 d-block"
-                                        onclick="event.preventDefault();
-                          document.getElementById('logout-form').submit();">
-                                        Logout
-                                    </a> --}}
-                {{-- <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>  --}}
-
-
-
+               @yield('cart')
             </div>
 
-        </div>
+              <div class="dropdown user-login-info">
+                  <div class="dropdown-toggle dropdown-no-arrow" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <img src="{{ asset('user/img/core-img/user.svg') }}" alt="" class="" style="width: 20px; height:20px; margin-top:35px; margin-right:30px; margin-left:30px;">
+                  </div>
+                  <div class="dropdown-menu dropdown-partial" aria-labelledby="userDropdown">
+                      <a class="dropdown-item" style="width:160px;" href="{{ route('user.profile') }}">Profile</a>
+                      <a class="dropdown-item" style="width:160px;" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                      <form id="logout-form" action="{{ route('user.logout') }}" method="POST" style="display: none;">
+                          @csrf
+                      </form>
+                  </div>
+              </div>
+          @elseif (Auth::check() && (Auth::user()->usertype === 'super_admin' || Auth::user()->usertype === 'supplier_admin' || Auth::user()->usertype === 'store_admin'))
+              <div class="user-login-info">
+                  <a href="{{ route('dashboard') }}" style="vertical-align: center">Dashboard</a>
+              </div>
+          @else
+              <div class="user-login-info">
+                  <a href="{{ route('user.login') }}">Sign In</a>
+              </div>
+          @endif
+          </div>
+          </div>
+
     </header>
     <!-- ##### Header Area End ##### -->
 
-
-
     @yield('content')
-
-
 
 
 
@@ -314,7 +241,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 
 </html>

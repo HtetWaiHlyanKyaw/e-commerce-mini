@@ -1,6 +1,22 @@
 @extends('user.master')
 @section('title', 'E_commerce Home Page')
-
+@section('cart')
+ <a href="#" class="btn position-relative">
+    @if ($cart && count($cart) > 0)
+        <img src="{{ asset('user/img/core-img/bag.svg') }}" alt="">
+        <span style="margin-top:32px; margin-left:10px" class="position-absolute start-80 me-5 translate-middle badge rounded-pill bg-light">
+            {{ count($cart) }}
+            <span class="visually-hidden">unread messages</span>
+        </span>
+    @else
+        <img src="{{ asset('user/img/core-img/bag.svg') }}" alt="">
+        <span style="margin-top:32px; margin-left:10px" class="position-absolute start-80 me-5 translate-middle badge rounded-pill bg-light">
+            0
+            <span class="visually-hidden">unread messages</span>
+        </span>
+    @endif
+</a>
+@endsection
 @section('style')
     <style>
         @media screen and (min-width: 568px) {
@@ -181,110 +197,6 @@
                         </div>
                     </div>
                     @endforeach
-                    <!-- Single Product -->
-                    {{-- <div class="single-product-wrapper">
-                        <!-- Product Image -->
-                        <div class="product-img">
-                            <img src="{{ asset('user/img/product-img/product-2.jpg') }}" alt="">
-                            <!-- Hover Thumb -->
-                            <img class="hover-img" src="{{ asset('user/img/product-img/product-3.jpg') }}"
-                                alt="">
-                            <!-- Favourite -->
-                            <div class="product-favourite">
-                                <a href="#" class="favme fa fa-heart"></a>
-                            </div>
-                        </div>
-                        <!-- Product Description -->
-                        <div class="product-description">
-                            <span>topshop</span>
-                            <a href="single-product-details.html">
-                                <h6>Poplin Displaced Wrap Dress</h6>
-                            </a>
-                            <p class="product-price">$80.00</p>
-
-                            <!-- Hover Content -->
-                            <div class="hover-content">
-                                <!-- Add to Cart -->
-                                <div class="add-to-cart-btn">
-                                    <a href="#" class="btn essence-btn">Add to Cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single Product -->
-                    <div class="single-product-wrapper">
-                        <!-- Product Image -->
-                        <div class="product-img">
-                            <img src="{{ asset('user/img/product-img/product-3.jpg') }}" alt="">
-                            <!-- Hover Thumb -->
-                            <img class="hover-img" src="{{ asset('user/img/product-img/product-4.jpg') }}"
-                                alt="">
-
-                            <!-- Product Badge -->
-                            <div class="product-badge offer-badge">
-                                <span>-30%</span>
-                            </div>
-
-                            <!-- Favourite -->
-                            <div class="product-favourite">
-                                <a href="#" class="favme fa fa-heart"></a>
-                            </div>
-                        </div>
-                        <!-- Product Description -->
-                        <div class="product-description">
-                            <span>mango</span>
-                            <a href="single-product-details.html">
-                                <h6>PETITE Crepe Wrap Mini Dress</h6>
-                            </a>
-                            <p class="product-price"><span class="old-price">$75.00</span> $55.00</p>
-
-                            <!-- Hover Content -->
-                            <div class="hover-content">
-                                <!-- Add to Cart -->
-                                <div class="add-to-cart-btn">
-                                    <a href="#" class="btn essence-btn">Add to Cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single Product -->
-                    <div class="single-product-wrapper">
-                        <!-- Product Image -->
-                        <div class="product-img">
-                            <img src="{{ asset('user/img/product-img/product-4.jpg') }}" alt="">
-                            <!-- Hover Thumb -->
-                            <img class="hover-img" src="{{ asset('user/img/product-img/product-5.jpg') }}"
-                                alt="">
-
-                            <!-- Product Badge -->
-                            <div class="product-badge new-badge">
-                                <span>New</span>
-                            </div>
-
-                            <!-- Favourite -->
-                            <div class="product-favourite">
-                                <a href="#" class="favme fa fa-heart"></a>
-                            </div>
-                        </div>
-                        <!-- Product Description -->
-                        <div class="product-description">
-                            <span>mango</span>
-                            <a href="single-product-details.html">
-                                <h6>PETITE Belted Jumper Dress</h6>
-                            </a>
-                            <p class="product-price">$80.00</p>
-
-                            <!-- Hover Content -->
-                            <div class="hover-content">
-                                <!-- Add to Cart -->
-                                <div class="add-to-cart-btn">
-                                    <a href="#" class="btn essence-btn">Add to Cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
                 </div>
             </div>
         </div>
@@ -310,39 +222,6 @@
 
             </div>
         </div>
-        {{-- <div class="carousel-item">
-            <div class="cards-wrapper">
-
-                    <div class="image-wrapper">
-                        <img src="{{ asset('user/img/product-img/product-3.jpg') }}" alt="...">
-                    </div>
-
-                    <div class="image-wrapper">
-                        <img src="{{ asset('user/img/product-img/product-4.jpg') }}" alt="...">
-                    </div>
-
-                    <div class="image-wrapper">
-                        <img src="{{ asset('user/img/product-img/product-6.jpg') }}" alt="...">
-                    </div>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <div class="cards-wrapper">
-
-                    <div class="image-wrapper">
-                        <img src="{{ asset('user/img/product-img/product-1.jpg') }}" alt="...">
-                    </div>
-
-                    <div class="image-wrapper">
-                        <img src="{{ asset('user/img/product-img/product-2.jpg') }}" alt="...">
-                    </div>
-
-                    <div class="image-wrapper">
-
-                    <img src="{{ asset('user/img/product-img/product-3.jpg') }}" alt="...">
-                </div>
-            </div>
-        </div> --}}
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
         data-bs-slide="prev">
@@ -400,110 +279,6 @@
                         </div>
                     </div>
                     @endforeach
-                    <!-- Single Product -->
-                    {{-- <div class="single-product-wrapper">
-                        <!-- Product Image -->
-                        <div class="product-img">
-                            <img src="{{ asset('user/img/product-img/product-2.jpg') }}" alt="">
-                            <!-- Hover Thumb -->
-                            <img class="hover-img" src="{{ asset('user/img/product-img/product-3.jpg') }}"
-                                alt="">
-                            <!-- Favourite -->
-                            <div class="product-favourite">
-                                <a href="#" class="favme fa fa-heart"></a>
-                            </div>
-                        </div>
-                        <!-- Product Description -->
-                        <div class="product-description">
-                            <span>topshop</span>
-                            <a href="single-product-details.html">
-                                <h6>Poplin Displaced Wrap Dress</h6>
-                            </a>
-                            <p class="product-price">$80.00</p>
-
-                            <!-- Hover Content -->
-                            <div class="hover-content">
-                                <!-- Add to Cart -->
-                                <div class="add-to-cart-btn">
-                                    <a href="#" class="btn essence-btn">Add to Cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single Product -->
-                    <div class="single-product-wrapper">
-                        <!-- Product Image -->
-                        <div class="product-img">
-                            <img src="{{ asset('user/img/product-img/product-3.jpg') }}" alt="">
-                            <!-- Hover Thumb -->
-                            <img class="hover-img" src="{{ asset('user/img/product-img/product-4.jpg') }}"
-                                alt="">
-
-                            <!-- Product Badge -->
-                            <div class="product-badge offer-badge">
-                                <span>-30%</span>
-                            </div>
-
-                            <!-- Favourite -->
-                            <div class="product-favourite">
-                                <a href="#" class="favme fa fa-heart"></a>
-                            </div>
-                        </div>
-                        <!-- Product Description -->
-                        <div class="product-description">
-                            <span>mango</span>
-                            <a href="single-product-details.html">
-                                <h6>PETITE Crepe Wrap Mini Dress</h6>
-                            </a>
-                            <p class="product-price"><span class="old-price">$75.00</span> $55.00</p>
-
-                            <!-- Hover Content -->
-                            <div class="hover-content">
-                                <!-- Add to Cart -->
-                                <div class="add-to-cart-btn">
-                                    <a href="#" class="btn essence-btn">Add to Cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single Product -->
-                    <div class="single-product-wrapper">
-                        <!-- Product Image -->
-                        <div class="product-img">
-                            <img src="{{ asset('user/img/product-img/product-4.jpg') }}" alt="">
-                            <!-- Hover Thumb -->
-                            <img class="hover-img" src="{{ asset('user/img/product-img/product-5.jpg') }}"
-                                alt="">
-
-                            <!-- Product Badge -->
-                            <div class="product-badge new-badge">
-                                <span>New</span>
-                            </div>
-
-                            <!-- Favourite -->
-                            <div class="product-favourite">
-                                <a href="#" class="favme fa fa-heart"></a>
-                            </div>
-                        </div>
-                        <!-- Product Description -->
-                        <div class="product-description">
-                            <span>mango</span>
-                            <a href="single-product-details.html">
-                                <h6>PETITE Belted Jumper Dress</h6>
-                            </a>
-                            <p class="product-price">$80.00</p>
-
-                            <!-- Hover Content -->
-                            <div class="hover-content">
-                                <!-- Add to Cart -->
-                                <div class="add-to-cart-btn">
-                                    <a href="#" class="btn essence-btn">Add to Cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
                 </div>
             </div>
         </div>
@@ -531,43 +306,8 @@
                     <div class="image-wrapper" style="width: 33.33%;">
                         <img src="{{ asset('images/VivoAdvertisement.webp') }}" alt="..." style="height: 300px; width: 100%;  object-fit:cover; object-position:center;">
                     </div>
-
             </div>
         </div>
-        {{-- <div class="carousel-item">
-            <div class="cards-wrapper">
-
-                    <div class="image-wrapper">
-                        <img src="{{ asset('user/img/product-img/product-3.jpg') }}" alt="...">
-                    </div>
-
-                    <div class="image-wrapper">
-                        <img src="{{ asset('user/img/product-img/product-4.jpg') }}" alt="...">
-                    </div>
-
-                    <div class="image-wrapper">
-                        <img src="{{ asset('user/img/product-img/product-6.jpg') }}" alt="...">
-                    </div>
-
-            </div>
-        </div>
-        <div class="carousel-item">
-            <div class="cards-wrapper">
-
-                    <div class="image-wrapper">
-                        <img src="{{ asset('user/img/product-img/product-1.jpg') }}" alt="...">
-                    </div>
-
-                    <div class="image-wrapper">
-                        <img src="{{ asset('user/img/product-img/product-2.jpg') }}" alt="...">
-                    </div>
-
-                    <div class="image-wrapper">
-
-                    <img src="{{ asset('user/img/product-img/product-3.jpg') }}" alt="...">
-                </div>
-            </div>
-        </div> --}}
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
         data-bs-slide="prev">
@@ -583,3 +323,5 @@
 {{-- Advertise end --}}
 
 @endsection
+
+

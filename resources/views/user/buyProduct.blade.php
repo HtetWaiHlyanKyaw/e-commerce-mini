@@ -1,5 +1,27 @@
 @extends('user.master')
 @section('title', 'Product Details & Purchase Options')
+@section('csrf')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
+@section('cart')
+    <a href="#" class="btn position-relative">
+        @if ($cart && count($cart) > 0)
+            <img src="{{ asset('user/img/core-img/bag.svg') }}" alt="">
+            <span style="margin-top:32px; margin-left:10px"
+                class="position-absolute start-80 me-5 translate-middle badge rounded-pill bg-light">
+                {{ count($cart) }}
+                <span class="visually-hidden">unread messages</span>
+            </span>
+        @else
+            <img src="{{ asset('user/img/core-img/bag.svg') }}" alt="">
+            <span style="margin-top:32px; margin-left:10px"
+                class="position-absolute start-80 me-5 translate-middle badge rounded-pill bg-light">
+                0
+                <span class="visually-hidden">unread messages</span>
+            </span>
+        @endif
+    </a>
+@endsection
 @section('style')
     <style>
         .rating {
@@ -93,25 +115,40 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <div class="col-sm-8 d-flex align-items-center">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <button id="minusBtn" class="btn btn-sm btn-primary"><i class="fa fa-minus"></i></button>
-                            </div>
-                            <input type="text" value="1" style="width:50px" id="qty"
-                                class="form-control text-center mx-1">
-                            <div class="input-group-append">
-                                <button id="plusBtn" class="btn btn-sm btn-primary me-2"><i
-                                        class="fa fa-plus"></i></button>
-                            </div>
+
+                <div class="container">
+                    <div class="form-group row">
+                        <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                            @if (Auth::check() && Auth::user()->usertype == 'customer')
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <button id="minusBtn" class="btn btn-sm btn-primary"><i
+                                                class="fa fa-minus"></i></button>
+                                    </div>
+                                    <input type="text" value="1" style="width:50px" id="qty"
+                                        class="form-control text-center mx-1">
+                                    <div class="input-group-append">
+                                        <button id="plusBtn" class="btn btn-sm btn-primary"><i
+                                                class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary ml-md-2 mt-2 mt-md-0">Buy Now</button>
+                                <button type="button" id="cartBtn" class="btn btn-primary ml-md-2 mt-2 mt-md-0"><i
+                                        class="fa-solid fa-cart-shopping"></i> Add to Cart</button>
+                                <input type="hidden" id="userId" value="{{ Auth::user()->id }}">
+                                <input type="hidden" name="product_id" id="product_id" value="{{ $products->first()->id }}">
+
+                            @elseif (!Auth::check())
+                                {{-- Show a message or redirect to login for non-authenticated users --}}
+                                <div class="alert alert-warning mt-3" role="alert">
+                                    If you want to buy this product, you need to <a href="{{ route('user.login') }}"
+                                        class="alert-link">login</a> first.
+                                </div>
+                            @endif
                         </div>
-                        <button type="button" class="btn btn-primary mr-2">Buy Now</button>
-                        <button type="button" class="btn btn-primary">Add to Cart</button>
                     </div>
                 </div>
             </div>
-
 
             {{-- <div class="bg-light " id="reviews" style="margin-top: 50px;">
                 <h5>Reviews</h5>
@@ -253,6 +290,7 @@
             // Initially fetch and append comments when the page is loaded
             fetchAndAppendComments();
 
+
             // Event listener for 'Show more comments' button
             $('#show-more-comments').on('click', function() {
                 fetchAndAppendComments();
@@ -273,7 +311,7 @@
                 document.getElementById("product_description").innerText = selectedProduct.description;
                 document.getElementById("product_price").innerText = "$ " + selectedProduct.price;
                 document.getElementById("product_id").value = selectedProduct.id;
-                // console.log("Selected Product ID:", selectedProduct.id);
+                //  console.log("Selected Product ID:", selectedProduct.id);
             }
         }
 
@@ -287,6 +325,7 @@
         updateProductDetails();
 
         $(document).ready(function() {
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -311,6 +350,7 @@
 
             //  add to cart
             $('#cartBtn').click(function() {
+
                 let userId = $('#userId').val();
                 let productId = $('#product_id').val();
 

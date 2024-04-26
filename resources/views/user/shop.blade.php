@@ -1,6 +1,24 @@
 @extends('user.master')
 @section('title', 'Shop')
+@section('cart')
+ <a href="{{route('cartList')}}" class="btn position-relative">
+    @if ($cart && count($cart) > 0)
+        <img src="{{ asset('user/img/core-img/bag.svg') }}" alt="">
+        <span style="margin-top:32px; margin-left:10px" class="position-absolute start-80 me-5 translate-middle badge rounded-pill bg-light">
+            {{ count($cart) }}
+            <span class="visually-hidden">unread messages</span>
+        </span>
+    @else
+        <img src="{{ asset('user/img/core-img/bag.svg') }}" alt="">
+        <span style="margin-top:32px; margin-left:10px" class="position-absolute start-80 me-5 translate-middle badge rounded-pill bg-light">
+            0
+            <span class="visually-hidden">unread messages</span>
+        </span>
+    @endif
+</a>
+@endsection
 @section('content')
+
     <!-- ##### Right Side Cart Area ##### -->
 
     <div class="cart-bg-overlay"></div>
@@ -185,6 +203,11 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="product-topbar d-flex align-items-center justify-content-between">
+                                    <!-- Total Products -->
+                                    <div class="total-products">
+                                        <p><span>186</span> products found</p>
+                                    </div>
+                                    <!-- Sorting -->
                                     <div class="product-sorting d-flex">
                                         <p>Sort by:</p>
                                         <form action="#" method="get">
@@ -222,7 +245,6 @@
                                             </a>
 
                                             <div class="hover-content">
-
                                                 <div class="add-to-cart-btn">
                                                     <a href="#" class="btn essence-btn">Add to Cart</a>
                                                 </div>

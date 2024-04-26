@@ -15,98 +15,66 @@
             </div>
             <div class="col-2"></div>
         </div>
-        {{-- <div class="row">
-            <div class="col-2"></div>
-            <div class="col-8">
-                <form action="">
-                    @csrf
-                    {{-- <div class="border border-primary-subtle p-3 rounded-2"> --}}
-        {{-- <label for="">Name*</label>
-                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
-                            value="{{ old('name', $user->name) }}" required>
+        <form method="POST" action="{{ route('user.pUpdate') }}" class="row ">
+            @csrf
+            <div class="col-md-6">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror"
+                    value="{{ old('name', $user->name) }}">
+                @error('name')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+            <div class="col-md-6">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" name="email" id="email"
+                    class="form-control @error('email') is-invalid @enderror" value="{{ old('email', $user->email) }}">
+                @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
 
-                        <label for="" class="mt-3">Email*</label>
-                        <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
-                            value="{{ old('email', $user->email) }}" required> --}}
-        {{-- </div> --}}
-        {{-- <fieldset style="border:1px solid black">
-                            <legend>Password Change:</legend>
-                            <div class="form-group">
-                                <label for="current_password" class="mt-3">Current Password (leave blank to leave unchanged)</label>
-                                <input type="password" id="current_password" name="current_password" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="new_password" class="mt-3">New Password (leave blank to leave unchanged)</label>
-                                <input type="password" id="new_password" name="new_password" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="confirm_password" class="mt-3">Confirm New Password</label>
-                                <input type="password" id="confirm_password" name="confirm_password" class="form-control">
-                            </div>
-                            <input type="submit" value="Save Changes" class="btn btn-info">
-                        </fieldset>
-                    </div>
-                </form> --}}
+            <div class="col-12">
+                <label for="currentPassword" class="form-label mt-4">Current Password (leave blank to leave
+                    unchanged)</label>
+                <input type="password" name="currentPassword"
+                    class="form-control  @error('currentPassword') is-invalid @enderror" id="currentPassword">
+                <input type="checkbox" id="currentPassword" onclick="togglePasswordVisibility()"> Show Password
+                @error('currentPassword')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+            <div class="col-12">
+                <label for="newPassword" class="form-label mt-4">New Password (leave blank to leave unchanged)</label>
+                <input type="password" name="newPassword" class="form-control" id="newPassword">
+                <input type="checkbox" id="newPassword" onclick="PasswordVisibility1()"> Show Password
+                @error('newPassword')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+            <div class="col-md-12">
+                <label for="confirm" class="form-label mt-4">Confirm New Password</label>
+                <input type="password" name="confirm" class="form-control" id="confirm">
+                <input type="checkbox" id="confirm" onclick="PasswordVisibility2()"> Show Password
+                @error('confirm')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
 
-                <form method="POST" action="{{route('user.pUpdate')}}" class="row ">
-                    @csrf
-                    <div class="col-md-6">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror"
-                            value="{{ old('name', $user->name) }}">
-                            @error('name')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="col-md-6">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" name="email" id="email"
-                            class="form-control @error('email') is-invalid @enderror" value="{{ old('email', $user->email) }}"
-                            >
-                            @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div class="col-12">
-                        <label for="currentPassword" class="form-label mt-4">Current Password (leave blank to leave unchanged)</label>
-                        <input type="password" name="currentPassword" class="form-control  @error('currentPassword') is-invalid @enderror" id="currentPassword">
-                        <input type="checkbox" id="currentPassword" onclick="togglePasswordVisibility()"> Show Password
-                        @error('currentPassword')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="col-12">
-                        <label for="newPassword" class="form-label mt-4">New Password (leave blank to leave unchanged)</label>
-                        <input type="password" name="newPassword" class="form-control" id="newPassword">
-                        <input type="checkbox" id="newPassword" onclick="PasswordVisibility1()"> Show Password
-                        @error('newPassword')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="col-md-12">
-                        <label for="confirm" class="form-label mt-4">Confirm New Password</label>
-                        <input type="password" name="confirm" class="form-control" id="confirm">
-                        <input type="checkbox" id="confirm" onclick="PasswordVisibility2()"> Show Password
-                        @error('confirm')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div class="col-12 mt-5">
-                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                    </div>
-                </form>
+            <div class="col-12 mt-5">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+            </div>
+        </form>
 
     </div>
 
