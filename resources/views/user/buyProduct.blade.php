@@ -136,7 +136,7 @@
                                 <button type="button" id="cartBtn" class="btn btn-primary ml-md-2 mt-2 mt-md-0"><i
                                         class="fa-solid fa-cart-shopping"></i> Add to Cart</button>
                                 <input type="hidden" id="userId" value="{{ Auth::user()->id }}">
-                                <input type="hidden" name="product_id" id="product_id" value="{{ $products->first()->id }}">
+                                {{-- <input type="hidden" name="product_id" id="product_id" value="{{ $products->first()->id }}"> --}}
 
                             @elseif (!Auth::check())
                                 {{-- Show a message or redirect to login for non-authenticated users --}}
@@ -311,7 +311,7 @@
                 document.getElementById("product_description").innerText = selectedProduct.description;
                 document.getElementById("product_price").innerText = "$ " + selectedProduct.price;
                 document.getElementById("product_id").value = selectedProduct.id;
-                //  console.log("Selected Product ID:", selectedProduct.id);
+            //  console.log("Selected Product ID:", selectedProduct.id);
             }
         }
 
