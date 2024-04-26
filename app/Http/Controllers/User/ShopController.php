@@ -195,18 +195,17 @@ class ShopController extends Controller
     {
         // Validate the request data
         $validatedData = $request->validate([
-            'product_id' => 'required|exists:products,id',
+            // 'product_id' => 'required|exists:products,id',
             'comments' => 'required|string|max:255',
             // 'rating' => 'integer|between:1,5',
         ]);
 
-
-        $productModelId = Product::where('id', $validatedData['product_id'])->value('product_model_id');
+        $productModelId = Product::where('id', 'product_id')->value('product_model_id');
         // Create a new review instance
         $review = new Review();
         $review->user_id = auth()->id(); // Assuming the user is authenticated
         $review->product_model_id = $productModelId;
-        $review->comments = $validatedData['comments'];
+        $review->comments = $request->comments;
         $review->rating = $request->rating;
         $review->save();
 
