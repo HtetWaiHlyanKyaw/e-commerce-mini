@@ -220,39 +220,38 @@
 
         var maxAmount = {!! max($supplierPurchaseAmounts) !!};
 
-            var ctx = document.getElementById('purchaseChart').getContext('2d');
-            var myChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: {!! json_encode($days) !!},
-                    datasets: [{
-                        label: 'Purchase Amount',
-                        data: {!! json_encode(array_values($supplierPurchaseAmounts)) !!},
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Days',
-                                font: {
-                                    weight: 'bold'
-                                }
+        var ctx = document.getElementById('purchaseChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: {!! json_encode($days) !!},
+                datasets: [{
+                    label: 'Purchase Amount',
+                    data: {!! json_encode(array_values($supplierPurchaseAmounts)) !!},
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Days',
+                            font: {
+                                weight: 'bold'
                             }
-                        },
-                        y: {
-                            beginAtZero: true,
-                            suggestedMax: maxAmount,
-                            title: {
-                                display: true,
-                                text: 'Purchase Amount',
-                                font: {
-                                    weight: 'bold'
-                                }
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        suggestedMax: maxAmount,
+                        title: {
+                            display: true,
+                            text: 'Purchase Amount',
+                            font: {
+                                weight: 'bold'
                             }
                         }
                     }
@@ -265,120 +264,52 @@
     <script>
         var maxCustomerAmount = {!! max($customerPurchaseAmounts) !!};
 
-                var ctxCustomer = document.getElementById('customerPurchaseChart').getContext('2d');
-                var myCustomerChart = new Chart(ctxCustomer, {
-                    type: 'line',
-                    data: {
-                        labels: {!! json_encode($customerPurchaseDays) !!},
-                        datasets: [{
-                            label: 'Purchase Amount',
-                            data: {!! json_encode(array_values($customerPurchaseAmounts)) !!},
+        var ctxCustomer = document.getElementById('customerPurchaseChart').getContext('2d');
+        var myCustomerChart = new Chart(ctxCustomer, {
+            type: 'line',
+            data: {
+                labels: {!! json_encode($customerPurchaseDays) !!},
+                datasets: [{
+                    label: 'Purchase Amount',
+                    data: {!! json_encode(array_values($customerPurchaseAmounts)) !!},
 
-                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            borderWidth: 1
-                        }]
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Days',
+                            font: {
+                                weight: 'bold'
+                            }
+                        }
                     },
-                    options: {
-                        scales: {
-                            x: {
-                                title: {
-                                    display: true,
-                                    text: 'Days',
-                                    font: {
-                                        weight: 'bold'
-                                    }
-                                }
-                            },
-                            y: {
-                                beginAtZero: true,
-                                suggestedMax: maxCustomerAmount,
-                                title: {
-                                    display: true,
-                                    text: 'Purchase Amount',
-                                    font: {
-                                        weight: 'bold'
-                                    }
-                                }
+                    y: {
+                        beginAtZero: true,
+                        suggestedMax: maxCustomerAmount,
+                        title: {
+                            display: true,
+                            text: 'Purchase Amount',
+                            font: {
+                                weight: 'bold'
                             }
                         }
                     }
-                });
-            </script>
-@endif
-        <script>
-            var quantityCtx = document.getElementById('quantityDoughnutChart').getContext('2d');
-            var salesCtx = document.getElementById('salesDoughnutChart').getContext('2d');
-            var productData = @json($productData);
-
-            // Extract data for quantity chart
-            var quantityLabels = productData.map(function(item) {
-                return item.product.name; // Assuming product_id is used as labels
-            });
-            var quantityData = productData.map(function(item) {
-                return item.total_quantity;
-            });
-
-            // Extract data for sales chart
-            var salesLabels = productData.map(function(item) {
-                return item.product.name; // Assuming product_id is used as labels
-            });
-            var salesData = productData.map(function(item) {
-                return item.total_sales;
-            });
-
-            var quantityDoughnutChart = new Chart(quantityCtx, {
-                type: 'doughnut',
-                data: {
-                    // labels: quantityLabels,
-                    datasets: [{
-                        label: 'Quantity Sold',
-                        data: quantityData,
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.5)',
-                            'rgba(54, 162, 235, 0.5)',
-                            'rgba(255, 206, 86, 0.5)',
-                            'rgba(75, 192, 192, 0.5)',
-                            'rgba(153, 102, 255, 0.5)',
-                            'rgba(255, 159, 64, 0.5)',
-                            'rgba(255, 99, 132, 0.5)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: false, // Set to true for responsiveness
-                    maintainAspectRatio: false // Set to true for maintaining aspect ratio
-
                 }
             }
         });
     </script>
     @endif
 
-            var salesDoughnutChart = new Chart(salesCtx, {
-                type: 'doughnut',
-                data: {
-                    // labels: salesLabels,
-                    datasets: [{
-                        label: 'Sales Total',
-                        data: salesData,
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.5)',
-                            'rgba(54, 162, 235, 0.5)',
-                            'rgba(255, 206, 86, 0.5)',
-                            'rgba(75, 192, 192, 0.5)',
-                            'rgba(153, 102, 255, 0.5)',
-                            'rgba(255, 159, 64, 0.5)',
-                            'rgba(255, 99, 132, 0.5)'
-                            // Add more colors as needed
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: false, // Set to true for responsiveness
-                    maintainAspectRatio: false // Set to true for maintaining aspect ratio
+    <script>
+    var quantityCtx = document.getElementById('quantityDoughnutChart').getContext('2d');
+    var salesCtx = document.getElementById('salesDoughnutChart').getContext('2d');
+    var productData = @json($productData);
 
     // Extract data for quantity chart
     var quantityLabels = productData.map(function(item) {

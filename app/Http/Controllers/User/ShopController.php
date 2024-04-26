@@ -134,4 +134,29 @@ class ShopController extends Controller
         // Redirect back with a success message
         return back()->with('success', 'Comment posted successfully');
     }
+
+    public function filterProducts(Request $request){
+        $brand_id = $request->input('brands');
+        $color = $request->input('colors');
+        $storage = $request ->input('storage');
+        $query = Product::with('brand', 'ProductModel')->orderByDesc('created_at');
+
+        if ($brand_id !== 'all') {
+
+             $query->where('brand_id', $brand_id);
+        }
+
+        if ($color !== 'all') {
+
+            $query->where('color', $color);
+        }
+
+        if ($storage !== 'all') {
+
+            $query->where('storage', $storage);
+        }
+
+        $filteredProducts = $query->get();
+        return response()->json($filteredProducts);
+    }
 }
