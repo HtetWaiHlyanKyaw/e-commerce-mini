@@ -95,17 +95,28 @@ class ShopController extends Controller
             })->where('user_id', $user->id)->exists();
         }
 
-        return view('user.buyProduct', [
-            'productVariants' => $productVariants,
-            // 'reviews' => $reviews,
-            'averageRating' => $averageRating,
-            'totalRating' => $totalRating,
-            'totalComments' => $totalComments,
-            'hasBoughtProductModel' => $hasBoughtProductModel,
-            'cart' =>$cart,
-            'user'=>$user,
-            'products'=>$products,
-        ]);
+        // return view('user.buyProduct', [
+        //     'productVariants' => $productVariants,
+        //     // 'reviews' => $reviews,
+        //     'averageRating' => $averageRating,
+        //     'totalRating' => $totalRating,
+        //     'totalComments' => $totalComments,
+        //     'hasBoughtProductModel' => $hasBoughtProductModel,
+        //     'cart' =>$cart,
+        //     'user'=>$user,
+        //     'products'=>$products,
+        // ]);
+
+        return view('user.buyProduct', compact(
+            'productVariants',
+            'averageRating',
+            'totalRating',
+            'totalComments',
+            'hasBoughtProductModel',
+            'user',
+            'cart',
+            'products'
+        ));
     }
 
     // public function details(Request $request)
@@ -155,21 +166,21 @@ class ShopController extends Controller
     //     $cart = $user->cart ?? [];
     //     $products = Product::all();
 
-    //     return view('user.buyProduct', compact(
-    //         'productVariants',
-    //         'averageRating',
-    //         'totalRating',
-    //         'totalComments',
-    //         'hasBoughtProductModel',
-    //         'brands',
-    //         'minPrice',
-    //         'maxPrice',
-    //         'uniqueColors',
-    //         'uniqueStorage',
-    //         'user',
-    //         'cart',
-    //         'products'
-    //     ));
+        // return view('user.buyProduct', compact(
+        //     'productVariants',
+        //     'averageRating',
+        //     'totalRating',
+        //     'totalComments',
+        //     'hasBoughtProductModel',
+        //     'brands',
+        //     'minPrice',
+        //     'maxPrice',
+        //     'uniqueColors',
+        //     'uniqueStorage',
+        //     'user',
+        //     'cart',
+        //     'products'
+        // ));
     // }
 
 
@@ -193,19 +204,19 @@ class ShopController extends Controller
 
     public function storeComment(Request $request)
     {
-        // Validate the request data
         $validatedData = $request->validate([
-            // 'product_id' => 'required|exists:products,id',
+            'product_id' => 'required|exists:products,id',
             'comments' => 'required|string|max:255',
             // 'rating' => 'integer|between:1,5',
         ]);
 
-        $productModelId = Product::where('id', 'product_id')->value('product_model_id');
+
+        $productModelId = Product::where('id', $validatedData['product_id'])->value('product_model_id');
         // Create a new review instance
         $review = new Review();
         $review->user_id = auth()->id(); // Assuming the user is authenticated
         $review->product_model_id = $productModelId;
-        $review->comments = $request->comments;
+        $review->comments = $validatedData['comments'];
         $review->rating = $request->rating;
         $review->save();
 

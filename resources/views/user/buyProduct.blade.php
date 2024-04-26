@@ -1,10 +1,7 @@
 @extends('user.master')
 @section('title', 'Product Details & Purchase Options')
-@section('csrf')
-<meta name="csrf-token" content="{{ csrf_token() }}">
-@endsection
 @section('cart')
-    <a href="#" class="btn position-relative">
+    <a href="{{route('cartList')}}" class="btn position-relative">
         @if ($cart && count($cart) > 0)
             <img src="{{ asset('user/img/core-img/bag.svg') }}" alt="">
             <span style="margin-top:32px; margin-left:10px"
@@ -115,7 +112,6 @@
                     </div>
                 </div>
 
-
                 <div class="container">
                     <div class="form-group row">
                         <div class="col-sm-12 col-md-8 d-flex align-items-center">
@@ -136,7 +132,7 @@
                                 <button type="button" id="cartBtn" class="btn btn-primary ml-md-2 mt-2 mt-md-0"><i
                                         class="fa-solid fa-cart-shopping"></i> Add to Cart</button>
                                 <input type="hidden" id="userId" value="{{ Auth::user()->id }}">
-                                <input type="hidden" name="product_id" id="product_id" value="{{ $products->first()->id }}">
+                                {{-- <input type="hidden" name="product_id" id="product_id" value="{{ $products->first()->id }}"> --}}
 
                             @elseif (!Auth::check())
                                 {{-- Show a message or redirect to login for non-authenticated users --}}
@@ -149,6 +145,8 @@
                     </div>
                 </div>
             </div>
+            </div>
+
 
             {{-- <div class="bg-light " id="reviews" style="margin-top: 50px;">
                 <h5>Reviews</h5>
@@ -185,7 +183,7 @@
             </div> --}}
             @if (Auth::check() && Auth::user()->usertype === 'customer' && $hasBoughtProductModel === true)
                 <div class="form-group row align-items-center">
-                    <div class="col-md-9">
+                    <div class="col-md-8">
                         <form id="comment-form" action="{{ route('user.comment.store') }}" method="POST">
                             @csrf
                             <input type="hidden" name="product_id" id="product_id">
@@ -213,7 +211,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <button id="show-more-comments" class="btn btn-outline-primary btn-block"
                             style="height: 60px;">Show more reviews</button>
                     </div>
@@ -290,7 +288,6 @@
             // Initially fetch and append comments when the page is loaded
             fetchAndAppendComments();
 
-
             // Event listener for 'Show more comments' button
             $('#show-more-comments').on('click', function() {
                 fetchAndAppendComments();
@@ -311,7 +308,7 @@
                 document.getElementById("product_description").innerText = selectedProduct.description;
                 document.getElementById("product_price").innerText = "$ " + selectedProduct.price;
                 document.getElementById("product_id").value = selectedProduct.id;
-                //  console.log("Selected Product ID:", selectedProduct.id);
+                console.log("Selected Product ID:", selectedProduct.id);
             }
         }
 
@@ -326,49 +323,49 @@
 
         $(document).ready(function() {
 
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            // Get the initial quantity value
-            let qty = parseInt($('#qty').val());
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+// Get the initial quantity value
+let qty = parseInt($('#qty').val());
 
-            // Increment quantity when plus button is clicked
-            $('#plusBtn').on('click', function() {
-                qty = qty + 1;
-                $('#qty').val(qty);
-            });
+// Increment quantity when plus button is clicked
+$('#plusBtn').on('click', function() {
+    qty = qty + 1;
+    $('#qty').val(qty);
+});
 
-            // Decrement quantity when minus button is clicked
-            $('#minusBtn').on('click', function() {
-                if (qty > 1) { // Ensure quantity doesn't go below 1
-                    qty = qty - 1;
-                    $('#qty').val(qty);
-                }
-            });
+// Decrement quantity when minus button is clicked
+$('#minusBtn').on('click', function() {
+    if (qty > 1) { // Ensure quantity doesn't go below 1
+        qty = qty - 1;
+        $('#qty').val(qty);
+    }
+});
 
-            //  add to cart
-            $('#cartBtn').click(function() {
+//  add to cart
+$('#cartBtn').click(function() {
 
-                let userId = $('#userId').val();
-                let productId = $('#product_id').val();
+    let userId = $('#userId').val();
+    let productId = $('#product_id').val();
 
-                $.ajax({
-                    type: 'post',
-                    url: '/cart/add',
-                    data: {
-                        'userId': userId,
-                        'productId': productId,
-                        'qty': qty
-                    },
-                    dataType: 'json', // corrected 'datatype' to 'dataType'
-                    success: function(response) {
-                        window.location.href = 'http://localhost:8000/';
-                    }
-                });
-            });
-        });
+    $.ajax({
+        type: 'post',
+        url: '/cart/add',
+        data: {
+            'userId': userId,
+            'productId': productId,
+            'qty': qty
+        },
+        dataType: 'json', // corrected 'datatype' to 'dataType'
+        success: function(response) {
+            window.location.href = 'http://localhost:8000/';
+        }
+    });
+});
+});
     </script>
 
 @endsection
