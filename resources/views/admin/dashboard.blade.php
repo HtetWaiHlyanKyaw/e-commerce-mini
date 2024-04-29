@@ -215,7 +215,9 @@
 @endsection
 @section('script')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    @if (!empty($supplierPurchaseAmounts))
     <script>
+
         var maxAmount = {!! max($supplierPurchaseAmounts) !!};
 
         var ctx = document.getElementById('purchaseChart').getContext('2d');
@@ -257,6 +259,8 @@
             }
         });
     </script>
+    @endif
+    @if (!empty($customerPurchaseAmounts))
     <script>
         var maxCustomerAmount = {!! max($customerPurchaseAmounts) !!};
 
@@ -300,6 +304,7 @@
             }
         });
     </script>
+    @endif
 
     <script>
     var quantityCtx = document.getElementById('quantityDoughnutChart').getContext('2d');
@@ -375,6 +380,4 @@
         }
     });
     </script>
-
-
 @endsection

@@ -59,7 +59,6 @@
                         <th style="color: #5d9bff; text-align:center;">No</th>
                         <th style="color: #5d9bff; text-align:center;">Name</th>
                         <th style="color: #5d9bff; text-align:center;">Date</th>
-
                         <th style="color: #5d9bff; text-align:center;">Actions</th>
                     </tr>
                 </thead>

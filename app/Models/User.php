@@ -48,4 +48,9 @@ class User extends Authenticatable
     protected $attributes = [
         'usertype' => 'customer', // Set default value for 'usertype' field
     ];
+
+    public function cart()
+    {
+        return $this->hasMany(Cart::class);
+    }
 }

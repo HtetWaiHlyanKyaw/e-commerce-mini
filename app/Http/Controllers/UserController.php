@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -18,8 +18,12 @@ class UserController extends Controller
         return view('user.single_blog');
     }
 
-    public function checkout(){
-        return view('user.checkout');
+    public function checkout(Request$request) {
+
+        $product = Product::with('brand', 'ProductModel')->find($request->product_id);
+        $quantity = $request->input('qtyHidden');
+        return view('user.checkout',['product' => $product,
+        'quantity' => $quantity ]);
     }
 
     public function blog(){
