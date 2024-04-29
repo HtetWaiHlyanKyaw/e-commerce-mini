@@ -20,11 +20,14 @@
     <link rel="stylesheet" href="{{ asset('user/css/core-style.css') }}">
     <link rel="stylesheet" href="{{ asset('user/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     @yield('style');
     <style>
         .dropdown-no-arrow::after {
             display: none !important;
         }
+
+
 
     </style>
 </head>
@@ -102,9 +105,9 @@
                             style="width: 20px; height:20px; margin-top:30px; margin-right:25px">
                     </div>
                     <div class="dropdown-menu dropdown-partial" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" style="width:160px;" href="{{ route('user.profile') }}">Profile</a>
+                        <a class="dropdown-item" style="width:160px;" href="{{ route('user.profile') }}" ><i class="fa fa-user"></i>  Profile</a>
                         <a class="dropdown-item" style="width:160px;" href="{{ route('logout') }}"
-                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-arrow-left"></i>   Logout</a>
                         <form id="logout-form" action="{{ route('user.logout') }}" method="POST"
                             style="display: none;">
                             @csrf
@@ -120,8 +123,8 @@
                 </div>
 
             @else
-                <div class="user-login-info">
-                    <a href="{{ route('user.login') }}">Sign In</a>
+                <div class="user-login-info" style=" text-align: center;">
+                    <a href="{{ route('user.login') }} " style="vertical-align: center;">Sign In</a>
                 </div>
             @endif
 
@@ -192,7 +195,7 @@
         <div class="container">
             <div class="row">
                 <!-- Single Widget Area -->
-                <div class="col-md-4 col-sm-6">
+                <div class="col-md-3 col-sm-6">
                     <div class="single_widget_area d-flex mb-10">
                         <!-- Logo -->
                         <div class="footer-logo mr-50">
@@ -211,26 +214,32 @@
                     </div>
                 </div>
                 <!-- Single Widget Area -->
-                <div class="col-md-4 col-sm-6">
-                    <div class="single_widget_area mb-30">
+                <div class="col-md-3 col-sm-6">
+                    <div class="single_widget_area mb-10">
                         <ul class="footer_widget_menu">
-                            <li><a href="#">Order Status</a></li>
-                            <li><a href="#">Payment Options</a></li>
-                            <li><a href="#">Guides</a></li>
+                            {{-- <li><a href="#">Order Status</a></li> --}}
+                            <li><a href="#"><i class="fa fa-phone"></i> 09775656968</a></li>
+                            {{-- <li><a href="#">Payment Options</a></li> --}}
+                            {{-- <li><a href="#"><i class="fa fa-envelope"></i> aungsung@gmail.com</a></li> --}}
+
+                            {{-- <li><a href="#">Guides</a></li>
                             <li><a href="#">Privacy Policy</a></li>
                             <li><a href="#">Terms of Service</a></li>
-                            <li><a href="#">FAQs</a></li>
+                            <li><a href="#">FAQs</a></li> --}}
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="single_widget_area mb-30">
+                <div class="col-md-3 col-sm-6">
+                    <div class="single_widget_area mb-10">
                         <ul class="footer_widget_menu">
-                            <li><a href="#"><i class="fa fa-phone"></i> 09775656968</a></li>
-                            <li></li>
-                            <li><a href="#"><i class="fa fa-envelope"></i> aungsung@gmail.com</a></li>
-                            <li></li>
-                            <li><a href="#"><i class="fa fa-location-arrow"></i> Bahan </a></li>
+                            <li><a href="#"><i class="fa fa-envelope"  style="display: inline;"></i>abc@gmail.com</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="single_widget_area mb-10">
+                        <ul class="footer_widget_menu">
+                            <li><a href="#"><i class="fa fa-location-arrow"></i> Mayangone </a></li>
                         </ul>
                     </div>
                 </div>
@@ -240,7 +249,7 @@
 
             <div class="row align-items-end">
                 <!-- Single Widget Area -->
-                <div class="col-md-6 col-sm-6">
+                {{-- <div class="col-md-6 col-sm-6">
                     <div class="single_widget_area">
                         <div class="footer_heading mb-30">
                             <h6>Subscribe</h6>
@@ -253,11 +262,11 @@
                             </form>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <!-- Single Widget Area -->
-                <div class="col-md-6 col-sm-6">
-                    <div class="single_widget_area">
-                        <div class="footer_social_area">
+                {{-- <div class="col-md-6 col-sm-6"> --}}
+                    <div class="single_widget_area ">
+                        <div class="footer_social_area text-center">
                             <a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><i
                                     class="fa fa-facebook" aria-hidden="true"></i></a>
                             <a href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><i
@@ -270,7 +279,7 @@
                                     class="fa fa-youtube-play" aria-hidden="true"></i></a>
                         </div>
                     </div>
-                </div>
+                {{-- </div> --}}
 
             </div>
 

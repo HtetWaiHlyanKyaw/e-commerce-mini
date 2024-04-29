@@ -1,15 +1,15 @@
 @extends('user.master')
-@section('title','Register')
+@section('title', 'Register')
 @section('style')
-<link rel="shortcut icon" type="image/png" href="{{ asset('admin/images/logos/Unity Source Logo.png') }}" />
-<link rel="stylesheet" href="{{ asset('admin/css/styles.min.css') }}" />
-<style>
-    .Login-Btn{
-        /* color: inherit; */
-        text-decoration: none;
-        font-size: 15px;
-    }
-</style>
+    <link rel="shortcut icon" type="image/png" href="{{ asset('admin/images/logos/Unity Source Logo.png') }}" />
+    <link rel="stylesheet" href="{{ asset('admin/css/styles.min.css') }}" />
+    <style>
+        /* .Login-Btn {
+            color: inherit;
+            text-decoration: none;
+            font-size: 15px;
+        } */
+    </style>
 @endsection
 {{-- <!doctype html>
 <html lang="en">
@@ -25,7 +25,7 @@
 @section('content')
 
 
-{{-- <body> --}}
+    {{-- <body> --}}
     <!--  Body Wrapper -->
     <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed">
@@ -34,53 +34,60 @@
                 <div class="row justify-content-center w-100">
                     <div class="col-md-8 col-lg-6 col-xxl-3">
                         <div class="card mb-0">
-                            <div class="card-body">
+                            <div class="card-body p-3">
                                 <a href="#" class="text-nowrap logo-img text-center d-block py-3 w-100">
-                                    <img src="{{ asset('admin/images/logos/Unity Source Logo.png') }}" width="180" alt="">
+                                    <img src="{{ asset('admin/images/logos/Unity Source Logo.png') }}" width="180"
+                                        alt="">
                                 </a>
                                 <p class="text-center">Unify Your Mobile Experience</p>
                                 <form method="POST" action="{{ route('user.register') }}">
                                     @csrf
                                     <div class="mb-3">
                                         <label for="name" class="form-label">Name</label>
-                                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name"
+                                        <input id="name" type="text"
+                                            class="form-control @error('name') is-invalid @enderror" name="name"
                                             value="{{ old('name') }}" required autofocus>
                                         @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
                                         @enderror
                                     </div>
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email</label>
-                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email"
+                                        <input id="email" type="email"
+                                            class="form-control @error('email') is-invalid @enderror" name="email"
                                             value="{{ old('email') }}" required>
                                         @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
                                         @enderror
                                     </div>
                                     <div class="mb-4">
                                         <label for="password" class="form-label">Password</label>
-                                        <input type="password" id="password1" name="password" class="form-control @error('password') is-invalid @enderror"
+                                        <input type="password" id="password1" name="password"
+                                            class="form-control @error('password') is-invalid @enderror"
                                             value="{{ old('password') }}" required>
-                                        <input type="checkbox" id="showPassword" onclick="togglePasswordVisibility()"> Show Password
+                                        <input type="checkbox" id="showPassword" onclick="togglePasswordVisibility()"> Show
+                                        Password
                                         @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
                                         @enderror
                                     </div>
                                     <div class="mb-4">
                                         <label for="password_confirmation" class="form-label">Confirm Password</label>
-                                        <input type="password" id="password2" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror"
+                                        <input type="password" id="password2" name="password_confirmation"
+                                            class="form-control @error('password_confirmation') is-invalid @enderror"
                                             value="{{ old('password_confirmation') }}" required>
-                                        <input type="checkbox" id="password_confirmation" onclick="PasswordVisibility()"> Show Password
+                                        <input type="checkbox" id="password_confirmation" onclick="PasswordVisibility()">
+                                        Show Password
                                         @error('password_confirmation')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
                                         @enderror
                                     </div>
 
@@ -95,8 +102,12 @@
             </div>
         </div>
     </div>
-    @endsection
-    @section('script')
+
+
+
+
+@endsection
+@section('script')
     <script src="{{ asset('admin/libs/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('admin/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
     <script>
@@ -110,7 +121,7 @@
         }
 
         function PasswordVisibility() {
-        var passwordField = document.getElementById("password2");
+            var passwordField = document.getElementById("password2");
             if (passwordField.type === "password") {
                 passwordField.type = "text";
             } else {
@@ -118,7 +129,7 @@
             }
         }
     </script>
-    @endsection
+@endsection
 
 {{-- </body>
 

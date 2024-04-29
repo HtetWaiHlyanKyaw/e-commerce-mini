@@ -362,6 +362,7 @@ img {
     .classynav ul li a {
         font-size: 16px;
         color: $text-color;
+
         &:hover {
             color: $dark-color;
         }
@@ -465,6 +466,7 @@ img {
                     font-size: 14px;
                 }
             }
+
         }
     }
     &.sticky {
