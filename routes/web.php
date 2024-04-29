@@ -174,15 +174,12 @@ Route::post('/user/login', [UserLoginController::class,'login']);
 Route::post('/user/logout', [UserLoginController::class,'logout'])->name('user.logout');
 Route::get('/user/Register_Page',[UserRegisterController::class, 'page'])->name('user.RegisterPage');
 Route::post('/user/registration',[UserRegisterController::class, 'register'])->name('user.register');
-
-
-
 //all user routes
 Route::get('/', [PageController::class, 'index'])->name('user.page');
 Route::get('/regular_page', [UserController::class, 'RegularPage'])->name('user.rePage');
 Route::get('/contact', [UserController::class, 'contact'])->name('user.contact');
 Route::get('/singleBlog', [UserController::class, 'singleBlog'])->name('user.Sblog');
-Route::get('/checkout', [UserController::class, 'checkout'])->name('user.checkout');
+Route::POST('/checkout', [UserController::class, 'checkout'])->name('user.checkout');
 Route::get('/blog', [UserController::class, 'blog'])->name('user.blog');
 Route::get('/productDetail', [UserController::class, 'productDetail'])->name('user.detail');
 Route::get('/comments/{product_id}/{limit}', [ShopController::class, 'fetchComments']);

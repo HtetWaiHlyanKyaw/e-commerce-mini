@@ -1,7 +1,10 @@
 @extends('user.master')
 @section('title', 'Product Details & Purchase Options')
+@section('csrf')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
 @section('cart')
-    <a href="{{route('cartList')}}" class="btn position-relative">
+    <a href="#" class="btn position-relative">
         @if ($cart && count($cart) > 0)
             <img src="{{ asset('user/img/core-img/bag.svg') }}" alt="">
             <span style="margin-top:32px; margin-left:10px"
@@ -53,6 +56,11 @@
             color: #ffcc00;
             /* Change color of hovered stars and those before it */
         }
+        #qty::-webkit-inner-spin-button,
+#qty::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
     </style>
 
 @endsection
@@ -97,7 +105,6 @@
                         <h1 id="product_price" class="text-danger"></h1>
                     </div>
                 </div>
-
                 <div class="form-group row">
                     <label for="product_variant" class="col-sm-3 col-form-label">Color and Storage:</label>
                     <div class="col-sm-4">
@@ -112,6 +119,7 @@
                     </div>
                 </div>
 
+
                 <div class="container">
                     <div class="form-group row">
                         <div class="col-sm-12 col-md-8 d-flex align-items-center">
@@ -121,32 +129,36 @@
                                         <button id="minusBtn" class="btn btn-sm btn-primary"><i
                                                 class="fa fa-minus"></i></button>
                                     </div>
-                                    <input type="text" value="1" style="width:50px" id="qty"
-                                        class="form-control text-center mx-1">
+                                    <input type="number"value="1" style="width:50px" id="qty"
+                                        class="form-control text-center mx-1" min="1" max="1" readonly>
                                     <div class="input-group-append">
                                         <button id="plusBtn" class="btn btn-sm btn-primary"><i
                                                 class="fa fa-plus"></i></button>
                                     </div>
                                 </div>
-                                <button type="button" class="btn btn-primary ml-md-2 mt-2 mt-md-0">Buy Now</button>
+                                <form action="{{route('user.checkout')}}" method="POST">
+                                    @csrf
+                                <input type="hidden" name="product_id" id="product_id_2">
+                                <input type="hidden" name="qtyHidden" id="qtyHidden" value="1">
+                                <button type="submit" class="btn btn-primary ml-md-2 mt-2 mt-md-0">Buy Now</button>
+                                </form>
                                 <button type="button" id="cartBtn" class="btn btn-primary ml-md-2 mt-2 mt-md-0"><i
                                         class="fa-solid fa-cart-shopping"></i> Add to Cart</button>
                                 <input type="hidden" id="userId" value="{{ Auth::user()->id }}">
                                 {{-- <input type="hidden" name="product_id" id="product_id" value="{{ $products->first()->id }}"> --}}
-
                             @elseif (!Auth::check())
                                 {{-- Show a message or redirect to login for non-authenticated users --}}
-                                <div class="alert alert-warning mt-3" role="alert">
+                                {{-- <div class="alert alert-warning mt-3" role="alert">
                                     If you want to buy this product, you need to <a href="{{ route('user.login') }}"
                                         class="alert-link">login</a> first.
-                                </div>
+                                </div> --}}
+                                <a href="{{route('user.login')}}"><button type="button" id="cartBtn" class="btn btn-primary ml-md-2 mt-2 mt-md-0"><i
+                                    class="fa-solid fa-cart-shopping"></i> Add to Cart</button></a>
                             @endif
                         </div>
                     </div>
                 </div>
             </div>
-            </div>
-
 
             {{-- <div class="bg-light " id="reviews" style="margin-top: 50px;">
                 <h5>Reviews</h5>
@@ -164,7 +176,6 @@
             @else
                 <h5 style="margin-top: 50px;">{{ $totalComments }} Reviews</h5><br>
             @endif
-
             <div class="bg-light" id="comments" style=" margin-bottom: 50px;">
                 {{-- <br> --}}
                 {{-- @foreach ($reviews as $review)
@@ -183,7 +194,7 @@
             </div> --}}
             @if (Auth::check() && Auth::user()->usertype === 'customer' && $hasBoughtProductModel === true)
                 <div class="form-group row align-items-center">
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                         <form id="comment-form" action="{{ route('user.comment.store') }}" method="POST">
                             @csrf
                             <input type="hidden" name="product_id" id="product_id">
@@ -211,7 +222,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <button id="show-more-comments" class="btn btn-outline-primary btn-block"
                             style="height: 60px;">Show more reviews</button>
                     </div>
@@ -292,7 +303,6 @@
             $('#show-more-comments').on('click', function() {
                 fetchAndAppendComments();
             });
-
         });
     </script>
     <script>
@@ -308,7 +318,12 @@
                 document.getElementById("product_description").innerText = selectedProduct.description;
                 document.getElementById("product_price").innerText = "$ " + selectedProduct.price;
                 document.getElementById("product_id").value = selectedProduct.id;
-                console.log("Selected Product ID:", selectedProduct.id);
+                document.getElementById("product_id_2").value = selectedProduct.id;
+                document.getElementById("qty").max = selectedProduct.quantity;
+                console.log("Quantity ", selectedProduct.quantity);
+                 console.log("Selected Product ID:", selectedProduct.id);
+                 console.log("Selected Product ID 2:", selectedProduct.id);
+                 console.log("Selected Product Name:", selectedProduct.name);
             }
         }
 
@@ -323,49 +338,58 @@
 
         $(document).ready(function() {
 
-$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
-// Get the initial quantity value
-let qty = parseInt($('#qty').val());
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            // Get the initial quantity value
+            let qty = parseInt($('#qty').val());
+const maxQty = parseInt($('#qty').attr('max'));
+const minQty = parseInt($('#qty').attr('min'));
 
 // Increment quantity when plus button is clicked
 $('#plusBtn').on('click', function() {
-    qty = qty + 1;
-    $('#qty').val(qty);
+    if (qty < maxQty) { // Check if quantity is less than the maximum
+        qty = qty + 1;
+        $('#qty').val(qty);
+        $('#qtyHidden').val(qty);
+
+    }
 });
 
 // Decrement quantity when minus button is clicked
 $('#minusBtn').on('click', function() {
-    if (qty > 1) { // Ensure quantity doesn't go below 1
+    if (qty > minQty) { // Check if quantity is greater than the minimum
         qty = qty - 1;
         $('#qty').val(qty);
+        $('#qtyHidden').val(qty);
+
     }
 });
 
-//  add to cart
-$('#cartBtn').click(function() {
 
-    let userId = $('#userId').val();
-    let productId = $('#product_id').val();
+            //  add to cart
+            $('#cartBtn').click(function() {
 
-    $.ajax({
-        type: 'post',
-        url: '/cart/add',
-        data: {
-            'userId': userId,
-            'productId': productId,
-            'qty': qty
-        },
-        dataType: 'json', // corrected 'datatype' to 'dataType'
-        success: function(response) {
-            window.location.href = 'http://localhost:8000/';
-        }
-    });
-});
-});
+                let userId = $('#userId').val();
+                let productId = $('#product_id').val();
+
+                $.ajax({
+                    type: 'post',
+                    url: '/cart/add',
+                    data: {
+                        'userId': userId,
+                        'productId': productId,
+                        'qty': qty
+                    },
+                    dataType: 'json', // corrected 'datatype' to 'dataType'
+                    success: function(response) {
+                        window.location.href = 'http://localhost:8000/';
+                    }
+                });
+            });
+        });
     </script>
 
 @endsection
