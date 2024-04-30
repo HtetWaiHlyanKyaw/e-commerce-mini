@@ -19,26 +19,18 @@
     <!-- Core Style CSS -->
     <link rel="stylesheet" href="{{ asset('user/css/core-style.css') }}">
     <link rel="stylesheet" href="{{ asset('user/style.css') }}">
-<<<<<<< HEAD
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-=======
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
->>>>>>> a9612f6d53d56eb01782410f4aeb1637928dfadf
     @yield('style');
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.min.css">
     <style>
         .dropdown-no-arrow::after {
             display: none !important;
         }
-<<<<<<< HEAD
 
 
 
-=======
->>>>>>> a9612f6d53d56eb01782410f4aeb1637928dfadf
     </style>
 </head>
 
@@ -92,7 +84,6 @@
                 <!-- User Login Info -->
                 @if (Auth::check() && Auth::user()->usertype === 'customer')
                 <div class="cart-area">
-<<<<<<< HEAD
                     <a href="#" id="essenceCartBtn"><img src="{{ asset('user/img/core-img/bag.svg') }}"
                             alt=""><span></span></a>
                 </div>
@@ -113,7 +104,7 @@
                     </div>
                 </div>
 
-            @elseif (Auth::check() && (Auth::user()->usertype === 'super_admin' || Auth::user()->usertype === 'supplier_admin' || Auth::user()->usertype === 'store_admin'))
+            {{-- @elseif (Auth::check() && (Auth::user()->usertype === 'super_admin' || Auth::user()->usertype === 'supplier_admin' || Auth::user()->usertype === 'store_admin'))
                 <div class="user-login-info">
                     <a href="{{route('dashboard')}}" style="vertical-align: center">
                         Dashboard
@@ -124,7 +115,7 @@
                 <div class="user-login-info" style=" text-align: center;">
                     <a href="{{ route('user.login') }} " style="vertical-align: center;">Sign In</a>
                 </div>
-            @endif
+            @endif --}}
 
 
 
@@ -174,9 +165,7 @@
 
 
 
-=======
                @yield('cart')
->>>>>>> a9612f6d53d56eb01782410f4aeb1637928dfadf
             </div>
 
               <div class="dropdown user-login-info">
@@ -201,7 +190,7 @@
               </div>
           @endif
           </div>
-          </div>
+
 
     </header>
     <!-- ##### Header Area End ##### -->
