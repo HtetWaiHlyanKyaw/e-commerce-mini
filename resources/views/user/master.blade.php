@@ -18,9 +18,11 @@
     <!-- Core Style CSS -->
     <link rel="stylesheet" href="{{ asset('user/css/core-style.css') }}">
     <link rel="stylesheet" href="{{ asset('user/style.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     @yield('style');
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.min.css">
     <style>
         .dropdown-no-arrow::after {
             display: none !important;
@@ -114,7 +116,7 @@
                     </div>
                 </div>
 
-            @elseif (Auth::check() && (Auth::user()->usertype === 'super_admin' || Auth::user()->usertype === 'supplier_admin' || Auth::user()->usertype === 'store_admin'))
+            {{-- @elseif (Auth::check() && (Auth::user()->usertype === 'super_admin' || Auth::user()->usertype === 'supplier_admin' || Auth::user()->usertype === 'store_admin'))
                 <div class="user-login-info">
                     <a href="{{route('dashboard')}}" style="vertical-align: center">
                         Dashboard
@@ -125,7 +127,7 @@
                 <div class="user-login-info" style=" text-align: center;">
                     <a href="{{ route('user.login') }} " style="vertical-align: center;">Sign In</a>
                 </div>
-            @endif
+            @endif --}}
 
 
 
@@ -175,9 +177,33 @@
 
 
 
+               @yield('cart')
             </div>
 
-        </div>
+              <div class="dropdown user-login-info">
+                  <div class="dropdown-toggle dropdown-no-arrow" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <img src="{{ asset('user/img/core-img/user.svg') }}" alt="" class="" style="width: 20px; height:20px; margin-top:35px; margin-right:30px; margin-left:30px;">
+                  </div>
+                  <div class="dropdown-menu dropdown-partial" aria-labelledby="userDropdown">
+                      <a class="dropdown-item" style="width:160px;" href="{{ route('user.profile') }}">Profile</a>
+                      <a class="dropdown-item" style="width:160px;" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                      <form id="logout-form" action="{{ route('user.logout') }}" method="POST" style="display: none;">
+                          @csrf
+                      </form>
+                  </div>
+              </div>
+          @elseif (Auth::check() && (Auth::user()->usertype === 'super_admin' || Auth::user()->usertype === 'supplier_admin' || Auth::user()->usertype === 'store_admin'))
+              <div class="user-login-info">
+                  <a href="{{ route('dashboard') }}" style="vertical-align: center">Dashboard</a>
+              </div>
+          @else
+              <div class="user-login-info">
+                  <a href="{{ route('user.login') }}">Sign In</a>
+              </div>
+          @endif
+          </div>
+
+
     </header>
     <!-- ##### Header Area End ##### -->
 
@@ -322,7 +348,22 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="//cdn.datatables.net/2.0.2/js/dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#myTable').DataTable({
+                // "order": [[ 0, "asc" ]],
+                "language": {
+                    "lengthMenu": "<strong>_MENU_ &nbsp records per page</strong>",
+                    "sInfo": "<strong>_START_ to _END_ of _TOTAL_</strong>",
+                    "search": "<strong>Search</strong>",
+                }
+            });
+
+        });
+    </script>
 </body>
 
 </html>

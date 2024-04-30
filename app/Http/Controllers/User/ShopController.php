@@ -9,6 +9,7 @@ use App\Models\review;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\CustomerPurchase;
+use App\Models\CustomerPurchaseDetail;
 use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -55,57 +56,6 @@ class ShopController extends Controller
         // Pass the paginator and other data to the view
         return view('user.shop', compact('paginatedGroupedData', 'brands', 'minPrice', 'maxPrice', 'uniqueColors', 'uniqueStorage', 'user', 'cart', 'products'));
     }
-
-    // public function details(Request $request)
-    // {
-    //     $modelId = $request->input('model_id');
-    //     $products = Product::where('product_model_id', $modelId)->get();
-    //     // $reviews = Review::with('user')->latest()->take(2)->get();
-    //     $productVariants = $products->map(function ($product) {
-    //         return [
-    //             'color' => $product->color,
-    //             'storage_option' => $product->storage_option,
-    //             'image' => asset('storage/products/' . $product->image),
-    //             'name' => trim(strstr($product->name, '(', true)),
-    //             'description' => $product->description,
-    //             'price' => $product->price,
-    //             'id' => $product->id,
-    //         ];
-    //     })->unique(function ($variant) {
-    //         return $variant['color'] . '_' . $variant['storage_option'];
-    //     });
-    //     $averageRating = Review::where('product_model_id', $modelId)
-    //         ->avg('rating');
-    //     $averageRating = round($averageRating);
-    //     $totalRating = Review::where('product_model_id', $modelId)
-    //         ->count('rating');
-    //     $totalComments = Review::where('product_model_id', $modelId)
-    //         ->count('comments');
-
-    //     $user = auth()->user();
-    //     $cart = $user->cart ?? [];
-    //     $products = Product::all();
-    //     if ($user === null) {
-    //         $hasBoughtProductModel = false;
-    //     } else {
-    //         $hasBoughtProductModel = CustomerPurchase::whereHas('details', function ($query) use ($modelId) {
-    //             $query->whereHas('product', function ($query) use ($modelId) {
-    //                 $query->where('product_model_id', $modelId);
-    //             });
-    //         })->where('user_id', $user->id)->exists();
-    //     }
-
-    //     return view('user.buyProduct', compact(
-    //         'productVariants',
-    //         'averageRating',
-    //         'totalRating',
-    //         'totalComments',
-    //         'hasBoughtProductModel',
-    //         'user',
-    //         'cart',
-    //         'products'
-    //     ));
-    // }
 
     public function details(Request $request)
     {
@@ -172,13 +122,12 @@ class ShopController extends Controller
         ));
     }
 
-
     public function fetchComments($product_id, $limit)
     {
         $product = Product::find($product_id);
         $model_id = $product->product_model_id;
         $comments = Review::with('user')
-            ->where('product_model_id', $model_id) // Filter comments by product_id
+            ->where('product_model_id', $model_id)
             ->latest()
             ->take($limit)
             ->get();
@@ -199,9 +148,7 @@ class ShopController extends Controller
             // 'rating' => 'integer|between:1,5',
         ]);
 
-
         $productModelId = Product::where('id', $validatedData['product_id'])->value('product_model_id');
-        // Create a new review instance
         $review = new Review();
         $review->user_id = auth()->id(); // Assuming the user is authenticated
         $review->product_model_id = $productModelId;
@@ -209,7 +156,6 @@ class ShopController extends Controller
         $review->rating = $request->rating;
         $review->save();
 
-        // Redirect back with a success message
         return back()->with('success', 'Comment posted successfully');
     }
 
@@ -236,5 +182,41 @@ class ShopController extends Controller
 
         $filteredProducts = $query->get();
         return response()->json($filteredProducts);
+    }
+
+    public function purchaseCreate(Request $request){
+
+
+        $request->validate([
+            'full_name' => 'required|string',
+            'town' => 'required|string',
+            'address' => 'required|string',
+            'phone_no' => 'required|string',
+            'payment_method' => 'required|string|in:Cash On Delivery,Mobile Banking, Mobile Wallet,Direct Bank Transfer',
+            'quantity' => 'required|integer|min:1',
+
+        ]);
+        $customerPurchase = new CustomerPurchase();
+        $customerPurchase->invoice_id = CustomerPurchase::generateInvoiceId();
+        $customerPurchase->total_quantity = $request->quantity;
+        $customerPurchase->total_price = $request->price;
+        $customerPurchase->payment_method = $request->payment_method;
+        $customerPurchase->user_id = auth()->user()->id;
+        $customerPurchase->town = $request->town;
+        $customerPurchase->address = $request->address;
+        $customerPurchase->full_name = $request->full_name;
+        $customerPurchase->phone = $request->phone_no;
+        $customerPurchase->save();
+
+        $product = Product::find($request->product_id);
+        $detail = new CustomerPurchaseDetail();
+        $detail->customer_purchase_id = $customerPurchase->id;
+        $detail->product_id = $request->product_id; // Assuming you have product IDs in the selectedProducts array
+        $detail->price = $product->price; // Assuming you have product prices in the selectedProducts array
+        $detail->quantity = $request->quantity; // Assuming you have product quantities in the selectedProducts array
+        $detail->sub_total = $product->price * $request->quantity;
+        $detail->save();
+        Product::reduceQuantity($request->product_id, $request->quantity);
+        return redirect()->route('user.page');
     }
 }

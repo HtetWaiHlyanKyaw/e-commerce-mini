@@ -19,11 +19,12 @@ class UserController extends Controller
     }
 
     public function checkout(Request$request) {
-
+        $multipleProducts = false;
         $product = Product::with('brand', 'ProductModel')->find($request->product_id);
-        $quantity = $request->input('qtyHidden');
+        $quantity = $request->qtyHidden;
         return view('user.checkout',['product' => $product,
-        'quantity' => $quantity ]);
+        'quantity' => $quantity,
+        'multipleProducts'=>$multipleProducts]);
     }
 
     public function blog(){
