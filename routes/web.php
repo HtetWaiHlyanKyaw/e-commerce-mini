@@ -10,6 +10,7 @@ use App\Http\Controllers\User\ShopController;
 use App\Http\Controllers\BrandModelController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\user\MasterController;
+use App\Http\Controllers\user\HistoryController;
 use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\admin\ReviewController;
 use App\Http\Controllers\UserRegisterController;
@@ -185,8 +186,10 @@ Route::get('/productDetail', [UserController::class, 'productDetail'])->name('us
 Route::get('/comments/{product_id}/{limit}', [ShopController::class, 'fetchComments']);
 Route::post('/comments/store', [ShopController::class, 'storeComment'])->name('user.comment.store');
 Route::post('/userFilter',[ShopController::class, 'filterProducts'])->name('filter.products');
-
+Route::post('/checkout/create', [ShopController::class, 'purchaseCreate'])->name('customer_purchase.create');
 Route::get('/shop', [ShopController::class, 'shop'])->name('user.shop');
+Route::get('/history', [HistoryController::class, 'list'])->name('user.history');
+Route::get('/history/detail/{id}', [HistoryController::class, 'detail'])->name('user.history_detail');
 // Route::get('/product/detail{id}',[ShopController::class, 'detail'])->name('user.productDetail');
 Route::get('/product/details', [ShopController::class,'details'])->name('user.productDetails');
 Route::get('/profile', [UserProfileController::class, 'profile'])->name('user.profile');

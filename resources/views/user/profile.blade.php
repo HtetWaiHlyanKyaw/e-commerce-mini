@@ -75,7 +75,8 @@
                 <button type="submit" class="btn btn-primary">Save Changes</button>
             </div>
         </form>
-
+        <div class></div>
+        <a href="{{route('user.history')}}"><button class="btn btn-primary">Purchase History</button></a>
     </div>
 
     {{-- <div class="card col-xl-5 col-md-6  mx-auto p-3" style="margin-bottom: 200px">
