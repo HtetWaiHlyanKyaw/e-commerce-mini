@@ -5,12 +5,12 @@
 <link rel="stylesheet" href="{{ asset('admin/css/styles.min.css') }}" />
 <!-- Laravel CSRF Token -->
 <style>
-    .Register-Btn{
-        /* color: inherit; */
+    /* .Register-Btn{
+
         text-decoration: none;
         font-size: 15px;
 
-    }
+    } */
 </style>
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
@@ -63,7 +63,7 @@
                                     </div>
                                     @endif
                                     <button type="submit"
-                                        class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign In</button>
+                                        class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2" >Sign In</button>
                                 </form>
                                 <p class="text-center">Don't have an account? <a href="{{ route('user.RegisterPage') }}" class="Register-Btn">Register</a></p>
                             </div>

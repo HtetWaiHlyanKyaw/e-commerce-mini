@@ -12,12 +12,12 @@
             <div class="notification bg-primary rounded-circle"></div>
           </a>
         </li> --}}
-        <a href="{{ route('user.page') }}"class="d-flex gap-2">
+            <a href="{{ route('user.page') }}"class="d-flex gap-2">
 
 
-                                <i class="ti ti-arrow-left fs-6"> </i>
-                                <p class="mb-0 fs-3">to Ecommerce Website</p>
-                            </a>
+                <i class="ti ti-arrow-left fs-6" style="color: black;"> </i>
+                <p class="mb-0 fs-3" style="color: black;">to Ecommerce Website</p>
+            </a>
         </ul>
         <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
             <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
@@ -37,7 +37,7 @@
                         <div class="message-body">
                             {{-- <a href="{{ route('profile', ['userId' => $userId]) }}" class="d-flex align-items-center gap-2 dropdown-item"> --}}
 
-                                <a href="{{ route('admin.profile') }}"
+                            <a href="{{ route('admin.profile') }}"
                                 class="d-flex align-items-center gap-2 dropdown-item">
 
                                 <i class="ti ti-user fs-6"> </i>
