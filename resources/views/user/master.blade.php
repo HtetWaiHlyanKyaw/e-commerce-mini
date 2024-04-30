@@ -23,6 +23,7 @@
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     @yield('style');
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.min.css">
     <style>
         .dropdown-no-arrow::after {
             display: none !important;
@@ -242,6 +243,21 @@
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="//cdn.datatables.net/2.0.2/js/dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#myTable').DataTable({
+                // "order": [[ 0, "asc" ]],
+                "language": {
+                    "lengthMenu": "<strong>_MENU_ &nbsp records per page</strong>",
+                    "sInfo": "<strong>_START_ to _END_ of _TOTAL_</strong>",
+                    "search": "<strong>Search</strong>",
+                }
+            });
+
+        });
+    </script>
 </body>
 
 </html>

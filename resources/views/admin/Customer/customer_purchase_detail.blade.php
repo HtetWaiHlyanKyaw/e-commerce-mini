@@ -76,10 +76,13 @@
                 </div>
                 <h4 class="header-color">Customer information</h4>
                 <div class="customer-details">
-                    <h6>Name: {{ $customerPurchase->user->name }}</h6>
+                    <h6>Account: {{ $customerPurchase->user->name }}</h6>
+                    <h6>Full Name: {{ $customerPurchase->user->full_name }}</h6>
                     <h6>Email: {{ $customerPurchase->user->email }}</h6>
-                    {{-- <h6>Phone: {{ $customerPurchase->user->phone_number }}</h6>
-                    <h6>Address: {{ $customerPurchase->user->address }}</h6> --}}
+                    <h6>Phone: {{ $customerPurchase->user->phone }}</h6>
+                    <h6>Town: {{ $customerPurchase->user->town }}</h6>
+                    <h6>Address: {{ $customerPurchase->user->address }}</h6>
+
                 </div>
             </div>
             <div class="col-md-6">

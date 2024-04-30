@@ -36,5 +36,4 @@ class PageController extends Controller
      $products = Product::all();
         return view('user.page', compact('topProducts','newestProducts', 'user', 'cart', 'products'));
     }
-
 }

@@ -38,4 +38,11 @@ class Product extends Model
         $product->quantity += $quantity; // Subtract the purchased quantity
         $product->save(); // Save the updated product
     }
+
+    public static function reduceQuantity($productId, $quantity)
+    {
+        $product = self::findOrFail($productId); // Find the product by its ID
+        $product->quantity -= $quantity; // Subtract the purchased quantity
+        $product->save(); // Save the updated product
+    }
 }

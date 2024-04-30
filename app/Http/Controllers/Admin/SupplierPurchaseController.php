@@ -228,7 +228,7 @@ class SupplierPurchaseController extends Controller
 
     public function create(Request $request)
     {
-        // Validate the request data
+
         // dd($request->selectedProducts);
         $request->validate([
             // 'invoice_id' => 'required|string',
@@ -239,11 +239,7 @@ class SupplierPurchaseController extends Controller
             'totalPrice' => 'required|numeric|min:0',
         ]);
         $selectedProducts = json_decode($request->selectedProducts, true);
-        // Wrap the database operations in a try-catch block to handle any exceptions
-
-        // Start a database transaction
-
-        // Create a new SupplierPurchase record
+        dd($selectedProducts);
         $supplierPurchase = new SupplierPurchase();
         $supplierPurchase->invoice_id = SupplierPurchase::generateInvoiceId();
         $supplierPurchase->total_quantity = $request->totalQuantity;
