@@ -59,18 +59,18 @@
                                         <span id="total">
                                             {{ $cart->product_price * $cart->qty }}
                                         </span>
-
                                     </td>
 
-                                    <td class="col-md-2 col-12 d-md-block d-none">
-                                        <a href="">
-                                            <i class="fa-solid fa-square-xmark text-dark fs-4" title="delete item"
-                                                data-toggle="tooltip"></i>
-                                        </a>
+
+
+                                    <td class="col-md-2 col-12 d-md-block d-none deleteBtn">
+
+                                        <i class="fa-solid fa-square-xmark text-dark fs-4 " style="cursor: pointer"
+                                            title="delete item" data-toggle="tooltip"></i>
                                     </td>
+                                    <input type="hidden" id="cartId" value="{{ $cart->id }}">
+                                    <input type="hidden" id="productId" value="{{ $cart->product_id }}">
                                 </tr>
-
-                                {{-- price --}}
                             @endforeach
                         </tbody>
                     </table>
@@ -157,13 +157,7 @@
                 let price = parseInt(tr.find('#price').text()); // text ne yu ya span mho lo
                 let total = price * qty;
                 tr.find('#total').text(total);
-
-
-                let subTotal = parseInt($('#subTotal').text());
-                $('#subTotal').text(subTotal + price);
-
-                $('#finalTotal').text(subTotal + price+ 1000);
-
+                calculate();
             });
 
             // Decrement quantity when minus button is clicked
@@ -179,13 +173,43 @@
                 let price = parseInt(tr.find('#price').text()); // text ne yu ya span mho lo
                 let total = price * qty;
                 tr.find('#total').text(total);
-                let subTotal = parseInt($('#subTotal').text());
+
 
                 if (count > 0) {
-                    $('#subTotal').text(subTotal - price);
-                    $('#finalTotal').text((subTotal - price)+ 1000);
+                    calculate();
                 }
             });
+
+            // delete buttom
+
+            $('.deleteBtn').click(function() {
+                let tr = $(this).parents('tr');
+                let cartId = parseInt(tr.find('#cartId').val());
+                let productId = tr.find('#productId').val();
+
+                $.ajax({
+                    type: 'get',
+                    url: '/cart/product/delete',
+                    data: {
+                        'cartId': cartId
+                    },
+                    dataType: 'json'
+                });
+                tr.remove();
+                calculate();
+            });
+
+
+
+            //subTotal Calculate
+            function calculate() {
+                let subTotal = 0;
+                $('tr').each(function(index, row) {
+                    subTotal += parseInt($(row).find('#total').text());
+                });
+                $('#subTotal').text(subTotal);
+                $('#finalTotal').text(subTotal + 1000);
+            }
         });
     </script>
 @endsection
