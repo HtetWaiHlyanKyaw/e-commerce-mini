@@ -4,7 +4,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 @section('cart')
-    <a href="#" class="btn position-relative">
+    <a href="{{route('cartList')}}" class="btn position-relative">
         @if ($cart && count($cart) > 0)
             <img src="{{ asset('user/img/core-img/bag.svg') }}" alt="">
             <span style="margin-top:32px; margin-left:10px"
