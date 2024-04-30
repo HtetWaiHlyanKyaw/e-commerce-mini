@@ -28,12 +28,9 @@
         .dropdown-no-arrow::after {
             display: none !important;
         }
-<<<<<<< HEAD
-=======
 
 
 
->>>>>>> c5163174fbf7eed28b163d7e392b8cf7746ff22a
     </style>
 </head>
 
@@ -87,7 +84,7 @@
                 <!-- User Login Info -->
                 @if (Auth::check() && Auth::user()->usertype === 'customer')
                 <div class="cart-area">
-                    <a href="#" id="essenceCartBtn"><img src="{{ asset('user/img/core-img/bag.svg') }}"
+                    <a href="" id="essenceCartBtn"><img src="{{ asset('user/img/core-img/bag.svg') }}"
                             alt=""><span></span></a>
                 </div>
                 <div class="dropdown user-login-info">
