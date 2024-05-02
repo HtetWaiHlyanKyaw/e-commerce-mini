@@ -108,7 +108,7 @@ class BannerController extends Controller
         'message' => 'Top Banner Updated Successfully!',
     ]);
 
-    return redirect()->back();
+    return redirect()->route('TopBanner.list');
 }
 
 

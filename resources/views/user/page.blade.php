@@ -55,7 +55,7 @@
 <!-- ##### Right Side Cart Area ##### -->
 <div class="cart-bg-overlay"></div>
 
-<div class="right-side-cart-area">
+{{-- <div class="right-side-cart-area">
 
     <!-- Cart Button -->
     <div class="cart-button">
@@ -70,7 +70,7 @@
             <!-- Single Cart Item -->
             <div class="single-cart-item">
                 <a href="#" class="product-image">
-                    <img src="{{ asset('user/img/product-img/product-1.jpg') }}" class="cart-thumb" alt="">
+                <img src="{{ asset('user/img/product-img/product-1.jpg') }}" class="cart-thumb" alt="">
                     <!-- Cart Item Desc -->
                     <div class="cart-item-desc">
                         <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
@@ -123,7 +123,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 <div id="carouselExampleIndicators" class="carousel carousel-dark slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
@@ -134,18 +134,27 @@
             aria-label="Slide 3"></button>
     </div>
     <div class="carousel-inner" style="margin-top: -25px;">
-        <div class="carousel-item active">
-            <img src="{{ asset('images/Iphone15Banner.webp') }}" alt="..." class="d-block w-100 " style="height: 90vh; object-fit: cover; object-position: top;">
+        @foreach($topBanner as $banner)
+        <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+            @if($banner->image_1)
+                <img src="{{ asset('storage/topBanner/' . $banner->image_1) }}" alt="..." class="d-block w-100" style="height: 80vh; object-fit: cover; object-position: top;">
+            @endif
         </div>
 
         <div class="carousel-item">
-            <img src="{{ asset('images/Oneplus13banner.webp') }}" alt="..."  class="d-block w-100" style="height: 90vh; object-fit: cover; object-position: top;">
+            @if($banner->image_2)
+                <img src="{{ asset('storage/topBanner/' . $banner->image_2) }}" alt="..." class="d-block w-100" style="height: 80vh; object-fit: cover; object-position: top;">
+            @endif
         </div>
 
         <div class="carousel-item">
-            <img src="{{ asset('images/Oppofindn3.jpg') }}" alt="..." class="d-block w-100 " style="height: 90vh; object-fit: cover; object-position: center;">
+            @if($banner->image_3)
+                <img src="{{ asset('storage/topBanner/' . $banner->image_3) }}" alt="..." class="d-block w-100" style="height: 80vh; object-fit: cover; object-position: center;">
+            @endif
         </div>
+        @endforeach
     </div>
+
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
         data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
