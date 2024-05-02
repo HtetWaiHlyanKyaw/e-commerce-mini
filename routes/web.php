@@ -198,4 +198,5 @@ Route::post('/profile/update', [UserProfileController::class, 'profileUpdate'])-
 Route::middleware('user')->group(function () {
 Route::post('/cart/add', [CartController::class, 'add'])->name('user.cardAdd');
 Route::get('/cart', [CartController::class, 'cart'])->name('cartList');
+Route::get('/cart/product/delete',[CartController::class, 'deleteProduct'])->name('cart.product.delete');
 });

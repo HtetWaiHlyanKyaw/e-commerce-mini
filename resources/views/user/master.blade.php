@@ -73,11 +73,6 @@
                     </form>
                 </div>
 
-                <!-- Favourite Area -->
-                {{-- <div class="favourite-area">
-                    <a href="#"><img src="{{ asset('user/img/core-img/heart.svg') }}" alt=""></a>
-                </div> --}}
-
                 <!-- User Login Info -->
                 @if (Auth::check() && Auth::user()->usertype === 'customer')
                     <div class="cart-area">
@@ -101,69 +96,6 @@
                             </form>
                         </div>
                     </div>
-
-                    {{-- @elseif (Auth::check() && (Auth::user()->usertype === 'super_admin' || Auth::user()->usertype === 'supplier_admin' || Auth::user()->usertype === 'store_admin'))
-                <div class="user-login-info">
-                    <a href="{{route('dashboard')}}" style="vertical-align: center">
-                        Dashboard
-                    </a>
-                </div>
-
-            @else
-                <div class="user-login-info" style=" text-align: center;">
-                    <a href="{{ route('user.login') }} " style="vertical-align: center;">Sign In</a>
-                </div>
-            @endif --}}
-
-
-
-
-
-                    {{-- <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
-                    <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
-                        {{-- <a href="https://adminmart.com/product/modernize-free-bootstrap-admin-dashboard/" target="_blank" class="btn btn-primary">Download Free</a> --}}
-                    {{-- <li class="nav-item dropdown">
-                            @php
-                                $name = auth()->user()->name;
-                                $firstLetter = substr($name, 0, 1);
-                            @endphp
-                            <a href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown" aria-expanded="false"
-                                style="font-size: 16px; color: #5d9bff; text-decoration: none; ">
-                                <input type="submit" value="{{ $firstLetter }}"
-                                    class="btn btn-primary btn-lg  rounded-circle">
-                                {{-- <p>{{auth()->user()->name}}</p> --}}
-                    {{-- </a>
-                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
-                                <div class="message-body">
-                                        <a href="{{ route('user.page') }}"
-                                        class="d-flex align-items-center gap-2 dropdown-item">
-
-                                        <i class="ti ti-user fs-6"> </i>
-                                        <p class="mb-0 fs-3">To Ecommerce Website</p>
-                                    </a>
-                                        <a href="{{ route('admin.profile') }}"
-                                        class="d-flex align-items-center gap-2 dropdown-item">
-
-                                        <i class="ti ti-user fs-6"> </i>
-                                        <p class="mb-0 fs-3">My Profile</p>
-                                    </a>
-                                    <a href="{{ route('logout') }}" class="btn btn-outline-primary mx-3 mt-2 d-block"
-                                        onclick="event.preventDefault();
-                          document.getElementById('logout-form').submit();">
-                                        Logout
-                                    </a> --}}
-                    {{-- <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>  --}}
-
-
-
-
             </div>
 
             <div class="dropdown user-login-info">
@@ -216,30 +148,13 @@
                             <a href="#"><img class="logo" src="{{ asset('user/img/uni.png') }}"
                                     alt=""></a>
                         </div>
-                        <!-- Footer Menu -->
-                        {{-- <div class="footer_menu">
-                            <ul>
-                                <li><a href="{{ route('user.page') }}">Home</a></li>
-                                <li><a href="{{ route('user.shop') }}">Shop</a></li>
-                                <li><a href="{{ route('user.blog') }}">About us</a></li>
-                                <li><a href="{{ route('user.contact') }}">Contact us</a></li>
-                            </ul>
-                        </div> --}}
                     </div>
                 </div>
                 <!-- Single Widget Area -->
                 <div class="col-md-3 col-sm-6">
                     <div class="single_widget_area mb-10">
                         <ul class="footer_widget_menu">
-                            {{-- <li><a href="#">Order Status</a></li> --}}
                             <li><a href="#"><i class="fa fa-phone"></i> 09775656968</a></li>
-                            {{-- <li><a href="#">Payment Options</a></li> --}}
-                            {{-- <li><a href="#"><i class="fa fa-envelope"></i> aungsung@gmail.com</a></li> --}}
-
-                            {{-- <li><a href="#">Guides</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Terms of Service</a></li>
-                            <li><a href="#">FAQs</a></li> --}}
                         </ul>
                     </div>
                 </div>
@@ -263,23 +178,7 @@
             </div>
 
             <div class="row align-items-end">
-                <!-- Single Widget Area -->
-                {{-- <div class="col-md-6 col-sm-6">
-                    <div class="single_widget_area">
-                        <div class="footer_heading mb-30">
-                            <h6>Subscribe</h6>
-                        </div>
-                        <div class="subscribtion_form">
-                            <form action="#" method="post">
-                                <input type="email" name="mail" class="mail" placeholder="Your mail......">
-                                <button type="submit" class="submit"><i class="fa fa-long-arrow-right"
-                                        aria-hidden="true"></i></button>
-                            </form>
-                        </div>
-                    </div>
-                </div> --}}
-                <!-- Single Widget Area -->
-                {{-- <div class="col-md-6 col-sm-6"> --}}
+
                 <div class="single_widget_area ">
                     <div class="footer_social_area text-center">
                         <a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><i
