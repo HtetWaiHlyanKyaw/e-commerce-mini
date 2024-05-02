@@ -25,6 +25,11 @@
 @section('content')
 <div class="container">
     <div class="row">
+        @if (session('alert'))
+                <div id="alertMessage" class="text-center alert alert-{{ session('alert')['type'] }}">
+                    {{ session('alert')['message'] }}
+                </div>
+            @endif
 @if ($customerPurchases->isEmpty())
         <p>No Products purchased</p>
 @else

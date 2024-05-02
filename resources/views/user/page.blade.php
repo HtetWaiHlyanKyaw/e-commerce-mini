@@ -135,13 +135,15 @@
     </div>
     <div class="carousel-inner" style="margin-top: -25px;">
         <div class="carousel-item active">
-            <img src="{{ asset('images/googleEcoSystem.webp') }}" alt="..."  class="d-block w-100" style="height: 100vh; object-fit: cover; object-position: top;">
+            <img src="{{ asset('images/Iphone15Banner.webp') }}" alt="..." class="d-block w-100 " style="height: 90vh; object-fit: cover; object-position: top;">
         </div>
+
         <div class="carousel-item">
-            <img src="{{ asset('images/s24Advertisement.jpg') }}" alt="..." class="d-block w-100 " style="height: 100vh; object-fit: cover; object-position: top;">
+            <img src="{{ asset('images/Oneplus13banner.webp') }}" alt="..."  class="d-block w-100" style="height: 90vh; object-fit: cover; object-position: top;">
         </div>
+
         <div class="carousel-item">
-            <img src="{{ asset('images/Iphone15Advertisement.webp') }}" alt="..." class="d-block w-100 " style="height: 100vh; object-fit: cover; object-position: center;">
+            <img src="{{ asset('images/Oppofindn3.jpg') }}" alt="..." class="d-block w-100 " style="height: 90vh; object-fit: cover; object-position: center;">
         </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"

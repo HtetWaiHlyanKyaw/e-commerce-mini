@@ -188,10 +188,10 @@ class ShopController extends Controller
 
 
         $request->validate([
-            'full_name' => 'required|string',
-            'town' => 'required|string',
-            'address' => 'required|string',
-            'phone_no' => 'required|string',
+            'full_name' => 'required|string|max:255',
+            'town' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'phone_no' => 'required|string|regex:/^09\d{9}$/',
             'payment_method' => 'required|string|in:Cash On Delivery,Mobile Banking, Mobile Wallet,Direct Bank Transfer',
             'quantity' => 'required|integer|min:1',
 
@@ -216,6 +216,10 @@ class ShopController extends Controller
         $detail->quantity = $request->quantity; // Assuming you have product quantities in the selectedProducts array
         $detail->sub_total = $product->price * $request->quantity;
         $detail->save();
+        session()->flash('alert', [
+            'type' => 'success',
+            'message' => 'Purchase Complete. Thank you for shoping with us.',
+        ]);
         Product::reduceQuantity($request->product_id, $request->quantity);
         return redirect()->route('user.page');
     }
