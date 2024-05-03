@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', 'Top Banner create page')
+@section('title', 'Middle Banner create page')
 @section('style')
 
 @endsection
@@ -8,13 +8,13 @@
     <div class="container-fluid">
         {{-- Page Title --}}
         <div class="pagetitle">
-            <h1 class="header-color">Top Banner Create</h1>
+            <h1 class="header-color">Middle Banner Create</h1>
             <br>
             <nav>
                 <ol class="breadcrumb">
                     <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
-                    <a class="breadcrumb-item" href="">Product List</a>
-                    <li class="breadcrumb-item active"><b>Create Top Banner</b></li>
+                    <a class="breadcrumb-item" href="{{ route('admin.MiddleBanner.list') }}">Middle Banner List</a>
+                    <li class="breadcrumb-item active"><b>Create Middle Banner</b></li>
                 </ol>
             </nav>
         </div>
@@ -41,11 +41,11 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title">
-                            <h4 class="text-center">Create New Top Banner</h4>
+                            <h4 class="text-center">Create New Middle Banner</h4>
                         </div>
                         <hr>
 
-                        <form action="{{route('admin.TopBanner.store')}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('admin.MiddleBanner.store')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <label for="image1" class="form-label">Image 1</label>
                             <div class="form-group mb-3">

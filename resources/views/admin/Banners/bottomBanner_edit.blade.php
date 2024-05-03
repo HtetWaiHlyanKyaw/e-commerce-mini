@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', 'Top Banner Edit Page')
+@section('title', 'Bottom Banner Edit Page')
 
 @section('style')
     <style>
@@ -14,12 +14,12 @@
     <div class="container-fluid">
         {{-- Page Title --}}
         <div class="pagetitle">
-            <h1 class="header-color">Top Banner Edit</h1>
+            <h1 class="header-color">Bottom Banner Edit</h1>
             <nav>
                 <ol class="breadcrumb">
                     <a class="breadcrumb-item " href="{{ route('dashboard') }}">Home</a>
-                    <a class="breadcrumb-item" href="{{ route('admin.TopBanner.list') }}">Top Banner List</a>
-                    <li class="breadcrumb-item active"><b>Edit Banner</b></li>
+                    <a class="breadcrumb-item" href="{{ route('admin.BottomBanner.list') }}">Bottom Banner List</a>
+                    <li class="breadcrumb-item active"><b>Edit Bottom Banner</b></li>
                 </ol>
             </nav>
         </div>
@@ -45,22 +45,22 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title">
-                            <h4 class="text-center">Edit Top Banner</h4>
+                            <h4 class="text-center">Edit Bottom Banner</h4>
                         </div>
                         <hr>
                         {{-- {{dd($topBanner)}} --}}
-                        <form action="{{ route('admin.TopBanner.update', $topBanner->id) }}" method="post"
+                        <form action="{{ route('admin.BottomBanner.update', $BottomBanner->id) }}" method="post"
                             enctype="multipart/form-data">
                             @csrf
                             {{-- {{dd($topBanner)}} --}}
-                            @if ($topBanner->image_1 == null)
+                            @if ($BottomBanner->image_1 == null)
                                 <div class="m-3 text-center">
                                     <img src="{{ asset('storage/products/noimage.jpg') }}" class="rounded img-thumbnail"
                                         alt="" width="300px">
                                 </div>
                             @else
                                 <div class="text-center m-3">
-                                    <img src="{{ asset('storage/topBanner/' . $topBanner->image_1) }}"
+                                    <img src="{{ asset('storage/BottomBanner/' . $BottomBanner->image_1) }}"
                                         style="border-radius: 3px" width="350" alt="Product Image1" height="auto">
                                 </div>
                             @endif
@@ -70,7 +70,7 @@
 
                                 <input type="file" name="image1"
                                     class="form-control @error('image1') is-invalid @enderror"
-                                    value="{{ old('image1', $topBanner->image_1) }}">
+                                    value="{{ old('image1', $BottomBanner->image_1) }}">
                                 @error('image1')
                                     <div class="text-danger">
                                         {{ $message }}
@@ -79,14 +79,14 @@
                             </div>
                             <hr style="margin-top: 28px">
 
-                            @if ($topBanner->image_2 == null)
+                            @if ($BottomBanner->image_2 == null)
                                 <div class="m-3 text-center">
                                     <img src="{{ asset('storage/products/noimage.jpg') }}" class="rounded img-thumbnail"
                                         alt="" width="300px">
                                 </div>
                             @else
                                 <div class="text-center m-3">
-                                    <img src="{{ asset('storage/topBanner/' . $topBanner->image_2) }}"
+                                    <img src="{{ asset('storage/BottomBanner/' . $BottomBanner->image_2) }}"
                                         style="border-radius: 3px" width="300" alt="Product Image2">
                                 </div>
                             @endif
@@ -95,7 +95,7 @@
 
                                 <input type="file" name="image2"
                                     class="form-control @error('image2') is-invalid @enderror"
-                                    value="{{ old('image2', $topBanner->image_2) }}">
+                                    value="{{ old('image2', $BottomBanner->image_2) }}">
                                 @error('image1')
                                     <div class="text-danger">
                                         {{ $message }}
@@ -104,14 +104,14 @@
                             </div>
                             <hr style="margin-top: 28px">
 
-                            @if ($topBanner->image_3 == null)
+                            @if ($BottomBanner->image_3 == null)
                                 <div class="m-3 text-center">
                                     <img src="{{ asset('storage/products/noimage.jpg') }}" class="rounded img-thumbnail"
                                         alt="" width="300px">
                                 </div>
                             @else
                                 <div class="text-center m-3">
-                                    <img src="{{ asset('storage/topBanner/' . $topBanner->image_3) }}"
+                                    <img src="{{ asset('storage/BottomBanner/' . $BottomBanner->image_3) }}"
                                         style="border-radius: 3px" width="300" alt="Product Image3">
                                 </div>
                             @endif
@@ -120,7 +120,7 @@
 
                                 <input type="file" name="image3"
                                     class="form-control @error('image3') is-invalid @enderror"
-                                    value="{{ old('image3', $topBanner->image_3) }}">
+                                    value="{{ old('image3', $BottomBanner->image_3) }}">
                                 @error('image3')
                                     <div class="text-danger">
                                         {{ $message }}

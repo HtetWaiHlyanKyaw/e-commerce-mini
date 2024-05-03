@@ -258,7 +258,7 @@
                     <span class="hide-menu">Top Banner</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{route('admin.TopBanner.list')}}" aria-expanded="false">
+                    <a class="sidebar-link" href="{{ route('admin.TopBanner.list') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-list"></i>
                         </span>
@@ -266,10 +266,59 @@
                     </a>
 
                 </li>
-            {{-- @endif --}}
-            {{-- @if (auth()->user()->hasPermissionTo('create supplier')) --}}
+                {{-- @endif --}}
+                {{-- @if (auth()->user()->hasPermissionTo('create supplier')) --}}
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{ route('admin.TopBanner.create') }}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-circle-plus"></i>
+                        </span>
+                        <span class="hide-menu">Create</span>
+                    </a>
+                </li>
+
+
+                <li class="nav-small-cap">
+                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                    <span class="hide-menu">Middle Banner</span>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{ route('admin.MiddleBanner.list') }}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-list"></i>
+                        </span>
+                        <span class="hide-menu">List</span>
+                    </a>
+
+                </li>
+                {{-- @endif --}}
+                {{-- @if (auth()->user()->hasPermissionTo('create supplier')) --}}
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{ route('admin.MiddleBanner.create') }}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-circle-plus"></i>
+                        </span>
+                        <span class="hide-menu">Create</span>
+                    </a>
+                </li>
+
+                <li class="nav-small-cap">
+                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                    <span class="hide-menu">Bottom Banner</span>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{ route('admin.BottomBanner.list') }}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-list"></i>
+                        </span>
+                        <span class="hide-menu">List</span>
+                    </a>
+
+                </li>
+                {{-- @endif --}}
+                {{-- @if (auth()->user()->hasPermissionTo('create supplier')) --}}
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{ route('admin.BottomBanner.create') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-circle-plus"></i>
                         </span>
