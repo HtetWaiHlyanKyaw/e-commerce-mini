@@ -67,10 +67,11 @@
             <div class="header-meta d-flex clearfix justify-content-end ">
                 <!-- Search Area -->
                 <div class="search-area">
-                    <form action="#" method="post">
+                        <form action="">
                         <input type="search" name="search" id="headerSearch" placeholder="Search product">
-                        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                    </form>
+                        {{-- <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button> --}}
+                        </form>
+                    <div id="searchResults" class="search-results"></div>
                 </div>
 
                 <!-- User Login Info -->
@@ -173,10 +174,7 @@
                         </ul>
                     </div>
                 </div>
-
-
             </div>
-
             <div class="row align-items-end">
 
                 <div class="single_widget_area ">
@@ -240,6 +238,56 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script src="//cdn.datatables.net/2.0.2/js/dataTables.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('headerSearch');
+            const searchResults = document.getElementById('searchResults');
+
+            searchInput.addEventListener('input', function() {
+                const query = this.value.trim();
+                if (query.length === 0) {
+                    searchResults.innerHTML = ''; // Clear the search results container
+                    return;
+                }
+
+                fetch(`/search?query=${query}`)
+    .then(response => response.json())
+    .then(groupedData => {
+        let html = '';
+        for (const modelId in groupedData) {
+            if (groupedData.hasOwnProperty(modelId)) {
+                const products = groupedData[modelId];
+                const firstProduct = products[0]; // Get the first product from the group
+                const productDetailsUrl = `/product/details?model_id=${encodeURIComponent(modelId)}`;
+                var trimmedName = firstProduct.name.substring(0, firstProduct.name.indexOf('(')).trim();
+                html += `<div class="card">
+                    <div class="row card-body">
+
+                        <div class="col-lg-4">
+
+                            <img src="/storage/products/${firstProduct.image}" width="120" alt="Product Image" style="border-radius: 1px;">
+                        </div>
+                        <div class="col-lg-8 d-flex align-items-center">
+                            <a href="${productDetailsUrl}">
+                                ${trimmedName}
+                            </a>
+                        </div>
+                    </a>
+                    </div>
+                </div>`;
+            }
+        }
+        searchResults.innerHTML = html;
+    })
+    .catch(error => console.error('Error:', error));
+
+            });
+        });
+    </script>
+
+
+
+
     <script>
         $(document).ready(function() {
             $('#myTable').DataTable({

@@ -7,9 +7,9 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\user\CartController;
 use App\Http\Controllers\User\PageController;
 use App\Http\Controllers\User\ShopController;
+use App\Http\Controllers\User\MasterController;
 use App\Http\Controllers\BrandModelController;
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\user\MasterController;
 use App\Http\Controllers\user\HistoryController;
 use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\admin\ReviewController;
@@ -190,6 +190,10 @@ Route::post('/checkout/create', [ShopController::class, 'purchaseCreate'])->name
 Route::get('/shop', [ShopController::class, 'shop'])->name('user.shop');
 Route::get('/history', [HistoryController::class, 'list'])->name('user.history');
 Route::get('/history/detail/{id}', [HistoryController::class, 'detail'])->name('user.history_detail');
+// routes/web.php
+
+Route::get('/search', [MasterController::class, 'search'])->name('search');
+
 // Route::get('/product/detail{id}',[ShopController::class, 'detail'])->name('user.productDetail');
 Route::get('/product/details', [ShopController::class,'details'])->name('user.productDetails');
 Route::get('/profile', [UserProfileController::class, 'profile'])->name('user.profile');
