@@ -167,11 +167,11 @@ Route::middleware('admin:super_admin,store_admin,supplier_admin')->group(functio
         Route::get('/delete/{id}', [MidBannerController::class, 'delete'])->name('MiddleBanner.delete');
     });
     Route::prefix('admin/BottomBanner')->group(function () {
-        Route::get('/list',[BottomBannerController::class, 'list'])->name('admin.BottomBanner.list');
-        Route::get('/create',[BottomBannerController::class,'create'])->name('admin.BottomBanner.create');
-        Route::post('/store',[BottomBannerController::class,'store'])->name('admin.BottomBanner.store');
-        Route::get('/list/edit/{id}',[BottomBannerController::class,'edit'])->name('admin.BottomBanner.edit');
-        Route::post('/list/update/{id}',[BottomBannerController::class,'update'])->name('admin.BottomBanner.update');
+        Route::get('/list', [BottomBannerController::class, 'list'])->name('admin.BottomBanner.list');
+        Route::get('/create', [BottomBannerController::class, 'create'])->name('admin.BottomBanner.create');
+        Route::post('/store', [BottomBannerController::class, 'store'])->name('admin.BottomBanner.store');
+        Route::get('/list/edit/{id}', [BottomBannerController::class, 'edit'])->name('admin.BottomBanner.edit');
+        Route::post('/list/update/{id}', [BottomBannerController::class, 'update'])->name('admin.BottomBanner.update');
         Route::get('/delete/{id}', [BottomBannerController::class, 'delete'])->name('BottomBanner.delete');
     });
 });
@@ -194,6 +194,8 @@ Route::get('/regular_page', [UserController::class, 'RegularPage'])->name('user.
 Route::get('/contact', [UserController::class, 'contact'])->name('user.contact');
 Route::get('/singleBlog', [UserController::class, 'singleBlog'])->name('user.Sblog');
 Route::POST('/checkout', [UserController::class, 'checkout'])->name('user.checkout');
+// Route::POST('/add_to_cart/checkout', [Customerpurchase::class, 'checkout'])->name('user.checkout');
+
 Route::get('/blog', [UserController::class, 'blog'])->name('user.blog');
 Route::get('/productDetail', [UserController::class, 'productDetail'])->name('user.detail');
 Route::get('/comments/{product_id}/{limit}', [ShopController::class, 'fetchComments']);
@@ -208,8 +210,12 @@ Route::get('/product/details', [ShopController::class, 'details'])->name('user.p
 Route::get('/profile', [UserProfileController::class, 'profile'])->name('user.profile');
 Route::post('/profile/update', [UserProfileController::class, 'profileUpdate'])->name('user.pUpdate');
 
+
 Route::middleware('user')->group(function () {
     Route::post('/cart/add', [CartController::class, 'add'])->name('user.cardAdd');
     Route::get('/cart', [CartController::class, 'cart'])->name('cartList');
     Route::get('/cart/product/delete', [CartController::class, 'deleteProduct'])->name('cart.product.delete');
+    Route::get('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
+    Route::post('/customer/purchase', [CustomerPurchaseController::class, 'CustomerPurchase'])->name('customer.purchase');
+    Route::POST('/add_to_cart/checkout', [CustomerPurchaseController::class, 'cartcheckout'])->name('user.cartcheckout');
 });

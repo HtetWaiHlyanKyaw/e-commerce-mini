@@ -1,5 +1,10 @@
 @extends('user.master')
 @section('title', 'cart')
+@section('csrf')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
+
+
 @section('content')
     <div class="container-fluid p-5 mt-4">
         {{-- {{dd($data)}} --}}
@@ -61,8 +66,6 @@
                                         </span>
                                     </td>
 
-
-
                                     <td class="col-md-2 col-12 d-md-block d-none deleteBtn">
 
                                         <i class="fa-solid fa-square-xmark text-dark fs-4 " style="cursor: pointer"
@@ -79,9 +82,9 @@
 
                 {{-- Right Cart side --}}
                 <div class="col-lg-4 col-12 p-5 bg-light">
-                    <h4 class="mb-3">Card Detail</h4>
+                    <h4 class="mb-3">Cart Detail</h4>
                     {{-- billing card --}}
-                    <div>
+                    {{-- <div>
                         <a href="">
                             <img src="{{ asset('images/visa.png') }}" alt="card-image" style="width:70px">
                         </a>
@@ -97,7 +100,7 @@
                         <a href="">
                             <img src="{{ asset('images/american express.png') }}" alt="card-image" style="width:70px">>
                         </a>
-                    </div>
+                    </div> --}}
 
                     <div class="mt-5">
                         <div class="d-flex justify-content-between mb-3">
@@ -114,7 +117,7 @@
 
                         {{-- Total --}}
                         <div class="d-flex justify-content-between mb-3 border-bottom">
-                            <h6>Total <small>(tax incl.)</small></h6>
+                            <h6>Total</small></h6>
                             <h6><i class="fa fa-dollar me-1"></i>
                                 <span id="finalTotal">
                                     {{ $subTotal + 1000 }}
@@ -125,13 +128,15 @@
 
                     {{-- Order and Clear Btn --}}
                     <div class="my-5">
-                        <button class="btn btn-sm btn btn-primary px-3 me-3">
+                        <button class="btn btn-sm btn btn-primary px-3 me-3" id="orderBtn">
                             Order
                         </button>
 
-                        <button class="btn btn-sm btn-danger px-3">
-                            Clear Cart
-                        </button>
+                        <a href="{{ route('cart.clear') }}">
+                            <button class="btn btn-sm btn-danger px-3">
+                                Clear Cart
+                            </button>
+                        </a>
                     </div>
 
                     <div class="alert alert-warning" role="alert">
@@ -148,6 +153,13 @@
 @section('script')
     <script>
         $(document).ready(function() {
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
             // Increment quantity when plus button is clicked
             $('.plusBtn').on('click', function() {
                 let tr = $(this).parents('tr'); // Find the quantity input
@@ -200,6 +212,31 @@
             });
 
 
+            $('#orderBtn').click(function() {
+                let orderList = [];
+                // let orderNumber= Math.floor(Math.random()* 1000000000);
+                $('tr').each(function(index, row) {
+                    orderList.push({
+                        'product_id': parseInt($(row).find('#productId').val()),
+                        // 'orderNumber' :  'unity'+ orderNumber,
+                        'qty': parseInt($(row).find('#qty').val()),
+                        'total': parseInt($(row).find('#total')
+                    .text()), // text ne yuu span na mho lo
+
+                    });
+                });
+
+                $.ajax({
+                    type: 'post',
+                    url: '/customer/purchase',
+                    data: Object.assign({}, orderList),
+                    // Corrected syntax for sending data
+                    dataType: 'json', // Corrected datatype to 'json'
+                    success: function(response) {
+                        window.location.href = '{{ route("checkout.index") }}';
+                    }
+                });
+            });
 
             //subTotal Calculate
             function calculate() {
