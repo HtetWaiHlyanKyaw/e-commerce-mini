@@ -21,8 +21,10 @@ use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Auth\UserLoginController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\MidBannerController;
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\User\UserProfileController;
+use App\Http\Controllers\Admin\BottomBannerController;
 use App\Http\Controllers\Admin\CustomerPurchaseController;
 use App\Http\Controllers\Admin\SupplierPurchaseController;
 
@@ -146,14 +148,32 @@ Route::middleware('admin:super_admin')->group(function () {
 Route::middleware('admin:super_admin,store_admin,supplier_admin')->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/admin/profile', [ProfileController::class, 'index'])->name('admin.profile');
+
     Route::prefix('admin/TopBanner')->group(function () {
-    Route::get('/list',[BannerController::class, 'list'])->name('admin.TopBanner.list');
-    Route::get('/create',[BannerController::class,'create'])->name('admin.TopBanner.create');
-    Route::post('/store',[BannerController::class,'store'])->name('admin.TopBanner.store');
-    Route::get('/list/edit/{id}',[BannerController::class,'edit'])->name('admin.TopBanner.edit');
-    Route::post('/list/update/{id}',[BannerController::class,'update'])->name('admin.TopBanner.update');
-    Route::get('/delete/{id}', [BannerController::class, 'delete'])->name('TopBanner.delete');
-});
+        Route::get('/list', [BannerController::class, 'list'])->name('admin.TopBanner.list');
+        Route::get('/create', [BannerController::class, 'create'])->name('admin.TopBanner.create');
+        Route::post('/store', [BannerController::class, 'store'])->name('admin.TopBanner.store');
+        Route::get('/list/edit/{id}', [BannerController::class, 'edit'])->name('admin.TopBanner.edit');
+        Route::post('/list/update/{id}', [BannerController::class, 'update'])->name('admin.TopBanner.update');
+        Route::get('/delete/{id}', [BannerController::class, 'delete'])->name('TopBanner.delete');
+    });
+
+    Route::prefix('admin/MiddleBanner')->group(function () {
+        Route::get('/list', [MidBannerController::class, 'list'])->name('admin.MiddleBanner.list');
+        Route::get('/create', [MidBannerController::class, 'create'])->name('admin.MiddleBanner.create');
+        Route::post('/store', [MidBannerController::class, 'store'])->name('admin.MiddleBanner.store');
+        Route::get('/list/edit/{id}', [MidBannerController::class, 'edit'])->name('admin.MiddleBanner.edit');
+        Route::post('/list/update/{id}', [MidBannerController::class, 'update'])->name('admin.MiddleBanner.update');
+        Route::get('/delete/{id}', [MidBannerController::class, 'delete'])->name('MiddleBanner.delete');
+    });
+    Route::prefix('admin/BottomBanner')->group(function () {
+        Route::get('/list', [BottomBannerController::class, 'list'])->name('admin.BottomBanner.list');
+        Route::get('/create', [BottomBannerController::class, 'create'])->name('admin.BottomBanner.create');
+        Route::post('/store', [BottomBannerController::class, 'store'])->name('admin.BottomBanner.store');
+        Route::get('/list/edit/{id}', [BottomBannerController::class, 'edit'])->name('admin.BottomBanner.edit');
+        Route::post('/list/update/{id}', [BottomBannerController::class, 'update'])->name('admin.BottomBanner.update');
+        Route::get('/delete/{id}', [BottomBannerController::class, 'delete'])->name('BottomBanner.delete');
+    });
 });
 
 //admin Login Control
@@ -192,8 +212,14 @@ Route::get('/product/details', [ShopController::class, 'details'])->name('user.p
 Route::get('/profile', [UserProfileController::class, 'profile'])->name('user.profile');
 Route::post('/profile/update', [UserProfileController::class, 'profileUpdate'])->name('user.pUpdate');
 
+Route::get('/user/checkout2', [CustomerPurchaseController::class, 'checkoutPage'])->name('user.checkout2');
+
 Route::middleware('user')->group(function () {
     Route::post('/cart/add', [CartController::class, 'add'])->name('user.cardAdd');
     Route::get('/cart', [CartController::class, 'cart'])->name('cartList');
     Route::get('/cart/product/delete', [CartController::class, 'deleteProduct'])->name('cart.product.delete');
+    Route::get('/cart/clear', [CartController::class, 'clearcart'])->name('cart.clear');
+    Route::get('/cart/process', [CartController::class, 'cartprocess'])->name('cart.process');
 });
+Route::get('/user/checkout2', [CustomerPurchaseController::class, 'checkoutPage'])->name('user.checkout2');
+Route::post('/customer-purchase/create', [CustomerPurchaseController::class, 'createCustomerPurchase'])->name('customer_purchase.create2');

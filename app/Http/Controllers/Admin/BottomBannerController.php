@@ -2,24 +2,23 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\TopBanner;
+use App\Models\BottomBanner;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
-class BannerController extends Controller
+class BottomBannerController extends Controller
 {
     public function list()
     {
-        $datas = TopBanner::all();
-        return view('admin.Banners.topBanner_list', compact('datas'));
+        $datas = BottomBanner::all();
+        return view('admin.Banners.BottomBanner_list', compact('datas'));
     }
 
     public function create()
     {
-        return view('admin.Banners.topBanner_create');
+        return view('admin.Banners.BottomBanner_create');
     }
 
     public function store(Request $request)
@@ -31,38 +30,38 @@ class BannerController extends Controller
         if ($request->hasFile('image1')) {
             $image1 = $request->file('image1');
             $imageName1 = Hash::make($image1->getClientOriginalName()) . '.' . $image1->getClientOriginalExtension();
-            $image1->storeAs('public/topBanner', $imageName1);
+            $image1->storeAs('public/BottomBanner', $imageName1);
             $data['image_1'] = $imageName1;
         }
 
         if ($request->hasFile('image2')) {
             $image2 = $request->file('image2');
             $imageName2 = Hash::make($image2->getClientOriginalName()) . '.' . $image2->getClientOriginalExtension();
-            $image2->storeAs('public/topBanner', $imageName2);
+            $image2->storeAs('public/BottomBanner', $imageName2);
             $data['image_2'] = $imageName2;
         }
 
         if ($request->hasFile('image3')) {
             $image3 = $request->file('image3');
             $imageName3 = Hash::make($image3->getClientOriginalName()) . '.' . $image3->getClientOriginalExtension();
-            $image3->storeAs('public/topBanner', $imageName3);
+            $image3->storeAs('public/BottomBanner', $imageName3);
             $data['image_3'] = $imageName3;
         }
 
-        TopBanner::create($data);
+        BottomBanner::create($data);
 
         session()->flash('alert', [
             'type' => 'success',
-            'message' => 'Top Banner Creation Successfully!',
+            'message' => 'Bottom Banner Creation Successful!',
         ]);
 
-        return redirect()->route('admin.TopBanner.list');
+        return redirect()->route('admin.BottomBanner.list');
     }
 
     public function edit($id)
     {
-        $topBanner = TopBanner::findOrFail($id);
-        return view('admin.Banners.topBanner_edit', compact('topBanner'));
+        $BottomBanner = BottomBanner::findOrFail($id);
+        return view('admin.Banners.BottomBanner_edit', compact('BottomBanner'));
     }
 
     public function update($id, Request $request)
@@ -74,7 +73,7 @@ class BannerController extends Controller
     if ($request->hasFile('image1')) {
         $image1 = $request->file('image1');
         $imageName1 = Hash::make($image1->getClientOriginalName()) . '.' . $image1->getClientOriginalExtension();
-        $image1->storeAs('public/topBanner', $imageName1);
+        $image1->storeAs('public/BottomBanner', $imageName1);
         $data['image_1'] = $imageName1;
     } else {
         unset($data['image_1']); // Remove image_1 from the data if image1 input is empty
@@ -84,7 +83,7 @@ class BannerController extends Controller
     if ($request->hasFile('image2')) {
         $image2 = $request->file('image2');
         $imageName2 = Hash::make($image2->getClientOriginalName()) . '.' . $image2->getClientOriginalExtension();
-        $image2->storeAs('public/topBanner', $imageName2);
+        $image2->storeAs('public/BottomBanner', $imageName2);
         $data['image_2'] = $imageName2;
     } else {
         unset($data['image_2']); // Remove image_2 from the data if image2 input is empty
@@ -94,21 +93,21 @@ class BannerController extends Controller
     if ($request->hasFile('image3')) {
         $image3 = $request->file('image3');
         $imageName3 = Hash::make($image3->getClientOriginalName()) . '.' . $image3->getClientOriginalExtension();
-        $image3->storeAs('public/topBanner', $imageName3);
+        $image3->storeAs('public/BottomBanner', $imageName3);
         $data['image_3'] = $imageName3;
     } else {
         unset($data['image_3']); // Remove image_3 from the data if image3 input is empty
     }
 
     // Update the database
-    TopBanner::where('id', $id)->update($data);
+    BottomBanner::where('id', $id)->update($data);
 
     session()->flash('alert', [
         'type' => 'success',
-        'message' => 'Top Banner Updated Successfully!',
+        'message' => 'Bottom Banner Updated Successfully!',
     ]);
 
-    return redirect()->route('admin.TopBanner.list');
+    return redirect()->route('admin.BottomBanner.list');
 }
 
 
@@ -128,12 +127,12 @@ class BannerController extends Controller
 
     public function delete($id)
     {
-        TopBanner::where('id', $id)->delete();
+        BottomBanner::where('id', $id)->delete();
         session()->flash('alert', [
             'type' => 'success',
-            'message' => 'Product Deleted  Successfully!',
+            'message' => 'Bottom Banner Image Deleted  Successfully!',
         ]);
-        return redirect()->route('admin.TopBanner.list')->with(['success' => 'Top Banner deleted successfully']);
+        return redirect()->route('admin.BottomBanner.list')->with(['success' => 'Bottom Banner deleted successfully']);
     }
 
     private function vali($request)

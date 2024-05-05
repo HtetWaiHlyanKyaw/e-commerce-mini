@@ -213,38 +213,26 @@
         </div>
     </div>
 </section>
-<div id="carouselExampleControls" class="carousel carousel-dark slide d-none d-sm-block " data-bs-ride="carousel">
+<div id="carouselExampleControls" class="carousel carousel-dark slide d-none d-sm-block" data-bs-ride="carousel">
     <div class="carousel-inner">
-        <div class="carousel-item active">
+        @foreach($middleBanner as $key => $banner)
+        <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
             <div class="cards-wrapper">
-                {{-- <div class="card"> --}}
-                    <div class="image-wrapper" style="width: 33.33%;">
-                        <img src="{{ asset('images/GooglePixelAdvertisement.webp') }}" alt="..." style="height: 300px; width: 100%; object-fit:cover; object-position:center;">
-
-                    </div>
-
-                    <div class="image-wrapper" style="width: 33.33%;">
-                        <img src="{{ asset('images/OppoAdvertisement.png') }}" alt="..." style="height: 300px; width: 100%;  object-fit:cover; object-position:center;">
-                    </div>
-
-                    <div class="image-wrapper" style="width: 33.33%;">
-                        <img src="{{ asset('images/VivoAdvertisement.webp') }}" alt="..." style="height: 300px; width: 100%;  object-fit:cover; object-position:center;">
-                    </div>
-
+                <div class="image-wrapper" style="width: 33.33%;">
+                    <img src="{{ asset('storage/middleBanner/' . $banner->image_1) }}" alt="..." style="height: 300px; width: 100%; object-fit:cover; object-position:center;">
+                </div>
+                <div class="image-wrapper" style="width: 33.33%;">
+                    <img src="{{ asset('storage/middleBanner/' . $banner->image_2) }}" alt="..." style="height: 300px; width: 100%;  object-fit:cover; object-position:center;">
+                </div>
+                <div class="image-wrapper" style="width: 33.33%;">
+                    <img src="{{ asset('storage/middleBanner/' . $banner->image_3) }}" alt="..." style="height: 300px; width: 100%;  object-fit:cover; object-position:center;">
+                </div>
             </div>
         </div>
+        @endforeach
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-        data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-        data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
 </div>
+
 {{-- Advertise end --}}
 {{-- New Arrival start --}}
 
@@ -300,37 +288,26 @@
 
 
 {{-- Advertise start --}}
-<div id="carouselExampleControls" class="carousel carousel-dark slide d-none d-sm-block " data-bs-ride="carousel">
+<div id="carouselExampleControls" class="carousel carousel-dark slide d-none d-sm-block" data-bs-ride="carousel">
     <div class="carousel-inner">
-        <div class="carousel-item active">
+        @foreach($BottomBanner as $key => $banner)
+        <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
             <div class="cards-wrapper">
-                {{-- <div class="card"> --}}
-                    <div class="image-wrapper" style="width: 33.33%;">
-                        <img src="{{ asset('images/OppoAdvertisement.png') }}" alt="..." style="height: 300px; width: 100%; object-fit:cover; object-position:center;">
-
-                    </div>
-
-                    <div class="image-wrapper" style="width: 33.33%;">
-                        <img src="{{ asset('images/GooglePixelAdvertisement.webp') }}" alt="..." style="height: 300px; width: 100%;  object-fit:cover; object-position:center;">
-                    </div>
-
-                    <div class="image-wrapper" style="width: 33.33%;">
-                        <img src="{{ asset('images/VivoAdvertisement.webp') }}" alt="..." style="height: 300px; width: 100%;  object-fit:cover; object-position:center;">
-                    </div>
+                <div class="image-wrapper" style="width: 33.33%;">
+                    <img src="{{ asset('storage/BottomBanner/' . $banner->image_1) }}" alt="..." style="height: 300px; width: 100%; object-fit:cover; object-position:center;">
+                </div>
+                <div class="image-wrapper" style="width: 33.33%;">
+                    <img src="{{ asset('storage/BottomBanner/' . $banner->image_2) }}" alt="..." style="height: 300px; width: 100%;  object-fit:cover; object-position:center;">
+                </div>
+                <div class="image-wrapper" style="width: 33.33%;">
+                    <img src="{{ asset('storage/BottomBanner/' . $banner->image_3) }}" alt="..." style="height: 300px; width: 100%;  object-fit:cover; object-position:center;">
+                </div>
             </div>
         </div>
+        @endforeach
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-        data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-        data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
 </div>
+
 {{-- Advertise end --}}
 
 @endsection

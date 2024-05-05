@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\User;
 
 use App\Models\Product;
+use App\Models\TopBanner;
+use App\Models\BottomBanner;
+use App\Models\MiddleBanner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CustomerPurchaseDetail;
-use App\Models\TopBanner;
 
 class PageController extends Controller
 {
@@ -38,10 +40,11 @@ class PageController extends Controller
 
         // Retrieve all top banners
         $topBanner = TopBanner::all();
-
+        $middleBanner = MiddleBanner::all();
+        $BottomBanner = BottomBanner::all();
         // Retrieve all products
         $products = Product::all();
 
-        return view('user.page', compact('topProducts', 'newestProducts', 'user', 'cart', 'products', 'topBanner'));
+        return view('user.page', compact('topProducts', 'newestProducts', 'user', 'cart', 'products', 'topBanner', 'middleBanner','BottomBanner' ));
     }
 }
