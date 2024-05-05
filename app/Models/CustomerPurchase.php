@@ -11,13 +11,9 @@ class CustomerPurchase extends Model
     protected $fillable = [
         'invoice_id',
         'user_id',
-        'full_name',
-        'payment_method',
+        'quantity',
+        'unit_price',
         'total_price',
-        'total_quantity',
-        'phone',
-        'address',
-        'town'
     ];
     public function user()
     {

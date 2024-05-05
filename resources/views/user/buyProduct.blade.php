@@ -4,7 +4,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 @section('cart')
-    <a href="{{ route('cartList') }}" class="btn position-relative">
+    <a href="{{route('cartList')}}" class="btn position-relative">
         @if ($cart && count($cart) > 0)
             <img src="{{ asset('user/img/core-img/bag.svg') }}" alt="">
             <span style="margin-top:32px; margin-left:10px"
@@ -56,12 +56,11 @@
             color: #ffcc00;
             /* Change color of hovered stars and those before it */
         }
-
         #qty::-webkit-inner-spin-button,
-        #qty::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
+#qty::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
     </style>
 
 @endsection
@@ -137,11 +136,11 @@
                                                 class="fa fa-plus"></i></button>
                                     </div>
                                 </div>
-                                <form action="{{ route('user.checkout') }}" method="POST">
+                                <form action="{{route('user.checkout')}}" method="POST">
                                     @csrf
-                                    <input type="hidden" name="product_id" id="product_id_2">
-                                    <input type="hidden" name="qtyHidden" id="qtyHidden" value="1">
-                                    <button type="submit" class="btn btn-primary ml-md-2 mt-2 mt-md-0">Buy Now</button>
+                                <input type="hidden" name="product_id" id="product_id_2">
+                                <input type="hidden" name="qtyHidden" id="qtyHidden" value="1">
+                                <button type="submit" class="btn btn-primary ml-md-2 mt-2 mt-md-0">Buy Now</button>
                                 </form>
                                 <button type="button" id="cartBtn" class="btn btn-primary ml-md-2 mt-2 mt-md-0"><i
                                         class="fa-solid fa-cart-shopping"></i> Add to Cart</button>
@@ -153,9 +152,8 @@
                                     If you want to buy this product, you need to <a href="{{ route('user.login') }}"
                                         class="alert-link">login</a> first.
                                 </div> --}}
-                                <a href="{{ route('user.login') }}"><button type="button" id="cartBtn"
-                                        class="btn btn-primary ml-md-2 mt-2 mt-md-0"><i
-                                            class="fa-solid fa-cart-shopping"></i> Add to Cart</button></a>
+                                <a href="{{route('user.login')}}"><button type="button" id="cartBtn" class="btn btn-primary ml-md-2 mt-2 mt-md-0"><i
+                                    class="fa-solid fa-cart-shopping"></i> Add to Cart</button></a>
                             @endif
                         </div>
                     </div>
@@ -323,9 +321,9 @@
                 document.getElementById("product_id_2").value = selectedProduct.id;
                 document.getElementById("qty").max = selectedProduct.quantity;
                 console.log("Quantity ", selectedProduct.quantity);
-                console.log("Selected Product ID:", selectedProduct.id);
-                console.log("Selected Product ID 2:", selectedProduct.id);
-                console.log("Selected Product Name:", selectedProduct.name);
+                 console.log("Selected Product ID:", selectedProduct.id);
+                 console.log("Selected Product ID 2:", selectedProduct.id);
+                 console.log("Selected Product Name:", selectedProduct.name);
             }
         }
 
@@ -347,28 +345,28 @@
             });
             // Get the initial quantity value
             let qty = parseInt($('#qty').val());
-            const maxQty = parseInt($('#qty').attr('max'));
-            const minQty = parseInt($('#qty').attr('min'));
+const maxQty = parseInt($('#qty').attr('max'));
+const minQty = parseInt($('#qty').attr('min'));
 
-            // Increment quantity when plus button is clicked
-            $('#plusBtn').on('click', function() {
-                if (qty < maxQty) { // Check if quantity is less than the maximum
-                    qty = qty + 1;
-                    $('#qty').val(qty);
-                    $('#qtyHidden').val(qty);
+// Increment quantity when plus button is clicked
+$('#plusBtn').on('click', function() {
+    if (qty < maxQty) { // Check if quantity is less than the maximum
+        qty = qty + 1;
+        $('#qty').val(qty);
+        $('#qtyHidden').val(qty);
 
-                }
-            });
+    }
+});
 
-            // Decrement quantity when minus button is clicked
-            $('#minusBtn').on('click', function() {
-                if (qty > minQty) { // Check if quantity is greater than the minimum
-                    qty = qty - 1;
-                    $('#qty').val(qty);
-                    $('#qtyHidden').val(qty);
+// Decrement quantity when minus button is clicked
+$('#minusBtn').on('click', function() {
+    if (qty > minQty) { // Check if quantity is greater than the minimum
+        qty = qty - 1;
+        $('#qty').val(qty);
+        $('#qtyHidden').val(qty);
 
-                }
-            });
+    }
+});
 
 
             //  add to cart

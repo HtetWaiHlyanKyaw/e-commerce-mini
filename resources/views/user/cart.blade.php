@@ -108,7 +108,6 @@
                             <h6><i class="fa fa-dollar me-1"></i><span id="subTotal">
                                     {{ $subTotal }}</span></h6>
                         </div>
-
                         {{-- Shipping --}}
                         <div class="d-flex justify-content-between mb-3 border-bottom">
                             <h6>Shipping</h6>
@@ -128,22 +127,21 @@
 
                     {{-- Order and Clear Btn --}}
                     <div class="my-5">
-                        <button class="btn btn-sm btn btn-primary px-3 me-3" id="orderBtn">
-                            Order
-                        </button>
-
+                        <a href="#" id="checkoutButton">
+                            <button class="btn btn-sm btn-primary px-3 me-3">
+                                Checkout
+                            </button>
+                        </a>
                         <a href="{{ route('cart.clear') }}">
                             <button class="btn btn-sm btn-danger px-3">
                                 Clear Cart
                             </button>
                         </a>
                     </div>
-
                     <div class="alert alert-warning" role="alert">
                         Shipping time may be about one week. <br>
                         After ordered , we will send voucher detail to your email.
                     </div>
-
                 </div>
             </div>
         @endif
@@ -212,31 +210,56 @@
             });
 
 
-            $('#orderBtn').click(function() {
-                let orderList = [];
-                // let orderNumber= Math.floor(Math.random()* 1000000000);
+            // $('#orderBtn').click(function() {
+            //     let orderList = [];
+            //     // let orderNumber= Math.floor(Math.random()* 1000000000);
+            //     $('tr').each(function(index, row) {
+            //         orderList.push({
+            //             'product_id': parseInt($(row).find('#productId').val()),
+            //             // 'orderNumber' :  'unity'+ orderNumber,
+            //             'qty': parseInt($(row).find('#qty').val()),
+            //             'total': parseInt($(row).find('#total')
+            //         .text()), // text ne yuu span na mho lo
+            //         });
+            //     });
+            //     $.ajax({
+            //         type: 'post',
+            //         url: '/customer/purchase',
+            //         data: Object.assign({}, orderList),
+            //         // Corrected syntax for sending data
+            //         dataType: 'json', // Corrected datatype to 'json'
+            //         success: function(response) {
+            //             window.location.href = 'http://localhost:8000/';
+            //         }
+            //     });
+            // });
+
+            // Update the click event handler for the checkout button
+            // Update the click event handler for the checkout button
+            $('#checkoutButton').on('click', function(event) {
+                event.preventDefault(); // Prevent the default anchor link behavior
+
+                // Create an array to store the data of each product in the cart
+                let productsData = [];
+
+                // Iterate through each row (product) in the cart table
                 $('tr').each(function(index, row) {
-                    orderList.push({
-                        'product_id': parseInt($(row).find('#productId').val()),
-                        // 'orderNumber' :  'unity'+ orderNumber,
-                        'qty': parseInt($(row).find('#qty').val()),
-                        'total': parseInt($(row).find('#total')
-                    .text()), // text ne yuu span na mho lo
-
-                    });
+                    let productData = {
+                        product_id: $(row).find('#productId').val(), // Get the product ID
+                        quantity: $(row).find('#qty').val(), // Get the quantity
+                        total: $(row).find('#total').text() // Get the total price
+                    };
+                    productsData.push(productData); // Add the product data to the array
                 });
 
-                $.ajax({
-                    type: 'post',
-                    url: '/customer/purchase',
-                    data: Object.assign({}, orderList),
-                    // Corrected syntax for sending data
-                    dataType: 'json', // Corrected datatype to 'json'
-                    success: function(response) {
-                        window.location.href = '{{ route("checkout.index") }}';
-                    }
-                });
+                // Serialize the array of product data as a JSON string
+                let productsJson = JSON.stringify(productsData);
+
+                // Redirect to the checkout2 page and pass the product data as a query parameter
+                window.location.href = 'user/checkout2?products=' + encodeURIComponent(productsJson);
             });
+
+
 
             //subTotal Calculate
             function calculate() {

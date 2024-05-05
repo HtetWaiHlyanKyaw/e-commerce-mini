@@ -194,8 +194,6 @@ Route::get('/regular_page', [UserController::class, 'RegularPage'])->name('user.
 Route::get('/contact', [UserController::class, 'contact'])->name('user.contact');
 Route::get('/singleBlog', [UserController::class, 'singleBlog'])->name('user.Sblog');
 Route::POST('/checkout', [UserController::class, 'checkout'])->name('user.checkout');
-// Route::POST('/add_to_cart/checkout', [Customerpurchase::class, 'checkout'])->name('user.checkout');
-
 Route::get('/blog', [UserController::class, 'blog'])->name('user.blog');
 Route::get('/productDetail', [UserController::class, 'productDetail'])->name('user.detail');
 Route::get('/comments/{product_id}/{limit}', [ShopController::class, 'fetchComments']);
@@ -210,12 +208,14 @@ Route::get('/product/details', [ShopController::class, 'details'])->name('user.p
 Route::get('/profile', [UserProfileController::class, 'profile'])->name('user.profile');
 Route::post('/profile/update', [UserProfileController::class, 'profileUpdate'])->name('user.pUpdate');
 
+Route::get('/user/checkout2', [CustomerPurchaseController::class, 'checkoutPage'])->name('user.checkout2');
 
 Route::middleware('user')->group(function () {
     Route::post('/cart/add', [CartController::class, 'add'])->name('user.cardAdd');
     Route::get('/cart', [CartController::class, 'cart'])->name('cartList');
     Route::get('/cart/product/delete', [CartController::class, 'deleteProduct'])->name('cart.product.delete');
-    Route::get('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
-    Route::post('/customer/purchase', [CustomerPurchaseController::class, 'CustomerPurchase'])->name('customer.purchase');
-    Route::POST('/add_to_cart/checkout', [CustomerPurchaseController::class, 'cartcheckout'])->name('user.cartcheckout');
+    Route::get('/cart/clear', [CartController::class, 'clearcart'])->name('cart.clear');
+    Route::get('/cart/process', [CartController::class, 'cartprocess'])->name('cart.process');
 });
+Route::get('/user/checkout2', [CustomerPurchaseController::class, 'checkoutPage'])->name('user.checkout2');
+Route::post('/customer-purchase/create', [CustomerPurchaseController::class, 'createCustomerPurchase'])->name('customer_purchase.create2');

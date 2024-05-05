@@ -1,115 +1,30 @@
 @extends('user.master')
-@section('title', 'checkout Page')
+@section('title', 'checkout2 Page')
 @section('style')
-    <style>
-        #phone_number::-webkit-inner-spin-button,
-        #phone_number::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
 
-        .subtotal,
-        .total {
-            font-size: 18px;
-            /* Adjust the font size as needed */
-            font-weight: bold;
-            /* Optionally, make the text bold */
-        }
-
-        .subtotal-value,
-        .total-value {
-            font-size: 18px;
-            /* Adjust the font size as needed */
-            font-weight: bold;
-            /* Optionally, make the text bold */
-        }
-    </style>
 @endsection
+
 @section('content')
-    <!-- ##### Right Side Cart Area ##### -->
     <!-- ##### Right Side Cart Area ##### -->
     <div class="cart-bg-overlay"></div>
 
     <div class="right-side-cart-area">
-
-        <!-- Cart Button -->
-        {{-- <div class="cart-button">
-            <a href="#" id="rightSideCart"><img src="{{ asset('user/img/core-img/bag.svg') }}" alt="">
-                <span>3</span></a>
-        </div> --}}
-
-        <div class="cart-content d-flex">
-
-            <!-- Cart List Area -->
-            {{-- <div class="cart-list">
-                <!-- Single Cart Item -->
-                <div class="single-cart-item">
-                    <a href="#" class="product-image">
-                        <img src="{{ asset('user/img/product-img/product-1.jpg') }}" class="cart-thumb" alt="">
-                        <!-- Cart Item Desc -->
-                        <div class="cart-item-desc">
-                            <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
-                            <span class="badge">Mango</span>
-                            <h6>Button Through Strap Mini Dress</h6>
-                            <p class="size">Size: S</p>
-                            <p class="color">Color: Red</p>
-                            <p class="price">$45.00</p>
-                        </div>
-                    </a>
-                </div> --}}
-
-                <!-- Single Cart Item -->
-                <div class="single-cart-item">
-                    {{-- <a href="#" class="product-image">
-                        <img src="{{ asset('user/img/product-img/product-2.jpg') }}" class="cart-thumb" alt="">
-                        <!-- Cart Item Desc -->
-                        <div class="cart-item-desc">
-                            <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
-                            <span class="badge">Mango</span>
-                            <h6>Button Through Strap Mini Dress</h6>
-                            <p class="size">Size: S</p>
-                            <p class="color">Color: Red</p>
-                            <p class="price">$45.00</p>
-                        </div>
-                    </a>
-                </div> --}}
-
-                <!-- Single Cart Item -->
-                {{-- <div class="single-cart-item">
-                    <a href="#" class="product-image">
-                        <img src="{{ asset('user/img/product-img/product-3.jpg') }}" class="cart-thumb" alt="">
-                        <!-- Cart Item Desc -->
-                        <div class="cart-item-desc">
-                            <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
-                            <span class="badge">Mango</span>
-                            <h6>Button Through Strap Mini Dress</h6>
-                            <p class="size">Size: S</p>
-                            <p class="color">Color: Red</p>
-                            <p class="price">$45.00</p>
-                        </div>
-                    </a>
-                </div>
-            </div> --}}
-
-            <!-- Cart Summary -->
-            {{-- <div class="cart-amount-summary">
-
-                <h2>Summary</h2>
-                <ul class="summary-table">
-                    <li><span>subtotal:</span> <span>$274.00</span></li>
-                    <li><span>delivery:</span> <span>Free</span></li>
-                    <li><span>discount:</span> <span>-15%</span></li>
-                    <li><span>total:</span> <span>$232.00</span></li>
-                </ul>
-                <div class="checkout-btn mt-100">
-                    <a href="checkout.html" class="btn essence-btn">check out</a>
-                </div>
-            </div> --}}
-        {{-- </div>
-    </div> --}}
+        <!-- Cart content goes here -->
+    </div>
     <!-- ##### Right Side Cart End ##### -->
 
     <!-- ##### Breadcumb Area Start ##### -->
+    {{-- <div class="breadcumb_area bg-img" style="background-image: url(user/img/bg-img/breadcumb.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="page-title text-center">
+                        <h2>Checkout</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> --}}
     <div class="breadcumb_area bg-img" style="background-image: url(user/img/bg-img/breadcumb.jpg);">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
@@ -135,7 +50,7 @@
                             <h5>Billing Address</h5>
                         </div>
 
-                        <form method="POST" action="{{route('customer_purchase.create')}}">
+                        <form method="POST" action="{{ route('customer_purchase.create2') }}">
                             @csrf
                             <div class="row">
                                 <div class="col-12 mb-4">
@@ -145,7 +60,8 @@
                                 </div>
                                 <div class="col-md-12 mb-4">
                                     <label for="first_name">Full Name <span>*</span></label>
-                                    <input type="text" class="form-control" id="first_name" value="" name="full_name" required>
+                                    <input type="text" class="form-control" id="first_name" value=""
+                                        name="full_name" required>
                                 </div>
 
                                 <div class="col-12 mb-4">
@@ -159,7 +75,8 @@
                                 </div>
                                 <div class="col-12 mb-3">
                                     <label for="street_address">Address <span>*</span></label>
-                                    <input type="text" class="form-control" id="street_address" value="" name="address">
+                                    <input type="text" class="form-control" id="street_address" value=""
+                                        name="address">
                                 </div>
                                 <div class="col-12 mb-3">
                                     <label for="phone_number">Phone No <span>*</span></label>
@@ -178,56 +95,37 @@
                             <h5>Your Order</h5>
                             <p>The Details</p>
                         </div>
-
-                        @if ($multipleProducts)
-                            <!-- Blade file for multiple products -->
-                            <ul class="order-details-form mb-4">
-                                <!-- Loop through each product -->
-                                @foreach ($products as $product)
-                                    <li><span>Quantity</span> <span>Product</span> <span>Total</span></li>
-                                    <li>
-                                        <span>{{ $quantity }}</span> <!-- Display the quantity -->
-                                        <input type="hidden" name="quantity" value="{{ $quantity }}">
-                                        <span>{{ $product->name }}</span> <!-- Display the product name -->
-                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                        <span>{{ $product->price }}</span> <!-- Display the price -->
-                                        <input type="hidden" name="price" value="{{ $product->price }}">
-                                    </li>
-                                    <li><span class="subtotal">Subtotal</span> <span></span> <span
-                                            class="subtotal-value">{{ $product->price * $quantity }}</span></li>
-                                            <input type="hidden" name="subtotal_price" value="{{ $product->price * $quantity }}">
-                                @endforeach
-                                <!-- Calculate total for all products -->
-                                @php
-                                    $total = $products->sum(function ($product) {
-                                        return $product->price * $quantity;
-                                    });
-                                @endphp
-                                <li><span class="total">Total</span> <span></span> <span
-                                        class="total-value">{{ $total }}</span></li>
-                                        <input type="hidden" name="total_price" value="{{ $total }}">
-                            </ul>
-                        @else
-                            <!-- Blade file for single product -->
-                            <ul class="order-details-form mb-4">
-                                <li><span>Quantity</span> <span>Product</span> <span>Total</span></li>
-                                <li>
-                                    <span>{{ $quantity }}</span> <!-- Display the quantity -->
-                                    <input type="hidden" name="quantity" value="{{ $quantity }}">
-                                    <span>{{ $product->name }}</span> <!-- Display the product name -->
-                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                    <span>{{ $product->price }}</span> <!-- Display the price -->
-                                    <input type="hidden" name="price" value="{{ $product->price }}">
-                                </li>
-                                <li><span class="subtotal">Subtotal</span> <span></span> <span
-                                        class="subtotal-value">{{ $product->price * $quantity }}</span></li>
-                                        <input type="hidden" name="subtotal_price" value="{{ $product->price * $quantity }}">
-                                <li><span class="total">Total</span> <span></span> <span
-                                        class="total-value">{{ $product->price * $quantity }}</span></li>
-                                        <input type="hidden" name="total_price" value="{{ $product->price * $quantity }}">
-                            </ul>
-                        @endif
-
+                        {{-- {{dd($product)}} --}}
+                        <!-- Table to display product details -->
+                        <table class="table">
+                            <tr>
+                                <th>PRODUCT NAME</th>
+                                <th>SUBTOTAL</th>
+                            </tr>
+                            @foreach ($productsData as $index => $productData)
+                                <tr>
+                                    <td>
+                                        {{ \App\Models\Product::find($productData['product_id'])->name }} x <b>
+                                            {{ $productData['quantity'] }}</b>
+                                    </td>
+                                    <td>{{ $productData['total'] }} $</td>
+                                </tr>
+                            @endforeach
+                            <tr>
+                                <th>Subtotal</th>
+                                <td style="font-size: 16px;"><b>{{ $subtotal }} $</b></td>
+                            </tr>
+                            <tr>
+                                <th>Shipping</th>
+                                <td>{{ $shipping }} $</td>
+                            </tr>
+                            <tr>
+                                <th>Total</th>
+                                <td style="font-size:18px"><span>
+                                        <strong>{{ $total }} $</strong>
+                                    </span></td>
+                            </tr>
+                        </table>
                         <div id="accordion" role="tablist">
                             <div class="card">
                                 <div class="card-header" role="tab" id="headingOne">
@@ -271,8 +169,23 @@
                             </div>
                         </div>
 
-                        <button type="submit"  class="btn essence-btn" style="width: 100%;">Place Order</button>
-                    </form>
+                        <!-- Your order summary and payment method selection -->
+                        <button type="submit" class="btn essence-btn" style="width: 100%;">Place
+                            Order</button>
+                        <input type="hidden" name="total_quantity" value="{{ $totalQuantity }}">
+                        <input type="hidden" name="user_id" value="{{ Auth()->user()->id }}">
+                        <input type="hidden" name="total_price" value="{{ $total }}">
+                        @foreach ($productsData as $index => $productData)
+                            <input type="hidden" name="products[{{ $index }}][product_id]"
+                                value="{{ $productData['product_id'] }}">
+                            <input type="hidden" name="products[{{ $index }}][price]"
+                                value="{{ $productData['price'] }}">
+                            <input type="hidden" name="products[{{ $index }}][quantity]"
+                                value="{{ $productData['quantity'] }}">
+                            <input type="hidden" name="products[{{ $index }}][total]"
+                                value="{{ $productData['total'] }}">
+                        @endforeach
+                        </form>
                     </div>
                 </div>
             </div>
