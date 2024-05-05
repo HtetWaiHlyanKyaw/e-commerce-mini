@@ -160,7 +160,8 @@
             use Carbon\Carbon;
             $currentMonthName = Carbon::now()->format('F');
         @endphp
-        <h4>Revenues for <span style="color: #5d9bff">{{ $currentMonthName }}</span></h4>
+        <h4>Revenues for  <span style="color: #5d9bff">{{ $currentMonthName }}</span></h4>
+
         <div class="row mt-4">
             <div class="col-lg-6">
                 <div class="card h-80">
@@ -177,11 +178,11 @@
                             </div>
                             <div class="col-4">
                                 <h4 class="card-text">Purchases : <span
-                                        class="text-success">{{ $supplierPurchases->count() }}</span></h4>
+                                        class="text-success">{{ $supplierPurchaseCount}}</span></h4>
                             </div>
                             <div class="col-4">
                                 <!-- Leave this empty if you don't have content for it -->
-                                <h4></h4>
+                                <h4 class="card-text">Quantity : <span  class="text-success">{{$supplierTotalQuantitySold}}</h4>
                             </div>
                         </div>
                     </div>
@@ -201,10 +202,11 @@
                             </div>
                             <div class="col-4">
                                 <h4 class="card-text">Purchases : <span
-                                        class="text-success">{{ $customerPurchases->count() }}</span></h4>
+                                        class="text-success">{{ $customerPurchaseCount}}</span></h4>
                             </div>
                             <div class="col-4">
-                                <h4></h4>
+                                <!-- Leave this empty if you don't have content for it -->
+                                <h4 class="card-text">Quantity : <span  class="text-success">{{$customerTotalQuantitySold}}</h4>
                             </div>
                         </div>
                     </div>

@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class MiddleBanner extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'image_1',
+        'image_2',
+        'image_3',
+    ];
 }

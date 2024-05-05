@@ -1,5 +1,8 @@
 @extends('user.master')
 @section('title', 'Shop')
+@section('style')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
 @section('cart')
  <a href="{{route('cartList')}}" class="btn position-relative">
     @if ($cart && count($cart) > 0)
@@ -205,7 +208,7 @@
                                 <div class="product-topbar d-flex align-items-center justify-content-between">
                                     <!-- Total Products -->
                                     <div class="total-products">
-                                        <p><span>186</span> products found</p>
+                                        {{-- <p><span>186</span> products found</p> --}}
                                     </div>
                                     <!-- Sorting -->
                                     <div class="product-sorting d-flex">
@@ -268,6 +271,12 @@
 @section('script')
     <script>
         $(document).ready(function() {
+            $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
             $('#filterForm').submit(function(event) {
                 event.preventDefault();
 
@@ -283,18 +292,18 @@
                 });
                 console.log(colors);
 
-                var storage = [];
-                $('input[name="storage"]:checked').each(function() {
-                    storage.push($(this).val());
-                });
-                console.log(storage);
+                // var storage = [];
+                // $('input[name="storage"]:checked').each(function() {
+                //     storage.push($(this).val());
+                // });
+                // console.log(storage);
 
                 var data = {
                     brands: brands,
                     colors: colors,
-                    storage: storage,
+                    // storage: storage,
                 };
-
+                console.log(data);
                 $.ajax({
                     type: 'POST',
                     url: '/userFilter',
@@ -303,11 +312,12 @@
                         response.forEach(function(product) {
                             console.log('Product ID:', product.id);
                             console.log('Product Name:', product.name);
+                            console.log('Shit');
                             // Access other properties as needed
                         });
                     },
                     error: function(xhr, status, error) {
-                        // console.error(xhr, status, error);
+                        console.error(xhr, status, error);
                     }
                 });
             });

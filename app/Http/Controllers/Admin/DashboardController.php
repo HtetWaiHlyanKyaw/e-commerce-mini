@@ -18,15 +18,19 @@ use Illuminate\Support\Facades\DB;
 class DashboardController extends Controller
 {
     public function index(){
-        $supplierPurchaseRevenue = SupplierPurchase::sum('total_price');
-        $customerPurchaseRevenue = CustomerPurchase::sum('total_price');
+        $supplierPurchaseRevenue = SupplierPurchase::whereMonth('created_at', Carbon::now()->month)->sum('total_price');
+        $customerPurchaseRevenue = CustomerPurchase::whereMonth('created_at', Carbon::now()->month)->sum('total_price');
+        $supplierPurchaseCount = SupplierPurchase::whereMonth('created_at', Carbon::now()->month)->count();
+        $customerPurchaseCount = CustomerPurchase::whereMonth('created_at', Carbon::now()->month)->count();
+        $supplierTotalQuantitySold = SupplierPurchase::whereMonth('created_at', Carbon::now()->month)->sum('total_quantity');
+        $customerTotalQuantitySold = CustomerPurchase::whereMonth('created_at', Carbon::now()->month)->sum('total_quantity');
         $storeAdminCount = User::where('usertype', 'store_admin')->count();
         $supplierAdminCount = User::where('usertype', 'supplier_admin')->count();
         $adminCount = User::where('usertype', 'super_admin')->count();
 
         $brands = Brand:: all();
         $models = ProductModel:: all();
-        $products = Product::with('brand', 'productModel')->paginate(10);
+        $products = Product::with('brand', 'productModel');
         $suppliers = Supplier:: all();
         $supplierPurchases = SupplierPurchase::with('supplier');
          $customerPurchases = CustomerPurchase::with('user');
@@ -82,7 +86,11 @@ class DashboardController extends Controller
             'brands',
             'models',
             'supplierPurchaseRevenue',
+            'supplierPurchaseCount',
+            'customerPurchaseCount',
             'customerPurchaseRevenue',
+            'supplierTotalQuantitySold',
+            'customerTotalQuantitySold',
             'storeAdminCount',
             'supplierAdminCount',
             'adminCount',

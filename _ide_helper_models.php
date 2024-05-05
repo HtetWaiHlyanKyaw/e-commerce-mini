@@ -16,6 +16,29 @@ namespace App\Models{
  * 
  *
  * @property int $id
+ * @property string $image_1
+ * @property string $image_2
+ * @property string $image_3
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|BottomBanner newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|BottomBanner newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|BottomBanner query()
+ * @method static \Illuminate\Database\Eloquent\Builder|BottomBanner whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BottomBanner whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BottomBanner whereImage1($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BottomBanner whereImage2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BottomBanner whereImage3($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BottomBanner whereUpdatedAt($value)
+ */
+	class BottomBanner extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
  * @property string $name
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -63,9 +86,13 @@ namespace App\Models{
  * @property int $id
  * @property string $invoice_id
  * @property int $user_id
+ * @property string $full_name
  * @property string $payment_method
  * @property string $total_price
  * @property int $total_quantity
+ * @property string $phone
+ * @property string $address
+ * @property string $town
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CustomerPurchaseDetail> $details
@@ -74,12 +101,16 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|CustomerPurchase newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|CustomerPurchase newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|CustomerPurchase query()
+ * @method static \Illuminate\Database\Eloquent\Builder|CustomerPurchase whereAddress($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CustomerPurchase whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CustomerPurchase whereFullName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CustomerPurchase whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CustomerPurchase whereInvoiceId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CustomerPurchase wherePaymentMethod($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CustomerPurchase wherePhone($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CustomerPurchase whereTotalPrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CustomerPurchase whereTotalQuantity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CustomerPurchase whereTown($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CustomerPurchase whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CustomerPurchase whereUserId($value)
  */
@@ -113,6 +144,29 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|CustomerPurchaseDetail whereUpdatedAt($value)
  */
 	class CustomerPurchaseDetail extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property string $image_1
+ * @property string $image_2
+ * @property string $image_3
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|MiddleBanner newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|MiddleBanner newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|MiddleBanner query()
+ * @method static \Illuminate\Database\Eloquent\Builder|MiddleBanner whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MiddleBanner whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MiddleBanner whereImage1($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MiddleBanner whereImage2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MiddleBanner whereImage3($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MiddleBanner whereUpdatedAt($value)
+ */
+	class MiddleBanner extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -282,6 +336,29 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|SupplierPurchaseDetail whereUpdatedAt($value)
  */
 	class SupplierPurchaseDetail extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property string $image_1
+ * @property string $image_2
+ * @property string $image_3
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|TopBanner newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TopBanner newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TopBanner query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TopBanner whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TopBanner whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TopBanner whereImage1($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TopBanner whereImage2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TopBanner whereImage3($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TopBanner whereUpdatedAt($value)
+ */
+	class TopBanner extends \Eloquent {}
 }
 
 namespace App\Models{

@@ -162,7 +162,8 @@ class ShopController extends Controller
     public function filterProducts(Request $request){
         $brand_id = $request->input('brands');
         $color = $request->input('colors');
-        $storage = $request ->input('storage');
+        dd($brand_id);
+        // $storage = $request ->input('storage');
         $query = Product::with('brand', 'ProductModel')->orderByDesc('created_at');
 
         if ($brand_id !== 'all') {
@@ -175,24 +176,23 @@ class ShopController extends Controller
             $query->where('color', $color);
         }
 
-        if ($storage !== 'all') {
+        // if ($storage !== 'all') {
 
-            $query->where('storage', $storage);
-        }
+        //     $query->where('storage', $storage);
+        // }
 
         $filteredProducts = $query->get();
         return response()->json($filteredProducts);
+
     }
 
     public function purchaseCreate(Request $request){
-
-
         $request->validate([
             'full_name' => 'required|string|max:255',
             'town' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'phone_no' => 'required|string|regex:/^09\d{9}$/',
-            'payment_method' => 'required|string|in:Cash On Delivery,Mobile Banking, Mobile Wallet,Direct Bank Transfer',
+            'payment_method' => 'required|string|in:Cash On Delivery,Mobile Banking,Mobile Wallet,Direct Bank Transfer',
             'quantity' => 'required|integer|min:1',
 
         ]);
