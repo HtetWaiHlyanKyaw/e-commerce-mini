@@ -68,6 +68,6 @@ class CartController extends Controller
     public function clearCart()
     {
         Cart::where('user_id', Auth::user()->id)->delete();
-        return redirect()->route('user.page');
+        return redirect()->route('cartList');
     }
 }
