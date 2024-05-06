@@ -102,7 +102,7 @@
                                 <th>PRODUCT NAME</th>
                                 <th>SUBTOTAL</th>
                             </tr>
-                            @foreach ($productsData as $index => $productData)
+                            {{-- @foreach ($productsData as $index => $productData)
                                 <tr>
                                     <td>
                                         {{ \App\Models\Product::find($productData['product_id'])->name }} x <b>
@@ -110,7 +110,22 @@
                                     </td>
                                     <td>{{ $productData['total'] }} $</td>
                                 </tr>
-                            @endforeach
+                            @endforeach --}}
+                            @foreach ($productsData as $productData)
+                            @php
+                                $product = \App\Models\Product::find($productData['product_id']);
+                            @endphp
+                            @if ($product)
+                                <tr>
+                                    <td>
+                                        {{ $product->name }} x <b>{{ $productData['quantity'] }}</b>
+                                    </td>
+                                    <td>{{ $productData['total'] }} $</td>
+                                </tr>
+                            @endif
+                        @endforeach
+
+
                             <tr>
                                 <th>Subtotal</th>
                                 <td style="font-size: 16px;"><b>{{ $subtotal }} $</b></td>

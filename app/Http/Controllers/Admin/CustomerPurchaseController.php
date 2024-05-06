@@ -115,33 +115,72 @@ class CustomerPurchaseController extends Controller
 
     // Assuming you have retrieved cart data in your controller
     // Assuming you have retrieved cart data in your controller
+    // public function checkoutPage(Request $request)
+    // {
+    //     // Retrieve the products data from the query parameter
+    //     $productsJson = $request->query('products');
+
+    //     // Decode the JSON string to an array of product data
+    //     $productsData = json_decode($productsJson, true);
+
+    //     // Fetch price information from the database and add it to product data
+    //     foreach ($productsData as &$productData) {
+    //         $product = \App\Models\Product::find($productData['product_id']);
+    //         $productData['price'] = $product->price;
+    //     }
+
+    //     // Calculate the subtotal by summing up the total cost of each product
+    //     $subtotal = 0;
+    //     $totalQuantity = 0; // Initialize total quantity
+    //     foreach ($productsData as $productData) {
+    //         $subtotal += $productData['total'];
+    //         $totalQuantity += $productData['quantity']; // Accumulate total quantity
+    //     }
+
+    //     // Calculate shipping and total
+    //     $shipping = 1000; // Example shipping cost
+    //     $total = $subtotal + $shipping;
+
+    //     // Pass the subtotal, shipping, total, and total quantity to the view
+    //     return view('user.checkout2', compact('productsData', 'subtotal', 'shipping', 'total', 'totalQuantity'));
+    // }
+
+    public function clearCart()
+    {
+        // Delete cart entries for the authenticated user
+        Cart::where('user_id', auth()->user()->id)->delete();
+
+        // Optionally, you can redirect the user to a specific page or return a response
+        return redirect()->route('user.history')->with('success', 'Cart cleared successfully!');
+    }
+
     public function checkoutPage(Request $request)
     {
         // Retrieve the products data from the query parameter
-        $productsJson = $request->query('products');
-
-        // Decode the JSON string to an array of product data
-        $productsData = json_decode($productsJson, true);
+        $productsData = json_decode($request->query('products'), true);
 
         // Fetch price information from the database and add it to product data
         foreach ($productsData as &$productData) {
             $product = \App\Models\Product::find($productData['product_id']);
-            $productData['price'] = $product->price;
+            if ($product) {
+                // Ensure product exists before adding to the product data
+                $productData['name'] = $product->name;
+                $productData['price'] = $product->price;
+                $productData['total'] = $product->price * $productData['quantity'];
+            } else {
+                // Handle the case where product is not found (optional)
+                // For example, you can remove the invalid product from the products data
+                unset($productData);
+            }
         }
 
-        // Calculate the subtotal by summing up the total cost of each product
-        $subtotal = 0;
-        $totalQuantity = 0; // Initialize total quantity
-        foreach ($productsData as $productData) {
-            $subtotal += $productData['total'];
-            $totalQuantity += $productData['quantity']; // Accumulate total quantity
-        }
-
-        // Calculate shipping and total
+        // Calculate the subtotal, total quantity, shipping, and total
+        $subtotal = collect($productsData)->sum('total');
+        $totalQuantity = collect($productsData)->sum('quantity');
         $shipping = 1000; // Example shipping cost
         $total = $subtotal + $shipping;
 
-        // Pass the subtotal, shipping, total, and total quantity to the view
+        // Pass the products data, subtotal, shipping, total, and total quantity to the view
         return view('user.checkout2', compact('productsData', 'subtotal', 'shipping', 'total', 'totalQuantity'));
     }
 
@@ -187,8 +226,12 @@ class CustomerPurchaseController extends Controller
             $customerPurchaseDetail->sub_total = $product['total'];
             $customerPurchaseDetail->save();
         }
+        // Clear the cart data
+        $this->clearCart();
+
+        // Redirect or return a response
+        return redirect()->route('user.history')->with('success', 'Your order has been placed successfully!');
         // Redirect or return a response
         // For example, you can redirect back to the checkout page with a success message
-        return redirect()->route('user.page')->with('success', 'Your order has been placed successfully!');
     }
 }
