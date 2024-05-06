@@ -7,6 +7,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\user\CartController;
 use App\Http\Controllers\User\PageController;
 use App\Http\Controllers\User\ShopController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BrandModelController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\user\MasterController;
@@ -27,6 +28,7 @@ use App\Http\Controllers\User\UserProfileController;
 use App\Http\Controllers\Admin\BottomBannerController;
 use App\Http\Controllers\Admin\CustomerPurchaseController;
 use App\Http\Controllers\Admin\SupplierPurchaseController;
+use App\Http\Controllers\GoogleAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -213,7 +215,6 @@ Route::get('/profile', [UserProfileController::class, 'profile'])->name('user.pr
 Route::post('/profile/update', [UserProfileController::class, 'profileUpdate'])->name('user.pUpdate');
 
 Route::get('/user/checkout2', [CustomerPurchaseController::class, 'checkoutPage'])->name('user.checkout2');
-
 Route::middleware('user')->group(function () {
     Route::post('/cart/add', [CartController::class, 'add'])->name('user.cardAdd');
     Route::get('/cart', [CartController::class, 'cart'])->name('cartList');
@@ -223,3 +224,8 @@ Route::middleware('user')->group(function () {
 });
 Route::get('/user/checkout2', [CustomerPurchaseController::class, 'checkoutPage'])->name('user.checkout2');
 Route::post('/customer-purchase/create', [CustomerPurchaseController::class, 'createCustomerPurchase'])->name('customer_purchase.create2');
+// Route::get('login/{provider}', [LoginController::class, 'redirectToProvider']);
+// Route::get('login/{provider}/callback', [LoginController::class, 'handleProviderCallback']);
+Route::get('auth/google', [GoogleAuthController::class, 'redirect'])->name('google-auth');
+Route::get('/auth/google/call-back',[GoogleAuthController::class, 'callbackGoogle']);
+
