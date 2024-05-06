@@ -198,7 +198,7 @@ Route::get('/blog', [UserController::class, 'blog'])->name('user.blog');
 Route::get('/productDetail', [UserController::class, 'productDetail'])->name('user.detail');
 Route::get('/comments/{product_id}/{limit}', [ShopController::class, 'fetchComments']);
 Route::post('/comments/store', [ShopController::class, 'storeComment'])->name('user.comment.store');
-Route::post('/userFilter', [ShopController::class, 'filterProducts'])->name('filter.products');
+Route::post('/filter-products', [ShopController::class, 'filterProducts'])->name('filter.products');
 Route::post('/checkout/create', [ShopController::class, 'purchaseCreate'])->name('customer_purchase.create');
 Route::get('/shop', [ShopController::class, 'shop'])->name('user.shop');
 Route::get('/history', [HistoryController::class, 'list'])->name('user.history');

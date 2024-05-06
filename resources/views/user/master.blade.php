@@ -101,7 +101,7 @@
                     </div>
             </div>
 
-            <div class="dropdown user-login-info">
+            {{-- <div class="dropdown user-login-info">
                 <div class="dropdown-toggle dropdown-no-arrow" id="userDropdown" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     <img src="{{ asset('user/img/core-img/user.svg') }}" alt="" class=""
@@ -116,7 +116,7 @@
                         @csrf
                     </form>
                 </div>
-            </div>
+            </div> --}}
         @elseif (Auth::check() &&
                 (Auth::user()->usertype === 'super_admin' ||
                     Auth::user()->usertype === 'supplier_admin' ||

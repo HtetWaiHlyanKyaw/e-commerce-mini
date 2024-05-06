@@ -215,7 +215,7 @@
                                 <div class="card-header" role="tab" id="headingOne">
                                     <h6 class="mb-0">
                                         <label>
-                                            <input type="radio" name="payment_method" value="Cash On Delivery">
+                                            <input type="radio" name="payment_method" value="Cash On Delivery" checked>
                                             Cash on Delivery
                                         </label>
                                     </h6>

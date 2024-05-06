@@ -1,24 +1,26 @@
 @extends('user.master')
 @section('title', 'Shop')
 @section('style')
-<meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 @section('cart')
- <a href="{{route('cartList')}}" class="btn position-relative">
-    @if ($cart && count($cart) > 0)
-        <img src="{{ asset('user/img/core-img/bag.svg') }}" alt="">
-        <span style="margin-top:32px; margin-left:10px" class="position-absolute start-80 me-5 translate-middle badge rounded-pill bg-light">
-            {{ count($cart) }}
-            <span class="visually-hidden">unread messages</span>
-        </span>
-    @else
-        <img src="{{ asset('user/img/core-img/bag.svg') }}" alt="">
-        <span style="margin-top:32px; margin-left:10px" class="position-absolute start-80 me-5 translate-middle badge rounded-pill bg-light">
-            0
-            <span class="visually-hidden">unread messages</span>
-        </span>
-    @endif
-</a>
+    <a href="{{ route('cartList') }}" class="btn position-relative">
+        @if ($cart && count($cart) > 0)
+            <img src="{{ asset('user/img/core-img/bag.svg') }}" alt="">
+            <span style="margin-top:32px; margin-left:10px"
+                class="position-absolute start-80 me-5 translate-middle badge rounded-pill bg-light">
+                {{ count($cart) }}
+                <span class="visually-hidden">unread messages</span>
+            </span>
+        @else
+            <img src="{{ asset('user/img/core-img/bag.svg') }}" alt="">
+            <span style="margin-top:32px; margin-left:10px"
+                class="position-absolute start-80 me-5 translate-middle badge rounded-pill bg-light">
+                0
+                <span class="visually-hidden">unread messages</span>
+            </span>
+        @endif
+    </a>
 @endsection
 @section('content')
 
@@ -108,7 +110,8 @@
             <div class="row">
                 <div class="col-12 col-md-2 col-lg-2">
                     <div class="shop_sidebar_area">
-                        <form id="filterForm">
+                        <form method="POST" action="{{ route('filter.products') }}">
+                            @csrf
                             <h6 class="widget-title mb-30">Filter by</h6>
                             <div class="widget brands mb-50">
                                 <!-- Widget Title 2 -->
@@ -117,15 +120,15 @@
                                 <div class="widget-desc"
                                     style="max-height: 200px; overflow-y: auto; scrollbar-width: thin;">
                                     <ul style="position: relative;">
-                                        <li style="position: relative;"><label for=""><input type="checkbox"
+                                        {{-- <li style="position: relative;"><label for=""><input type="checkbox"
                                                     name="brands" class="form-check-input"
                                                     style="position: absolute; top: 25%; transform: translateY(-50%);"
-                                                    value="">All Brands</label></li>
+                                                    value="">All Brands</label></li> --}}
                                         @foreach ($brands as $brand)
                                             <li style="position: relative;"><label for=""><input type="checkbox"
-                                                        name="brands" class="form-check-input"
+                                                        name="brands[]" class="form-check-input"
                                                         style="position: absolute; top: 25%; transform: translateY(-50%);"
-                                                        value="{{ $brand->id }}">{{ $brand->name }}</label></li>
+                                                        value="{{ $brand->id }}" @if(in_array($brand->id, request()->input('brands', []))) checked @endif>{{ $brand->name }}</label></li>
                                         @endforeach
                                     </ul>
                                 </div>
@@ -140,9 +143,9 @@
                                         @foreach ($uniqueColors as $color)
                                             <li style="position: relative;">
                                                 <label for="">
-                                                    <input type="checkbox" name="colors" class="form-check-input"
+                                                    <input type="checkbox" class="form-check-input" name="colors[]"
                                                         style="position: absolute; top: 25%; transform: translateY(-50%);"
-                                                        value="{{ $color }}">
+                                                        value="{{ $color }}" @if(in_array($color, request()->input('colors', []))) checked @endif>
                                                     {{ $color }}
                                                 </label>
                                             </li>
@@ -161,9 +164,9 @@
                                         @foreach ($uniqueStorage as $storage)
                                             <li style="position: relative;">
                                                 <label for="">
-                                                    <input type="checkbox" name="storage" class="form-check-input"
+                                                    <input type="checkbox" class="form-check-input" name="storage[]"
                                                         style="position: absolute; top: 25%; transform: translateY(-50%);"
-                                                        value="{{ $storage }}">
+                                                        value="{{ $storage }}"  @if(in_array($storage, request()->input('storage', []))) checked @endif>
                                                     {{ $storage }}
                                                 </label>
                                             </li>
@@ -174,28 +177,35 @@
                             <div class="widget price mb-50">
                                 <!-- Widget Title -->
                                 <!-- Widget Title 2 -->
+                                <input type="hidden" name="minPrice" id="minPrice" value="{{ isset($filteredMinPrice) ? intval($filteredMinPrice) : intval($minPrice) }}">
+                                <input type="hidden" name="maxPrice" id="maxPrice" value="{{ isset($filteredMaxPrice) ? intval($filteredMaxPrice) : intval($maxPrice) }}">
+
                                 <p class="widget-title2 mb-30">Price</p>
                                 <div class="widget-desc">
                                     <div class="slider-range">
                                         <div data-min="{{ intval($minPrice) }}" data-max="{{ intval($maxPrice) }}"
                                             data-unit="$"
                                             class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
-                                            data-value-min="{{ intval($minPrice) }}"
-                                            data-value-max="{{ intval($maxPrice) }}" data-label-result="Range:">
+                                            data-value-min="{{ isset($filteredMinPrice) ? intval($filteredMinPrice) : intval($minPrice) }}"
+             data-value-max="{{ isset($filteredMaxPrice) ? intval($filteredMaxPrice) : intval($maxPrice) }}"
+             data-label-result="Range:">
                                             <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
                                             <span class="ui-slider-handle ui-state-default ui-corner-all"
                                                 tabindex="0"></span>
                                             <span class="ui-slider-handle ui-state-default ui-corner-all"
                                                 tabindex="0"></span>
                                         </div>
-                                        <div class="range-price">Range: ${{ intval($minPrice) }} -
-                                            ${{ intval($maxPrice) }}</div>
+                                        <div class="range-price">Range: ${{ isset($filteredMinPrice) ? intval($filteredMinPrice) : intval($minPrice) }} -
+                                            ${{ isset($filteredMaxPrice) ? intval($filteredMaxPrice) : intval($maxPrice) }}</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="widget price mb-50">
                                 <div class="widget-desc"><button style="width: 100%; color: white" class="btn btn-dark"
                                         type="submit">Filter</button></div>
+                                <div class="widget-desc"><a href="{{ route('user.shop') }}"><button
+                                            style="margin-top:10px; width: 100%;" class="btn btn-outline-danger"
+                                            type="button" id="clearBtn">Clear All</button></a></div>
                             </div>
                         </form>
                     </div>
@@ -227,36 +237,43 @@
                             </div>
                         </div>
                         <div class="row">
-                            <h4 style="margin-bottom: 20px;">All Products</h4>
-                            @foreach ($paginatedGroupedData as $modelId => $productGroup)
-                                <div class="col-12 col-sm-6 col-lg-3">
+                            <h4 style="margin-bottom: 20px;">Products</h4>
+                            @if ($paginatedGroupedData->isEmpty())
 
-                                    <div class="single-product-wrapper" style="border: solid 1px #dddddd">
+                                    <p style="text-align: center;">No products found.</p>
 
-                                        <div class="product-img">
+                            @else
+                                @foreach ($paginatedGroupedData as $modelId => $productGroup)
+                                    <div class="col-12 col-sm-6 col-lg-3" id="product-list">
 
-                                            <img src="{{ asset('storage/products/' . $productGroup->first()->image) }}"
-                                                alt="Product Image"
-                                                style="border-radius: 3px; width: 100%; height: 200px; object-fit: cover;">
-                                        </div>
+                                        <div class="single-product-wrapper" style="border: solid 1px #dddddd">
 
-                                        <div class="product-description" style="margin-bottom: 20px;">
-                                            <a href="{{ route('user.productDetails', ['model_id' => $modelId]) }}">
-                                                <h6 class="text-center">
-                                                    {{ trim(strstr($productGroup->first()->name, '(', true)) }}</h6>
-                                                <!-- Display model name -->
-                                            </a>
+                                            <div class="product-img">
 
-                                            <div class="hover-content">
-                                                <div class="add-to-cart-btn">
-                                                    <a href="#" class="btn essence-btn">Add to Cart</a>
+                                                <img src="{{ asset('storage/products/' . $productGroup->first()->image) }}"
+                                                    alt="Product Image"
+                                                    style="border-radius: 3px; width: 100%; height: 200px; object-fit: cover;">
+                                            </div>
+
+                                            <div class="product-description" style="margin-bottom: 20px;">
+                                                <a href="{{ route('user.productDetails', ['model_id' => $modelId]) }}">
+                                                    <h6 class="text-center">
+                                                        {{ trim(strstr($productGroup->first()->name, '(', true)) }}</h6>
+                                                    <!-- Display model name -->
+                                                </a>
+
+                                                <div class="hover-content">
+                                                    <div class="add-to-cart-btn">
+                                                        <a href="#" class="btn essence-btn">Add to Cart</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
+                            @endif
                         </div>
+
                     </div>
                     <!-- Pagination -->
                     <div>
@@ -269,7 +286,7 @@
 
 @endsection
 @section('script')
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             $.ajaxSetup({
         headers: {
@@ -322,5 +339,65 @@
                 });
             });
         });
-    </script>
+    </script> --}}
+    {{-- <script>
+        $(document).ready(function() {
+            $('#filter-btn').click(function(e) {
+                e.preventDefault();
+                // var brands = [];
+                // $.each($("input[name='brands[]']:checked"), function(){
+                //     brands.push($(this).val());
+                // });
+                // console.log(brands);
+                // var colors = [];
+                // $.each($("input[name='colors[]']:checked"), function(){
+                //     colors.push($(this).val());
+                // });
+                // console.log(colors);
+                // // var minPrice = $('#min-price').val();
+                // // var maxPrice = $('#max-price').val();
+                // var storage = $('#storage').val();
+                // console.log(storage);
+
+                var brands = [];
+                $('input[name="brands"]:checked').each(function() {
+                    brands.push($(this).val());
+                });
+                console.log(brands);
+
+                var colors = [];
+                $('input[name="colors"]:checked').each(function() {
+                    colors.push($(this).val());
+                });
+                console.log(colors);
+
+                 var storage = [];
+                 $('input[name="storage"]:checked').each(function() {
+                     storage.push($(this).val());
+                 });
+                 console.log(storage);
+                // AJAX call to send filter criteria to the server
+                $.ajax({
+                    url: "{{ route('filter.products') }}",
+                    type: 'POST',
+                    data: {
+                        brands: brands,
+                        colors: colors,
+                        // minPrice: minPrice,
+                        // maxPrice: maxPrice,
+                        storage: storage,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        // Handle response and update product listing
+                        $('#product-list').html(response);
+                    },
+                    error: function(xhr) {
+                        console.log(xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script> --}}
+
 @endsection

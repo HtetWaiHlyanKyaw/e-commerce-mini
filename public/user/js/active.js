@@ -99,6 +99,8 @@
         var value_min = jQuery(this).data('value-min');
         var value_max = jQuery(this).data('value-max');
         var label_result = jQuery(this).data('label-result');
+        var minPriceInput = $(this).closest('form').find('input[name="minPrice"]');
+    var maxPriceInput = $(this).closest('form').find('input[name="maxPrice"]');
         var t = $(this);
         $(this).slider({
             range: true,
@@ -109,6 +111,8 @@
                 var result = label_result + " " + unit + ui.values[0] + ' - ' + unit + ui.values[1];
                 console.log(t);
                 t.closest('.slider-range').find('.range-price').html(result);
+                minPriceInput.val(ui.values[0]);
+            maxPriceInput.val(ui.values[1]);
             }
         });
     });
