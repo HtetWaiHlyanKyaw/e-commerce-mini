@@ -22,13 +22,14 @@ class ShopController extends Controller
         $brands = Brand::all();
         $minPrice = Product::min('price');
         $maxPrice = Product::max('price');
-        $products = Product::with('brand', 'ProductModel')->orderByDesc('created_at')->get();
+        $products = Product::with('brand', 'ProductModel')->get()->sortByDesc('created_at');
+
         $uniqueColors = $products->pluck('color')->unique();
         $uniqueStorage = $products->pluck('storage_option')->unique();
         $filteredMinPrice = null;
         $filteredMaxPrice = null;        // Eager load brand and model information
         $datas = Product::with('brand', 'ProductModel')->get();
-        $groupedData = $datas->groupBy('product_model_id');
+        $groupedData = $products->groupBy('product_model_id');
         $perPage = 12;
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
         $currentPageItems = $groupedData->slice(($currentPage - 1) * $perPage, $perPage)->all();
@@ -52,9 +53,9 @@ class ShopController extends Controller
 
         // Retrieve all products
         $products = Product::all();
-
+        $filteredSelectedValue = 'newest';
         // Pass the paginator and other data to the view
-        return view('user.shop', compact('paginatedGroupedData', 'brands', 'minPrice', 'maxPrice', 'uniqueColors', 'uniqueStorage', 'user', 'cart', 'products','filteredMinPrice','filteredMaxPrice'));
+        return view('user.shop', compact('paginatedGroupedData', 'brands', 'minPrice', 'maxPrice', 'uniqueColors', 'uniqueStorage', 'user', 'cart', 'products','filteredMinPrice','filteredMaxPrice', 'filteredSelectedValue'));
     }
 
     public function details(Request $request)
@@ -193,6 +194,7 @@ class ShopController extends Controller
         $filteredStorage = $request->input('storage');
         $filteredMinPrice = $request->input('minPrice');
         $filteredMaxPrice = $request->input('maxPrice');
+        $filteredSelectedValue = $request->input('select');
 
         $brands = Brand::all();
         $minPrice = Product::min('price');
@@ -218,6 +220,21 @@ class ShopController extends Controller
             $query->whereBetween('price', [$filteredMinPrice, $filteredMaxPrice]);
         }
 
+        if ($filteredSelectedValue === 'newest') {
+            $query->orderBy('created_at', 'desc');
+        }
+        else if($filteredSelectedValue == 'A to Z'){
+            $query->orderBy('name', 'asc');
+        }
+        else if($filteredSelectedValue == 'Z to A'){
+            $query->orderBy('name', 'desc');
+        }
+        else if($filteredSelectedValue == 'high to low'){
+            $query->orderBy('price', 'desc');
+        }
+        else{
+            $query->orderBy('price', 'asc');
+        }
         $filteredProducts = $query->get();
         $groupedData = $filteredProducts->groupBy('product_model_id');
         $perPage = 12;
@@ -245,7 +262,7 @@ class ShopController extends Controller
         $products = Product::all();
 
         // Pass the paginator and other data to the view
-        return view('user.shop', compact('paginatedGroupedData', 'brands', 'minPrice', 'maxPrice', 'uniqueColors', 'uniqueStorage', 'user', 'cart', 'products','filteredMinPrice','filteredMaxPrice'));
+        return view('user.shop', compact('paginatedGroupedData', 'brands', 'minPrice', 'maxPrice', 'uniqueColors', 'uniqueStorage', 'user', 'cart', 'products','filteredMinPrice','filteredMaxPrice', 'filteredSelectedValue'));
 
     }
 

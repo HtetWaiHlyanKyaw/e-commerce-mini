@@ -107,10 +107,12 @@
     </div>
     <section class=" section-padding-80 bg-light" style="margin-top: -50px">
         <div class="container">
+            <form id="sortAndFilterForm" method="POST" action="{{ route('filter.products') }}">
             <div class="row">
+
                 <div class="col-12 col-md-2 col-lg-2">
                     <div class="shop_sidebar_area">
-                        <form method="POST" action="{{ route('filter.products') }}">
+                        {{-- <form method="POST" action="{{ route('filter.products') }}"> --}}
                             @csrf
                             <h6 class="widget-title mb-30">Filter by</h6>
                             <div class="widget brands mb-50">
@@ -128,7 +130,9 @@
                                             <li style="position: relative;"><label for=""><input type="checkbox"
                                                         name="brands[]" class="form-check-input"
                                                         style="position: absolute; top: 25%; transform: translateY(-50%);"
-                                                        value="{{ $brand->id }}" @if(in_array($brand->id, request()->input('brands', []))) checked @endif>{{ $brand->name }}</label></li>
+                                                        value="{{ $brand->id }}"
+                                                        @if (in_array($brand->id, request()->input('brands', []))) checked @endif>{{ $brand->name }}</label>
+                                            </li>
                                         @endforeach
                                     </ul>
                                 </div>
@@ -145,7 +149,8 @@
                                                 <label for="">
                                                     <input type="checkbox" class="form-check-input" name="colors[]"
                                                         style="position: absolute; top: 25%; transform: translateY(-50%);"
-                                                        value="{{ $color }}" @if(in_array($color, request()->input('colors', []))) checked @endif>
+                                                        value="{{ $color }}"
+                                                        @if (in_array($color, request()->input('colors', []))) checked @endif>
                                                     {{ $color }}
                                                 </label>
                                             </li>
@@ -166,7 +171,8 @@
                                                 <label for="">
                                                     <input type="checkbox" class="form-check-input" name="storage[]"
                                                         style="position: absolute; top: 25%; transform: translateY(-50%);"
-                                                        value="{{ $storage }}"  @if(in_array($storage, request()->input('storage', []))) checked @endif>
+                                                        value="{{ $storage }}"
+                                                        @if (in_array($storage, request()->input('storage', []))) checked @endif>
                                                     {{ $storage }}
                                                 </label>
                                             </li>
@@ -177,8 +183,10 @@
                             <div class="widget price mb-50">
                                 <!-- Widget Title -->
                                 <!-- Widget Title 2 -->
-                                <input type="hidden" name="minPrice" id="minPrice" value="{{ isset($filteredMinPrice) ? intval($filteredMinPrice) : intval($minPrice) }}">
-                                <input type="hidden" name="maxPrice" id="maxPrice" value="{{ isset($filteredMaxPrice) ? intval($filteredMaxPrice) : intval($maxPrice) }}">
+                                <input type="hidden" name="minPrice" id="minPrice"
+                                    value="{{ isset($filteredMinPrice) ? intval($filteredMinPrice) : intval($minPrice) }}">
+                                <input type="hidden" name="maxPrice" id="maxPrice"
+                                    value="{{ isset($filteredMaxPrice) ? intval($filteredMaxPrice) : intval($maxPrice) }}">
 
                                 <p class="widget-title2 mb-30">Price</p>
                                 <div class="widget-desc">
@@ -187,16 +195,19 @@
                                             data-unit="$"
                                             class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
                                             data-value-min="{{ isset($filteredMinPrice) ? intval($filteredMinPrice) : intval($minPrice) }}"
-             data-value-max="{{ isset($filteredMaxPrice) ? intval($filteredMaxPrice) : intval($maxPrice) }}"
-             data-label-result="Range:">
+                                            data-value-max="{{ isset($filteredMaxPrice) ? intval($filteredMaxPrice) : intval($maxPrice) }}"
+                                            data-label-result="Range:">
                                             <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
                                             <span class="ui-slider-handle ui-state-default ui-corner-all"
                                                 tabindex="0"></span>
                                             <span class="ui-slider-handle ui-state-default ui-corner-all"
                                                 tabindex="0"></span>
                                         </div>
-                                        <div class="range-price">Range: ${{ isset($filteredMinPrice) ? intval($filteredMinPrice) : intval($minPrice) }} -
-                                            ${{ isset($filteredMaxPrice) ? intval($filteredMaxPrice) : intval($maxPrice) }}</div>
+                                        <div class="range-price">Range:
+                                            ${{ isset($filteredMinPrice) ? intval($filteredMinPrice) : intval($minPrice) }}
+                                            -
+                                            ${{ isset($filteredMaxPrice) ? intval($filteredMaxPrice) : intval($maxPrice) }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -223,25 +234,34 @@
                                     <!-- Sorting -->
                                     <div class="product-sorting d-flex">
                                         <p>Sort by:</p>
-                                        <form action="#" method="get">
-                                            <select name="select" id="sortByselect">
-                                                <option value="value">Highest Rated</option>
-                                                <option value="value">Newest</option>
-                                                <option value="value">Price: $$ - $</option>
-                                                <option value="value">Price: $ - $$</option>
-                                            </select>
-                                            <input type="submit" class="d-none" value="">
-                                        </form>
+
+                                        {{-- <select name="select" id="sortByselect">
+                                            <option value="newest">Newest</option>
+                                            <option value="A to Z">A to Z</option>
+                                            <option value="Z to A">Z to</option>
+
+                                            <option value="high to low">Price: $$ - $</option>
+                                            <option value="low to high">Price: $ - $$</option>
+                                        </select> --}}
+                                        <select name="select" id="sortByselect">
+                                            <option value="newest" {{ $filteredSelectedValue == 'newest' ? 'selected' : '' }}>Newest</option>
+                                            <option value="A to Z" {{ $filteredSelectedValue == 'A to Z' ? 'selected' : '' }}>A to Z</option>
+                                            <option value="Z to A" {{ $filteredSelectedValue == 'Z to A' ? 'selected' : '' }}>Z to A</option>
+                                            <option value="high to low" {{ $filteredSelectedValue == 'high to low' ? 'selected' : '' }}>Price: $$ - $</option>
+                                            <option value="low to high" {{ $filteredSelectedValue == 'low to high' ? 'selected' : '' }}>Price: $ - $$</option>
+                                        </select>
+                                        <input type="submit" class="d-none" value="">
+
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
                             <h4 style="margin-bottom: 20px;">Products</h4>
                             @if ($paginatedGroupedData->isEmpty())
 
-                                    <p style="text-align: center;">No products found.</p>
-
+                                <p style="text-align: center;">No products found.</p>
                             @else
                                 @foreach ($paginatedGroupedData as $modelId => $productGroup)
                                     <div class="col-12 col-sm-6 col-lg-3" id="product-list">
@@ -281,123 +301,20 @@
                     </div>
                 </div>
             </div>
+            </form>
         </div>
     </section>
 
 @endsection
 @section('script')
-    {{-- <script>
-        $(document).ready(function() {
-            $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+
+<script>
+    $(document).ready(function() {
+        // Automatically submit form when option is selected from combo box
+        $('#sortByselect, #category').change(function() {
+            $('#sortAndFilterForm').submit();
+        });
     });
-
-            $('#filterForm').submit(function(event) {
-                event.preventDefault();
-
-                var brands = [];
-                $('input[name="brands"]:checked').each(function() {
-                    brands.push($(this).val());
-                });
-                console.log(brands);
-
-                var colors = [];
-                $('input[name="colors"]:checked').each(function() {
-                    colors.push($(this).val());
-                });
-                console.log(colors);
-
-                // var storage = [];
-                // $('input[name="storage"]:checked').each(function() {
-                //     storage.push($(this).val());
-                // });
-                // console.log(storage);
-
-                var data = {
-                    brands: brands,
-                    colors: colors,
-                    // storage: storage,
-                };
-                console.log(data);
-                $.ajax({
-                    type: 'POST',
-                    url: '/userFilter',
-                    data: data,
-                    success: function(response) {
-                        response.forEach(function(product) {
-                            console.log('Product ID:', product.id);
-                            console.log('Product Name:', product.name);
-                            console.log('Shit');
-                            // Access other properties as needed
-                        });
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(xhr, status, error);
-                    }
-                });
-            });
-        });
-    </script> --}}
-    {{-- <script>
-        $(document).ready(function() {
-            $('#filter-btn').click(function(e) {
-                e.preventDefault();
-                // var brands = [];
-                // $.each($("input[name='brands[]']:checked"), function(){
-                //     brands.push($(this).val());
-                // });
-                // console.log(brands);
-                // var colors = [];
-                // $.each($("input[name='colors[]']:checked"), function(){
-                //     colors.push($(this).val());
-                // });
-                // console.log(colors);
-                // // var minPrice = $('#min-price').val();
-                // // var maxPrice = $('#max-price').val();
-                // var storage = $('#storage').val();
-                // console.log(storage);
-
-                var brands = [];
-                $('input[name="brands"]:checked').each(function() {
-                    brands.push($(this).val());
-                });
-                console.log(brands);
-
-                var colors = [];
-                $('input[name="colors"]:checked').each(function() {
-                    colors.push($(this).val());
-                });
-                console.log(colors);
-
-                 var storage = [];
-                 $('input[name="storage"]:checked').each(function() {
-                     storage.push($(this).val());
-                 });
-                 console.log(storage);
-                // AJAX call to send filter criteria to the server
-                $.ajax({
-                    url: "{{ route('filter.products') }}",
-                    type: 'POST',
-                    data: {
-                        brands: brands,
-                        colors: colors,
-                        // minPrice: minPrice,
-                        // maxPrice: maxPrice,
-                        storage: storage,
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: function(response) {
-                        // Handle response and update product listing
-                        $('#product-list').html(response);
-                    },
-                    error: function(xhr) {
-                        console.log(xhr.responseText);
-                    }
-                });
-            });
-        });
-    </script> --}}
+</script>
 
 @endsection

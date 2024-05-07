@@ -226,6 +226,6 @@ Route::get('/user/checkout2', [CustomerPurchaseController::class, 'checkoutPage'
 Route::post('/customer-purchase/create', [CustomerPurchaseController::class, 'createCustomerPurchase'])->name('customer_purchase.create2');
 // Route::get('login/{provider}', [LoginController::class, 'redirectToProvider']);
 // Route::get('login/{provider}/callback', [LoginController::class, 'handleProviderCallback']);
-Route::get('auth/google', [GoogleAuthController::class, 'redirect'])->name('google-auth');
+Route::get('/auth/google', [GoogleAuthController::class, 'redirect'])->name('google-auth');
 Route::get('/auth/google/call-back',[GoogleAuthController::class, 'callbackGoogle']);
 

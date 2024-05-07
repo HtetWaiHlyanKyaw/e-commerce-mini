@@ -68,7 +68,9 @@
 
                                     <td class="col-md-2 col-12 d-md-block d-none deleteBtn">
 
-                                        <i class="fa-solid fa-square-xmark text-dark fs-4 " style="cursor: pointer"
+                                        {{-- <i class="fa-solid fa-square-xmark text-dark fs-4 " style="cursor: pointer"
+                                            title="delete item" data-toggle="tooltip"></i> --}}
+                                            <i class="fa fa-times" style="cursor: pointer"
                                             title="delete item" data-toggle="tooltip"></i>
                                     </td>
                                     <input type="hidden" id="cartId" value="{{ $cart->id }}">
