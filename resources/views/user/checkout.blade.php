@@ -23,6 +23,8 @@
             font-weight: bold;
             /* Optionally, make the text bold */
         }
+
+
     </style>
 @endsection
 @section('content')
@@ -110,7 +112,7 @@
     <!-- ##### Right Side Cart End ##### -->
 
     <!-- ##### Breadcumb Area Start ##### -->
-    <div class="breadcumb_area bg-img" style="background-image: url(user/img/bg-img/breadcumb.jpg);">
+    {{-- <div class="breadcumb_area bg-img" style="background-image: url(user/img/bg-img/breadcumb.jpg);">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
@@ -120,7 +122,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- ##### Breadcumb Area End ##### -->
 
     <!-- ##### Checkout Area Start ##### -->
@@ -129,40 +131,40 @@
             <div class="row">
 
                 <div class="col-12 col-md-6">
-                    <div class="checkout_details_area mt-50 clearfix">
+                    <div class="checkout_details_area mt-15 clearfix">
 
                         <div class="cart-page-heading mb-30">
-                            <h5>Billing Address</h5>
+                            <p style="font-size: 30px;color:black;">Billing Address</p>
                         </div>
 
                         <form method="POST" action="{{route('customer_purchase.create')}}">
                             @csrf
                             <div class="row">
                                 <div class="col-12 mb-4">
-                                    <label for="account_name">Account Name <span>*</span></label>
+                                    <label for="account_name" style="font-size: 13px;">Account Name <span>*</span></label>
                                     <input type="text" class="form-control" id="account_name" name="user_id"
                                         value="{{ Auth()->user()->name }}" readonly>
                                 </div>
                                 <div class="col-md-12 mb-4">
-                                    <label for="first_name">Full Name <span>*</span></label>
+                                    <label for="first_name" style="font-size: 13px;">Full Name <span>*</span></label>
                                     <input type="text" class="form-control" id="first_name" value="" name="full_name" required>
                                 </div>
 
                                 <div class="col-12 mb-4">
-                                    <label for="email_address">Email Address <span>*</span></label>
+                                    <label for="email_address" style="font-size: 13px;">Email Address <span>*</span></label>
                                     <input type="email" class="form-control" id="email_address"
                                         value="{{ Auth()->user()->email }}" name="email" readonly>
                                 </div>
-                                <div class="col-12 mb-3">
-                                    <label for="city">Town/City <span>*</span></label>
+                                <div class="col-12 mb-4 ">
+                                    <label for="city" style="font-size: 13px;">Town/City <span>*</span></label>
                                     <input type="text" class="form-control" id="city" value="" name="town">
                                 </div>
-                                <div class="col-12 mb-3">
-                                    <label for="street_address">Address <span>*</span></label>
+                                <div class="col-12 mb-4">
+                                    <label for="street_address" style="font-size: 13px;">Address <span>*</span></label>
                                     <input type="text" class="form-control" id="street_address" value="" name="address">
                                 </div>
                                 <div class="col-12 mb-3">
-                                    <label for="phone_number">Phone No <span>*</span></label>
+                                    <label for="phone_number" style="font-size: 13px;">Phone No <span>*</span></label>
                                     <input type="number" class="form-control" id="phone_number" min="0"
                                         value="" name="phone_no">
                                 </div>
@@ -175,8 +177,8 @@
                     <div class="order-details-confirmation">
 
                         <div class="cart-page-heading">
-                            <h5>Your Order</h5>
-                            <p>The Details</p>
+                            <p style="font-size: 30px;color:black;">Your Order</p>
+                            <p style="font-size: 15px;">The Details</p>
                         </div>
 
                         @if ($multipleProducts)
@@ -210,19 +212,19 @@
                         @else
                             <!-- Blade file for single product -->
                             <ul class="order-details-form mb-4">
-                                <li><span>Quantity</span> <span>Product</span> <span>Total</span></li>
+                                <li><b style="font-size: 15px;">Quantity</b> <b style="font-size: 15px;">Product</b> <b style="font-size: 15px;">Total</b></li>
                                 <li>
-                                    <span>{{ $quantity }}</span> <!-- Display the quantity -->
+                                    <span style="font-size: 13px;">{{ $quantity }}</span> <!-- Display the quantity -->
                                     <input type="hidden" name="quantity" value="{{ $quantity }}">
-                                    <span>{{ $product->name }}</span> <!-- Display the product name -->
+                                    <span style="font-size: 13px;">{{ $product->name }}</span> <!-- Display the product name -->
                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                    <span>{{ $product->price }}</span> <!-- Display the price -->
+                                    <span style="font-size: 13px;">{{ $product->price }}</span> <!-- Display the price -->
                                     <input type="hidden" name="price" value="{{ $product->price }}">
                                 </li>
-                                <li><span class="subtotal">Subtotal</span> <span></span> <span
+                                <li><b class="subtotal">Subtotal</b> <span></span> <span
                                         class="subtotal-value">{{ $product->price * $quantity }}</span></li>
                                         <input type="hidden" name="subtotal_price" value="{{ $product->price * $quantity }}">
-                                <li><span class="total">Total</span> <span></span> <span
+                                <li><b class="total">Total</b> <span></span> <span
                                         class="total-value">{{ $product->price * $quantity }}</span></li>
                                         <input type="hidden" name="total_price" value="{{ $product->price * $quantity }}">
                             </ul>
@@ -231,42 +233,42 @@
                         <div id="accordion" role="tablist">
                             <div class="card">
                                 <div class="card-header" role="tab" id="headingOne">
-                                    <h6 class="mb-0">
+                                    <p class="mb-0">
                                         <label>
                                             <input type="radio" name="payment_method" value="Cash On Delivery">
                                             Cash on Delivery
                                         </label>
-                                    </h6>
+                                    </p>
                                 </div>
                             </div>
                             <div class="card">
                                 <div class="card-header" role="tab" id="headingTwo">
-                                    <h6 class="mb-0">
+                                    <p class="mb-0">
                                         <label>
                                             <input type="radio" name="payment_method" value="Mobile Banking">
                                             Mobile Banking
                                         </label>
-                                    </h6>
+                                    </p>
                                 </div>
                             </div>
                             <div class="card">
                                 <div class="card-header" role="tab" id="headingThree">
-                                    <h6 class="mb-0">
+                                    <p class="mb-0">
                                         <label>
                                             <input type="radio" name="payment_method" value="Mobile Wallet">
                                             Mobile Wallet
                                         </label>
-                                    </h6>
+                                    </p>
                                 </div>
                             </div>
                             <div class="card">
                                 <div class="card-header" role="tab" id="headingFour">
-                                    <h6 class="mb-0">
+                                    <p class="mb-0">
                                         <label>
                                             <input type="radio" name="payment_method" value="Direct Bank Transfer">
                                             Direct Bank Transfer
                                         </label>
-                                    </h6>
+                                    </p>
                                 </div>
                             </div>
                         </div>

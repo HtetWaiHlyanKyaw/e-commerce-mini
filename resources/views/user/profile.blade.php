@@ -13,8 +13,11 @@
             <div class="col-8 text-center">
                 <h2>User Profile</h2>
             </div>
-            <div class="col-2"></div>
+            <div class="col-2">
+                <a href="{{route('user.history')}}"><button class="btn btn-primary"><i class="fa-solid fa-cart-shopping"></i> Purchase History</button></a>
+            </div>
         </div>
+
         <form method="POST" action="{{ route('user.pUpdate') }}" class="row ">
             @csrf
             <div class="col-md-6">
@@ -71,12 +74,24 @@
                 @enderror
             </div>
 
-            <div class="col-12 mt-5">
-                <button type="submit" class="btn btn-primary">Save Changes</button>
+            <div class="col-10 mt-5 text-center  ">
+                <button type="submit" class="btn btn-primary"><i class="fa fa-file-arrow-down"></i>  Save Changes</button>
+
             </div>
+
+            {{-- <div>
+                <button class=" text-center" style="width:160px;height:70px;justify-content:center;text-align: center;" href="{{ route('logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-arrow-left"></i>   Logout</button>
+            </div> --}}
+
+            <div class="col-2" style="margin-top: 52px; padding-left:70px;" >
+                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><button class="btn btn-primary"><i class="fa-solid fa-arrow-right-from-bracket"></i>   Logout</button></a>
+            </div>
+
         </form>
-        <div class></div>
-        <a href="{{route('user.history')}}"><button class="btn btn-primary">Purchase History</button></a>
+
+        {{-- <a href="{{route('user.history')}}"><button class="btn btn-primary">Purchase History</button></a> --}}
+
     </div>
 
     {{-- <div class="card col-xl-5 col-md-6  mx-auto p-3" style="margin-bottom: 200px">

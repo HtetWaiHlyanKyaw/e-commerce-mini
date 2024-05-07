@@ -4,6 +4,7 @@
     <style>
         .header-color {
               color: #5d9bff;
+
         }
        .bg-lighter {
             background-color: #f6f7ff;

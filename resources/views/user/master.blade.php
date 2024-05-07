@@ -96,25 +96,31 @@
                 <!-- User Login Info -->
                 @if (Auth::check() && Auth::user()->usertype === 'customer')
                 <div class="cart-area">
-                    <a href="#" id="essenceCartBtn"><img src="{{ asset('user/img/core-img/bag.svg') }}"
-                            alt=""><span></span></a>
+                    {{-- <a href="#" id="essenceCartBtn"><img src="{{ asset('user/img/core-img/bag.svg') }}"
+                            alt=""><span></span></a> --}}
+                            @yield('cart')
                 </div>
-                <div class="dropdown user-login-info">
+                <div>
+                    <a href="{{ route('user.profile') }}">
+                        <img src="{{ asset('user/img/core-img/user.svg') }}" alt="" style="width: 20px; height:20px; margin-top:30px; margin-right:25px">
+                    </a>
+                </div>
+                {{-- <div class="dropdown user-login-info" >
                     <div class="dropdown-toggle dropdown-no-arrow" id="userDropdown" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         <img src="{{ asset('user/img/core-img/user.svg') }}" alt=""
                             style="width: 20px; height:20px; margin-top:30px; margin-right:25px">
                     </div>
-                    <div class="dropdown-menu dropdown-partial" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" style="width:160px;" href="{{ route('user.profile') }}" ><i class="fa fa-user"></i>  Profile</a>
-                        <a class="dropdown-item" style="width:160px;" href="{{ route('logout') }}"
+                    <div class="dropdown-menu dropdown-partial mb-5" aria-labelledby="userDropdown">
+                        <a class="dropdown-item text-center" style="width:160px;height:70px;justify-content:center;text-align: center;" href="{{ route('user.profile') }}" ><i class="fa fa-user"></i>  Profile</a>
+                        <a class="dropdown-item text-center" style="width:160px;height:70px;justify-content:center;text-align: center;" href="{{ route('logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-arrow-left"></i>   Logout</a>
                         <form id="logout-form" action="{{ route('user.logout') }}" method="POST"
                             style="display: none;">
                             @csrf
                         </form>
                     </div>
-                </div>
+                </div> --}}
 
             {{-- @elseif (Auth::check() && (Auth::user()->usertype === 'super_admin' || Auth::user()->usertype === 'supplier_admin' || Auth::user()->usertype === 'store_admin'))
                 <div class="user-login-info">
@@ -177,7 +183,7 @@
 
 
 
-               @yield('cart')
+
             </div>
 
               <div class="dropdown user-login-info">
