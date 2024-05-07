@@ -22,13 +22,25 @@
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     @yield('style');
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.min.css">
     <style>
         .dropdown-no-arrow::after {
             display: none !important;
+        }
+
+        .search-results {
+            max-height: 300px;
+            max-width: 500px;
+            /* Adjust the height as needed */
+            overflow-y: auto;
+            overflow-x: hidden;
+            border-radius: 0;
+            /* Add vertical scrollbar when content exceeds height */
+
+            /* Optional: Add border for clarity */
         }
     </style>
 </head>
@@ -69,10 +81,10 @@
             <div class="header-meta d-flex clearfix justify-content-end ">
                 <!-- Search Area -->
                 <div class="search-area">
-                        <form action="">
+                    <form >
                         <input type="search" name="search" id="headerSearch" placeholder="Search product">
                         {{-- <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button> --}}
-                        </form>
+                    </form>
                     <div id="searchResults" class="search-results"></div>
                 </div>
 
@@ -252,16 +264,19 @@
                 }
 
                 fetch(`/search?query=${query}`)
-    .then(response => response.json())
-    .then(groupedData => {
-        let html = '';
-        for (const modelId in groupedData) {
-            if (groupedData.hasOwnProperty(modelId)) {
-                const products = groupedData[modelId];
-                const firstProduct = products[0]; // Get the first product from the group
-                const productDetailsUrl = `/product/details?model_id=${encodeURIComponent(modelId)}`;
-                var trimmedName = firstProduct.name.substring(0, firstProduct.name.indexOf('(')).trim();
-                html += `<div class="card">
+                    .then(response => response.json())
+                    .then(groupedData => {
+                        let html = '';
+                        for (const modelId in groupedData) {
+                            if (groupedData.hasOwnProperty(modelId)) {
+                                const products = groupedData[modelId];
+                                const firstProduct = products[
+                                0]; // Get the first product from the group
+                                const productDetailsUrl =
+                                    `/product/details?model_id=${encodeURIComponent(modelId)}`;
+                                var trimmedName = firstProduct.name.substring(0, firstProduct.name
+                                    .indexOf('(')).trim();
+                                html += `<div class="card" style="border-radius: 0;">
                     <div class="row card-body">
 
                         <div class="col-lg-4">
@@ -276,11 +291,11 @@
                     </a>
                     </div>
                 </div>`;
-            }
-        }
-        searchResults.innerHTML = html;
-    })
-    .catch(error => console.error('Error:', error));
+                            }
+                        }
+                        searchResults.innerHTML = html;
+                    })
+                    .catch(error => console.error('Error:', error));
 
             });
         });
