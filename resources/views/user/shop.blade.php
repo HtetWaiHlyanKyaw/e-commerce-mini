@@ -108,11 +108,11 @@
     <section class=" section-padding-80 bg-light" style="margin-top: -50px">
         <div class="container">
             <form id="sortAndFilterForm" method="POST" action="{{ route('filter.products') }}">
-            <div class="row">
+                <div class="row">
 
-                <div class="col-12 col-md-2 col-lg-2">
-                    <div class="shop_sidebar_area">
-                        {{-- <form method="POST" action="{{ route('filter.products') }}"> --}}
+                    <div class="col-12 col-md-2 col-lg-2">
+                        <div class="shop_sidebar_area">
+                            {{-- <form method="POST" action="{{ route('filter.products') }}"> --}}
                             @csrf
                             <h6 class="widget-title mb-30">Filter by</h6>
                             <div class="widget brands mb-50">
@@ -218,24 +218,24 @@
                                             style="margin-top:10px; width: 100%;" class="btn btn-outline-danger"
                                             type="button" id="clearBtn">Clear All</button></a></div>
                             </div>
-                        </form>
-                    </div>
-                </div>
+            </form>
+        </div>
+        </div>
 
-                <div class="col-12 col-md-10 col-lg-10">
-                    <div class="shop_grid_product_area">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="product-topbar d-flex align-items-center justify-content-between">
-                                    <!-- Total Products -->
-                                    <div class="total-products">
-                                        {{-- <p><span>186</span> products found</p> --}}
-                                    </div>
-                                    <!-- Sorting -->
-                                    <div class="product-sorting d-flex">
-                                        <p>Sort by:</p>
+        <div class="col-12 col-md-10 col-lg-10">
+            <div class="shop_grid_product_area">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="product-topbar d-flex align-items-center justify-content-between">
+                            <!-- Total Products -->
+                            <div class="total-products">
+                                {{-- <p><span>186</span> products found</p> --}}
+                            </div>
+                            <!-- Sorting -->
+                            <div class="product-sorting d-flex">
+                                <p>Sort by:</p>
 
-                                        {{-- <select name="select" id="sortByselect">
+                                {{-- <select name="select" id="sortByselect">
                                             <option value="newest">Newest</option>
                                             <option value="A to Z">A to Z</option>
                                             <option value="Z to A">Z to</option>
@@ -243,78 +243,74 @@
                                             <option value="high to low">Price: $$ - $</option>
                                             <option value="low to high">Price: $ - $$</option>
                                         </select> --}}
-                                        <select name="select" id="sortByselect">
-                                            <option value="newest" {{ $filteredSelectedValue == 'newest' ? 'selected' : '' }}>Newest</option>
-                                            <option value="A to Z" {{ $filteredSelectedValue == 'A to Z' ? 'selected' : '' }}>A to Z</option>
-                                            <option value="Z to A" {{ $filteredSelectedValue == 'Z to A' ? 'selected' : '' }}>Z to A</option>
-                                            <option value="high to low" {{ $filteredSelectedValue == 'high to low' ? 'selected' : '' }}>Price: $$ - $</option>
-                                            <option value="low to high" {{ $filteredSelectedValue == 'low to high' ? 'selected' : '' }}>Price: $ - $$</option>
-                                        </select>
-                                        <input type="submit" class="d-none" value="">
+                                <select name="select" id="sortByselect">
+                                    <option value="newest" {{ $filteredSelectedValue == 'newest' ? 'selected' : '' }}>
+                                        Newest</option>
+                                    <option value="A to Z" {{ $filteredSelectedValue == 'A to Z' ? 'selected' : '' }}>A to
+                                        Z</option>
+                                    <option value="Z to A" {{ $filteredSelectedValue == 'Z to A' ? 'selected' : '' }}>Z to
+                                        A</option>
+                                    <option value="high to low"
+                                        {{ $filteredSelectedValue == 'high to low' ? 'selected' : '' }}>Price: $$ - $
+                                    </option>
+                                    <option value="low to high"
+                                        {{ $filteredSelectedValue == 'low to high' ? 'selected' : '' }}>Price: $ - $$
+                                    </option>
+                                </select>
+                                <input type="submit" class="d-none" value="">
 
-                                    </div>
-                                </div>
                             </div>
                         </div>
-
-                        <div class="row">
-                            <h4 style="margin-bottom: 20px;">Products</h4>
-                            @if ($paginatedGroupedData->isEmpty())
-
-                                <p style="text-align: center;">No products found.</p>
-                            @else
-                                @foreach ($paginatedGroupedData as $modelId => $productGroup)
-                                    <div class="col-12 col-sm-6 col-lg-3" id="product-list">
-
-                                        <div class="single-product-wrapper" style="border: solid 1px #dddddd">
-
-                                            <div class="product-img">
-
-                                                <img src="{{ asset('storage/products/' . $productGroup->first()->image) }}"
-                                                    alt="Product Image"
-                                                    style="border-radius: 3px; width: 100%; height: 200px; object-fit: cover;">
-                                            </div>
-
-                                            <div class="product-description" style="margin-bottom: 20px;">
-                                                <a href="{{ route('user.productDetails', ['model_id' => $modelId]) }}">
-                                                    <h6 class="text-center">
-                                                        {{ trim(strstr($productGroup->first()->name, '(', true)) }}</h6>
-                                                    <!-- Display model name -->
-                                                </a>
-
-                                                <div class="hover-content">
-                                                    <div class="add-to-cart-btn">
-                                                        <a href="#" class="btn essence-btn">Add to Cart</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            @endif
-                        </div>
-
-                    </div>
-                    <!-- Pagination -->
-                    <div>
-                        {{ $paginatedGroupedData->links() }}
                     </div>
                 </div>
+
+                <div class="row">
+                    <h4 style="margin-bottom: 20px;">Products</h4>
+                    @if ($paginatedGroupedData->isEmpty())
+                        <p style="text-align: center;">No products found.</p>
+                    @else
+                        @foreach ($paginatedGroupedData as $modelId => $productGroup)
+                            <div class="col-12 col-sm-6 col-lg-3" id="product-list">
+                                <div class="single-product-wrapper" style="border: solid 1px #dddddd">
+                                    <a href="{{ route('user.productDetails', ['model_id' => $modelId]) }}">
+                                        <div class="product-img">
+                                            <img src="{{ asset('storage/products/' . $productGroup->first()->image) }}"
+                                                alt="Product Image"
+                                                style="border-radius: 3px; width: 100%; height: 200px; object-fit: cover;">
+                                        </div>
+                                        <div class="product-description" style="margin-bottom: 20px;">
+                                            <h6 class="text-center">
+                                                {{ trim(strstr($productGroup->first()->name, '(', true)) }}</h6>
+                                            <!-- Display model name -->
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
             </div>
-            </form>
+        </div>
+        <!-- Pagination -->
+        <div>
+            {{ $paginatedGroupedData->links() }}
+        </div>
+        </div>
+        </div>
+        </form>
         </div>
     </section>
 
 @endsection
 @section('script')
 
-<script>
-    $(document).ready(function() {
-        // Automatically submit form when option is selected from combo box
-        $('#sortByselect, #category').change(function() {
-            $('#sortAndFilterForm').submit();
+    <script>
+        $(document).ready(function() {
+            // Automatically submit form when option is selected from combo box
+            $('#sortByselect, #category').change(function() {
+                $('#sortAndFilterForm').submit();
+            });
         });
-    });
-</script>
+    </script>
 
 @endsection
