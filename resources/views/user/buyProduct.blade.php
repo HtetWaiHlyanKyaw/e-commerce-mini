@@ -126,33 +126,23 @@
                             @if (Auth::check() && Auth::user()->usertype == 'customer')
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <button id="minusBtn" class="btn btn-sm btn-primary"><i
-                                                class="fa fa-minus"></i></button>
+                                        <button id="minusBtn" class="btn btn-sm btn-primary"><i class="fa fa-minus"></i></button>
                                     </div>
-                                    <input type="number"value="1" style="width:50px" id="qty"
-                                        class="form-control text-center mx-1" min="1" max="1" readonly>
+                                    <input type="number" value="1" style="width:50px" id="qty" class="form-control text-center mx-1" min="1" max="1" readonly>
                                     <div class="input-group-append">
-                                        <button id="plusBtn" class="btn btn-sm btn-primary"><i
-                                                class="fa fa-plus"></i></button>
+                                        <button id="plusBtn" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button>
                                     </div>
                                 </div>
-
-                                <input type="hidden" name="product_id" id="product_id_2">
-                                <input type="hidden" name="qtyHidden" id="qtyHidden" value="1">
-                                <button class="btn btn-primary ml-md-2 mt-2 mt-md-0" id="buyNowButton">Buy Now</button>
-
-                                <button type="button" id="cartBtn" class="btn btn-primary ml-md-2 mt-2 mt-md-0"><i
-                                        class="fa-solid fa-cart-shopping"></i> Add to Cart</button>
+                                <form action="{{ route('user.checkout') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="product_id" id="product_id_2">
+                                    <input type="hidden" name="qtyHidden" id="qtyHidden" value="1">
+                                    <button type="submit" class="btn btn-primary ml-md-2 mt-2 mt-md-0">Buy Now</button>
+                                </form>
+                                <button type="button" id="cartBtn" class="btn btn-primary ml-md-2 mt-2 mt-md-0"><i class="fa-solid fa-cart-shopping"></i> Add to Cart</button>
                                 <input type="hidden" id="userId" value="{{ Auth::user()->id }}">
-                                {{-- <input type="hidden" name="product_id" id="product_id" value="{{ $products->first()->id }}"> --}}
                             @elseif (!Auth::check())
-                                {{-- Show a message or redirect to login for non-authenticated users --}}
-                                {{-- <div class="alert alert-warning mt-3" role="alert">
-                                    If you want to buy this product, you need to <a href="{{ route('user.login') }}"
-                                        class="alert-link">login</a> first.
-                                </div> --}}
-                                <a href="{{route('user.login')}}"><button type="button" id="cartBtn" class="btn btn-primary ml-md-2 mt-2 mt-md-0"><i
-                                    class="fa-solid fa-cart-shopping"></i> Add to Cart</button></a>
+                                <a href="{{ route('user.login') }}"><button type="button" id="cartBtn" class="btn btn-primary ml-md-2 mt-2 mt-md-0"><i class="fa-solid fa-cart-shopping"></i> Add to Cart</button></a>
                             @endif
                         </div>
                     </div>

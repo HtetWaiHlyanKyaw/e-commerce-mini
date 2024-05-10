@@ -39,6 +39,11 @@ class Product extends Model
     {
         return $this->belongsTo(ProductModel::class);
     }
+     // Define the relationship with reviews
+     public function reviews()
+     {
+         return $this->hasMany(Review::class);
+     }
 
     public static function updateQuantity($productId, $quantity)
     {
