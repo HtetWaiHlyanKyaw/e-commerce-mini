@@ -32,6 +32,8 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $this->vali($request);
+        // dd($request->display, $request->resolution, $request->os, $request->chipset, $request->main_camera, $request->selfie_camera, $request->battery, $request->charging);
+
         $data = $this->dataArrange($request);
         if ($request->hasfile('image')) {
             $imageName = uniqid() . $request->file('image')->getClientOriginalName();
@@ -104,7 +106,14 @@ class ProductController extends Controller
             'quantity' => 'required',
             'low_stock' => 'required',
             'description' => 'required',
-
+            'display' => 'required',
+            'resolution' => 'required',
+            'os' => 'required',
+            'chipset' => 'required',
+            'main_camera' => 'required',
+            'selfie_camera' => 'required',
+            'battery' => 'required',
+            'charging' => 'required',
         ];
 
         Validator::make($request->all(), $rules)->validate();
@@ -124,6 +133,14 @@ class ProductController extends Controller
             'quantity' => 'required',
             'low_stock' => 'required',
             'description' => 'required',
+            'display' => 'required',
+            'resolution' => 'required',
+            'os' => 'required',
+            'chipset' => 'required',
+            'main_camera' => 'required',
+            'selfie_camera' => 'required',
+            'battery' => 'required',
+            'charging' => 'required',
         ])->validate();
     }
 
@@ -139,6 +156,14 @@ class ProductController extends Controller
             'quantity' => $request->quantity,
             'low_stock' => $request->low_stock,
             'description' => $request->description,
+            'display' => $request->display,
+            'resolution' => $request->resolution,
+            'os' => $request->os,
+            'chipset' => $request->chipset,
+            'main_camera' => $request->main_camera,
+            'selfie_camera' => $request->selfie_camera,
+            'battery' => $request->battery,
+            'charging' => $request->charging,
         ];
     }
 

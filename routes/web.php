@@ -195,7 +195,9 @@ Route::get('/', [PageController::class, 'index'])->name('user.page');
 Route::get('/regular_page', [UserController::class, 'RegularPage'])->name('user.rePage');
 Route::get('/contact', [UserController::class, 'contact'])->name('user.contact');
 Route::get('/singleBlog', [UserController::class, 'singleBlog'])->name('user.Sblog');
-Route::POST('/checkout', [UserController::class, 'checkout'])->name('user.checkout');
+// Route::POST('/checkout', [UserController::class, 'checkout'])->name('user.checkout');
+Route::get('/checkout', [UserController::class, 'checkout'])->name('user.checkout');
+
 Route::get('/blog', [UserController::class, 'blog'])->name('user.blog');
 Route::get('/productDetail', [UserController::class, 'productDetail'])->name('user.detail');
 Route::get('/comments/{product_id}/{limit}', [ShopController::class, 'fetchComments']);

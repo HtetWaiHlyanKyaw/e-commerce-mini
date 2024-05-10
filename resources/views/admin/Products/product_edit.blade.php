@@ -2,11 +2,11 @@
 @section('title', 'Product Edit Page')
 
 @section('style')
-<style>
-    .header-color {
-        color: #5d9bff;
-    }
-</style>
+    <style>
+        .header-color {
+            color: #5d9bff;
+        }
+    </style>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
 
@@ -41,7 +41,7 @@
 
         {{-- Product update Form --}}
         <div class="container-fluid">
-            <div class="col-lg-6 offset-lg-3">
+            <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title">
@@ -66,22 +66,40 @@
                         <form action="{{ route('product.update', $product->id) }}" method="post"
                             enctype="multipart/form-data">
                             @csrf
+                            <div class="row">
+                                <div class="col">
+                                    <label for="productName" class="form-label">Product Name</label>
+                                    <div class="form-group mb-3">
 
-                            <label for="productName" class="form-label">Product Name</label>
-                            <div class="form-group mb-3">
-
-                                <input type="text" name="productName"
-                                    class="form-control @error('productName') is-invalid @enderror"
-                                    value="{{ old('productName', $product->name) }}">
+                                        <input type="text" name="productName"
+                                            class="form-control @error('productName') is-invalid @enderror"
+                                            value="{{ old('productName', $product->name) }}">
 
 
-                                @error('productName')
-                                    <div class="text-danger">
-                                        {{ $message }}
+                                        @error('productName')
+                                            <div class="text-danger">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
-                                @enderror
-                            </div>
+                                </div>
+                                <div class="col">
+                                    <label for="display" class="form-label">Display</label>
+                                    <div class="form-group mb-3">
 
+                                        <input type="text" name="display"
+                                            class="form-control @error('display') is-invalid @enderror"
+                                            value="{{ old('display', $product->display) }}">
+
+
+                                        @error('productName')
+                                            <div class="text-danger">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
                             <label for="image" class="form-label">Product Image</label>
                             <div class="form-group mb-3">
 
@@ -97,28 +115,49 @@
                                 @enderror
                             </div>
                             {{-- Brand Call --}}
-                            <div class="form-group mb-3">
-                                <label for="BrandName" class="form-label">Brand</label>
-                                <select class="form-select @error('BrandName') is-invalid @enderror brandname"
-                                    name="BrandName" aria-label="Default select example">
-                                    <option value="">Choose Brand</option>
-                                    @foreach ($brands as $brand)
-                                        <option value="{{ $brand->id }}"
-                                            @if ($product->brand_id == $brand->id) selected @endif>
-                                            {{ $brand->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                            <div class="row">
+                                <div class="col">
+                                <div class="form-group mb-3">
+                                    <label for="BrandName" class="form-label">Brand</label>
+                                    <select class="form-select @error('BrandName') is-invalid @enderror brandname"
+                                        name="BrandName" aria-label="Default select example">
+                                        <option value="">Choose Brand</option>
+                                        @foreach ($brands as $brand)
+                                            <option value="{{ $brand->id }}"
+                                                @if ($product->brand_id == $brand->id) selected @endif>
+                                                {{ $brand->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
 
-                                @error('BrandName')
-                                    <div class="text-danger">
-                                        {{ $message }}
+                                    @error('BrandName')
+                                        <div class="text-danger">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label for="resolution" class="form-label">Resolution</label>
+                                    <div class="form-group mb-3">
+
+                                        <input type="text" name="resolution"
+                                            class="form-control @error('resolution') is-invalid @enderror"
+                                            value="{{ old('resolution', $product->resolution) }}">
+
+
+                                        @error('resolution')
+                                            <div class="text-danger">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
-                                @enderror
+                            </div>
                             </div>
 
-
                             {{-- Model Call --}}
+                            <div class="row">
+                            <div class="col">
                             <div class="form-group mb-3">
                                 <label for="ModelName" class="form-label">Model</label>
                                 <select class="form-select @error('ModelName') is-invalid @enderror modelname"
@@ -140,8 +179,26 @@
                                     </div>
                                 @enderror
                             </div>
+                        </div>
+                            <div class="col">
+                                <label for="os" class="form-label">OS</label>
+                                <div class="form-group mb-3">
+
+                                    <input type="text" name="os"
+                                        class="form-control @error('os') is-invalid @enderror"
+                                        value="{{ old('os', $product->os) }}">
 
 
+                                    @error('os')
+                                        <div class="text-danger">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                        <div class="col">
                             <label for="storage_option" class="form-label">Storage Option</label>
                             <div class="form-group mb-3">
 
@@ -156,7 +213,26 @@
                                     </div>
                                 @enderror
                             </div>
+                        </div>
+                            <div class="col">
+                                <label for="chipset" class="form-label">Chipset</label>
+                                <div class="form-group mb-3">
 
+                                    <input type="text" name="chipset"
+                                        class="form-control @error('chipset') is-invalid @enderror"
+                                        value="{{ old('chipset', $product->chipset) }}">
+
+
+                                    @error('chipset')
+                                        <div class="text-danger">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
                             <label for="color" class="form-label">Color</label>
                             <div class="form-group mb-3">
 
@@ -171,7 +247,27 @@
                                     </div>
                                 @enderror
                             </div>
+                        </div>
 
+                            <div class="col">
+                                <label for="main_camera" class="form-label">Main Camera</label>
+                                <div class="form-group mb-3">
+
+                                    <input type="text" name="main_camera"
+                                        class="form-control @error('main_camera') is-invalid @enderror"
+                                        value="{{ old('main_camera', $product->main_camera) }}">
+
+
+                                    @error('main_camera')
+                                        <div class="text-danger">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
                             <label for="price" class="form-label">Price</label>
                             <div class="form-group mb-3">
                                 <input type="text" name="price"
@@ -185,7 +281,26 @@
                                     </div>
                                 @enderror
                             </div>
+                        </div>
+                        <div class="col">
+                            <label for="selfie_camera" class="form-label">Selfie Camera</label>
+                                <div class="form-group mb-3">
 
+                                    <input type="text" name="selfie_camera"
+                                        class="form-control @error('selfie_camera') is-invalid @enderror"
+                                        value="{{ old('selfie_camera', $product->selfie_camera) }}">
+
+
+                                    @error('selfie_camera')
+                                        <div class="text-danger">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                        </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
                             <label for="quantity" class="form-label">Quantity</label>
                             <div class="form-group mb-3">
 
@@ -200,7 +315,26 @@
                                     </div>
                                 @enderror
                             </div>
+                        </div>
+                        <div class="col">
+                            <label for="battery" class="form-label">Battery</label>
+                                <div class="form-group mb-3">
 
+                                    <input type="text" name="battery"
+                                        class="form-control @error('battery') is-invalid @enderror"
+                                        value="{{ old('battery', $product->battery) }}">
+
+
+                                    @error('battery')
+                                        <div class="text-danger">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                        </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
                             <label for="low_stock" class="form-label">Low Stock</label>
                             <div class="form-group mb-3">
 
@@ -215,12 +349,29 @@
                                     </div>
                                 @enderror
                             </div>
+                        </div>
+                        <div class="col">
+                            <label for="charging" class="form-label">Charging</label>
+                                <div class="form-group mb-3">
 
+                                    <input type="text" name="charging"
+                                        class="form-control @error('charging') is-invalid @enderror"
+                                        value="{{ old('charging', $product->charging) }}">
+
+
+                                    @error('charging')
+                                        <div class="text-danger">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                        </div>
+                        </div>
                             <label for="description" class="form-label">Description</label>
                             <div class="form-group mb-3">
 
-                                <textarea name="description" cols="20" rows="5" class="form-control  @error('description') is-invalid @enderror"
-                                    >{{old('description', $product->description)}}</textarea>
+                                <textarea name="description" cols="20" rows="5"
+                                    class="form-control  @error('description') is-invalid @enderror">{{ old('description', $product->description) }}</textarea>
 
 
                                 @error('description')
@@ -233,7 +384,7 @@
                             {{-- update --}}
                             <div class="text-center">
                                 <a href="{{ route('product.index') }}"><input type="button" value="Cancel"
-                                    class="btn btn-outline-danger btn-lg border-2 px-3 me-3"></a>
+                                        class="btn btn-outline-danger btn-lg border-2 px-3 me-3"></a>
                                 <input type="submit" value="Update" class="btn btn-lg btn-primary px-3">
                             </div>
                         </form>

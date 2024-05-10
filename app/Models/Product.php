@@ -20,6 +20,14 @@ class Product extends Model
         'quantity',
         'low_stock',
         'description',
+        'display',
+        'resolution',
+        'chipset',
+        'os',
+        'main_camera',
+        'selfie_camera',
+        'battery',
+        'charging',
     ];
 
     public function brand()
