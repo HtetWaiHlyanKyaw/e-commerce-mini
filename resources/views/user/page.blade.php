@@ -39,8 +39,8 @@
                 height: 22vw;
                 margin: 0 auto;
                 /* display: flex;
-                                                                align-items: center;
-                                                                justify-content: center; */
+                                                                    align-items: center;
+                                                                    justify-content: center; */
             }
         }
 
@@ -213,17 +213,18 @@
                                     <div class="hover-content">
                                         <!-- Add to Cart -->
                                         <div class="add-to-cart-btn">
-                                            <button class="btn essence-btn add-to-cart"
-                                                data-product-id="{{ $topProduct->first()->id }}">Add to Cart</button>
+                                            @if (Auth::check() && Auth::user()->usertype == 'customer')
+                                                    <button class="btn essence-btn add-to-cart"
+                                                        data-product-id="{{ $topProduct->first()->id }}">Add to
+                                                        Cart</button>
+                                                @elseif (!Auth::check())
+                                                <a href="{{ route('user.login') }}" class="btn essence-btn">Add to Cart</a>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
-
-
-
-
                     </div>
                 </div>
             </div>
@@ -295,9 +296,11 @@
                                     <div class="hover-content">
                                         <!-- Add to Cart -->
                                         <div class="add-to-cart-btn">
-                                            @if (Auth::check() && Auth::user()->user_type == 'customer')
+                                            @if (Auth::check() && Auth::user()->usertype == 'customer')
                                                 <button class="btn essence-btn add-to-cart"
                                                     data-product-id="{{ $newProduct->first()->id }}">Add to Cart</button>
+                                            @elseif (!Auth::check())
+                                                <a href="{{ route('user.login') }}" class="btn essence-btn">Add to Cart</a>
                                             @endif
                                         </div>
                                     </div>
