@@ -39,8 +39,8 @@
                 height: 22vw;
                 margin: 0 auto;
                 /* display: flex;
-                                                    align-items: center;
-                                                    justify-content: center; */
+                                                                align-items: center;
+                                                                justify-content: center; */
             }
         }
 
@@ -213,7 +213,8 @@
                                     <div class="hover-content">
                                         <!-- Add to Cart -->
                                         <div class="add-to-cart-btn">
-                                            <button class="btn essence-btn add-to-cart" data-product-id="{{ $topProduct->first()->id }}">Add to Cart</button>
+                                            <button class="btn essence-btn add-to-cart"
+                                                data-product-id="{{ $topProduct->first()->id }}">Add to Cart</button>
                                         </div>
                                     </div>
                                 </div>
@@ -294,14 +295,18 @@
                                     <div class="hover-content">
                                         <!-- Add to Cart -->
                                         <div class="add-to-cart-btn">
-                                            <button class="btn essence-btn add-to-cart" data-product-id="{{ $newProduct->first()->id }}">Add to Cart</button>
+                                            @if (Auth::check() && Auth::user()->user_type == 'customer')
+                                                <button class="btn essence-btn add-to-cart"
+                                                    data-product-id="{{ $newProduct->first()->id }}">Add to Cart</button>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
-                        <input type="hidden" id="userId" value="{{ Auth::user()->id }}">
-
+                        @if (Auth::check())
+                            <input type="hidden" id="userId" value="{{ Auth::user()->id }}">
+                        @endif
                     </div>
                 </div>
             </div>
@@ -362,8 +367,8 @@
                     },
                     dataType: 'json',
                     success: function(response) {
-                        // Redirect to the shop page
-                        window.location.href = '{{ route('user.shop') }}';
+                        // Redirect to localhost:8000
+                        window.location.href = 'http://localhost:8000';
                     },
                     error: function(xhr, textStatus, errorThrown) {
                         // Handle error responses

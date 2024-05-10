@@ -87,8 +87,8 @@ class ShopController extends Controller
             ->count('comments');
 
         $user = auth()->user();
-        $cartProductIds = $user->cart->pluck('product_id')->toArray() ?? [];
-        $productExistsInCart = in_array($modelId, $cartProductIds);
+        // $cartProductIds = $user->cart->pluck('product_id')->toArray() ?? [];
+        // $productExistsInCart = in_array($modelId, $cartProductIds);
 
         if ($user === null) {
             $hasBoughtProductModel = false;
@@ -122,7 +122,6 @@ class ShopController extends Controller
             'user',
             'cart',
             'products',
-            'productExistsInCart' // Pass productExistsInCart to the view
         ));
     }
 
