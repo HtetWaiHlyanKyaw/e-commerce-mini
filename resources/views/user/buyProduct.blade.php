@@ -133,12 +133,12 @@
                                         <button id="plusBtn" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button>
                                     </div>
                                 </div>
-                                <form action="{{ route('user.checkout') }}" method="POST">
-                                    @csrf
+                                {{-- <form action="{{ route('user.checkout') }}" method="POST">
+                                    @csrf --}}
                                     <input type="hidden" name="product_id" id="product_id_2">
                                     <input type="hidden" name="qtyHidden" id="qtyHidden" value="1">
-                                    <button type="submit" class="btn btn-primary ml-md-2 mt-2 mt-md-0">Buy Now</button>
-                                </form>
+                                    <button id="buyNowButton" class="btn btn-primary ml-md-2 mt-2 mt-md-0">Buy Now</button>
+                                {{-- </form> --}}
                                 <button type="button" id="cartBtn" class="btn btn-primary ml-md-2 mt-2 mt-md-0"><i class="fa-solid fa-cart-shopping"></i> Add to Cart</button>
                                 <input type="hidden" id="userId" value="{{ Auth::user()->id }}">
                             @elseif (!Auth::check())
