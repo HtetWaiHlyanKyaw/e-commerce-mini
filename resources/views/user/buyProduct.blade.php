@@ -4,7 +4,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 @section('cart')
-    <a href="{{route('cartList')}}" class="btn position-relative">
+    <a href="{{ route('cartList') }}" class="btn position-relative">
         @if ($cart && count($cart) > 0)
             <img src="{{ asset('user/img/core-img/bag.svg') }}" alt="">
             <span style="margin-top:32px; margin-left:10px"
@@ -56,11 +56,12 @@
             color: #ffcc00;
             /* Change color of hovered stars and those before it */
         }
+
         #qty::-webkit-inner-spin-button,
-#qty::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
+        #qty::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
     </style>
 
 @endsection
@@ -126,11 +127,14 @@
                             @if (Auth::check() && Auth::user()->usertype == 'customer')
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <button id="minusBtn" class="btn btn-sm btn-primary"><i class="fa fa-minus"></i></button>
+                                        <button id="minusBtn" class="btn btn-sm btn-primary"><i
+                                                class="fa fa-minus"></i></button>
                                     </div>
-                                    <input type="number" value="1" style="width:50px" id="qty" class="form-control text-center mx-1" min="1" max="1" readonly>
+                                    <input type="number" value="1" style="width:50px" id="qty"
+                                        class="form-control text-center mx-1" min="1" max="1" readonly>
                                     <div class="input-group-append">
-                                        <button id="plusBtn" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button>
+                                        <button id="plusBtn" class="btn btn-sm btn-primary"><i
+                                                class="fa fa-plus"></i></button>
                                     </div>
                                 </div>
                                 <form action="{{ route('user.checkout') }}" method="POST">
@@ -139,10 +143,13 @@
                                     <input type="hidden" name="qtyHidden" id="qtyHidden" value="1">
                                     <button type="submit" class="btn btn-primary ml-md-2 mt-2 mt-md-0">Buy Now</button>
                                 </form>
-                                <button type="button" id="cartBtn" class="btn btn-primary ml-md-2 mt-2 mt-md-0"><i class="fa-solid fa-cart-shopping"></i> Add to Cart</button>
+                                <button type="button" id="cartBtn" class="btn btn-primary ml-md-2 mt-2 mt-md-0"><i
+                                        class="fa-solid fa-cart-shopping"></i> Add to Cart</button>
                                 <input type="hidden" id="userId" value="{{ Auth::user()->id }}">
                             @elseif (!Auth::check())
-                                <a href="{{ route('user.login') }}"><button type="button" id="cartBtn" class="btn btn-primary ml-md-2 mt-2 mt-md-0"><i class="fa-solid fa-cart-shopping"></i> Add to Cart</button></a>
+                                <a href="{{ route('user.login') }}"><button type="button" id="cartBtn"
+                                        class="btn btn-primary ml-md-2 mt-2 mt-md-0"><i
+                                            class="fa-solid fa-cart-shopping"></i> Add to Cart</button></a>
                             @endif
                         </div>
                     </div>
@@ -152,118 +159,60 @@
                 <div class="card-header" style="background-color: rgb(105, 105, 105); color: white">
                     Product Specifications
                 </div>
-                {{-- <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <h6>Display</h6>
-                        </div>
-                        <div class="col-md-9">
-                            <p id="display_text"><p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <h6>Resolution</h6>
-                        </div>
-                        <div class="col-md-9">
-                            <p id="resolution_text"></p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <h6>OS</h6>
-                        </div>
-                        <div class="col-md-9">
-                            <p id="OS_text"></p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <h6>Chipset</h6>
-                        </div>
-                        <div class="col-md-9">
-                            <p id="chipset_text"></p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <h6>Main Camera</h6>
-                        </div>
-                        <div class="col-md-9">
-                            <p id="main_camera_text"></p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <h6>Selfie Camera</h6>
-                        </div>
-                        <div class="col-md-9">
-                            <p id="selfie_camera_text"></p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <h6>Battery</h6>
-                        </div>
-                        <div class="col-md-9">
-                            <p id="battery_text"></p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <h6>Charging</h6>
-                        </div>
-                        <div class="col-md-9">
-                            <p id="charging_text"></p>
-                        </div>
-                    </div>
-                </div> --}}
                 <table class="table table-bordered">
                     <tbody>
                         <tr>
                             <th class="col-2">Display</th>
-                            <td class="col-10"><p id="display_text"></p></td>
+                            <td class="col-10">
+                                <p id="display_text"></p>
+                            </td>
                         </tr>
                         <tr>
                             <th>Resolution</th>
-                            <td><p id="resolution_text"></p></td>
+                            <td>
+                                <p id="resolution_text"></p>
+                            </td>
                         </tr>
                         <tr>
                             <th>Chipset</th>
-                            <td><p id="chipset_text"></p></td>
+                            <td>
+                                <p id="chipset_text"></p>
+                            </td>
                         </tr>
                         <tr>
                             <th>OS</th>
-                            <td><p id="OS_text"></p></td>
+                            <td>
+                                <p id="OS_text"></p>
+                            </td>
                         </tr>
                         <tr>
                             <th>Main Camera</th>
-                            <td><p id="main_camera_text"></p></td>
+                            <td>
+                                <p id="main_camera_text"></p>
+                            </td>
                         </tr>
                         <tr>
                             <th>Selfie Camera</th>
-                            <td><p id="selfie_camera_text"></p></td>
+                            <td>
+                                <p id="selfie_camera_text"></p>
+                            </td>
                         </tr>
                         <tr>
                             <th>Battery</th>
-                            <td><p id="battery_text"></p></td>
+                            <td>
+                                <p id="battery_text"></p>
+                            </td>
                         </tr>
                         <tr>
                             <th>Charging</th>
-                            <td><p id="charging_text"></p></td>
+                            <td>
+                                <p id="charging_text"></p>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            {{-- <div class="bg-light " id="reviews" style="margin-top: 50px;">
-                <h5>Reviews</h5>
-                <br>
-                @foreach ($reviews as $review)
-                <h6>{{$review->user->name}}</h6>
-                <p>{{$review->comments}}</p>
-                <br>
-                @endforeach
-            </div> --}}
+
             @if ($totalComments === 0)
                 <h5 style="margin-top: 50px;">No Reviews</h5><br>
             @elseif($totalComments === 1)
@@ -272,21 +221,7 @@
                 <h5 style="margin-top: 50px;">{{ $totalComments }} Reviews</h5><br>
             @endif
             <div class="bg-light" id="comments" style=" margin-bottom: 50px;">
-                {{-- <br> --}}
-                {{-- @foreach ($reviews as $review)
-                    <h6>{{$review->user->name}}</h6>
-                    <div class="comment">{{ $review->comments }}</div>
-                    <div class="comment">{{ \Carbon\Carbon::parse($review->created_at)->format('F j, Y') }}</div>
-                    <br>
-                @endforeach --}}
             </div>
-            {{-- <div class="form-group row">
-                <div class="col-sm-8 d-flex align-items-center">
-                <input type="text" class="form-control" placeholder="Give feedback">
-                <button class="btn btn-primary" id="give-feedback"><i class="fa fa-send"></i></button>
-                </div>
-                <button id="show-more-comments" class="btn btn-outline-primary">Show more comments</button>
-            </div> --}}
             @if (Auth::check() && Auth::user()->usertype === 'customer' && $hasBoughtProductModel === true)
                 <div class="form-group row align-items-center">
                     <div class="col-md-9">
@@ -331,28 +266,19 @@
                     </div>
                 </div>
             @endif
-            {{-- @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif --}}
         </div>
     </div>
 @endsection
 
 @section('script')
-<script>
-    document.getElementById("buyNowButton").addEventListener("click", function() {
-        var productId = document.getElementById("product_id_2").value;
-        var qtyHidden = document.getElementById("qtyHidden").value;
-        var url = "{{ route('user.checkout') }}?product_id=" + productId + "&qtyHidden=" + qtyHidden;
-        window.location.href = url;
-    });
-</script>
+    <script>
+        document.getElementById("buyNowButton").addEventListener("click", function() {
+            var productId = document.getElementById("product_id_2").value;
+            var qtyHidden = document.getElementById("qtyHidden").value;
+            var url = "{{ route('user.checkout') }}?product_id=" + productId + "&qtyHidden=" + qtyHidden;
+            window.location.href = url;
+        });
+    </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
@@ -434,9 +360,9 @@
 
                 document.getElementById("qty").max = selectedProduct.quantity;
                 console.log("Quantity ", selectedProduct.quantity);
-                 console.log("Selected Product ID:", selectedProduct.id);
-                 console.log("Selected Product ID 2:", selectedProduct.id);
-                 console.log("Selected Product Name:", selectedProduct.name);
+                console.log("Selected Product ID:", selectedProduct.id);
+                console.log("Selected Product ID 2:", selectedProduct.id);
+                console.log("Selected Product Name:", selectedProduct.name);
             }
         }
 
@@ -458,29 +384,28 @@
             });
             // Get the initial quantity value
             let qty = parseInt($('#qty').val());
-const maxQty = parseInt($('#qty').attr('max'));
-const minQty = parseInt($('#qty').attr('min'));
+            const maxQty = parseInt($('#qty').attr('max'));
+            const minQty = parseInt($('#qty').attr('min'));
 
-// Increment quantity when plus button is clicked
-$('#plusBtn').on('click', function() {
-    if (qty < maxQty) { // Check if quantity is less than the maximum
-        qty = qty + 1;
-        $('#qty').val(qty);
-        $('#qtyHidden').val(qty);
+            // Increment quantity when plus button is clicked
+            $('#plusBtn').on('click', function() {
+                if (qty < maxQty) { // Check if quantity is less than the maximum
+                    qty = qty + 1;
+                    $('#qty').val(qty);
+                    $('#qtyHidden').val(qty);
 
-    }
-});
+                }
+            });
 
-// Decrement quantity when minus button is clicked
-$('#minusBtn').on('click', function() {
-    if (qty > minQty) { // Check if quantity is greater than the minimum
-        qty = qty - 1;
-        $('#qty').val(qty);
-        $('#qtyHidden').val(qty);
+            // Decrement quantity when minus button is clicked
+            $('#minusBtn').on('click', function() {
+                if (qty > minQty) { // Check if quantity is greater than the minimum
+                    qty = qty - 1;
+                    $('#qty').val(qty);
+                    $('#qtyHidden').val(qty);
 
-    }
-});
-
+                }
+            });
 
             //  add to cart
             $('#cartBtn').click(function() {
@@ -498,11 +423,12 @@ $('#minusBtn').on('click', function() {
                     },
                     dataType: 'json', // corrected 'datatype' to 'dataType'
                     success: function(response) {
-                        window.location.href = 'http://localhost:8000/';
+                        // Redirecting to the user.shop named route
+                        window.location.href = '{{ route('user.shop') }}';
                     }
+
                 });
             });
         });
     </script>
-
 @endsection
