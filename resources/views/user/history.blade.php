@@ -33,10 +33,13 @@
 @section('content')
     <div class="container">
         <div class="row">
+            <div class="col-4">
+                @include('user.sidebar')
+            </div>
             @if ($customerPurchases->isEmpty())
                 <p>No Products purchased</p>
             @else
-                <div class="bg-white p-4 border rounded">
+                <div class="col-8 bg-white p-4 border rounded">
                     <table style="background-color:white" id="myTable" class="hover">
 
                         <thead style="background-color: white; color:black;">

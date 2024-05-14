@@ -1,5 +1,10 @@
 @extends('user.master')
 @section('title', 'cart')
+@section('csrf')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
+
+
 @section('content')
     <div class="container-fluid p-5 mt-4">
         {{-- {{dd($data)}} --}}
@@ -59,18 +64,16 @@
                                         <span id="total">
                                             {{ $cart->product_price * $cart->qty }}
                                         </span>
-
                                     </td>
 
-                                    <td class="col-md-2 col-12 d-md-block d-none">
-                                        <a href="">
-                                            <i class="fa-solid fa-square-xmark text-dark fs-4" title="delete item"
-                                                data-toggle="tooltip"></i>
-                                        </a>
+                                    <td class="col-md-2 col-12 d-md-block d-none deleteBtn">
+
+                                        <i class="fa-solid fa-square-xmark text-dark fs-4 " style="cursor: pointer"
+                                            title="delete item" data-toggle="tooltip"></i>
                                     </td>
+                                    <input type="hidden" id="cartId" value="{{ $cart->id }}">
+                                    <input type="hidden" id="productId" value="{{ $cart->product_id }}">
                                 </tr>
-
-                                {{-- price --}}
                             @endforeach
                         </tbody>
                     </table>
@@ -79,9 +82,9 @@
 
                 {{-- Right Cart side --}}
                 <div class="col-lg-4 col-12 p-5 bg-light">
-                    <h4 class="mb-3">Card Detail</h4>
+                    <h4 class="mb-3">Cart Detail</h4>
                     {{-- billing card --}}
-                    <div>
+                    {{-- <div>
                         <a href="">
                             <img src="{{ asset('images/visa.png') }}" alt="card-image" style="width:70px">
                         </a>
@@ -97,7 +100,7 @@
                         <a href="">
                             <img src="{{ asset('images/american express.png') }}" alt="card-image" style="width:70px">>
                         </a>
-                    </div>
+                    </div> --}}
 
                     <div class="mt-5">
                         <div class="d-flex justify-content-between mb-3">
@@ -105,7 +108,6 @@
                             <h6><i class="fa fa-dollar me-1"></i><span id="subTotal">
                                     {{ $subTotal }}</span></h6>
                         </div>
-
                         {{-- Shipping --}}
                         <div class="d-flex justify-content-between mb-3 border-bottom">
                             <h6>Shipping</h6>
@@ -114,7 +116,7 @@
 
                         {{-- Total --}}
                         <div class="d-flex justify-content-between mb-3 border-bottom">
-                            <h6>Total <small>(tax incl.)</small></h6>
+                            <h6>Total</small></h6>
                             <h6><i class="fa fa-dollar me-1"></i>
                                 <span id="finalTotal">
                                     {{ $subTotal + 1000 }}
@@ -125,20 +127,21 @@
 
                     {{-- Order and Clear Btn --}}
                     <div class="my-5">
-                        <button class="btn btn-sm btn btn-primary px-3 me-3">
-                            Order
-                        </button>
-
-                        <button class="btn btn-sm btn-danger px-3">
-                            Clear Cart
-                        </button>
+                        <a href="#" id="checkoutButton">
+                            <button class="btn btn-sm btn-primary px-3 me-3">
+                                Checkout
+                            </button>
+                        </a>
+                        <a href="{{ route('cart.clear') }}">
+                            <button class="btn btn-sm btn-danger px-3">
+                                Clear Cart
+                            </button>
+                        </a>
                     </div>
-
                     <div class="alert alert-warning" role="alert">
                         Shipping time may be about one week. <br>
                         After ordered , we will send voucher detail to your email.
                     </div>
-
                 </div>
             </div>
         @endif
@@ -148,6 +151,13 @@
 @section('script')
     <script>
         $(document).ready(function() {
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
             // Increment quantity when plus button is clicked
             $('.plusBtn').on('click', function() {
                 let tr = $(this).parents('tr'); // Find the quantity input
@@ -157,13 +167,7 @@
                 let price = parseInt(tr.find('#price').text()); // text ne yu ya span mho lo
                 let total = price * qty;
                 tr.find('#total').text(total);
-
-
-                let subTotal = parseInt($('#subTotal').text());
-                $('#subTotal').text(subTotal + price);
-
-                $('#finalTotal').text(subTotal + price+ 1000);
-
+                calculate();
             });
 
             // Decrement quantity when minus button is clicked
@@ -179,13 +183,93 @@
                 let price = parseInt(tr.find('#price').text()); // text ne yu ya span mho lo
                 let total = price * qty;
                 tr.find('#total').text(total);
-                let subTotal = parseInt($('#subTotal').text());
+
 
                 if (count > 0) {
-                    $('#subTotal').text(subTotal - price);
-                    $('#finalTotal').text((subTotal - price)+ 1000);
+                    calculate();
                 }
             });
+
+            // delete buttom
+
+            $('.deleteBtn').click(function() {
+                let tr = $(this).parents('tr');
+                let cartId = parseInt(tr.find('#cartId').val());
+                let productId = tr.find('#productId').val();
+
+                $.ajax({
+                    type: 'get',
+                    url: '/cart/product/delete',
+                    data: {
+                        'cartId': cartId
+                    },
+                    dataType: 'json'
+                });
+                tr.remove();
+                calculate();
+            });
+
+
+            // $('#orderBtn').click(function() {
+            //     let orderList = [];
+            //     // let orderNumber= Math.floor(Math.random()* 1000000000);
+            //     $('tr').each(function(index, row) {
+            //         orderList.push({
+            //             'product_id': parseInt($(row).find('#productId').val()),
+            //             // 'orderNumber' :  'unity'+ orderNumber,
+            //             'qty': parseInt($(row).find('#qty').val()),
+            //             'total': parseInt($(row).find('#total')
+            //         .text()), // text ne yuu span na mho lo
+            //         });
+            //     });
+            //     $.ajax({
+            //         type: 'post',
+            //         url: '/customer/purchase',
+            //         data: Object.assign({}, orderList),
+            //         // Corrected syntax for sending data
+            //         dataType: 'json', // Corrected datatype to 'json'
+            //         success: function(response) {
+            //             window.location.href = 'http://localhost:8000/';
+            //         }
+            //     });
+            // });
+
+            // Update the click event handler for the checkout button
+            // Update the click event handler for the checkout button
+            $('#checkoutButton').on('click', function(event) {
+                event.preventDefault(); // Prevent the default anchor link behavior
+
+                // Create an array to store the data of each product in the cart
+                let productsData = [];
+
+                // Iterate through each row (product) in the cart table
+                $('tr').each(function(index, row) {
+                    let productData = {
+                        product_id: $(row).find('#productId').val(), // Get the product ID
+                        quantity: $(row).find('#qty').val(), // Get the quantity
+                        total: $(row).find('#total').text() // Get the total price
+                    };
+                    productsData.push(productData); // Add the product data to the array
+                });
+
+                // Serialize the array of product data as a JSON string
+                let productsJson = JSON.stringify(productsData);
+
+                // Redirect to the checkout2 page and pass the product data as a query parameter
+                window.location.href = 'user/checkout2?products=' + encodeURIComponent(productsJson);
+            });
+
+
+
+            //subTotal Calculate
+            function calculate() {
+                let subTotal = 0;
+                $('tr').each(function(index, row) {
+                    subTotal += parseInt($(row).find('#total').text());
+                });
+                $('#subTotal').text(subTotal);
+                $('#finalTotal').text(subTotal + 1000);
+            }
         });
     </script>
 @endsection

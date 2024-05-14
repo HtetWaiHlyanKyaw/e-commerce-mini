@@ -23,41 +23,51 @@
     </a>
 @endsection
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 p-5"  style="margin-top:50px;">
-            <h4 class="header-color" style="color:#25518f;">Order Summary</h4>
-            <div class="customer-details">
-                <p style="margin-bottom: 5px; "><b>Invoice ID:</b> {{ $customerPurchase->invoice_id }}</p>
-                <p style="margin-bottom: 5px; "><b>Payment Method:</b> {{ $customerPurchase->payment_method }}</p>
-                <p style="margin-bottom: 5px; "><b>Total Quantity:</b> {{ $customerPurchase->total_quantity }}</p>
-                <p style="margin-bottom: 5px; "><b>Total Price: </b>{{ $customerPurchase->total_price }}</p>
-                <p><b>Date:</b> {{ \Carbon\Carbon::parse($customerPurchase->created_at)->format('F j, Y') }}</p>
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                @include('user.sidebar')
             </div>
-        </div>
-        <div class="col-md-4">
-            <h4 class="header-color">Ordered Products</h4>
-            <div class="slip-wrapper">
-                @php $counter = 0 @endphp
-                @foreach ($details as $detail)
-                    <div class="slip ">
+            <div class="col-4" style="margin-top:50px;">
+                <h4 class="header-color" style="color:#25518f;">Order Summary</h4>
+                <div class="customer-details">
+                    <p style="margin-bottom: 5px; "><b>Invoice ID:</b> {{ $customerPurchase->invoice_id }}</p>
+                    <p style="margin-bottom: 5px; "><b>Payment Method:</b> {{ $customerPurchase->payment_method }}</p>
+                    <p style="margin-bottom: 5px; "><b>Total Quantity:</b> {{ $customerPurchase->total_quantity }}</p>
+                    <p style="margin-bottom: 5px; "><b>Total Price: </b>{{ $customerPurchase->total_price }}</p>
+                    <p><b>Date:</b> {{ \Carbon\Carbon::parse($customerPurchase->created_at)->format('F j, Y') }}</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h4 class="header-color">Ordered Products</h4>
+                <div class="slip-wrapper">
+                    @php $counter = 0 @endphp
+                    @foreach ($details as $detail)
+                        <div class="slip ">
 
-                        <img src="{{ asset('storage/products/'.$detail->product->image)}}" style="width: 95%; height: 300px; object-fit: cover;" alt="Product Image" class="product-image">
-                        <div><p style="color: black;">{{ $detail->product->name }}</p></div>
-                        <div style="margin-bottom: 10px; "><strong style="color:#25518f;">Quantity:</strong> {{ $detail->quantity }}</div>
-                        <div style="margin-bottom: 10px;"><strong style="color:#25518f;">Price:</strong> {{ $detail->price }}</div>
-                        <div><strong style="color:#25518f;">Sub Total:</strong> {{ $detail->sub_total }}</div>
-                    </div>
-                    @php $counter++ @endphp
-                    @if ($counter % 10 == 0)
-                        </div><div class="slip-wrapper">
+                            <img src="{{ asset('storage/products/' . $detail->product->image) }}"
+                                style="width: 95%; height: 300px; object-fit: cover;" alt="Product Image"
+                                class="product-image">
+                            <div>
+                                <p style="color: black;">{{ $detail->product->name }}</p>
+                            </div>
+                            <div style="margin-bottom: 10px; "><strong style="color:#25518f;">Quantity:</strong>
+                                {{ $detail->quantity }}</div>
+                            <div style="margin-bottom: 10px;"><strong style="color:#25518f;">Price:</strong>
+                                {{ $detail->price }}</div>
+                            <div><strong style="color:#25518f;">Sub Total:</strong> {{ $detail->sub_total }}</div>
+                        </div>
+                        @php $counter++ @endphp
+                        @if ($counter % 10 == 0)
+                </div>
+                <div class="slip-wrapper">
                     @endif
-                @endforeach
+                    @endforeach
 
+                </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
 @section('script')
 

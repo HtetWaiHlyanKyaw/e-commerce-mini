@@ -39,14 +39,13 @@ class CartController extends Controller
     }
 
 
-
     // Cart List Page
-
     public function cart()
     {
         $data = Cart::where('carts.user_id', Auth::user()->id)
             ->select('carts.*', 'products.image as product_image', 'products.name as product_name', 'products.price as product_price')
             ->leftJoin('products', 'products.id', 'carts.product_id')
+            ->orderBy('id', 'asc')
             ->get();
 
         $subTotal = 0;
@@ -55,5 +54,20 @@ class CartController extends Controller
         }
 
         return view('user.cart', compact('data', 'subTotal'));
+    }
+
+    //Delete Product In cart
+    public function deleteProduct(Request $request)
+    {
+        Cart::where('id', $request->cartId)
+            ->where('user_id', Auth::user()->id)
+            ->delete();
+    }
+
+    //Cart Clear
+    public function clearCart()
+    {
+        Cart::where('user_id', Auth::user()->id)->delete();
+        return redirect()->route('cartList');
     }
 }

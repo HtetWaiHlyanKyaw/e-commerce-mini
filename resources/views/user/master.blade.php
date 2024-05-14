@@ -102,7 +102,7 @@
                 </div>
                 <div>
                     <a href="{{ route('user.profile') }}">
-                        <img src="{{ asset('user/img/core-img/user.svg') }}" alt="" style="width: 20px; height:20px; margin-top:30px; margin-right:25px">
+                        <img src="{{ asset('user/img/core-img/user.svg') }}" alt="User" style="width: 20px; height:20px; margin-top:30px; margin-right:25px">
                     </a>
                 </div>
                 {{-- <div class="dropdown user-login-info" >
