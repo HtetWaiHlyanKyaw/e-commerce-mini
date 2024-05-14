@@ -137,12 +137,12 @@
                                                 class="fa fa-plus"></i></button>
                                     </div>
                                 </div>
-                                <form action="{{ route('user.checkout') }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="product_id" id="product_id_2">
-                                    <input type="hidden" name="qtyHidden" id="qtyHidden" value="1">
-                                    <button type="submit" class="btn btn-primary ml-md-2 mt-2 mt-md-0">Buy Now</button>
-                                </form>
+                                {{-- <form action="{{ route('user.checkout') }}" method="POST">
+                                    @csrf --}}
+                                <input type="hidden" name="product_id" id="product_id_2">
+                                <input type="hidden" name="qtyHidden" id="qtyHidden" value="1">
+                                <button id="buyNowButton" class="btn btn-primary ml-md-2 mt-2 mt-md-0">Buy Now</button>
+                                {{-- </form> --}}
                                 <button type="button" id="cartBtn" class="btn btn-primary ml-md-2 mt-2 mt-md-0"><i
                                         class="fa-solid fa-cart-shopping"></i> Add to Cart</button>
                                 <input type="hidden" id="userId" value="{{ Auth::user()->id }}">
@@ -382,6 +382,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
             // Get the initial quantity value
             let qty = parseInt($('#qty').val());
             const maxQty = parseInt($('#qty').attr('max'));
@@ -407,28 +408,36 @@
                 }
             });
 
-            //  add to cart
-            $('#cartBtn').click(function() {
+      // Add to cart
+        $('#cartBtn').click(function() {
+            let userId = $('#userId').val();
+            let productId = $('#product_id').val();
 
-                let userId = $('#userId').val();
-                let productId = $('#product_id').val();
+            $.ajax({
+                type: 'post',
+                url: '/cart/add',
+                data: {
+                    'userId': userId,
+                    'productId': productId,
+                    'qty': 1 // Explicitly set qty to 1
+                },
+                dataType: 'json',
+                success: function(response) {
+                    // Reset the input fields to 1
+                    $('#qty').val(1);
+                    $('#qtyHidden').val(1);
 
-                $.ajax({
-                    type: 'post',
-                    url: '/cart/add',
-                    data: {
-                        'userId': userId,
-                        'productId': productId,
-                        'qty': qty
-                    },
-                    dataType: 'json', // corrected 'datatype' to 'dataType'
-                    success: function(response) {
-                        // Redirecting to the user.shop named route
-                        window.location.href = '{{ route('user.shop') }}';
-                    }
+                    // Optionally, you can display a success message here
 
-                });
+                    // Redirecting to the user.shop named route
+                    window.location.href = '{{ route('user.shop') }}';
+                },
+                error: function(xhr, status, error) {
+                    // Optionally, handle the error here
+                    console.error('Error adding to cart:', status, error);
+                }
             });
         });
+    });
     </script>
 @endsection

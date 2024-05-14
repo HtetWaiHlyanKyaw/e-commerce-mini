@@ -15,7 +15,7 @@ class SupplierPurchaseController extends Controller
     //
     public function list()
     {
-        $supplierPurchases = SupplierPurchase::with('details', 'supplier')->latest()->get();
+        $supplierPurchases = SupplierPurchase::with('details', 'supplier')->get();
         return view('admin.SupplierPurchases.supplier_purchase_list', compact('supplierPurchases'));
     }
 

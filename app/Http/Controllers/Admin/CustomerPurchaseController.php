@@ -20,7 +20,7 @@ class CustomerPurchaseController extends Controller
     // }
     public function list()
     {
-        $customerPurchases = CustomerPurchase::with('details', 'user')->latest()->get();
+        $customerPurchases = CustomerPurchase::with('details', 'user')->get();
         return view('admin.Customer.customer_purchases', compact('customerPurchases'));
     }
 
@@ -136,8 +136,8 @@ class CustomerPurchaseController extends Controller
             // 'email' => 'required|email',
             'town' => 'required',
             'address' => 'required',
-            'phone_no' => 'required',
-            'payment_method' => 'required',
+            'phone_no' => 'required|string|regex:/^09\d{9}$/',
+            'payment_method' => 'required|string|in:Cash On Delivery,Mobile Banking,Mobile Wallet,Direct Bank Transfer',
             'total_price' => 'required',
             'total_quantity' => 'required',
             'products' => 'required|array', // Assuming you're receiving products data as an array
