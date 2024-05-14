@@ -57,13 +57,14 @@
                 </thead>
                 <tbody>
                     @php
-                    $counter = 1; // Initialize counter variable
+                    $counter = 1;
+                    $totalAdmins = $data->count();// Initialize counter variable
                 @endphp
                     @foreach ($data as $aList)
 
                         <tr class="tr-shadow">
                             {{-- <td class="col-lg-1">{{ $productModel->id }}</td> --}}
-                            <td class="col-lg-1" style="text-align:center;">{{ $counter++}}</td>
+                            <td class="col-lg-1" style="text-align:center;">{{ $totalAdmins-- }}</td>
                             <td class="col-lg-1" style="text-align:center;">{{ $aList->name }}</td>
                             <td class="col-lg-1" style="text-align:center;">{{ $aList->email }}</td>
                             <td class="col-lg-1" style="text-align:center;">{{ $aList->usertype }}</td>
@@ -81,7 +82,9 @@
                                 </a>
                             </td>
                         </tr>
-
+                        @php
+                            $counter++; // Increment counter for the next row
+                        @endphp
                     @endforeach
                 </tbody>
 

@@ -170,33 +170,6 @@ class ShopController extends Controller
         return back()->with('success', 'Comment posted successfully');
     }
 
-    // public function filterProducts(Request $request){
-    //     $brand_id = $request->input('brands');
-    //     $color = $request->input('colors');
-    //     dd($brand_id);
-    //     // $storage = $request ->input('storage');
-    //     $query = Product::with('brand', 'ProductModel')->orderByDesc('created_at');
-
-    //     if ($brand_id !== 'all') {
-
-    //          $query->where('brand_id', $brand_id);
-    //     }
-
-    //     if ($color !== 'all') {
-
-    //         $query->where('color', $color);
-    //     }
-
-    //     // if ($storage !== 'all') {
-
-    //     //     $query->where('storage', $storage);
-    //     // }
-
-    //     $filteredProducts = $query->get();
-    //     return response()->json($filteredProducts);
-
-    // }
-
     public function filterProducts(Request $request)
     {
         $filteredBrands = $request->input('brands');
@@ -275,44 +248,6 @@ class ShopController extends Controller
         return view('user.shop', compact('paginatedGroupedData', 'brands', 'minPrice', 'maxPrice', 'uniqueColors', 'uniqueStorage', 'user', 'cart', 'products','filteredMinPrice','filteredMaxPrice', 'filteredSelectedValue'));
 
     }
-
-    // public function purchaseCreate(Request $request){
-    //     $request->validate([
-    //         'full_name' => 'required|string|max:255',
-    //         'town' => 'required|string|max:255',
-    //         'address' => 'required|string|max:255',
-    //         'phone_no' => 'required|string|regex:/^09\d{9}$/',
-    //         'payment_method' => 'required|string|in:Cash On Delivery,Mobile Banking,Mobile Wallet,Direct Bank Transfer',
-    //         'quantity' => 'required|integer|min:1',
-
-    //     ]);
-    //     $customerPurchase = new CustomerPurchase();
-    //     $customerPurchase->invoice_id = CustomerPurchase::generateInvoiceId();
-    //     $customerPurchase->total_quantity = $request->quantity;
-    //     $customerPurchase->total_price = $request->price;
-    //     $customerPurchase->payment_method = $request->payment_method;
-    //     $customerPurchase->user_id = auth()->user()->id;
-    //     $customerPurchase->town = $request->town;
-    //     $customerPurchase->address = $request->address;
-    //     $customerPurchase->full_name = $request->full_name;
-    //     $customerPurchase->phone = $request->phone_no;
-    //     $customerPurchase->save();
-
-    //     $product = Product::find($request->product_id);
-    //     $detail = new CustomerPurchaseDetail();
-    //     $detail->customer_purchase_id = $customerPurchase->id;
-    //     $detail->product_id = $request->product_id; // Assuming you have product IDs in the selectedProducts array
-    //     $detail->price = $product->price; // Assuming you have product prices in the selectedProducts array
-    //     $detail->quantity = $request->quantity; // Assuming you have product quantities in the selectedProducts array
-    //     $detail->sub_total = $product->price * $request->quantity;
-    //     $detail->save();
-    //     session()->flash('alert', [
-    //         'type' => 'success',
-    //         'message' => 'Purchase Complete. Thank you for shoping with us.',
-    //     ]);
-    //     Product::reduceQuantity($request->product_id, $request->quantity);
-    //     return redirect()->route('user.history');
-    // }
 
     public function purchaseCreate(Request $request)
 {

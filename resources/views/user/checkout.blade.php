@@ -217,8 +217,8 @@
                             <ul class="order-details-form mb-4">
                                 <li><span>Product</span> <span>Total</span></li>
                                 <li>
-                                    {{-- <span>{{ $quantity }}</span>
-                                    <input type="hidden" name="quantity" value="{{ $quantity }}"> --}}
+                                    {{-- <span>{{ $quantity }}</span>--}}
+                                     <input type="hidden" name="quantity" value="{{ $quantity }}">
                                     <span>{{ $product->name }}x {{$quantity}}</span>
                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                                     <span>{{ $product->price }}</span>
