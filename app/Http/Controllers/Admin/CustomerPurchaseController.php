@@ -119,7 +119,7 @@ class CustomerPurchaseController extends Controller
         // Calculate the subtotal, total quantity, shipping, and total
         $subtotal = collect($productsData)->sum('total');
         $totalQuantity = collect($productsData)->sum('quantity');
-        $shipping = 1000; // Example shipping cost
+        $shipping = 5; // Example shipping cost
         $total = $subtotal + $shipping;
 
         // Pass the products data, subtotal, shipping, total, and total quantity to the view

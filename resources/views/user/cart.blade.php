@@ -5,6 +5,7 @@
 @endsection
 
 
+
 @section('content')
     <div class="container-fluid p-5 mt-4">
         {{-- {{dd($data)}} --}}
@@ -96,7 +97,7 @@
                         {{-- Shipping --}}
                         <div class="d-flex justify-content-between mb-3 border-bottom">
                             <h6>Shipping</h6>
-                            <h6><i class="fa fa-dollar me-1"></i>1000</h6>
+                            <h6><i class="fa fa-dollar me-1"></i>5</h6>
                         </div>
 
                         {{-- Total --}}
@@ -104,7 +105,7 @@
                             <h6>Total</small></h6>
                             <h6><i class="fa fa-dollar me-1"></i>
                                 <span id="finalTotal">
-                                    {{ $subTotal + 1000 }}
+                                    {{ $subTotal + 5 }}
                                 </span>
                             </h6>
                         </div>
@@ -148,7 +149,7 @@
                 let tr = $(this).parents('tr');
                 let qty = parseInt(tr.find('#qty').val());
                 let maxQty = parseInt(tr.find('#maxQty')
-            .val()); // Assuming you have a hidden input field containing the maximum quantity
+                    .val()); // Assuming you have a hidden input field containing the maximum quantity
                 if (qty < maxQty) { // Check if quantity is less than maximum quantity
                     qty += 1;
                     tr.find('#qty').val(qty);
@@ -256,7 +257,7 @@
                     subTotal += parseInt($(row).find('#total').text());
                 });
                 $('#subTotal').text(subTotal);
-                $('#finalTotal').text(subTotal + 1000);
+                $('#finalTotal').text(subTotal + 5);
             }
         });
     </script>
