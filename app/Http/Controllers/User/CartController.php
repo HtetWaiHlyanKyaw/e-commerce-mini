@@ -60,6 +60,7 @@ class CartController extends Controller
     // Cart List Page
     public function cart()
     {
+        $user = Auth::user();
         $data = Cart::where('carts.user_id', Auth::user()->id)
             ->select('carts.*', 'products.image as product_image', 'products.name as product_name', 'products.price as product_price', 'products.quantity as product_quantity')
             ->leftJoin('products', 'products.id', 'carts.product_id')
@@ -75,7 +76,9 @@ class CartController extends Controller
             $subTotal += $cart->qty * $cart->product_price;
         }
 
-        return view('user.cart', compact('data', 'subTotal', 'cartExists'));
+        $cart = $user->cart ?? [];
+        $products = Product::all();
+        return view('user.cart', compact('data', 'subTotal', 'cartExists', 'cart', 'products'));
     }
 
 
