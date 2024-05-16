@@ -39,9 +39,9 @@ class PageController extends Controller
         $cart = $user->cart ?? [];
 
         // Retrieve all top banners
-        $topBanner = TopBanner::all();
-        $middleBanner = MiddleBanner::all();
-        $BottomBanner = BottomBanner::all();
+        $topBanner = TopBanner::latest()->get();
+        $middleBanner = MiddleBanner::latest()->get();
+        $BottomBanner = BottomBanner::latest()->get();
         // Retrieve all products
         $products = Product::all();
 

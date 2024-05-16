@@ -15,7 +15,7 @@ class SupplierPurchaseController extends Controller
     //
     public function list()
     {
-        $supplierPurchases = SupplierPurchase::with('details', 'supplier')->latest()->get();
+        $supplierPurchases = SupplierPurchase::with('details', 'supplier')->get();
         return view('admin.SupplierPurchases.supplier_purchase_list', compact('supplierPurchases'));
     }
 
@@ -239,7 +239,7 @@ class SupplierPurchaseController extends Controller
             'totalPrice' => 'required|numeric|min:0',
         ]);
         $selectedProducts = json_decode($request->selectedProducts, true);
-        dd($selectedProducts);
+
         $supplierPurchase = new SupplierPurchase();
         $supplierPurchase->invoice_id = SupplierPurchase::generateInvoiceId();
         $supplierPurchase->total_quantity = $request->totalQuantity;

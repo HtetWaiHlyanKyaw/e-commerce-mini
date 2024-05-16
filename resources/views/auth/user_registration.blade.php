@@ -97,7 +97,7 @@
                                 <!-- Google Sign-in Button -->
                                 <a href="{{ route('google-auth') }}"
                                     class="btn btn-google w-100 py-2 fs-4 mb-4 rounded-2 bg-secondary-subtle">
-                                    <i class="fab fa-google me-2"></i>Sign in with Google
+                                    <i class="fa fa-google me-2"></i>Continue with Google
                                 </a>
                                 <p class="text-center">Already have an account? <a href="{{ route('user.login') }}" class="Login-Btn">Sign in</a></p>
                             </div>

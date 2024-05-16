@@ -16,7 +16,6 @@ class HistoryController extends Controller
         $user_id = Auth::user()->id;
         $customerPurchases = CustomerPurchase::with('details', 'user')
         ->where('user_id', $user_id)
-        ->latest()
         ->get();
         // Retrieve the cart items for the authenticated user
         $cart = $user->cart ?? [];
@@ -25,6 +24,7 @@ class HistoryController extends Controller
         $products = Product::all();
         return view('user.history',['user'=> $user, 'cart'=>$cart, 'products'=>$products, 'customerPurchases'=>$customerPurchases ]);
     }
+
 
     public function detail($id){
         $customerPurchase = CustomerPurchase::with('details', 'user')->findOrFail($id);

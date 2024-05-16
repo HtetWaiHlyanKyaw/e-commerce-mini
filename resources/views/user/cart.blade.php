@@ -68,11 +68,16 @@
 
                                     <td class="col-md-2 col-12 d-md-block d-none deleteBtn">
 
-                                        <i class="fa-solid fa-square-xmark text-dark fs-4 " style="cursor: pointer"
-                                            title="delete item" data-toggle="tooltip"></i>
+
+                                        {{-- <i class="fa-solid fa-square-xmark text-dark fs-4 " style="cursor: pointer"
+                                            title="delete item" data-toggle="tooltip"></i> --}}
+                                        <i class="fa fa-times" style="cursor: pointer" title="delete item"
+                                            data-toggle="tooltip"></i>
                                     </td>
                                     <input type="hidden" id="cartId" value="{{ $cart->id }}">
                                     <input type="hidden" id="productId" value="{{ $cart->product_id }}">
+                                    <input type="hidden" id="maxQty" value="{{ $cart->product_quantity }}">
+
                                 </tr>
                             @endforeach
                         </tbody>
@@ -83,25 +88,6 @@
                 {{-- Right Cart side --}}
                 <div class="col-lg-4 col-12 p-5 bg-light">
                     <h4 class="mb-3">Cart Detail</h4>
-                    {{-- billing card --}}
-                    {{-- <div>
-                        <a href="">
-                            <img src="{{ asset('images/visa.png') }}" alt="card-image" style="width:70px">
-                        </a>
-
-                        <a href="">
-                            <img src="{{ asset('images/master.png') }}" alt="card-image" style="width:70px">>
-                        </a>
-
-                        <a href="">
-                            <img src="{{ asset('images/discover.png') }}" alt="card-image" style="width:70px">>
-                        </a>
-
-                        <a href="">
-                            <img src="{{ asset('images/american express.png') }}" alt="card-image" style="width:70px">>
-                        </a>
-                    </div> --}}
-
                     <div class="mt-5">
                         <div class="d-flex justify-content-between mb-3">
                             <h6>Subtotal</h6>
@@ -160,15 +146,20 @@
 
             // Increment quantity when plus button is clicked
             $('.plusBtn').on('click', function() {
-                let tr = $(this).parents('tr'); // Find the quantity input
-                let qty = parseInt(tr.find('#qty').val()); //val ne yu lo ya
-                qty = qty + 1;
-                tr.find('#qty').val(qty);
-                let price = parseInt(tr.find('#price').text()); // text ne yu ya span mho lo
-                let total = price * qty;
-                tr.find('#total').text(total);
-                calculate();
+                let tr = $(this).parents('tr');
+                let qty = parseInt(tr.find('#qty').val());
+                let maxQty = parseInt(tr.find('#maxQty')
+                    .val()); // Assuming you have a hidden input field containing the maximum quantity
+                if (qty < maxQty) { // Check if quantity is less than maximum quantity
+                    qty += 1;
+                    tr.find('#qty').val(qty);
+                    let price = parseInt(tr.find('#price').text());
+                    let total = price * qty;
+                    tr.find('#total').text(total);
+                    calculate();
+                }
             });
+
 
             // Decrement quantity when minus button is clicked
             $('.minusBtn').on('click', function() {
@@ -258,7 +249,6 @@
                 // Redirect to the checkout2 page and pass the product data as a query parameter
                 window.location.href = 'user/checkout2?products=' + encodeURIComponent(productsJson);
             });
-
 
 
             //subTotal Calculate

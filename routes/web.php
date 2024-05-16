@@ -74,7 +74,7 @@ Route::middleware('admin:store_admin,super_admin')->group(function () {
     //     Route::get('/delete/{id}', [BrandController::class, 'delete'])->name('brand.delete');
     // });
 
-    //Model URLs
+//Model URLs
     Route::prefix('admin/model')->group(function () {
         Route::get('/page', [BrandModelController::class, 'page'])->name('model.page');
         Route::post('/create', [BrandModelController::class, 'create'])->name('model.create');
@@ -128,7 +128,7 @@ Route::middleware('admin:super_admin')->group(function () {
         Route::get('/list', [CustomerController::class, 'list'])->name('customer.page');
     });
 
-    //Customer Purchase URL
+//Customer Purchase URL
     Route::prefix('admin/customer purchase')->group(function () {
         Route::get('/page', [CustomerPurchaseController::class, 'page'])->name('customer_purchase.page');
         Route::get('/list', [CustomerPurchaseController::class, 'list'])->name('customer_purchase.list');
@@ -184,6 +184,7 @@ Route::get('/admin/login', [AdminLoginController::class, 'showLoginForm'])->name
 Route::post('/admin/login', [AdminLoginController::class, 'login']);
 Route::post('/admin/logout', [AdminLoginController::class, 'logout'])->name('logout');
 
+
 //user Login and Register Control
 Route::get('/user/login', [UserLoginController::class, 'showLoginForm'])->name('user.login');
 Route::post('/user/login', [UserLoginController::class, 'login']);
@@ -195,16 +196,22 @@ Route::get('/', [PageController::class, 'index'])->name('user.page');
 Route::get('/regular_page', [UserController::class, 'RegularPage'])->name('user.rePage');
 Route::get('/contact', [UserController::class, 'contact'])->name('user.contact');
 Route::get('/singleBlog', [UserController::class, 'singleBlog'])->name('user.Sblog');
-Route::POST('/checkout', [UserController::class, 'checkout'])->name('user.checkout');
+// Route::POST('/checkout', [UserController::class, 'checkout'])->name('user.checkout');
+Route::get('/checkout', [UserController::class, 'checkout'])->name('user.checkout');
+
 Route::get('/blog', [UserController::class, 'blog'])->name('user.blog');
 Route::get('/productDetail', [UserController::class, 'productDetail'])->name('user.detail');
 Route::get('/comments/{product_id}/{limit}', [ShopController::class, 'fetchComments']);
 Route::post('/comments/store', [ShopController::class, 'storeComment'])->name('user.comment.store');
-Route::post('/userFilter', [ShopController::class, 'filterProducts'])->name('filter.products');
+Route::post('/filter-products', [ShopController::class, 'filterProducts'])->name('filter.products');
 Route::post('/checkout/create', [ShopController::class, 'purchaseCreate'])->name('customer_purchase.create');
 Route::get('/shop', [ShopController::class, 'shop'])->name('user.shop');
 Route::get('/history', [HistoryController::class, 'list'])->name('user.history');
 Route::get('/history/detail/{id}', [HistoryController::class, 'detail'])->name('user.history_detail');
+// routes/web.php
+
+Route::get('/search', [MasterController::class, 'search'])->name('search');
+
 // Route::get('/product/detail{id}',[ShopController::class, 'detail'])->name('user.productDetail');
 Route::get('/product/details', [ShopController::class, 'details'])->name('user.productDetails');
 Route::get('/profile', [UserProfileController::class, 'profile'])->name('user.profile');
@@ -222,6 +229,5 @@ Route::get('/user/checkout2', [CustomerPurchaseController::class, 'checkoutPage'
 Route::post('/customer-purchase/create', [CustomerPurchaseController::class, 'createCustomerPurchase'])->name('customer_purchase.create2');
 // Route::get('login/{provider}', [LoginController::class, 'redirectToProvider']);
 // Route::get('login/{provider}/callback', [LoginController::class, 'handleProviderCallback']);
-Route::get('auth/google', [GoogleAuthController::class, 'redirect'])->name('google-auth');
+Route::get('/auth/google', [GoogleAuthController::class, 'redirect'])->name('google-auth');
 Route::get('/auth/google/call-back',[GoogleAuthController::class, 'callbackGoogle']);
-

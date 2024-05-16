@@ -163,6 +163,7 @@
             <table id="myTable" class="hover compact">
                 <thead>
                     <tr>
+                        <th style="color: #5d9bff;text-align:center;">No</th>
                         <th style="text-align:center;color: #5d9bff">Invoice ID</th>
                         <th style="text-align:center;color: #5d9bff">Supplier Name</th>
                         <th style="text-align:center;color: #5d9bff">Total Quantity</th>
@@ -173,8 +174,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @php
+                        $counter = 1; // Initialize counter variable
+                        $totalSupplierPurchases = $supplierPurchases->count();
+                    @endphp
                     @foreach ($supplierPurchases as $supplierPurchase)
                         <tr>
+                            <td class="col-lg-1" style="text-align:center;">{{ $totalSupplierPurchases-- }}</td>
                             <td style="text-align:center;">{{ $supplierPurchase->invoice_id }}</td>
                             <td style="text-align:center;">{{ $supplierPurchase->supplier->name }}</td>
                             <td style="text-align:center;">{{ $supplierPurchase->total_quantity }}</td>
@@ -191,6 +197,9 @@
                                 </a>
                             </td>
                         </tr>
+                        @php
+                            $counter++; // Increment counter for the next row
+                        @endphp
                     @endforeach
                 </tbody>
             </table>

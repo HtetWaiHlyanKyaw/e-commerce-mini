@@ -18,7 +18,7 @@ class UserController extends Controller
         return view('user.single_blog');
     }
 
-    public function checkout(Request$request) {
+    public function checkout(Request $request) {
         $multipleProducts = false;
         $product = Product::with('brand', 'ProductModel')->find($request->product_id);
         $quantity = $request->qtyHidden;

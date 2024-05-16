@@ -18,9 +18,11 @@
     <!-- Core Style CSS -->
     <link rel="stylesheet" href="{{ asset('user/css/core-style.css') }}">
     <link rel="stylesheet" href="{{ asset('user/style.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
     @yield('style');
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.min.css">
     <style>
@@ -28,8 +30,17 @@
             display: none !important;
         }
 
+        .search-results {
+            max-height: 300px;
+            max-width: 500px;
+            /* Adjust the height as needed */
+            overflow-y: auto;
+            overflow-x: hidden;
+            border-radius: 0;
+            /* Add vertical scrollbar when content exceeds height */
 
-
+            /* Optional: Add border for clarity */
+        }
     </style>
 </head>
 
@@ -81,10 +92,11 @@
             <div class="header-meta d-flex clearfix justify-content-end ">
                 <!-- Search Area -->
                 <div class="search-area">
-                    <form action="#" method="post">
+                    <form >
                         <input type="search" name="search" id="headerSearch" placeholder="Search product">
-                        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        {{-- <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button> --}}
                     </form>
+                    <div id="searchResults" class="search-results"></div>
                 </div>
 
                 <!-- Favourite Area -->
@@ -274,10 +286,7 @@
                         </ul>
                     </div>
                 </div>
-
-
             </div>
-
             <div class="row align-items-end">
                 <!-- Single Widget Area -->
                 {{-- <div class="col-md-6 col-sm-6">
@@ -333,17 +342,16 @@
 
     <!-- ##### Footer Area End ##### -->
 
-    <!-- jQuery (Necessary for All JavaScript Plugins) -->
     <script src="{{ asset('user/js/jquery/jquery-2.2.4.min.js') }}"></script>
-    <!-- Popper js -->
+
     <script src="{{ asset('user/js/popper.min.js') }}"></script>
-    <!-- Bootstrap js -->
+
     <script src="{{ asset('user/js/bootstrap.min.js') }}"></script>
-    <!-- Plugins js -->
+
     <script src="{{ asset('user/js/plugins.js') }}"></script>
-    <!-- Classy Nav js -->
+
     <script src="{{ asset('user/js/classy-nav.min.js') }}"></script>
-    <!-- Active js -->
+
     <script src="{{ asset('user/js/active.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
@@ -351,12 +359,65 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
-    </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </script> --}}
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
 
     <script src="//cdn.datatables.net/2.0.2/js/dataTables.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('headerSearch');
+            const searchResults = document.getElementById('searchResults');
+
+            searchInput.addEventListener('input', function() {
+                const query = this.value.trim();
+                if (query.length === 0) {
+                    searchResults.innerHTML = ''; // Clear the search results container
+                    return;
+                }
+
+                fetch(`/search?query=${query}`)
+                    .then(response => response.json())
+                    .then(groupedData => {
+                        let html = '';
+                        for (const modelId in groupedData) {
+                            if (groupedData.hasOwnProperty(modelId)) {
+                                const products = groupedData[modelId];
+                                const firstProduct = products[
+                                0]; // Get the first product from the group
+                                const productDetailsUrl =
+                                    `/product/details?model_id=${encodeURIComponent(modelId)}`;
+                                var trimmedName = firstProduct.name.substring(0, firstProduct.name
+                                    .indexOf('(')).trim();
+                                html += `<div class="card" style="border-radius: 0;">
+                    <div class="row card-body">
+
+                        <div class="col-lg-4">
+
+                            <img src="/storage/products/${firstProduct.image}" width="120" alt="Product Image" style="border-radius: 1px;">
+                        </div>
+                        <div class="col-lg-8 d-flex align-items-center">
+                            <a href="${productDetailsUrl}">
+                            ${trimmedName}
+                            </a>
+                        </div>
+                    </a>
+                    </div>
+                </div>`;
+                            }
+                        }
+                        searchResults.innerHTML = html;
+                    })
+                    .catch(error => console.error('Error:', error));
+
+            });
+        });
+    </script>
+
+
+
+
     <script>
         $(document).ready(function() {
             $('#myTable').DataTable({

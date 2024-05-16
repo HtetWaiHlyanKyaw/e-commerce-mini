@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\LengthAwarePaginator;
-
+use Illuminate\Support\Facades\Validator;
 class ShopController extends Controller
 {
     public function shop()
@@ -22,13 +22,14 @@ class ShopController extends Controller
         $brands = Brand::all();
         $minPrice = Product::min('price');
         $maxPrice = Product::max('price');
-        $products = Product::with('brand', 'ProductModel')->orderByDesc('created_at')->get();
+        $products = Product::with('brand', 'ProductModel')->get()->sortByDesc('created_at');
+
         $uniqueColors = $products->pluck('color')->unique();
         $uniqueStorage = $products->pluck('storage_option')->unique();
-
-        // Eager load brand and model information
+        $filteredMinPrice = null;
+        $filteredMaxPrice = null;        // Eager load brand and model information
         $datas = Product::with('brand', 'ProductModel')->get();
-        $groupedData = $datas->groupBy('product_model_id');
+        $groupedData = $products->groupBy('product_model_id');
         $perPage = 12;
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
         $currentPageItems = $groupedData->slice(($currentPage - 1) * $perPage, $perPage)->all();
@@ -52,9 +53,9 @@ class ShopController extends Controller
 
         // Retrieve all products
         $products = Product::all();
-
+        $filteredSelectedValue = 'newest';
         // Pass the paginator and other data to the view
-        return view('user.shop', compact('paginatedGroupedData', 'brands', 'minPrice', 'maxPrice', 'uniqueColors', 'uniqueStorage', 'user', 'cart', 'products'));
+        return view('user.shop', compact('paginatedGroupedData', 'brands', 'minPrice', 'maxPrice', 'uniqueColors', 'uniqueStorage', 'user', 'cart', 'products','filteredMinPrice','filteredMaxPrice', 'filteredSelectedValue'));
     }
 
     public function details(Request $request)
@@ -72,6 +73,14 @@ class ShopController extends Controller
                 'price' => $product->price,
                 'id' => $product->id,
                 'quantity' => $product->quantity,
+                'display' => $product->display,
+                'resolution' => $product->resolution,
+                'os' => $product->os,
+                'chipset' => $product->chipset,
+                'main_camera' => $product->main_camera,
+                'selfie_camera' => $product->selfie_camera,
+                'battery' => $product->battery,
+                'charging' => $product->charging,
             ];
         })->unique(function ($variant) {
             return $variant['color'] . '_' . $variant['storage_option'];
@@ -86,6 +95,8 @@ class ShopController extends Controller
             ->count('comments');
 
         $user = auth()->user();
+        // $cartProductIds = $user->cart->pluck('product_id')->toArray() ?? [];
+        // $productExistsInCart = in_array($modelId, $cartProductIds);
 
         if ($user === null) {
             $hasBoughtProductModel = false;
@@ -118,7 +129,7 @@ class ShopController extends Controller
             'uniqueStorage',
             'user',
             'cart',
-            'products'
+            'products',
         ));
     }
 
@@ -159,68 +170,130 @@ class ShopController extends Controller
         return back()->with('success', 'Comment posted successfully');
     }
 
-    public function filterProducts(Request $request){
-        $brand_id = $request->input('brands');
-        $color = $request->input('colors');
-        $storage = $request ->input('storage');
-        $query = Product::with('brand', 'ProductModel')->orderByDesc('created_at');
+    public function filterProducts(Request $request)
+    {
+        $filteredBrands = $request->input('brands');
+        $filteredColors = $request->input('colors');
+        $filteredStorage = $request->input('storage');
+        $filteredMinPrice = $request->input('minPrice');
+        $filteredMaxPrice = $request->input('maxPrice');
+        $filteredSelectedValue = $request->input('select');
 
-        if ($brand_id !== 'all') {
+        $brands = Brand::all();
+        $minPrice = Product::min('price');
+        $maxPrice = Product::max('price');
+        $products = Product::with('brand', 'ProductModel')->orderByDesc('created_at')->get();
+        $uniqueColors = $products->pluck('color')->unique();
+        $uniqueStorage = $products->pluck('storage_option')->unique();
 
-             $query->where('brand_id', $brand_id);
+        $query = Product::query();
+
+        if (!empty($filteredBrands)) {
+            $query->whereIn('brand_id', $filteredBrands);
         }
 
-        if ($color !== 'all') {
-
-            $query->where('color', $color);
+        if (!empty($filteredColors)) {
+            $query->whereIn('color', $filteredColors);
+        }
+        if (!empty($filteredStorage)) {
+            $query->whereIn('storage_option', $filteredStorage);
         }
 
-        if ($storage !== 'all') {
-
-            $query->where('storage', $storage);
+        if (!empty($filteredMinPrice) && !empty($filteredMaxPrice)) {
+            $query->whereBetween('price', [$filteredMinPrice, $filteredMaxPrice]);
         }
 
+        if ($filteredSelectedValue === 'newest') {
+            $query->orderBy('created_at', 'desc');
+        }
+        else if($filteredSelectedValue == 'A to Z'){
+            $query->orderBy('name', 'asc');
+        }
+        else if($filteredSelectedValue == 'Z to A'){
+            $query->orderBy('name', 'desc');
+        }
+        else if($filteredSelectedValue == 'high to low'){
+            $query->orderBy('price', 'desc');
+        }
+        else{
+            $query->orderBy('price', 'asc');
+        }
         $filteredProducts = $query->get();
-        return response()->json($filteredProducts);
+        $groupedData = $filteredProducts->groupBy('product_model_id');
+        $perPage = 12;
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $currentPageItems = $groupedData->slice(($currentPage - 1) * $perPage, $perPage)->all();
+
+        // Create a paginator instance
+        $paginatedGroupedData = new LengthAwarePaginator(
+            $currentPageItems,
+            count($groupedData),
+            $perPage,
+            $currentPage
+        );
+
+        // Set the path for the paginator
+        $paginatedGroupedData->setPath(URL::current());
+
+        // Retrieve the authenticated user
+        $user = Auth::user();
+
+        // Retrieve the cart items for the authenticated user
+        $cart = $user->cart ?? [];
+
+        // Retrieve all products
+        $products = Product::all();
+
+        // Pass the paginator and other data to the view
+        return view('user.shop', compact('paginatedGroupedData', 'brands', 'minPrice', 'maxPrice', 'uniqueColors', 'uniqueStorage', 'user', 'cart', 'products','filteredMinPrice','filteredMaxPrice', 'filteredSelectedValue'));
+
     }
 
-    public function purchaseCreate(Request $request){
+    public function purchaseCreate(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'full_name' => 'required|string|max:255',
+        'town' => 'required|string|max:255',
+        'address' => 'required|string|max:255',
+        'phone_no' => 'required|string|regex:/^09\d{9}$/',
+        'payment_method' => 'required|string|in:Cash On Delivery,Mobile Banking,Mobile Wallet,Direct Bank Transfer',
+        'quantity' => 'required|integer|min:1',
+        // Add more validation rules as needed
+    ]);
 
-
-        $request->validate([
-            'full_name' => 'required|string|max:255',
-            'town' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
-            'phone_no' => 'required|string|regex:/^09\d{9}$/',
-            'payment_method' => 'required|string|in:Cash On Delivery,Mobile Banking, Mobile Wallet,Direct Bank Transfer',
-            'quantity' => 'required|integer|min:1',
-
-        ]);
-        $customerPurchase = new CustomerPurchase();
-        $customerPurchase->invoice_id = CustomerPurchase::generateInvoiceId();
-        $customerPurchase->total_quantity = $request->quantity;
-        $customerPurchase->total_price = $request->price;
-        $customerPurchase->payment_method = $request->payment_method;
-        $customerPurchase->user_id = auth()->user()->id;
-        $customerPurchase->town = $request->town;
-        $customerPurchase->address = $request->address;
-        $customerPurchase->full_name = $request->full_name;
-        $customerPurchase->phone = $request->phone_no;
-        $customerPurchase->save();
-
-        $product = Product::find($request->product_id);
-        $detail = new CustomerPurchaseDetail();
-        $detail->customer_purchase_id = $customerPurchase->id;
-        $detail->product_id = $request->product_id; // Assuming you have product IDs in the selectedProducts array
-        $detail->price = $product->price; // Assuming you have product prices in the selectedProducts array
-        $detail->quantity = $request->quantity; // Assuming you have product quantities in the selectedProducts array
-        $detail->sub_total = $product->price * $request->quantity;
-        $detail->save();
-        session()->flash('alert', [
-            'type' => 'success',
-            'message' => 'Purchase Complete. Thank you for shoping with us.',
-        ]);
-        Product::reduceQuantity($request->product_id, $request->quantity);
-        return redirect()->route('user.page');
+    if ($validator->fails()) {
+        return redirect()->back()
+            ->withErrors($validator)
+            ->withInput();
     }
+
+    $customerPurchase = new CustomerPurchase();
+    $customerPurchase->invoice_id = CustomerPurchase::generateInvoiceId();
+    $customerPurchase->total_quantity = $request->quantity;
+    $customerPurchase->total_price = $request->price;
+    $customerPurchase->payment_method = $request->payment_method;
+    $customerPurchase->user_id = auth()->user()->id;
+    $customerPurchase->town = $request->town;
+    $customerPurchase->address = $request->address;
+    $customerPurchase->full_name = $request->full_name;
+    $customerPurchase->phone = $request->phone_no;
+    $customerPurchase->save();
+
+    $product = Product::find($request->product_id);
+    $detail = new CustomerPurchaseDetail();
+    $detail->customer_purchase_id = $customerPurchase->id;
+    $detail->product_id = $request->product_id; // Assuming you have product IDs in the selectedProducts array
+    $detail->price = $product->price; // Assuming you have product prices in the selectedProducts array
+    $detail->quantity = $request->quantity; // Assuming you have product quantities in the selectedProducts array
+    $detail->sub_total = $product->price * $request->quantity;
+    $detail->save();
+
+    session()->flash('alert', [
+        'type' => 'success',
+        'message' => 'Purchase Complete. Thank you for shopping with us.',
+    ]);
+    Product::reduceQuantity($request->product_id, $request->quantity);
+    return redirect()->route('user.history');
+}
+
 }

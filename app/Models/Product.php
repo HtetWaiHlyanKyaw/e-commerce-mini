@@ -20,6 +20,14 @@ class Product extends Model
         'quantity',
         'low_stock',
         'description',
+        'display',
+        'resolution',
+        'chipset',
+        'os',
+        'main_camera',
+        'selfie_camera',
+        'battery',
+        'charging',
     ];
 
     public function brand()
@@ -31,6 +39,11 @@ class Product extends Model
     {
         return $this->belongsTo(ProductModel::class);
     }
+     // Define the relationship with reviews
+     public function reviews()
+     {
+         return $this->hasMany(Review::class);
+     }
 
     public static function updateQuantity($productId, $quantity)
     {
