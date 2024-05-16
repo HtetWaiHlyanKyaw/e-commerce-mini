@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -10,9 +11,13 @@ class UserController extends Controller
         return view('user.regular_page');
     }
 
-    public function contact(){
-        return view('user.contact');
+    public function contact() {
+        $user = Auth::user();
+        $cart = $user ? $user->cart : [];
+        $products = Product::all();
+        return view('user.contact', compact('cart', 'products'));
     }
+
 
     public function singleBlog(){
         return view('user.single_blog');
@@ -27,12 +32,20 @@ class UserController extends Controller
         'multipleProducts'=>$multipleProducts]);
     }
 
-    public function blog(){
-        return view('user.blog');
+    public function blog() {
+        $user = Auth::user();
+        $cart = $user ? $user->cart : [];
+        $products = Product::all();
+        return view('user.blog', compact('cart', 'products'));
     }
 
     public function productDetail(){
         return view('user.single_product_details');
     }
+
+    // public function Profile(){
+    //     return view('user.profile');
+    // }
+
 
 }

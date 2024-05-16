@@ -18,6 +18,12 @@ class CartController extends Controller
 {
     public function add(Request $request)
     {
+        Log::info('Add to cart request received', [
+            'userId' => $request->userId,
+            'productId' => $request->productId,
+            'qty' => $request->qty,
+        ]);
+
         try {
             // Check if the user has reached the limit of 10 products in the cart
             $cartItemCount = Cart::where('user_id', $request->userId)->count();

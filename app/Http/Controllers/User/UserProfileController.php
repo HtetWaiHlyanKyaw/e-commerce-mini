@@ -2,20 +2,26 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator; // Add this line
+
 class UserProfileController extends Controller
 {
 
-    public function profile()
-    {
-        $user = Auth::user();
-        // Pass user data to the view
-        return view('user.profile', ['user' => $user]);
-    }
+public function profile()
+{
+    $user = Auth::user();
+    $cart = $user->cart ?? [];
+    $products = Product::all();
+
+    // Pass user, cart, and products data to the view
+    return view('user.profile', compact('user', 'cart', 'products'));
+}
+
 
     public function profileUpdate( Request $request)
     {
@@ -44,6 +50,7 @@ class UserProfileController extends Controller
 
             // Retrieve the currently authenticated user
             $user = Auth::user();
+
 
             // Check if the provided current password matches the one in the database
             if ($request->currentPassword && !Hash::check($request->currentPassword, $user->password)) {

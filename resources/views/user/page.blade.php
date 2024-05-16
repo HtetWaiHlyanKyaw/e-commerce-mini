@@ -24,6 +24,27 @@
 @endsection
 @section('style')
     <style>
+        .single-product-wrapper {
+    width: 100%; /* Set this according to your layout */
+    /* Other styling */
+}
+
+.product-img {
+    width: 100%;  /* Ensure the image container takes full width */
+    height: 250px; /* Set a fixed height */
+    overflow: hidden; /* Hide any overflow */
+    position: relative; /* For better control over child elements */
+}
+
+.product-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the entire container */
+    display: block; /* Remove any inline-block space issues */
+    position: absolute; /* Position it within the container */
+    top: 0;
+    left: 0;
+}
         @media screen and (min-width: 568px) {
             .cards-wrapper {
                 display: flex;
@@ -125,13 +146,19 @@
                                     <!-- Hover Thumb -->
                                     {{-- <img class="hover-img" src="{{ asset('user/img/product-img/product-2.jpg') }}"
                                 alt=""> --}}
+                                @if ($topProduct->first()->image)
                                     <img src="{{ asset('storage/products/' . $topProduct->first()->image) }}"
-                                        alt="Product Image">
-
+                                        alt="Product Image" style="height: 100%;">
+                                        @else
+                                        <div style="height: 100%; display: flex; align-items: center; justify-content: center; color: #8c8c8c;">
+                                            No Image
+                                        </div>
+                                        @endif
                                 </div>
-                                <div class="product-description">
+                                <div class="product-description text-center" >
                                     <a href="{{ route('user.productDetails', ['model_id' => $modelId]) }}">
-                                        <h6>{{ $topProduct->first()->name }}</h6>
+                                        <h6>
+                                        {{ trim(strstr($topProduct->first()->name, '(', true)) }}</h6>
                                     </a>
                                     <!-- Hover Content -->
                                     <div class="hover-content">
@@ -204,9 +231,11 @@
                                         alt="Product Image">
 
                                 </div>
-                                <div class="product-description">
+                                <div class="product-description text-center">
                                     <a href="{{ route('user.productDetails', ['model_id' => $modelId]) }}">
-                                        <h6>{{ $newProduct->first()->name }}</h6>
+
+                                        <h6>
+                                            {{ trim(strstr($newProduct->first()->name, '(', true)) }}</h6>
                                     </a>
                                     <!-- Hover Content -->
                                     <div class="hover-content">
@@ -224,6 +253,8 @@
                                 </div>
                             </div>
                         @endforeach
+
+
                         @if (Auth::check())
                             <input type="hidden" id="userId" value="{{ Auth::user()->id }}">
                         @endif

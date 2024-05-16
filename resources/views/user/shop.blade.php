@@ -108,12 +108,14 @@
     <section class=" section-padding-80 bg-light" style="margin-top: -50px">
         <div class="container">
             <form id="sortAndFilterForm" method="POST" action="{{ route('filter.products') }}">
+
                 <div class="row">
 
                     <div class="col-12 col-md-2 col-lg-2">
                         <div class="shop_sidebar_area">
                             {{-- <form method="POST" action="{{ route('filter.products') }}"> --}}
                             @csrf
+                            <input type="hidden" name="page" id="page" value="1">
                             <h6 class="widget-title mb-30">Filter by</h6>
                             <div class="widget brands mb-50">
                                 <!-- Widget Title 2 -->
@@ -235,14 +237,6 @@
                             <div class="product-sorting d-flex">
                                 <p>Sort by:</p>
 
-                                {{-- <select name="select" id="sortByselect">
-                                            <option value="newest">Newest</option>
-                                            <option value="A to Z">A to Z</option>
-                                            <option value="Z to A">Z to</option>
-
-                                            <option value="high to low">Price: $$ - $</option>
-                                            <option value="low to high">Price: $ - $$</option>
-                                        </select> --}}
                                 <select name="select" id="sortByselect">
                                     <option value="newest" {{ $filteredSelectedValue == 'newest' ? 'selected' : '' }}>
                                         Newest</option>
@@ -269,24 +263,30 @@
                     @if ($paginatedGroupedData->isEmpty())
                         <p style="text-align: center;">No products found.</p>
                     @else
-                        @foreach ($paginatedGroupedData as $modelId => $productGroup)
-                            <div class="col-12 col-sm-6 col-lg-3" id="product-list">
-                                <div class="single-product-wrapper" style="border: solid 1px #dddddd">
-                                    <a href="{{ route('user.productDetails', ['model_id' => $modelId]) }}">
-                                        <div class="product-img">
-                                            <img src="{{ asset('storage/products/' . $productGroup->first()->image) }}"
-                                                alt="Product Image"
-                                                style="border-radius: 3px; width: 100%; height: 200px; object-fit: cover;">
+                    @foreach ($paginatedGroupedData as $modelId => $productGroup)
+                    <div class="col-12 col-sm-6 col-lg-3" id="product-list">
+                        <div class="single-product-wrapper" style="border: solid 1px #dddddd">
+                            <a href="{{ route('user.productDetails', ['model_id' => $modelId]) }}">
+                                <div class="product-img" style="border-radius: 3px; width: 100%; height: 200px; object-fit: cover; background-color: #f8f8f8;">
+                                    @if ($productGroup->first()->image)
+                                        <img src="{{ asset('storage/products/' . $productGroup->first()->image) }}" alt="Product Image" style="border-radius: 3px; width: 100%; height: 100%; object-fit: cover;">
+                                    @else
+                                        <!-- Placeholder content to keep the height consistent -->
+                                        <div style="height: 100%; display: flex; align-items: center; justify-content: center; color: #ccc;">
+                                            No Image
                                         </div>
-                                        <div class="product-description" style="margin-bottom: 20px;">
-                                            <h6 class="text-center">
-                                                {{ trim(strstr($productGroup->first()->name, '(', true)) }}</h6>
-                                            <!-- Display model name -->
-                                        </div>
-                                    </a>
+                                    @endif
                                 </div>
-                            </div>
-                        @endforeach
+                                <div class="product-description" style="margin-bottom: 20px;">
+                                    <h6 class="text-center">
+                                        {{ trim(strstr($productGroup->first()->name, '(', true)) }}</h6>
+                                    <!-- Display model name -->
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+
                     @endif
                 </div>
             </div>
@@ -304,10 +304,28 @@
 @endsection
 @section('script')
 
+    {{-- <script>
+        $(document).ready(function() {
+            // Automatically submit form when option is selected from combo box
+            $('#sortByselect, #category').change(function() {
+                $('#sortAndFilterForm').submit();
+            });
+        });
+    </script> --}}
+
     <script>
         $(document).ready(function() {
             // Automatically submit form when option is selected from combo box
             $('#sortByselect, #category').change(function() {
+                $('#page').val(1); // Reset to page 1 on filter change
+                $('#sortAndFilterForm').submit();
+            });
+
+            // Handle pagination clicks
+            $(document).on('click', '.pagination a', function(event) {
+                event.preventDefault();
+                var page = new URL($(this).attr('href')).searchParams.get('page');
+                $('#page').val(page);
                 $('#sortAndFilterForm').submit();
             });
         });

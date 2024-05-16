@@ -25,6 +25,7 @@ class HistoryController extends Controller
         return view('user.history',['user'=> $user, 'cart'=>$cart, 'products'=>$products, 'customerPurchases'=>$customerPurchases ]);
     }
 
+
     public function detail($id){
         $customerPurchase = CustomerPurchase::with('details', 'user')->findOrFail($id);
         $details = CustomerPurchaseDetail::where('customer_purchase_id', $id)->paginate(10);

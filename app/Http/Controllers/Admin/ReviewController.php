@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 class ReviewController extends Controller
 {
     public function review(){
-        $userdata =review::with('User')->get();
-        // $productdata =review::with('product')->get();
+        $userdata =review::with('User', 'ProductModel')->get();
+
         // $data = review::get();
         return view('admin.Products.product_review' , ['userdata' =>  $userdata]);
     }

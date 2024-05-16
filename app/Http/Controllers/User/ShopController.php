@@ -171,83 +171,73 @@ class ShopController extends Controller
     }
 
     public function filterProducts(Request $request)
-    {
-        $filteredBrands = $request->input('brands');
-        $filteredColors = $request->input('colors');
-        $filteredStorage = $request->input('storage');
-        $filteredMinPrice = $request->input('minPrice');
-        $filteredMaxPrice = $request->input('maxPrice');
-        $filteredSelectedValue = $request->input('select');
+{
+    $filteredBrands = $request->input('brands');
+    $filteredColors = $request->input('colors');
+    $filteredStorage = $request->input('storage');
+    $filteredMinPrice = $request->input('minPrice');
+    $filteredMaxPrice = $request->input('maxPrice');
+    $filteredSelectedValue = $request->input('select');
+    $currentPage = $request->input('page', 1);
 
-        $brands = Brand::all();
-        $minPrice = Product::min('price');
-        $maxPrice = Product::max('price');
-        $products = Product::with('brand', 'ProductModel')->orderByDesc('created_at')->get();
-        $uniqueColors = $products->pluck('color')->unique();
-        $uniqueStorage = $products->pluck('storage_option')->unique();
+    $brands = Brand::all();
+    $minPrice = Product::min('price');
+    $maxPrice = Product::max('price');
+    $products = Product::with('brand', 'ProductModel')->orderByDesc('created_at')->get();
+    $uniqueColors = $products->pluck('color')->unique();
+    $uniqueStorage = $products->pluck('storage_option')->unique();
 
-        $query = Product::query();
+    $query = Product::query();
 
-        if (!empty($filteredBrands)) {
-            $query->whereIn('brand_id', $filteredBrands);
-        }
-
-        if (!empty($filteredColors)) {
-            $query->whereIn('color', $filteredColors);
-        }
-        if (!empty($filteredStorage)) {
-            $query->whereIn('storage_option', $filteredStorage);
-        }
-
-        if (!empty($filteredMinPrice) && !empty($filteredMaxPrice)) {
-            $query->whereBetween('price', [$filteredMinPrice, $filteredMaxPrice]);
-        }
-
-        if ($filteredSelectedValue === 'newest') {
-            $query->orderBy('created_at', 'desc');
-        }
-        else if($filteredSelectedValue == 'A to Z'){
-            $query->orderBy('name', 'asc');
-        }
-        else if($filteredSelectedValue == 'Z to A'){
-            $query->orderBy('name', 'desc');
-        }
-        else if($filteredSelectedValue == 'high to low'){
-            $query->orderBy('price', 'desc');
-        }
-        else{
-            $query->orderBy('price', 'asc');
-        }
-        $filteredProducts = $query->get();
-        $groupedData = $filteredProducts->groupBy('product_model_id');
-        $perPage = 12;
-        $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $currentPageItems = $groupedData->slice(($currentPage - 1) * $perPage, $perPage)->all();
-
-        // Create a paginator instance
-        $paginatedGroupedData = new LengthAwarePaginator(
-            $currentPageItems,
-            count($groupedData),
-            $perPage,
-            $currentPage
-        );
-
-        // Set the path for the paginator
-        $paginatedGroupedData->setPath(URL::current());
-
-        // Retrieve the authenticated user
-        $user = Auth::user();
-
-        // Retrieve the cart items for the authenticated user
-        $cart = $user->cart ?? [];
-
-        // Retrieve all products
-        $products = Product::all();
-
-        // Pass the paginator and other data to the view
-        return view('user.shop', compact('paginatedGroupedData', 'brands', 'minPrice', 'maxPrice', 'uniqueColors', 'uniqueStorage', 'user', 'cart', 'products','filteredMinPrice','filteredMaxPrice', 'filteredSelectedValue'));
-
+    if (!empty($filteredBrands)) {
+        $query->whereIn('brand_id', $filteredBrands);
     }
+
+    if (!empty($filteredColors)) {
+        $query->whereIn('color', $filteredColors);
+    }
+    if (!empty($filteredStorage)) {
+        $query->whereIn('storage_option', $filteredStorage);
+    }
+
+    if (!empty($filteredMinPrice) && !empty($filteredMaxPrice)) {
+        $query->whereBetween('price', [$filteredMinPrice, $filteredMaxPrice]);
+    }
+
+    if ($filteredSelectedValue === 'newest') {
+        $query->orderBy('created_at', 'desc');
+    } else if ($filteredSelectedValue === 'A to Z') {
+        $query->orderBy('name', 'asc');
+    } else if ($filteredSelectedValue === 'Z to A') {
+        $query->orderBy('name', 'desc');
+    } else if ($filteredSelectedValue === 'high to low') {
+        $query->orderBy('price', 'desc');
+    } else {
+        $query->orderBy('price', 'asc');
+    }
+
+    $filteredProducts = $query->get();
+    $groupedData = $filteredProducts->groupBy('product_model_id');
+    $perPage = 12;
+    $currentPageItems = $groupedData->slice(($currentPage - 1) * $perPage, $perPage)->all();
+
+    $paginatedGroupedData = new LengthAwarePaginator(
+        $currentPageItems,
+        count($groupedData),
+        $perPage,
+        $currentPage
+    );
+
+    $paginatedGroupedData->setPath(route('filter.products'));
+
+    $user = Auth::user();
+    $cart = $user->cart ?? [];
+
+    return view('user.shop', compact(
+        'paginatedGroupedData', 'brands', 'minPrice', 'maxPrice', 'uniqueColors', 'uniqueStorage', 'user', 'cart', 'filteredProducts', 'filteredMinPrice', 'filteredMaxPrice', 'filteredSelectedValue'
+    ));
+}
+
 
     public function purchaseCreate(Request $request)
 {

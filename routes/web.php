@@ -74,7 +74,7 @@ Route::middleware('admin:store_admin,super_admin')->group(function () {
     //     Route::get('/delete/{id}', [BrandController::class, 'delete'])->name('brand.delete');
     // });
 
-    //Model URLs
+//Model URLs
     Route::prefix('admin/model')->group(function () {
         Route::get('/page', [BrandModelController::class, 'page'])->name('model.page');
         Route::post('/create', [BrandModelController::class, 'create'])->name('model.create');
@@ -128,7 +128,7 @@ Route::middleware('admin:super_admin')->group(function () {
         Route::get('/list', [CustomerController::class, 'list'])->name('customer.page');
     });
 
-    //Customer Purchase URL
+//Customer Purchase URL
     Route::prefix('admin/customer purchase')->group(function () {
         Route::get('/page', [CustomerPurchaseController::class, 'page'])->name('customer_purchase.page');
         Route::get('/list', [CustomerPurchaseController::class, 'list'])->name('customer_purchase.list');
@@ -180,9 +180,18 @@ Route::middleware('admin:super_admin,store_admin,supplier_admin')->group(functio
 
 //admin Login Control
 
+
+
+// Route::get('/supplier-purchases/{month}', [DashboardController::class, 'getSupplierPurchasesByMonth']);
+Route::get('/supplier-purchases/{month}/{year}', [DashboardController::class, 'getSupplierPurchasesByMonthAndYear']);
+Route::get('/customer-purchases/{month}/{year}', [DashboardController::class, 'getCustomerPurchasesByMonthAndYear']);
+
+
+
 Route::get('/admin/login', [AdminLoginController::class, 'showLoginForm'])->name('login');
 Route::post('/admin/login', [AdminLoginController::class, 'login']);
 Route::post('/admin/logout', [AdminLoginController::class, 'logout'])->name('logout');
+
 
 //user Login and Register Control
 Route::get('/user/login', [UserLoginController::class, 'showLoginForm'])->name('user.login');
@@ -230,4 +239,3 @@ Route::post('/customer-purchase/create', [CustomerPurchaseController::class, 'cr
 // Route::get('login/{provider}/callback', [LoginController::class, 'handleProviderCallback']);
 Route::get('/auth/google', [GoogleAuthController::class, 'redirect'])->name('google-auth');
 Route::get('/auth/google/call-back',[GoogleAuthController::class, 'callbackGoogle']);
-

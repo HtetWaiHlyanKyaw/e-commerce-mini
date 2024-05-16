@@ -69,6 +69,7 @@
 
                                     <td class="col-md-2 col-12 d-md-block d-none deleteBtn">
 
+
                                         {{-- <i class="fa-solid fa-square-xmark text-dark fs-4 " style="cursor: pointer"
                                             title="delete item" data-toggle="tooltip"></i> --}}
                                         <i class="fa fa-times" style="cursor: pointer" title="delete item"
@@ -248,6 +249,7 @@
                 // Redirect to the checkout2 page and pass the product data as a query parameter
                 window.location.href = 'user/checkout2?products=' + encodeURIComponent(productsJson);
             });
+
 
             //subTotal Calculate
             function calculate() {
