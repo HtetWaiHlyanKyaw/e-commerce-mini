@@ -321,11 +321,13 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
             $('.add-to-cart').click(function() {
                 let userId = $('#userId').val();
                 var productId = $(this).data('product-id');
                 console.log(productId);
                 console.log(userId);
+
                 $.ajax({
                     type: 'post',
                     url: '/cart/add',
@@ -340,8 +342,12 @@
                         window.location.href = 'http://localhost:8000';
                     },
                     error: function(xhr, textStatus, errorThrown) {
-                        // Handle error responses
-                        console.error(xhr.responseText);
+                        if (xhr.status === 409) {
+                            alert(xhr.responseJSON.message);
+                        } else {
+                            console.error(xhr.responseText);
+                            alert('An error occurred while adding the item to the cart.');
+                        }
                     }
                 });
             });

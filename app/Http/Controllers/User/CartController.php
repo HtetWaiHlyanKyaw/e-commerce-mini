@@ -18,7 +18,20 @@ class CartController extends Controller
 {
     public function add(Request $request)
     {
+        Log::info('Add to cart request received', [
+            'userId' => $request->userId,
+            'productId' => $request->productId,
+            'qty' => $request->qty,
+        ]);
+
         try {
+            // Check if the user has reached the limit of 10 products in the cart
+            $cartItemCount = Cart::where('user_id', $request->userId)->count();
+
+            if ($cartItemCount >= 10) {
+                return response()->json(['message' => 'Cannot Add More Than Ten Products To The Cart'], 409);
+            }
+
             // Check if the product already exists in the cart for the current user
             $existingCartItem = Cart::where('user_id', $request->userId)
                 ->where('product_id', $request->productId)
@@ -47,6 +60,7 @@ class CartController extends Controller
     // Cart List Page
     public function cart()
     {
+        $user = Auth::user();
         $data = Cart::where('carts.user_id', Auth::user()->id)
             ->select('carts.*', 'products.image as product_image', 'products.name as product_name', 'products.price as product_price', 'products.quantity as product_quantity')
             ->leftJoin('products', 'products.id', 'carts.product_id')
@@ -62,7 +76,9 @@ class CartController extends Controller
             $subTotal += $cart->qty * $cart->product_price;
         }
 
-        return view('user.cart', compact('data', 'subTotal', 'cartExists'));
+        $cart = $user->cart ?? [];
+        $products = Product::all();
+        return view('user.cart', compact('data', 'subTotal', 'cartExists', 'cart', 'products'));
     }
 
 

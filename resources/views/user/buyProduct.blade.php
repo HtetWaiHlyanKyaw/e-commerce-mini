@@ -1,12 +1,12 @@
 @extends('user.master')
 @section('title', 'Product Details & Purchase Options')
 @section('csrf')
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 @section('cart')
-    <a href="{{route('cartList')}}" class="btn position-relative">
+    <a href="{{ route('cartList') }}" class="btn position-relative">
         @if ($cart && count($cart) > 0)
-            <img src="{{ asset('user/img/core-img/bag.svg') }}" alt="">
+            <img src="{{ asset('user/img/core-img/bag.svg') }}" class="mb-2">
             <span style="margin-top:32px; margin-left:10px"
                 class="position-absolute start-80 me-5 translate-middle badge rounded-pill bg-light">
                 {{ count($cart) }}
@@ -56,11 +56,12 @@
             color: #ffcc00;
             /* Change color of hovered stars and those before it */
         }
+
         #qty::-webkit-inner-spin-button,
-#qty::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
+        #qty::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
     </style>
 
 @endsection
@@ -68,8 +69,10 @@
     <div class="container" style="margin-top: 50px">
         <div class="row">
             <div class="col-lg-5">
-                <div class="product-img" style="border-radius: 3px; width: 100%; height: 500px; object-fit: cover; background-color: #f8f8f8;">
-                    <img id="product_image" class="w-100 shadow" src="" alt="Product Image" style="border-radius: 3px; width: 100%; height: 100%; object-fit: cover;">
+                <div class="product-img"
+                    style="border-radius: 3px; width: 100%; height: 500px; object-fit: cover; background-color: #f8f8f8;">
+                    <img id="product_image" class="w-100 shadow" src="" alt="Product Image"
+                        style="border-radius: 3px; width: 100%; height: 100%; object-fit: cover;">
                 </div>
             </div>
 
@@ -125,26 +128,33 @@
                             @if (Auth::check() && Auth::user()->usertype == 'customer')
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <button id="minusBtn" class="btn btn-sm btn-primary"><i class="fa fa-minus"></i></button>
+                                        <button id="minusBtn" class="btn btn-sm btn-primary"><i
+                                                class="fa fa-minus"></i></button>
                                     </div>
-                                    <input type="number" value="1" style="width:50px" id="qty" class="form-control text-center mx-1" min="1" max="1" readonly>
+                                    <input type="number" value="1" style="width:50px" id="qty"
+                                        class="form-control text-center mx-1" min="1" max="1" readonly>
                                     <div class="input-group-append">
-                                        <button id="plusBtn" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button>
+                                        <button id="plusBtn" class="btn btn-sm btn-primary"><i
+                                                class="fa fa-plus"></i></button>
                                     </div>
                                 </div>
                                 {{-- <form action="{{ route('user.checkout') }}" method="POST">
                                     @csrf --}}
-                                    <input type="hidden" name="product_id" id="product_id_2">
-                                    <input type="hidden" name="qtyHidden" id="qtyHidden" value="1">
-                                    <button id="buyNowButton" class="btn btn-primary ml-md-2 mt-2 mt-md-0">Buy Now</button>
+                                <input type="hidden" name="product_id" id="product_id_2">
+                                <input type="hidden" name="qtyHidden" id="qtyHidden" value="1">
+                                <button id="buyNowButton" class="btn btn-primary ml-md-2 mt-2 mt-md-0">Buy Now</button>
                                 {{-- </form> --}}
-                                <button type="button" id="cartBtn" class="btn btn-primary ml-md-2 mt-2 mt-md-0"><i class="fa-solid fa-cart-shopping"></i> Add to Cart</button>
+                                <button type="button" id="cartBtn" class="btn btn-primary ml-md-2 mt-2 mt-md-0"><i
+                                        class="fa-solid fa-cart-shopping"></i> Add to Cart</button>
                                 <input type="hidden" id="userId" value="{{ Auth::user()->id }}">
                             @elseif (!Auth::check())
-                                <a href="{{ route('user.login') }}"><button type="button" id="cartBtn" class="btn btn-primary ml-md-2 mt-2 mt-md-0"><i class="fa-solid fa-cart-shopping"></i> Add to Cart</button></a>
+                                <a href="{{ route('user.login') }}"><button type="button" id="cartBtn"
+                                        class="btn btn-primary ml-md-2 mt-2 mt-md-0"><i
+                                            class="fa-solid fa-cart-shopping"></i> Add to Cart</button></a>
                             @endif
                         </div>
                     </div>
+                    <div id="error-message" class="text-danger mt-2" style="display:none;"></div>
                 </div>
             </div>
             <div class="col-12 mt-5">
@@ -221,35 +231,51 @@
                     <tbody>
                         <tr>
                             <th class="col-2">Display</th>
-                            <td class="col-10"><p id="display_text"></p></td>
+                            <td class="col-10">
+                                <p id="display_text"></p>
+                            </td>
                         </tr>
                         <tr>
                             <th>Resolution</th>
-                            <td><p id="resolution_text"></p></td>
+                            <td>
+                                <p id="resolution_text"></p>
+                            </td>
                         </tr>
                         <tr>
                             <th>Chipset</th>
-                            <td><p id="chipset_text"></p></td>
+                            <td>
+                                <p id="chipset_text"></p>
+                            </td>
                         </tr>
                         <tr>
                             <th>OS</th>
-                            <td><p id="OS_text"></p></td>
+                            <td>
+                                <p id="OS_text"></p>
+                            </td>
                         </tr>
                         <tr>
                             <th>Main Camera</th>
-                            <td><p id="main_camera_text"></p></td>
+                            <td>
+                                <p id="main_camera_text"></p>
+                            </td>
                         </tr>
                         <tr>
                             <th>Selfie Camera</th>
-                            <td><p id="selfie_camera_text"></p></td>
+                            <td>
+                                <p id="selfie_camera_text"></p>
+                            </td>
                         </tr>
                         <tr>
                             <th>Battery</th>
-                            <td><p id="battery_text"></p></td>
+                            <td>
+                                <p id="battery_text"></p>
+                            </td>
                         </tr>
                         <tr>
                             <th>Charging</th>
-                            <td><p id="charging_text"></p></td>
+                            <td>
+                                <p id="charging_text"></p>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -344,14 +370,14 @@
 @endsection
 
 @section('script')
-<script>
-    document.getElementById("buyNowButton").addEventListener("click", function() {
-        var productId = document.getElementById("product_id_2").value;
-        var qtyHidden = document.getElementById("qtyHidden").value;
-        var url = "{{ route('user.checkout') }}?product_id=" + productId + "&qtyHidden=" + qtyHidden;
-        window.location.href = url;
-    });
-</script>
+    <script>
+        document.getElementById("buyNowButton").addEventListener("click", function() {
+            var productId = document.getElementById("product_id_2").value;
+            var qtyHidden = document.getElementById("qtyHidden").value;
+            var url = "{{ route('user.checkout') }}?product_id=" + productId + "&qtyHidden=" + qtyHidden;
+            window.location.href = url;
+        });
+    </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
@@ -433,9 +459,9 @@
 
                 document.getElementById("qty").max = selectedProduct.quantity;
                 console.log("Quantity ", selectedProduct.quantity);
-                 console.log("Selected Product ID:", selectedProduct.id);
-                 console.log("Selected Product ID 2:", selectedProduct.id);
-                 console.log("Selected Product Name:", selectedProduct.name);
+                console.log("Selected Product ID:", selectedProduct.id);
+                console.log("Selected Product ID 2:", selectedProduct.id);
+                console.log("Selected Product Name:", selectedProduct.name);
             }
         }
 
@@ -457,33 +483,31 @@
             });
             // Get the initial quantity value
             let qty = parseInt($('#qty').val());
-const maxQty = parseInt($('#qty').attr('max'));
-const minQty = parseInt($('#qty').attr('min'));
+            const maxQty = parseInt($('#qty').attr('max'));
+            const minQty = parseInt($('#qty').attr('min'));
 
-// Increment quantity when plus button is clicked
-$('#plusBtn').on('click', function() {
-    if (qty < maxQty) { // Check if quantity is less than the maximum
-        qty = qty + 1;
-        $('#qty').val(qty);
-        $('#qtyHidden').val(qty);
+            // Increment quantity when plus button is clicked
+            $('#plusBtn').on('click', function() {
+                if (qty < maxQty) { // Check if quantity is less than the maximum
+                    qty = qty + 1;
+                    $('#qty').val(qty);
+                    $('#qtyHidden').val(qty);
 
-    }
-});
+                }
+            });
 
-// Decrement quantity when minus button is clicked
-$('#minusBtn').on('click', function() {
-    if (qty > minQty) { // Check if quantity is greater than the minimum
-        qty = qty - 1;
-        $('#qty').val(qty);
-        $('#qtyHidden').val(qty);
+            // Decrement quantity when minus button is clicked
+            $('#minusBtn').on('click', function() {
+                if (qty > minQty) { // Check if quantity is greater than the minimum
+                    qty = qty - 1;
+                    $('#qty').val(qty);
+                    $('#qtyHidden').val(qty);
 
-    }
-});
+                }
+            });
 
-
-            //  add to cart
+            // Add to cart
             $('#cartBtn').click(function() {
-
                 let userId = $('#userId').val();
                 let productId = $('#product_id').val();
 
@@ -493,16 +517,30 @@ $('#minusBtn').on('click', function() {
                     data: {
                         'userId': userId,
                         'productId': productId,
-                        'qty': qty
+                        'qty': 1 // Explicitly set qty to 1
                     },
-                    dataType: 'json', // corrected 'datatype' to 'dataType'
+                    dataType: 'json',
                     success: function(response) {
+                        // Reset the input fields to 1
+                        $('#qty').val(1);
+                        $('#qtyHidden').val(1);
+
+                        // Optionally, you can display a success message here
+
                         // Redirecting to the user.shop named route
                         window.location.href = '{{ route('user.shop') }}';
+                    },
+                    error: function(xhr, status, error) {
+                        if (xhr.status === 409) {
+                            // Display the error message for cart limit
+                            $('#error-message').text(xhr.responseJSON.message).show();
+                        } else {
+                            // Optionally, handle other errors here
+                            console.error('Error adding to cart:', status, error);
+                        }
                     }
                 });
             });
         });
     </script>
-
 @endsection

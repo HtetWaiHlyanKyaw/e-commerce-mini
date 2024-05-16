@@ -150,9 +150,6 @@
     @yield('content')
 
 
-
-
-
     <!-- ##### Footer Area Start ##### -->
     <footer class="footer_area clearfix">
         <div class="container">
