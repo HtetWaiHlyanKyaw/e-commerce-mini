@@ -180,6 +180,14 @@ Route::middleware('admin:super_admin,store_admin,supplier_admin')->group(functio
 
 //admin Login Control
 
+
+
+// Route::get('/supplier-purchases/{month}', [DashboardController::class, 'getSupplierPurchasesByMonth']);
+Route::get('/supplier-purchases/{month}/{year}', [DashboardController::class, 'getSupplierPurchasesByMonthAndYear']);
+Route::get('/customer-purchases/{month}/{year}', [DashboardController::class, 'getCustomerPurchasesByMonthAndYear']);
+
+
+
 Route::get('/admin/login', [AdminLoginController::class, 'showLoginForm'])->name('login');
 Route::post('/admin/login', [AdminLoginController::class, 'login']);
 Route::post('/admin/logout', [AdminLoginController::class, 'logout'])->name('logout');

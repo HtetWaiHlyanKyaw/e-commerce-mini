@@ -251,7 +251,7 @@
 
                     </li>
                 @endif
-
+                    <hr>
                 {{-- @if (auth()->user()->hasPermissionTo('read supplier_purchase')) --}}
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
@@ -276,7 +276,7 @@
                         <span class="hide-menu">Create</span>
                     </a>
                 </li>
-
+                <hr>
 
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
@@ -301,7 +301,7 @@
                         <span class="hide-menu">Create</span>
                     </a>
                 </li>
-
+                <hr>
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Bottom Banner</span>
@@ -325,6 +325,7 @@
                         <span class="hide-menu">Create</span>
                     </a>
                 </li>
+                <hr>
             </ul>
         </nav>
         <!-- End Sidebar navigation -->

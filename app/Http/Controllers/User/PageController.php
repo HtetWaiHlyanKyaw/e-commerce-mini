@@ -31,7 +31,7 @@ class PageController extends Controller
 
         // Retrieve newest products
         $newestProducts = Product::orderBy('created_at', 'desc')->get()->groupBy('product_model_id')->take(4);
-
+        // $newestProducts = Product::latest()->take(4)->get();
         // Retrieve the authenticated user
         $user = Auth::user();
 

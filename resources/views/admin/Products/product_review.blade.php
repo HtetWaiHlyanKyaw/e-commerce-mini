@@ -38,6 +38,7 @@
                     <tr>
                         <th style="text-align:center; color: #5d9bff;">No</th>
                         <th style="text-align:center; color: #5d9bff;">Name</th>
+                        <th style="text-align:center; color: #5d9bff;">Product Model</th>
                         {{-- <th>Product Name</th> --}}
                         <th style="text-align:center; color: #5d9bff;">Rating</th>
                         <th style="text-align:center; color: #5d9bff;">Comments</th>
@@ -51,12 +52,12 @@
                     @foreach ($userdata as $clist)
                         <tr class="tr-shadow">
                             {{-- <td class="col-lg-1">{{ $blist->id }}</td> --}}
-                            <td class="col-lg-1">{{ $counter }}</td>
-                            <td class="col-lg-1">{{ $clist->User->name }}</td>
-                            {{-- <td class="col-lg-1">{{ $clist->pro }}</td> --}}
-                            <td class="col-lg-1">{{ $clist->rating }}</td>
-                            <td class="col-lg-1">{{ $clist->comments }}</td>
-                            <td class="col-lg-1">{{ $clist->created_at->format('d / M /Y') }}</td>
+                            <td class="col-lg-1 text-center" >{{ $counter }}</td>
+                            <td class="col-lg-1 text-center">{{ $clist->User->name }}</td>
+                            <td class="col-lg-1 text-center">{{ $clist->ProductModel->name }}</td>
+                            <td class="col-lg-1 text-center">{{ $clist->rating }}</td>
+                            <td class="col-lg-1 text-center">{{ $clist->comments }}</td>
+                            <td class="col-lg-1 text-center">{{ \Carbon\Carbon::parse($clist->created_at)->format('F j, Y') }}</td>
                         </tr>
                         @php
                             $counter++; // Increment counter for the next row

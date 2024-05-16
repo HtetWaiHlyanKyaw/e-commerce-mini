@@ -68,9 +68,8 @@
     <div class="container" style="margin-top: 50px">
         <div class="row">
             <div class="col-lg-5">
-                <div class="product-img">
-                    <img id="product_image" class="w-100 shadow" src="" style="height:500px;object-fit: cover;"
-                        alt="Product Image">
+                <div class="product-img" style="border-radius: 3px; width: 100%; height: 500px; object-fit: cover; background-color: #f8f8f8;">
+                    <img id="product_image" class="w-100 shadow" src="" alt="Product Image" style="border-radius: 3px; width: 100%; height: 100%; object-fit: cover;">
                 </div>
             </div>
 
@@ -498,7 +497,8 @@ $('#minusBtn').on('click', function() {
                     },
                     dataType: 'json', // corrected 'datatype' to 'dataType'
                     success: function(response) {
-                        window.location.href = 'http://localhost:8000/';
+                        // Redirecting to the user.shop named route
+                        window.location.href = '{{ route('user.shop') }}';
                     }
                 });
             });
