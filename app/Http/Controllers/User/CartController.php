@@ -19,6 +19,13 @@ class CartController extends Controller
     public function add(Request $request)
     {
         try {
+            // Check if the user has reached the limit of 10 products in the cart
+            $cartItemCount = Cart::where('user_id', $request->userId)->count();
+
+            if ($cartItemCount >= 10) {
+                return response()->json(['message' => 'Cannot Add More Than Ten Products To The Cart'], 409);
+            }
+
             // Check if the product already exists in the cart for the current user
             $existingCartItem = Cart::where('user_id', $request->userId)
                 ->where('product_id', $request->productId)

@@ -153,6 +153,7 @@
                             @endif
                         </div>
                     </div>
+                    <div id="error-message" class="text-danger mt-2" style="display:none;"></div>
                 </div>
             </div>
             <div class="col-12 mt-5">
@@ -408,36 +409,41 @@
                 }
             });
 
-      // Add to cart
-        $('#cartBtn').click(function() {
-            let userId = $('#userId').val();
-            let productId = $('#product_id').val();
+            // Add to cart
+            $('#cartBtn').click(function() {
+                let userId = $('#userId').val();
+                let productId = $('#product_id').val();
 
-            $.ajax({
-                type: 'post',
-                url: '/cart/add',
-                data: {
-                    'userId': userId,
-                    'productId': productId,
-                    'qty': 1 // Explicitly set qty to 1
-                },
-                dataType: 'json',
-                success: function(response) {
-                    // Reset the input fields to 1
-                    $('#qty').val(1);
-                    $('#qtyHidden').val(1);
+                $.ajax({
+                    type: 'post',
+                    url: '/cart/add',
+                    data: {
+                        'userId': userId,
+                        'productId': productId,
+                        'qty': 1 // Explicitly set qty to 1
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        // Reset the input fields to 1
+                        $('#qty').val(1);
+                        $('#qtyHidden').val(1);
 
-                    // Optionally, you can display a success message here
+                        // Optionally, you can display a success message here
 
-                    // Redirecting to the user.shop named route
-                    window.location.href = '{{ route('user.shop') }}';
-                },
-                error: function(xhr, status, error) {
-                    // Optionally, handle the error here
-                    console.error('Error adding to cart:', status, error);
-                }
+                        // Redirecting to the user.shop named route
+                        window.location.href = '{{ route('user.shop') }}';
+                    },
+                    error: function(xhr, status, error) {
+                        if (xhr.status === 409) {
+                            // Display the error message for cart limit
+                            $('#error-message').text(xhr.responseJSON.message).show();
+                        } else {
+                            // Optionally, handle other errors here
+                            console.error('Error adding to cart:', status, error);
+                        }
+                    }
+                });
             });
         });
-    });
     </script>
 @endsection
