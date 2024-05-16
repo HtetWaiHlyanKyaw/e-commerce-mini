@@ -24,46 +24,47 @@
 @endsection
 @section('content')
     <div class="container">
-        <div class="row">
-            <div class="col-4">
+        <div class="row mb-5">
+            <div class="col-3 mt-5">
                 @include('user.sidebar')
             </div>
-            <div class="col-4" style="margin-top:50px;">
-                <h4 class="header-color" style="color:#25518f;">Order Summary</h4>
-                <div class="customer-details">
-                    <p style="margin-bottom: 5px; "><b>Invoice ID:</b> {{ $customerPurchase->invoice_id }}</p>
-                    <p style="margin-bottom: 5px; "><b>Payment Method:</b> {{ $customerPurchase->payment_method }}</p>
-                    <p style="margin-bottom: 5px; "><b>Total Quantity:</b> {{ $customerPurchase->total_quantity }}</p>
-                    <p style="margin-bottom: 5px; "><b>Total Price: </b>{{ $customerPurchase->total_price }}</p>
-                    <p><b>Date:</b> {{ \Carbon\Carbon::parse($customerPurchase->created_at)->format('F j, Y') }}</p>
+            <div class="col-9 bg-light" style="margin-top:30px; padding: 50px;">
+                <h4>Order Summary</h4>
+                <div class="customer-details row">
+                    <div class="col"><p style="margin-bottom: 5px; "><b>Invoice</b><br>{{ $customerPurchase->invoice_id }}</p></div>
+                    <div class="col"> <p style="margin-bottom: 5px; "><b>Payment Method</b><br>{{ $customerPurchase->payment_method }}</p></div>
+                    <div class="col"><p style="margin-bottom: 5px; "><b>Total Quantity</b><br> {{ $customerPurchase->total_quantity }}</p></div>
+                    <div class="col"> <p style="margin-bottom: 5px; "><b>Total Price</b> <br>{{ $customerPurchase->total_price }}</p></div>
+                    <div class="col"><p><b>Date:</b> <br> {{ \Carbon\Carbon::parse($customerPurchase->created_at)->format('F j, Y') }}</p></div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <h4 class="header-color">Ordered Products</h4>
+                <hr>
+                <h4>Ordered Products</h4>
                 <div class="slip-wrapper">
                     @php $counter = 0 @endphp
                     @foreach ($details as $detail)
-                        <div class="slip ">
-
-                            <img src="{{ asset('storage/products/' . $detail->product->image) }}"
-                                style="width: 95%; height: 300px; object-fit: cover;" alt="Product Image"
-                                class="product-image">
-                            <div>
-                                <p style="color: black;">{{ $detail->product->name }}</p>
+                        @if ($counter % 4 == 0)
+                            <div class="row"> <!-- Start a new row for every 4th product -->
+                        @endif
+                        <div class="col-md-3">
+                            <div class="slip">
+                                <img src="{{ asset('storage/products/' . $detail->product->image) }}"
+                                    style="width: 100%; height: 200px; object-fit: cover;" alt="Product Image"
+                                    class="product-image">
+                                <div>
+                                    <p style="color: black;">{{ $detail->product->name }}</p>
+                                </div>
+                                <div style="margin-bottom: 10px; "><strong>Quantity:</strong>
+                                    {{ $detail->quantity }}</div>
+                                <div style="margin-bottom: 10px;"><strong >Price:</strong>
+                                    {{ $detail->price }}</div>
+                                <div><strong>Sub Total:</strong> {{ $detail->sub_total }}</div>
                             </div>
-                            <div style="margin-bottom: 10px; "><strong style="color:#25518f;">Quantity:</strong>
-                                {{ $detail->quantity }}</div>
-                            <div style="margin-bottom: 10px;"><strong style="color:#25518f;">Price:</strong>
-                                {{ $detail->price }}</div>
-                            <div><strong style="color:#25518f;">Sub Total:</strong> {{ $detail->sub_total }}</div>
                         </div>
                         @php $counter++ @endphp
-                        @if ($counter % 10 == 0)
-                </div>
-                <div class="slip-wrapper">
-                    @endif
+                        @if ($counter % 4 == 0 || $loop->last)
+                            </div> <!-- Close the row after every 4th product or if it's the last product -->
+                        @endif
                     @endforeach
-
                 </div>
             </div>
         </div>

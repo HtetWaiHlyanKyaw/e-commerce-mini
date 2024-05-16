@@ -19,8 +19,9 @@
         <li class="list-item">
             <div class="widget price mt-20">
                 <button class="btn btn-outline-danger text-center" style="margin-top:10px; width: 100%;" href="{{ route('logout') }}"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
-                        class="fa fa-arrow-left"></i> Logout</button>
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> Logout </button>
+                    {{-- <i
+                    class="fa fa-sign-out"></i> --}}
             </div>
 
         </li>

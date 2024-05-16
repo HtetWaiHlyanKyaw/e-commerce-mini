@@ -6,7 +6,7 @@
 @section('cart')
     <a href="{{ route('cartList') }}" class="btn position-relative">
         @if ($cart && count($cart) > 0)
-            <img src="{{ asset('user/img/core-img/bag.svg') }}" alt="">
+            <img src="{{ asset('user/img/core-img/bag.svg') }}">
             <span style="margin-top:32px; margin-left:10px"
                 class="position-absolute start-80 me-5 translate-middle badge rounded-pill bg-light">
                 {{ count($cart) }}
@@ -158,7 +158,15 @@
                                 <div class="product-description text-center" >
                                     <a href="{{ route('user.productDetails', ['model_id' => $modelId]) }}">
                                         <h6>
-                                        {{ trim(strstr($topProduct->first()->name, '(', true)) }}</h6>
+                                            @php
+                                                $name = strstr($topProduct->first()->name, '(', true);
+                                                if ($name === false) {
+                                                    echo $topProduct->first()->name;
+                                                } else {
+                                                    echo trim($name);
+                                                }
+                                            @endphp
+                                        </h6>
                                     </a>
                                     <!-- Hover Content -->
                                     <div class="hover-content">
@@ -227,15 +235,30 @@
                             <div class="single-product-wrapper">
                                 <!-- Product Image -->
                                 <div class="product-img">
+                                    @if ($newProduct->first()->image)
                                     <img src="{{ asset('storage/products/' . $newProduct->first()->image) }}"
-                                        alt="Product Image">
+                                        alt="Product Image" style="height: 100%;">
+                                        @else
+                                        <div style="height: 100%; display: flex; align-items: center; justify-content: center; color: #8c8c8c;">
+                                            No Image
+                                        </div>
+                                        @endif
 
                                 </div>
                                 <div class="product-description text-center">
                                     <a href="{{ route('user.productDetails', ['model_id' => $modelId]) }}">
 
-                                        <h6>
-                                            {{ trim(strstr($newProduct->first()->name, '(', true)) }}</h6>
+
+                                            <h6>
+                                                @php
+                                                    $name = strstr($newProduct->first()->name, '(', true);
+                                                    if ($name === false) {
+                                                        echo $newProduct->first()->name;
+                                                    } else {
+                                                        echo trim($name);
+                                                    }
+                                                @endphp
+                                            </h6>
                                     </a>
                                     <!-- Hover Content -->
                                     <div class="hover-content">

@@ -39,13 +39,16 @@
                 </div>
             @endif
             <div class="row">
-                <div class="col-4">
+                <div class="col-3 mt-5">
                     @include('user.sidebar')
                 </div>
                 @if ($customerPurchases->isEmpty())
                     <p>No Products purchased</p>
                 @else
-                    <div class="col-8 bg-white p-5 border rounded">
+
+                    <div class="col-9 bg-white p-5 border rounded">
+                            <h2 class="text-center">Purchase History</h2>
+                        <br>
                         <table style="background-color:white" id="myTable" class="hover compact">
 
                             <thead style="background-color: white; color:black;">

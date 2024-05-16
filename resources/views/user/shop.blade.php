@@ -279,7 +279,15 @@
                                 </div>
                                 <div class="product-description" style="margin-bottom: 20px;">
                                     <h6 class="text-center">
-                                        {{ trim(strstr($productGroup->first()->name, '(', true)) }}</h6>
+                                        @php
+                                            $name = strstr($productGroup->first()->name, '(', true);
+                                            if ($name === false) {
+                                                echo $productGroup->first()->name;
+                                            } else {
+                                                echo trim($name);
+                                            }
+                                        @endphp
+                                    </h6>
                                     <!-- Display model name -->
                                 </div>
                             </a>
