@@ -14,7 +14,7 @@
                 <span class="visually-hidden">unread messages</span>
             </span>
         @else
-            <img src="{{ asset('user/img/core-img/bag.svg') }}" alt="">
+            <img src="{{ asset('user/img/core-img/bag.svg') }}" class="mb-2">
             <span style="margin-top:32px; margin-left:10px"
                 class="position-absolute start-80 me-5 translate-middle badge rounded-pill bg-light">
                 0

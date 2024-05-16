@@ -1,11 +1,6 @@
 @extends('user.master')
 @section('title', 'Login')
 @section('style')
-    <link rel="shortcut icon" type="image/png" href="{{ asset('admin/images/logos/Unity Source Logo.png') }}" />
-    <link rel="stylesheet" href="{{ asset('admin/css/styles.min.css') }}" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-        integrity="sha512-xrQn4PY6+j5Sl2l0vUMo4J4iN6A3BlvAodFWKoeqZPLvQ5TtlDs3U3I7zvYz6m1vL+3pE8VjvD2KkiBcuq1tfA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" /> <!-- Laravel CSRF Token -->
     <style>
         /* .Register-Btn{
 
