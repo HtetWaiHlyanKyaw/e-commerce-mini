@@ -160,74 +160,6 @@
                 <div class="card-header" style="background-color: rgb(105, 105, 105); color: white">
                     Product Specifications
                 </div>
-                {{-- <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <h6>Display</h6>
-                        </div>
-                        <div class="col-md-9">
-                            <p id="display_text"><p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <h6>Resolution</h6>
-                        </div>
-                        <div class="col-md-9">
-
-
-<p id="resolution_text"></p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <h6>OS</h6>
-                        </div>
-                        <div class="col-md-9">
-                            <p id="OS_text"></p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <h6>Chipset</h6>
-                        </div>
-                        <div class="col-md-9">
-                            <p id="chipset_text"></p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <h6>Main Camera</h6>
-                        </div>
-                        <div class="col-md-9">
-                            <p id="main_camera_text"></p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <h6>Selfie Camera</h6>
-                        </div>
-                        <div class="col-md-9">
-                            <p id="selfie_camera_text"></p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <h6>Battery</h6>
-                        </div>
-                        <div class="col-md-9">
-                            <p id="battery_text"></p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <h6>Charging</h6>
-                        </div>
-                        <div class="col-md-9">
-                            <p id="charging_text"></p>
-                        </div>
-                    </div>
-                </div> --}}
                 <table class="table table-bordered">
                     <tbody>
                         <tr>
@@ -281,15 +213,7 @@
                     </tbody>
                 </table>
             </div>
-            {{-- <div class="bg-light " id="reviews" style="margin-top: 50px;">
-                <h5>Reviews</h5>
-                <br>
-                @foreach ($reviews as $review)
-                <h6>{{$review->user->name}}</h6>
-                <p>{{$review->comments}}</p>
-                <br>
-                @endforeach
-            </div> --}}
+
             @if ($totalComments === 0)
                 <h5 style="margin-top: 50px;">No Reviews</h5><br>
             @elseif($totalComments === 1)
@@ -298,21 +222,7 @@
                 <h5 style="margin-top: 50px;">{{ $totalComments }} Reviews</h5><br>
             @endif
             <div class="bg-light" id="comments" style=" margin-bottom: 50px;">
-                {{-- <br> --}}
-                {{-- @foreach ($reviews as $review)
-                    <h6>{{$review->user->name}}</h6>
-                    <div class="comment">{{ $review->comments }}</div>
-                    <div class="comment">{{ \Carbon\Carbon::parse($review->created_at)->format('F j, Y') }}</div>
-                    <br>
-                @endforeach --}}
             </div>
-            {{-- <div class="form-group row">
-                <div class="col-sm-8 d-flex align-items-center">
-                <input type="text" class="form-control" placeholder="Give feedback">
-                <button class="btn btn-primary" id="give-feedback"><i class="fa fa-send"></i></button>
-                </div>
-                <button id="show-more-comments" class="btn btn-outline-primary">Show more comments</button>
-            </div> --}}
             @if (Auth::check() && Auth::user()->usertype === 'customer' && $hasBoughtProductModel === true)
                 <div class="form-group row align-items-center">
                     <div class="col-md-9">
@@ -357,17 +267,6 @@
                     </div>
                 </div>
             @endif
-            {{-- @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-
-
-@foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif --}}
         </div>
     </div>
 @endsection
@@ -484,6 +383,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
             // Get the initial quantity value
             let qty = parseInt($('#qty').val());
             const maxQty = parseInt($('#qty').attr('max'));
@@ -494,10 +394,6 @@
                 if (qty < maxQty) { // Check if quantity is less than the maximum
                     qty = qty + 1;
                     $('#qty').val(qty);
-                    $('#qtyHidden').val(qty);
-
-                }
-            });
 
             // Decrement quantity when minus button is clicked
             $('#minusBtn').on('click', function() {
@@ -509,27 +405,36 @@
                 }
             });
 
+      // Add to cart
+        $('#cartBtn').click(function() {
+            let userId = $('#userId').val();
+            let productId = $('#product_id').val();
 
-            //  add to cart
-            $('#cartBtn').click(function() {
+            $.ajax({
+                type: 'post',
+                url: '/cart/add',
+                data: {
+                    'userId': userId,
+                    'productId': productId,
+                    'qty': 1 // Explicitly set qty to 1
+                },
+                dataType: 'json',
+                success: function(response) {
+                    // Reset the input fields to 1
+                    $('#qty').val(1);
+                    $('#qtyHidden').val(1);
 
-                let userId = $('#userId').val();
-                let productId = $('#product_id').val();
+                    // Optionally, you can display a success message here
 
-                $.ajax({
-                    type: 'post',
-                    url: '/cart/add',
-                    data: {
-                        'userId': userId,
-                        'productId': productId,
-                        'qty': qty
-                    },
-                    dataType: 'json', // corrected 'datatype' to 'dataType'
-                    success: function(response) {
-                        window.location.href = 'http://localhost:8000/';
-                    }
-                });
+                    // Redirecting to the user.shop named route
+                    window.location.href = '{{ route('user.shop') }}';
+                },
+                error: function(xhr, status, error) {
+                    // Optionally, handle the error here
+                    console.error('Error adding to cart:', status, error);
+                }
             });
         });
+    });
     </script>
 @endsection

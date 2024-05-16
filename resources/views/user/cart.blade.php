@@ -5,6 +5,7 @@
 @endsection
 
 
+
 @section('content')
     <div class="container-fluid p-5 mt-4">
         {{-- {{dd($data)}} --}}
@@ -97,7 +98,7 @@
                         {{-- Shipping --}}
                         <div class="d-flex justify-content-between mb-3 border-bottom">
                             <h6>Shipping</h6>
-                            <h6><i class="fa fa-dollar me-1"></i>1000</h6>
+                            <h6><i class="fa fa-dollar me-1"></i>5</h6>
                         </div>
 
                         {{-- Total --}}
@@ -105,7 +106,7 @@
                             <h6>Total</small></h6>
                             <h6><i class="fa fa-dollar me-1"></i>
                                 <span id="finalTotal">
-                                    {{ $subTotal + 1000 }}
+                                    {{ $subTotal + 5 }}
                                 </span>
                             </h6>
                         </div>
@@ -258,7 +259,7 @@
                     subTotal += parseInt($(row).find('#total').text());
                 });
                 $('#subTotal').text(subTotal);
-                $('#finalTotal').text(subTotal + 1000);
+                $('#finalTotal').text(subTotal + 5);
             }
         });
     </script>

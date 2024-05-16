@@ -13,10 +13,4 @@ class ProfileController extends Controller
         // Pass user data to the view
         return view('admin.profile', ['user' => $user]);
     }
-
-
-
-
-
-
 }
