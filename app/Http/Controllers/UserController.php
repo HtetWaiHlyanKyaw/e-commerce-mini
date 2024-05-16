@@ -35,4 +35,9 @@ class UserController extends Controller
         return view('user.single_product_details');
     }
 
+    // public function Profile(){
+    //     return view('user.profile');
+    // }
+
+
 }

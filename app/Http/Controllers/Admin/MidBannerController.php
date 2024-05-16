@@ -113,7 +113,6 @@ class MidBannerController extends Controller
 
     private function valiedit($request)
     {
-
         {
             $rules = [
                 'image1' => 'image|mimes:jpeg,jpg,png,webp',

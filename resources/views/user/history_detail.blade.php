@@ -23,18 +23,56 @@
     </a>
 @endsection
 @section('content')
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-6">
-            <h4 class="header-color">Order Summary</h4>
-            <div class="customer-details">
-                <h6>Invoice ID: {{ $customerPurchase->invoice_id }}</h6>
-                <h6>Payment Method: {{ $customerPurchase->payment_method }}</h6>
-                <h6>Total Quantity: {{ $customerPurchase->total_quantity }}</h6>
-                <h6>Total Price: {{ $customerPurchase->total_price }}</h6>
-                <h6>Date: {{ \Carbon\Carbon::parse($customerPurchase->created_at)->format('F j, Y') }}</h6>
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                @include('user.sidebar')
             </div>
-            {{-- <h4 class="header-color">Customer information</h4>
+            <div class="col-4" style="margin-top:50px;">
+                <h4 class="header-color" style="color:#25518f;">Order Summary</h4>
+                <div class="customer-details">
+                    <p style="margin-bottom: 5px; "><b>Invoice ID:</b> {{ $customerPurchase->invoice_id }}</p>
+                    <p style="margin-bottom: 5px; "><b>Payment Method:</b> {{ $customerPurchase->payment_method }}</p>
+                    <p style="margin-bottom: 5px; "><b>Total Quantity:</b> {{ $customerPurchase->total_quantity }}</p>
+                    <p style="margin-bottom: 5px; "><b>Total Price: </b>{{ $customerPurchase->total_price }}</p>
+                    <p><b>Date:</b> {{ \Carbon\Carbon::parse($customerPurchase->created_at)->format('F j, Y') }}</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h4 class="header-color">Ordered Products</h4>
+                <div class="slip-wrapper">
+                    @php $counter = 0 @endphp
+                    @foreach ($details as $detail)
+                        <div class="slip ">
+
+                            <img src="{{ asset('storage/products/' . $detail->product->image) }}"
+                                style="width: 95%; height: 300px; object-fit: cover;" alt="Product Image"
+                                class="product-image">
+                            <div>
+                                <p style="color: black;">{{ $detail->product->name }}</p>
+                            </div>
+                            <div style="margin-bottom: 10px; "><strong style="color:#25518f;">Quantity:</strong>
+                                {{ $detail->quantity }}</div>
+                            <div style="margin-bottom: 10px;"><strong style="color:#25518f;">Price:</strong>
+                                {{ $detail->price }}</div>
+                            <div><strong style="color:#25518f;">Sub Total:</strong> {{ $detail->sub_total }}</div>
+                        </div>
+                        @php $counter++ @endphp
+                        @if ($counter % 10 == 0)
+                </div>
+                <div class="slip-wrapper">
+                    @endif
+                    @endforeach
+
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+@section('script')
+
+@endsection
+{{-- <h4 class="header-color">Customer information</h4>
             <div class="customer-details">
                 <h6>Account: {{ $customerPurchase->user->name }}</h6>
                 <h6>Full Name: {{ $customerPurchase->user->full_name }}</h6>
@@ -43,31 +81,3 @@
                 <h6>Address: {{ $customerPurchase->user->address }}</h6>
 
             </div> --}}
-        </div>
-        <div class="col-md-6">
-            <h4 class="header-color">Ordered Products</h4>
-            <div class="slip-wrapper">
-                @php $counter = 0 @endphp
-                @foreach ($details as $detail)
-                    <div class="slip">
-
-                        <img src="{{ asset('storage/products/'.$detail->product->image)}}" style="width: 100%; height: 200px; object-fit: cover;" alt="Product Image" class="product-image">
-                        <div><strong>{{ $detail->product->name }}</strong></div>
-                        <div><strong>Quantity:</strong> {{ $detail->quantity }}</div>
-                        <div><strong>Price:</strong> {{ $detail->price }}</div>
-                        <div><strong>Sub Total:</strong> {{ $detail->sub_total }}</div>
-                    </div>
-                    @php $counter++ @endphp
-                    @if ($counter % 10 == 0)
-                        </div><div class="slip-wrapper">
-                    @endif
-                @endforeach
-
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
-@section('script')
-
-@endsection
