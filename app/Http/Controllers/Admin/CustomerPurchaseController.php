@@ -155,7 +155,7 @@ class CustomerPurchaseController extends Controller
             'address' => 'required|string|max:255',
             'phone_no' => 'required|string|regex:/^09\d{9}$/',
             'payment_method' => 'required|string|in:Cash On Delivery,Mobile Banking,Mobile Wallet,Direct Bank Transfer',
-            'quantity' => 'required|integer|min:1',
+            // 'quantity' => 'required|integer|min:1',
             'total_price' => 'required',
             'total_quantity' => 'required',
             'products' => 'required|array',

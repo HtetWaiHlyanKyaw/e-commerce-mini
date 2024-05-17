@@ -438,6 +438,7 @@ namespace App\Models{
  * @property string|null $comments
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\ProductModel $ProductModel
  * @property-read \App\Models\User $User
  * @method static \Illuminate\Database\Eloquent\Builder|review newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|review newQuery()

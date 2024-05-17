@@ -15,7 +15,7 @@
                 <span class="visually-hidden">unread messages</span>
             </span>
         @else
-            <img src="{{ asset('user/img/core-img/bag.svg') }}" alt="">
+            <img src="{{ asset('user/img/core-img/bag.svg') }}" class="mb-2">
             <span style="margin-top:32px; margin-left:10px"
                 class="position-absolute start-80 me-5 translate-middle badge rounded-pill bg-light">
                 0
@@ -27,13 +27,13 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-3 mt-5">
+            <div class="col-4">
                 @include('user.sidebar')
             </div>
-            <div class="col-9">
+            <div class="col-8">
                 <form method="POST" action="{{ route('user.pUpdate') }}" class="row">
                     @csrf
-                    <div class="col-12 mt-3">
+                    <div class="col-12">
                         <h2 class="text-center">User Profile</h2>
                     </div>
                     <div class="col-md-6">
@@ -91,7 +91,7 @@
                             </span>
                         @enderror
                     </div>
-                    <div class="col-10 mt-5 text-center mb-5" style="align-items:center;">
+                    <div class="col-10 mt-5 text-center" style="align-items:center;">
                         <button type="submit" class="btn btn-primary">Save Changes</button>
                     </div>
                 </form>

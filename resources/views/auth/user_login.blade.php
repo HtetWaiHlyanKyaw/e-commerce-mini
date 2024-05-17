@@ -2,12 +2,37 @@
 @section('title', 'Login')
 @section('style')
     <style>
-        /* .Register-Btn{
+        .btn-social {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 16px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            background-color: #f5e8e8;
+            /* Ensure consistent style on hover */
+            transition: none;
+        }
 
-                text-decoration: none;
-                font-size: 15px;
+        .btn-google {
+            background-color: #2eb82e;
+        }
 
-            } */
+        .btn-facebook {
+            background-color: #3b5998;
+        }
+
+        .btn-social i {
+            margin-right: 8px;
+            font-size: 18px;
+            vertical-align: middle;
+        }
+
+        /* Explicitly set hover styles to match normal styles */
     </style>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
@@ -68,13 +93,19 @@
                                 <!-- Divider -->
                                 <div class="text-center mb-3"><strong>Or</strong></div>
                                 <!-- Google Sign-in Button -->
-                                <a href="{{ route('google-auth') }}"
+                                {{-- <a href="{{ route('google-auth') }}"
                                     class="btn btn-google w-100 py-2 fs-4 mb-4 rounded-2 bg-secondary-subtle">
                                     <i class="fab fa-google me-2"></i>Continue with Google
+                                </a> --}}
+                                <a href="{{ route('google-auth') }}" class="btn-social btn-google">
+                                    <i class="fab fa-google"></i> Continue with Google
                                 </a>
-                                {{-- <a href="{{route('google-auth')}}"
-                                class="btn btn-google w-100 py-2 fs-4 mb-4 rounded-2"><i
-                                    class="fab fa-google me-2"></i>Sign in with Google</a> --}}
+
+                                <!-- Facebook login button -->
+                                <a href="{{route('facebookPage')}}" class="btn-social btn-facebook">
+                                    <i class="fab fa-facebook-f"></i> Continue with Facebook
+                                </a>
+
                                 <p class="text-center">Don't have an account? <a href="{{ route('user.RegisterPage') }}"
                                         class="Register-Btn">Register</a></p>
                             </div>
