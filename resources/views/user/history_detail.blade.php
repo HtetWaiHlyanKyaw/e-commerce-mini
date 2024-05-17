@@ -38,8 +38,8 @@
                     <div class="col"><p><b>Date:</b> <br> {{ \Carbon\Carbon::parse($customerPurchase->created_at)->format('F j, Y') }}</p></div>
                 </div>
                 <hr>
-                <h4>Ordered Products</h4>
-                <div class="slip-wrapper">
+                <h5>Ordered Products</h5>
+                <div class="slip-wrapper mt-3">
                     @php $counter = 0 @endphp
                     @foreach ($details as $detail)
                         @if ($counter % 4 == 0)
@@ -47,17 +47,24 @@
                         @endif
                         <div class="col-md-3">
                             <div class="slip">
+                                @if($detail->product->image)
                                 <img src="{{ asset('storage/products/' . $detail->product->image) }}"
                                     style="width: 100%; height: 200px; object-fit: cover;" alt="Product Image"
                                     class="product-image">
+                                    @else
+                                    <div style="height: 200px; display: flex; align-items: center; justify-content: center; color: #8c8c8c; background-color: #fff">
+                                        No Image
+                                    </div>
+                                    @endif
                                 <div>
-                                    <p style="color: black;">{{ $detail->product->name }}</p>
+                                    <p style="color: black;" class="mt-2"><strong>{{ $detail->product->name }}</strong></p>
                                 </div>
                                 <div style="margin-bottom: 10px; "><strong>Quantity:</strong>
                                     {{ $detail->quantity }}</div>
                                 <div style="margin-bottom: 10px;"><strong >Price:</strong>
                                     {{ $detail->price }}</div>
                                 <div><strong>Sub Total:</strong> {{ $detail->sub_total }}</div>
+                                <br>
                             </div>
                         </div>
                         @php $counter++ @endphp

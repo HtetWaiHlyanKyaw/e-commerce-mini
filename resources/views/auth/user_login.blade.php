@@ -27,9 +27,9 @@
 
 </head> --}}
 @section('content')
-    {{-- <body> --}}
+    {{-- <body>
     <!--  Body Wrapper -->
-    {{-- <div class="container-fluid"> --}}
+    <div class="container-fluid"> --}}
     <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed">
         <div
@@ -91,8 +91,8 @@
     </div>
 
 
-    {{-- </body> --}}
-    {{-- </div> --}}
+    {{-- </body>
+    </div> --}}
 @endsection
 {{-- </html> --}}
 @section('script')

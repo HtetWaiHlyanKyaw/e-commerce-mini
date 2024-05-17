@@ -46,20 +46,20 @@
                     <p>No Products purchased</p>
                 @else
 
-                    <div class="col-9 bg-white p-5 border rounded">
+                    <div class="col-9 bg-white p-5 border rounded mt-3">
                             <h2 class="text-center">Purchase History</h2>
                         <br>
-                        <table style="background-color:white" id="myTable" class="hover compact">
+                        <table style="background-color:white" id="myTable" class="hover compact stripe">
 
-                            <thead style="background-color: white; color:black;">
+                            <thead style="background-color: rgb(26, 26, 26); color:white; height: 20px;">
 
                                 <tr>
-                                    <th style="color: #5d9bff; text-align:center">No</th>
-                                    <th style="color: #5d9bff; text-align:center">Invoice ID</th>
-                                    <th style="color: #5d9bff; text-align:center">Total Quantity</th>
-                                    <th style="color: #5d9bff; text-align:center">Total Price</th>
-                                    <th style="color: #5d9bff; text-align:center">Date</th>
-                                    <th style="color: #5d9bff; text-align:center">Action</th>
+                                    <td style="text-align:center">No</td>
+                                    <td style="text-align:center">Invoice ID</td>
+                                    <td style="text-align:center">Total Quantity</td>
+                                    <td style="text-align:center">Total Price</td>
+                                    <td style="text-align:center">Date</td>
+                                    <td style="text-align:center">Action</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -85,11 +85,13 @@
                                                 title="customer purchase detail">
                                                 <i class="fa fa-file"></i>
                                             </button> --}}
-                                                <button class="btn btn-outline-primary btn-md border-2 rounded"
+                                                {{-- <button class="btn btn-dark btn-md border-2 rounded"
                                                     title="supplier purchase detail">
                                                     Details
-                                                    {{-- <i class="fa fa-file" style="font-size:22px;"></i> --}}
-                                                </button>
+
+                                                </button> --}}
+                                                <p style="color: black;"><strong>Details</strong> <i class="fa fa-arrow-right"></i></p>
+
                                             </a>
                                         </td>
                                     </tr>

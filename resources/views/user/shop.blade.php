@@ -2,6 +2,8 @@
 @section('title', 'Shop')
 @section('style')
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
+
 @endsection
 @section('cart')
     <a href="{{ route('cartList') }}" class="btn position-relative">

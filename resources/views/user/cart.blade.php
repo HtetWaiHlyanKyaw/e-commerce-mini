@@ -23,8 +23,8 @@
         @endif
     </a>
 @endsection
-
-
+@section('style')
+@endsection
 @section('content')
     <div class="container-fluid p-5 mt-4">
         {{-- {{dd($data)}} --}}
@@ -35,7 +35,28 @@
             <div class="row shadow">
                 {{-- left Cart side --}}
                 <div class="col-lg-8 col-12 p-5 rounded">
+                    <div class="row ml-3 mb-3">
+                        <div class="col-md-2 col-12">
+                            <h6>Product</h6>
+                        </div>
+                        <div class="col-md-2 col-12">
+                            <h6>Name</h6>
+                        </div>
+                        <div class="col-md-2 col-12 ml-3">
+                            <h6>Price</h6>
+                        </div>
+                        <div class="col-md-2 col-12 ">
+                            <h6>Quantity</h6>
+                        </div>
+                        <div class="col-md-2 col-12">
+                            <h6>Sub Total</h6>
+                        </div>
+                    </div>
+                    <hr>
                     <table class="table table-borderless text-center mb-5">
+
+
+
                         <tbody>
                             @foreach ($data as $cart)
                                 <tr class="row border-bottom">
@@ -46,18 +67,27 @@
                                         </a>
                                     </td>
                                     {{-- Image --}}
-                                    <td class="col-md-2 col-12">
-                                        <img class="img-fluid" src="{{ asset('storage/products/' . $cart->product_image) }}"
-                                            alt="product image">
+
+                                    <td class="col-md-2 col-12" style="height: 150px;">
+                                        @if ($cart->product_image)
+                                        <img src="{{ asset('storage/products/' . $cart->product_image) }}" alt="Product Image" style="border-radius: 3px; width: 100%; height: 100%; object-fit: cover;"  class="img-fluid">
+                                    @else
+                                        <!-- Placeholder content to keep the height consistent -->
+                                        <div style="height: 100%; display: flex; align-items: center; justify-content: center; color: #ccc; background-color:#f7f7f7">
+                                            No Image
+                                        </div>
+                                    @endif
+                                        {{-- <img class="img-fluid" src="{{ asset('storage/products/' . $cart->product_image) }}"
+                                            alt="product image"> --}}
                                     </td>
 
                                     {{-- name --}}
                                     <td class="col-md-2 col-12">
-                                        <i class="fa fa-mobile"></i> {{ $cart->product_name }}
+                                        {{ $cart->product_name }}
                                     </td>
 
                                     <td class="col-md-2 col-12">
-                                        <i class="fa fa-dollar"></i>
+                                        $
                                         <span id="price">
                                             {{ $cart->product_price }}
                                         </span>
@@ -80,7 +110,7 @@
 
                                     {{-- total --}}
                                     <td class="col-md-2 col-12">
-                                        <i class="fa fa-dollar"></i>
+                                        $
                                         <span id="total">
                                             {{ $cart->product_price * $cart->qty }}
                                         </span>
@@ -132,22 +162,31 @@
                     </div>
 
                     {{-- Order and Clear Btn --}}
-                    <div class="my-5">
+                    <div class="my-5 row">
+                        <div class="col">
                         <a href="#" id="checkoutButton">
-                            <button class="btn btn-sm btn-primary px-3 me-3">
+                            <button class="btn btn-sm btn-primary px-3 me-3 w-100 essence-btn">
                                 Checkout
                             </button>
                         </a>
+                    </div>
+                    <div class="col">
                         <a href="{{ route('cart.clear') }}">
-                            <button class="btn btn-sm btn-danger px-3">
+                            <button class="btn btn-sm btn-danger w-100 px-3 essence-btn2">
                                 Clear Cart
                             </button>
                         </a>
                     </div>
-                    <div class="alert alert-warning" role="alert">
+                    </div>
+
+
+
+
+
+                    {{-- <div class="alert alert-warning" role="alert">
                         Shipping time may be about one week. <br>
                         After ordered , we will send voucher detail to your email.
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         @endif

@@ -60,29 +60,53 @@
                                 </div>
                                 <div class="col-md-12 mb-4">
                                     <label for="first_name">Full Name <span>*</span></label>
-                                    <input type="text" class="form-control" id="first_name" value=""
+                                    <input type="text" class="form-control" id="first_name" value="{{old('full_name')}}"
                                         name="full_name" required>
                                 </div>
-
+                                @error('full_name')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                                 <div class="col-12 mb-4">
                                     <label for="email_address">Email Address <span>*</span></label>
                                     <input type="email" class="form-control" id="email_address"
                                         value="{{ Auth()->user()->email }}" name="email" readonly>
                                 </div>
+                                @error('email')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                                 <div class="col-12 mb-3">
                                     <label for="city">Town/City <span>*</span></label>
-                                    <input type="text" class="form-control" id="city" value="" name="town">
+                                    <input type="text" class="form-control" id="city" value="{{old('town')}}" name="town">
                                 </div>
+                                @error('town')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                                 <div class="col-12 mb-3">
                                     <label for="street_address">Address <span>*</span></label>
-                                    <input type="text" class="form-control" id="street_address" value=""
+                                    <input type="text" class="form-control" id="street_address" value="{{old('address')}}"
                                         name="address">
                                 </div>
+                                @error('address')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                                 <div class="col-12 mb-3">
                                     <label for="phone_number">Phone No <span>*</span></label>
-                                    <input type="number" class="form-control" id="phone_number" min="0"
-                                        value="" name="phone_no">
+                                    <input type="number" class="form-control @error('phone_no') is-invalid @enderror" id="phone_number" min="0"
+                                        value="{{old('phone_no')}}" name="phone_no">
                                 </div>
+                                @error('phone_no')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
 
                     </div>

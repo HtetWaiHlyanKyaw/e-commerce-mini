@@ -15,13 +15,16 @@
                 <p style="font-size: 15px;">Purchase History</p>
             </a>
         </li>
-
+        {{-- onclick="event.preventDefault(); document.getElementById('logout-form').submit();" --}}
         <li class="list-item">
             <div class="widget price mt-20">
-                <button class="btn btn-outline-danger text-center" style="margin-top:10px; width: 100%;" href="{{ route('logout') }}"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> Logout </button>
-                    {{-- <i
-                    class="fa fa-sign-out"></i> --}}
+                <form action="{{ route('user.logout') }}" method="POST" id="logout-form">
+                    @csrf
+                    <button class="btn btn-outline-danger text-center" style="margin-top:10px; width: 100%;" href=""
+                    ><i
+                        class="fa fa-arrow-left" type="submit"></i> Logout</button>
+                </form>
+
             </div>
 
         </li>

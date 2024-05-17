@@ -23,7 +23,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    @yield('csrf');
+    @yield('csrf')
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.min.css">
     <style>
         .dropdown-no-arrow::after {
