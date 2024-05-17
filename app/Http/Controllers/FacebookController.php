@@ -39,7 +39,7 @@ class FacebookController extends Controller
             }
         } catch (Exception $e) {
             // Log the exception message or handle it as needed
-            return redirect()->route('login')->withErrors(['login_error' => $e->getMessage()]);
+            return redirect()->route('user.login')->withErrors(['login_error' => $e->getMessage()]);
         }
     }
 }
