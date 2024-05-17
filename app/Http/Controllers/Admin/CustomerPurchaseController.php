@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\CustomerPurchase;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Models\CustomerPurchaseDetail;
 use Illuminate\Support\Facades\Validator;
 class CustomerPurchaseController extends Controller
@@ -20,6 +21,7 @@ class CustomerPurchaseController extends Controller
     // }
     public function list()
     {
+
         $customerPurchases = CustomerPurchase::with('details', 'user')->get();
         return view('admin.Customer.customer_purchases', compact('customerPurchases'));
     }
@@ -116,6 +118,9 @@ class CustomerPurchaseController extends Controller
             }
         }
 
+        $user = Auth::user();
+        $cart = $user->cart ?? [];
+        $products = Product::all();
         // Calculate the subtotal, total quantity, shipping, and total
         $subtotal = collect($productsData)->sum('total');
         $totalQuantity = collect($productsData)->sum('quantity');
@@ -123,7 +128,7 @@ class CustomerPurchaseController extends Controller
         $total = $subtotal + $shipping;
 
         // Pass the products data, subtotal, shipping, total, and total quantity to the view
-        return view('user.checkout2', compact('productsData', 'subtotal', 'shipping', 'total', 'totalQuantity'));
+        return view('user.checkout2', compact('productsData', 'subtotal', 'shipping', 'total', 'totalQuantity','user','cart', 'products'));
     }
 
 
