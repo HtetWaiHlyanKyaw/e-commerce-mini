@@ -3,7 +3,25 @@
 @section('style')
 
 @endsection
-
+@section('cart')
+    <a href="{{ route('cartList') }}" class="btn position-relative">
+        @if ($cart && count($cart) > 0)
+            <img src="{{ asset('user/img/core-img/bag.svg') }}" class="mb-2">
+            <span style="margin-top:32px; margin-left:10px"
+                class="position-absolute start-80 me-5 translate-middle badge rounded-pill bg-light">
+                {{ count($cart) }}
+                <span class="visually-hidden">unread messages</span>
+            </span>
+        @else
+            <img src="{{ asset('user/img/core-img/bag.svg') }}" class="mb-2">
+            <span style="margin-top:32px; margin-left:10px"
+                class="position-absolute start-80 me-5 translate-middle badge rounded-pill bg-light">
+                0
+                <span class="visually-hidden">unread messages</span>
+            </span>
+        @endif
+    </a>
+@endsection
 @section('content')
     <!-- ##### Right Side Cart Area ##### -->
     <div class="cart-bg-overlay"></div>
