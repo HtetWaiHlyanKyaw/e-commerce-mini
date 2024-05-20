@@ -219,8 +219,12 @@ class CustomerPurchaseController extends Controller
             // Clear the cart data
             $this->clearCart();
 
+            session()->flash('alert', [
+                'type' => 'success',
+                'message' => 'Purchase Complete. Thank you for shopping with us.',
+            ]);
             // Redirect or return a response
-            return redirect()->route('user.history')->with('success', 'Your order has been placed successfully!');
+            return redirect()->route('user.history');
         } catch (\Exception $e) {
             // Rollback the transaction if an exception occurs
             DB::rollback();

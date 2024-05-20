@@ -88,10 +88,8 @@
                                                 {{-- <button class="btn btn-dark btn-md border-2 rounded"
                                                     title="supplier purchase detail">
                                                     Details
-
                                                 </button> --}}
                                                 <p style="color: black;"><strong>Details</strong> <i class="fa fa-arrow-right"></i></p>
-
                                             </a>
                                         </td>
                                     </tr>
