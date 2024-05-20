@@ -23,7 +23,7 @@ class FacebookController extends Controller
 
             if ($finduser) {
                 Auth::login($finduser);
-                return redirect()->intended('shop');
+                return redirect()->intended(route('user.page'));
             } else {
                 $newUser = User::updateOrCreate(
                     ['email' => $user->email],
@@ -35,8 +35,9 @@ class FacebookController extends Controller
                 );
 
                 Auth::login($newUser);
-                return redirect()->intended('shop');
+                return redirect()->intended(route('user.page'));
             }
+
         } catch (Exception $e) {
             // Log the exception message or handle it as needed
             return redirect()->route('user.login')->withErrors(['login_error' => $e->getMessage()]);

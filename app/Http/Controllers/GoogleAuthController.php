@@ -45,7 +45,7 @@ class GoogleAuthController extends Controller
             }
 
             // Redirect to the desired route
-            return redirect()->intended('shop'); // Make sure 'shop' is a valid route
+            return redirect()->intended(route('user.page')); // Make sure 'shop' is a valid route
         } catch (\Throwable $th) {
             // Handle exceptions
             dd('Something went wrong!' . $th->getMessage());

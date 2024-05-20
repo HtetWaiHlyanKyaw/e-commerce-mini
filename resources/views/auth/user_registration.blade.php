@@ -5,10 +5,10 @@
     <link rel="stylesheet" href="{{ asset('admin/css/styles.min.css') }}" />
     <style>
         /* .Login-Btn {
-            color: inherit;
-            text-decoration: none;
-            font-size: 15px;
-        } */
+                    color: inherit;
+                    text-decoration: none;
+                    font-size: 15px;
+                } */
     </style>
 @endsection
 
@@ -19,10 +19,11 @@
     <!--  Body Wrapper -->
     <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed">
-        <div class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center">
+        <div
+            class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center">
             <div class="d-flex align-items-center justify-content-center w-100">
                 <div class="row justify-content-center w-100">
-                    <div class="col-md-8 col-lg-6 col-xxl-3">
+                    <div class="col-md-7 col-lg-4 col-xxl-3 mt-5 mb-5">
                         <div class="card mb-0">
                             <div class="card-body p-3">
                                 <a href="#" class="text-nowrap logo-img text-center d-block py-3 w-100">
@@ -30,7 +31,7 @@
                                         alt="">
                                 </a>
                                 <p class="text-center">Unify Your Mobile Experience</p>
-                                <form method="POST" action="{{ route('user.register') }}">
+                                <form method="POST" action="{{ route('user.register') }} " >
                                     @csrf
                                     <div class="mb-3">
                                         <label for="name" class="form-label">Name</label>
@@ -81,15 +82,24 @@
                                         @enderror
                                     </div>
                                     <button type="submit"
-                                        class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Register</button>
+                                        class="btn btn-primary w-100 py-8 fs-5 mb-4 rounded-pill h-auto p-2">Register</button>
                                 </form>
                                 <div class="text-center mb-3"><strong>Or</strong></div>
                                 <!-- Google Sign-in Button -->
-                                <a href="{{ route('google-auth') }}"
-                                    class="btn btn-google w-100 py-2 fs-4 mb-4 rounded-2 bg-secondary-subtle">
-                                    <i class="fa fa-google me-2"></i>Continue with Google
-                                </a>
-                                <p class="text-center">Already have an account? <a href="{{ route('user.login') }}" class="Login-Btn">Sign in</a></p>
+                                <button style="background-color: #3B5997; color:white;"
+                                    onclick="location.href='{{ route('facebookPage') }}'"
+                                    class="btn w-100 py-8 fs-6 mb-2 rounded-pill p-3">
+                                    <i class="fab fa-facebook-f"></i> &nbsp;&nbsp;Continue with Facebook
+                                </button>
+                                <button style="background-color: black; color:white;"
+                                    onclick="location.href='{{ route('google-auth') }}'"
+                                    class="btn btn-light w-100 py-8 fs-6 mb-4 rounded-pill p-3 h-auto">
+                                    <i class="fab fa-google"></i> &nbsp;&nbsp;&nbsp; Continue with Google
+                                </button>
+
+                                <a href="{{ route('user.login') }}" class="Register-Btn">
+                                    <p class="text-center">Already have an account?
+                                        <strong>Sign in</strong></p></a>
                             </div>
                         </div>
                     </div>

@@ -1,38 +1,9 @@
 @extends('user.master')
 @section('title', 'Login')
 @section('style')
+<link rel="shortcut icon" type="image/png" href="{{ asset('admin/images/logos/Unity Source Logo.png') }}" />
+<link rel="stylesheet" href="{{ asset('admin/css/styles.min.css') }}" />
     <style>
-        .btn-social {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            margin-bottom: 16px;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: bold;
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            background-color: #f5e8e8;
-            /* Ensure consistent style on hover */
-            transition: none;
-        }
-
-        .btn-google {
-            background-color: #2eb82e;
-        }
-
-        .btn-facebook {
-            background-color: #3b5998;
-        }
-
-        .btn-social i {
-            margin-right: 8px;
-            font-size: 18px;
-            vertical-align: middle;
-        }
-
-        /* Explicitly set hover styles to match normal styles */
     </style>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
@@ -56,7 +27,7 @@
             class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center">
             <div class="d-flex align-items-center justify-content-center w-100">
                 <div class="row justify-content-center w-100">
-                    <div class="col-md-8 col-lg-6 col-xxl-3">
+                    <div class="col-md-6 col-lg-4 col-xxl-3">
                         <div class="card mb-0">
                             <div class="card-body">
                                 <a href="#" class="text-nowrap logo-img text-center d-block py-3 w-100">
@@ -68,7 +39,7 @@
                                     @csrf
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email</label>
-                                        <input id="email" type="email" class="form-control" name="email"
+                                        <input id="email" type="email" class="form-control " name="email"
                                             value="{{ old('email') }}" required autofocus aria-describedby="emailHelp">
                                     </div>
                                     <div class=" mb-4">
@@ -87,7 +58,7 @@
                                             </ul>
                                         </div>
                                     @endif
-                                    <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign
+                                    <button type="submit" class="btn btn-primary w-100 py-8 fs-5 mb-4 rounded-pill h-auto p-2">Sign
                                         In</button>
                                 </form>
                                 <!-- Divider -->
@@ -97,17 +68,20 @@
                                     class="btn btn-google w-100 py-2 fs-4 mb-4 rounded-2 bg-secondary-subtle">
                                     <i class="fab fa-google me-2"></i>Continue with Google
                                 </a> --}}
-                                <a href="{{ route('google-auth') }}" class="btn-social btn-google">
-                                    <i class="fab fa-google"></i> Continue with Google
-                                </a>
+                                <!-- Google login button -->
 
                                 <!-- Facebook login button -->
-                                <a href="{{route('facebookPage')}}" class="btn-social btn-facebook">
-                                    <i class="fab fa-facebook-f"></i> Continue with Facebook
-                                </a>
+                                <button style="background-color: #3B5997; color:white;" onclick="location.href='{{ route('facebookPage') }}'"
+                                    class="btn w-100 py-8 fs-6 mb-2 rounded-pill p-3">
+                                    <i class="fab fa-facebook-f"></i> &nbsp;&nbsp;Continue with Facebook
+                                </button>
 
-                                <p class="text-center">Don't have an account? <a href="{{ route('user.RegisterPage') }}"
-                                        class="Register-Btn">Register</a></p>
+                                <button style="background-color: black; color:white;" onclick="location.href='{{ route('google-auth') }}'" class="btn btn-light w-100 py-8 fs-6 mb-4 rounded-pill p-3 h-auto">
+                                    <i class="fab fa-google"></i> &nbsp;&nbsp;&nbsp; Continue with Google
+                                </button>
+
+                                <a href="{{ route('user.RegisterPage') }}"
+                                        class="Register-Btn"><p class="text-center">Don't have an account? <strong>Register</strong></p></a>
                             </div>
                         </div>
                     </div>
