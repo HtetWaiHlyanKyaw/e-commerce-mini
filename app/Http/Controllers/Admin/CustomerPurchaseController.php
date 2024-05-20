@@ -147,7 +147,6 @@ class CustomerPurchaseController extends Controller
         //     'total_quantity' => 'required',
         //     'products' => 'required|array', // Assuming you're receiving products data as an array
         // ]);
-
         $validator = Validator::make($request->all(), [
             'user_id' => 'required',
             'full_name' => 'required|string|max:255',
@@ -155,11 +154,10 @@ class CustomerPurchaseController extends Controller
             'address' => 'required|string|max:255',
             'phone_no' => 'required|string|regex:/^09\d{9}$/',
             'payment_method' => 'required|string|in:Cash On Delivery,Mobile Banking,Mobile Wallet,Direct Bank Transfer',
-            'quantity' => 'required|integer|min:1',
             'total_price' => 'required',
             'total_quantity' => 'required',
             'products' => 'required|array',
-            // Add more validation rules as needed
+    //         // Add more validation rules as needed
         ]);
 
 
