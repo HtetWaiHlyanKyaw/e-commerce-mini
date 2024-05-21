@@ -43,7 +43,9 @@
                     @include('user.sidebar')
                 </div>
                 @if ($customerPurchases->isEmpty())
-                    <p>No Products purchased</p>
+                <div class="col-9 bg-white p-5 border rounded mt-3">
+                    <h5 class="text-center">No Products purchased</h5>
+                </div>
                 @else
 
                     <div class="col-9 bg-white p-5 border rounded mt-3">
@@ -88,10 +90,8 @@
                                                 {{-- <button class="btn btn-dark btn-md border-2 rounded"
                                                     title="supplier purchase detail">
                                                     Details
-
                                                 </button> --}}
                                                 <p style="color: black;"><strong>Details</strong> <i class="fa fa-arrow-right"></i></p>
-
                                             </a>
                                         </td>
                                     </tr>

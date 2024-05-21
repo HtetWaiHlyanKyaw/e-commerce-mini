@@ -78,8 +78,8 @@
                                 </div>
                                 <div class="col-md-12 mb-4">
                                     <label for="first_name">Full Name <span>*</span></label>
-                                    <input type="text" class="form-control" id="first_name" value="{{old('full_name')}}"
-                                        name="full_name" required>
+                                    <input type="text" class="form-control" id="first_name"
+                                        value="{{ old('full_name') }}" name="full_name" required>
                                 </div>
                                 @error('full_name')
                                     <div class="text-danger">
@@ -98,7 +98,8 @@
                                 @enderror
                                 <div class="col-12 mb-3">
                                     <label for="city">Town/City <span>*</span></label>
-                                    <input type="text" class="form-control" id="city" value="{{old('town')}}" name="town">
+                                    <input type="text" class="form-control" id="city" value="{{ old('town') }}"
+                                        name="town">
                                 </div>
                                 @error('town')
                                     <div class="text-danger">
@@ -107,8 +108,8 @@
                                 @enderror
                                 <div class="col-12 mb-3">
                                     <label for="street_address">Address <span>*</span></label>
-                                    <input type="text" class="form-control" id="street_address" value="{{old('address')}}"
-                                        name="address">
+                                    <input type="text" class="form-control" id="street_address"
+                                        value="{{ old('address') }}" name="address">
                                 </div>
                                 @error('address')
                                     <div class="text-danger">
@@ -117,8 +118,8 @@
                                 @enderror
                                 <div class="col-12 mb-3">
                                     <label for="phone_number">Phone No <span>*</span></label>
-                                    <input type="number" class="form-control @error('phone_no') is-invalid @enderror" id="phone_number" min="0"
-                                        value="{{old('phone_no')}}" name="phone_no">
+                                    <input type="number" class="form-control @error('phone_no') is-invalid @enderror"
+                                        id="phone_number" min="0" value="{{ old('phone_no') }}" name="phone_no">
                                 </div>
                                 @error('phone_no')
                                     <div class="text-danger">
@@ -154,18 +155,18 @@
                                 </tr>
                             @endforeach --}}
                             @foreach ($productsData as $productData)
-                            @php
-                                $product = \App\Models\Product::find($productData['product_id']);
-                            @endphp
-                            @if ($product)
-                                <tr>
-                                    <td>
-                                        {{ $product->name }} x <b>{{ $productData['quantity'] }}</b>
-                                    </td>
-                                    <td>{{ $productData['total'] }} $</td>
-                                </tr>
-                            @endif
-                        @endforeach
+                                @php
+                                    $product = \App\Models\Product::find($productData['product_id']);
+                                @endphp
+                                @if ($product)
+                                    <tr>
+                                        <td>
+                                            {{ $product->name }} x <b>{{ $productData['quantity'] }}</b>
+                                        </td>
+                                        <td>{{ $productData['total'] }} $</td>
+                                    </tr>
+                                @endif
+                            @endforeach
 
 
                             <tr>

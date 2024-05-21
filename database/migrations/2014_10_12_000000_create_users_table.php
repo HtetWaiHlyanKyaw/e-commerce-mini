@@ -18,6 +18,7 @@ return new class extends Migration
             $table->enum('usertype', ['admin', 'customer', 'store_admin', 'supplier_admin', 'super_admin'])->default('customer');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
+            $table->string('facebook_id')->nullable();
             $table->string('google_id')->nullable();
             $table->rememberToken();
             $table->timestamps();

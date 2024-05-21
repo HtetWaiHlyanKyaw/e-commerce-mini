@@ -300,11 +300,12 @@
                     @endif
                 </div>
             </div>
+            <div>
+                {{ $paginatedGroupedData->links() }}
+            </div>
         </div>
         <!-- Pagination -->
-        <div>
-            {{ $paginatedGroupedData->links() }}
-        </div>
+
         </div>
         </div>
         </form>
