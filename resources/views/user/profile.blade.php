@@ -30,14 +30,25 @@
             <div class="col-3 mt-5">
                 @include('user.sidebar')
             </div>
+            @php
+
+
+                        $user = Auth::user();
+                        $passwordRequired = !is_null($user->password);
+
+                    @endphp
             <div class="col-9 bg-white p-5 border rounded mt-3 mb-5">
                 <form method="POST" action="{{ route('user.pUpdate') }}" class="row">
                     @csrf
                     <div class="col-12">
                         <h2 class="text-center">User Profile</h2>
                     </div>
+                    @if($passwordRequired)
                     <div class="col-md-6">
-                        <label for="name" class="form-label">Name</label>
+                    @else
+                    <div class="col-12 mb-4">
+                    @endif
+                    <label for="name" class="form-label">Name</label>
                         <input type="text" name="name" id="name"
                             class="form-control @error('name') is-invalid @enderror" value="{{ old('name', $user->name) }}">
                         @error('name')
@@ -46,7 +57,11 @@
                             </span>
                         @enderror
                     </div>
+                    @if($passwordRequired)
                     <div class="col-md-6">
+                    @else
+                    <div class="col-12 ">
+                    @endif
                         <label for="email" class="form-label">Email</label>
                         <input type="email" name="email" id="email"
                             class="form-control @error('email') is-invalid @enderror"
@@ -57,9 +72,10 @@
                             </span>
                         @enderror
                     </div>
+
+                    @if($passwordRequired)
                     <div class="md-3">
-                        <label for="currentPassword" class="form-label mt-4">Current Password (leave blank to leave
-                            unchanged)</label>
+                        <label for="currentPassword" class="form-label mt-4">Current Password <strong style="color: red">*</strong></label>
                         <input type="password" name="currentPassword"
                             class="form-control @error('currentPassword') is-invalid @enderror" id="currentPassword">
                         <input type="checkbox" id="currentPassword" onclick="togglePasswordVisibility()"> Show Password
@@ -91,6 +107,8 @@
                             </span>
                         @enderror
                     </div>
+
+                @endif
                     <div class="col-12 mt-5 text-center" style="align-items:center;">
                         <button type="submit" class="btn btn-primary">Save Changes</button>
                     </div>

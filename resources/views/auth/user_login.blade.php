@@ -50,12 +50,12 @@
                                         Password
                                     </div>
                                     @if ($errors->any())
-                                        <div>
-                                            <ul>
+                                        <div class="text-center">
+
                                                 @foreach ($errors->all() as $error)
-                                                    <li>{{ $error }}</li>
+                                                    <p class=" text-danger">{{ $error }}</p>
                                                 @endforeach
-                                            </ul>
+
                                         </div>
                                     @endif
                                     <button type="submit" class="btn btn-primary w-100 py-8 fs-5 mb-4 rounded-pill h-auto p-2">Sign
