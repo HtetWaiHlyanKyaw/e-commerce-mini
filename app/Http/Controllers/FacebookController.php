@@ -39,6 +39,7 @@ class FacebookController extends Controller
             }
         } catch (Exception $e) {
             Log::error('Facebook authentication error: ' . $e->getMessage());
+
             return redirect()->route('user.login')->withErrors(['login_error' => 'Failed to authenticate with Facebook. Please try again.']);
         }
     }

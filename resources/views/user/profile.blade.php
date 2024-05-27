@@ -65,7 +65,7 @@
                         <label for="email" class="form-label">Email</label>
                         <input type="email" name="email" id="email"
                             class="form-control @error('email') is-invalid @enderror"
-                            value="{{ old('email', $user->email) }}">
+                            value="{{ old('email', $user->email) }}" readonly>
                         @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

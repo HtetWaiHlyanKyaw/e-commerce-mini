@@ -249,8 +249,9 @@
                     </a>
 
                 </li>
-                @endif
+
                     <hr>
+                    @endif
                 {{-- @if (auth()->user()->hasPermissionTo('read supplier_purchase')) --}}
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
