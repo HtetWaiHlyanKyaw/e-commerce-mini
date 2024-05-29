@@ -41,7 +41,7 @@
                                         Show Password
                                     </div>
                                     @if ($errors->any())
-                                        <div>
+                                        <div class="text-center text-danger">
                                             <ul>
                                                 @foreach ($errors->all() as $error)
                                                     <li>{{ $error }}</li>

@@ -68,7 +68,7 @@
 @section('content')
     <div class="container" style="margin-top: 50px">
         <div class="row">
-            <div class="col-lg-5">
+            <div class="col-lg-5 mt-5">
                 <div class="product-img"
                     style="border-radius: 3px; width: 100%; height: 500px; object-fit: cover; background-color: #f8f8f8;">
                     <img id="product_image" class="w-100 shadow" src="" alt="Product Image"
@@ -76,7 +76,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-7">
+            <div class="col-lg-7 mt-5">
                 <h3 id="product_name"></h3>
                 <div class="row align-items-center">
                     <div class="col-auto average-stars">

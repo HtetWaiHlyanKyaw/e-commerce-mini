@@ -22,7 +22,7 @@
 @section('content')
     <div class="container" style="margin-top:50px; margin-bottom: 50px;">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-6 mt-5">
                 <div class="about-col">
                     <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit</h1>
                     <p class="text-justify">
@@ -48,7 +48,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-6">
+            <div class="col-lg-6 mt-5">
                 <div class="about-col">
                     <img src="{{asset('images/Store.jpg')}}" alt="">
                 </div>

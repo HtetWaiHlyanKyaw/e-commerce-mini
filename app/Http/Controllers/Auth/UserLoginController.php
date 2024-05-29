@@ -29,7 +29,7 @@ class UserLoginController extends Controller
         if ($user && is_null($user->password)) {
             // Redirect back to login form with an error message
             return redirect()->route('user.login')->withErrors([
-                'email' => 'Please log in using Google.',
+                'email' => 'Incorrect Credentials',
             ]);
         }
 
@@ -41,7 +41,7 @@ class UserLoginController extends Controller
 
         // If authentication failed
         return redirect()->route('user.login')->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'email' => 'IIncorrect Credentials',
         ]);
     }
 
